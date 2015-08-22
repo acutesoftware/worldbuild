@@ -23,7 +23,9 @@ class TestTemplate(unittest.TestCase):
     
     def test_01_instantiate_class(self):
         build_world.main()
-        self.assertTrue(os.path.exists('world_traversed.txt'))
+        op_file = os.path.join(pth, 'data', 'world_traversed.txt')
+        #print('op_file = ', op_file)
+        self.assertTrue(os.path.exists(op_file))
 
 
 if __name__ == '__main__':

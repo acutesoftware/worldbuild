@@ -1,4 +1,4 @@
-# build_world.py    written by Duncan Murray 31/3/2015
+# build_world.py
 
 import os
 import sys
@@ -7,24 +7,26 @@ from random import randint
 import aikif.environments.worlds as my_world
 import aikif.agents.explore.agent_explore_grid as agt
 
-temp_folder = 'C:\\temp\\'
+temp_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'temp') + os.sep
+fldr = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
 LOG_LEVEL = 2
-fldr = os.getcwd() #+ os.sep + 'data'  + os.sep + 'worlds' 
+
+#print('temp_folder = ', temp_folder)
 
 def main():
     """
     generates a random world, sets terrain and runs agents in it
     """
-    width       =   50  # grid width  (takes about 5 minutes to generate 500x400 grid with 8% blockages)
-    height      =   20  # grid height
+    width       =   79  # grid width  (takes about 5 minutes to generate 500x400 grid with 8% blockages)
+    height      =   50  # grid height
     num_seeds   =    4   # number of seed points to start land generation
-    perc_land   =   25   # % of world that is land
-    perc_sea    =   75   # % of world that is sea
+    perc_land   =   15   # % of world that is land
+    perc_sea    =   85   # % of world that is sea
     perc_blocked=    2   # % of world that is blocked
     
     myWorld = my_world.World( height, width, [' ','x','#']) 
     myWorld.build_random( num_seeds, perc_land, perc_sea, perc_blocked)
-    myWorld.grd.save(fldr + os.sep + 'test_world.txt')
+    myWorld.grd.save(fldr + os.sep + 'sample_world.txt')
     
     #Create some agents to walk the grid
     iterations  = 50   # how many simulations to run
@@ -39,6 +41,8 @@ def main():
         agt_list.append(ag)
     sim = my_world.WorldSimulation(myWorld, agt_list, LOG_LEVEL)
     sim.run(iterations, 'Y', temp_folder)
+    
+    #print('saving sim to ', fldr + os.sep + 'world_traversed.txt')
     sim.world.grd.save(fldr + os.sep + 'world_traversed.txt')
  
 
