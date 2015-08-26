@@ -21,4 +21,25 @@ wiki_pages = [  'overview',
              ]
 
              
+culture_categories = [
+     {'surface':'food'},
+     {'surface':'language'},
+     {'deep':'communicates_gestures'},
+     {'deep':'communicates_tone_of_voice'},
+     {'deep':'communicates_eye_contact'},
+     {'deep':'attitues_elders'},
+     {'deep':'attitudes_religion'},
+     {'deep':'attitudes_nature'},
+     ]
 
+for c in culture_categories:
+    print(str(c))
+
+groups_of_people_categories = {
+    'location':'location on the map',
+    'race':'race of this group, if applicable',
+    'political_leaning':'politics of this group, if applicable',
+    'religious_leaning':'religion of this group, if applicable',
+    }
+    
+print(groups_of_people_categories)    
