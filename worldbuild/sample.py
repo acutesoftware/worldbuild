@@ -8,7 +8,7 @@ import yaml
 
 data_fldr = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + 'samples' ) 
 
-print('data_fldr = ', data_fldr)
+#print('data_fldr = ', data_fldr)
 sample_xtn = '*.sample'
 
 
@@ -80,5 +80,6 @@ def _read_yaml(fname):
     with open(fname, 'r') as stream:
         return yaml.load(stream)
 
- 
-main()
+
+if __name__ == '__main__': 
+    main()
