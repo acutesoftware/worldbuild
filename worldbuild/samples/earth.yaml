@@ -1,0 +1,23 @@
+---
+Locations:
+    continents: 
+        - Australia
+        - America
+        - Africa
+        - Asia
+
+    countries:
+        - &Australia
+        - USA
+        - South Africa
+        - France
+        - England
+        
+Events:
+    world:
+        - eclipse
+        - meteor
+        
+    local:
+        - fesival:
+            country:@Australia
