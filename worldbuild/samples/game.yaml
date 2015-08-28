@@ -1,0 +1,44 @@
+--- 
+Monsters:
+  - 
+    name: Cave spider
+    hp: [2,6]  
+    ac: 16
+    attacks: [BITE, HURT]       # can be put in a list or, see below
+    skills:
+        - bite with teeth       # gives same result as above
+        - kick with legs
+  -
+    name: Troll
+    hp: [5,7]   
+    ac: 26
+    attacks: [CRUSH, HIT] 
+    skills:
+        - Attack with club
+        - Hit with fist
+    
+Objects:
+    - Sword
+    - Knife
+    - Apple
+    - Cheese
+    - Treasure
+    
+actions:  
+    -
+        name: Smite
+        energy: 2
+        type: Magic
+        text: Wound a character.
+    -
+        name: Fireball
+        energy: 3
+        type: Magic
+        text: Raze 5 and wound each character at this location
+    -
+        name: Magic Missile
+        energy: 1
+        type: Magic
+        text: Target player wounds one of his or her characters
+    
+    
