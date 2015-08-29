@@ -1,0 +1,13 @@
+# tiny_world.yaml
+
+location:
+  - name    : kitchen
+    pos     : 1
+  - name    : lounge
+    pos     : 1
+  
+object:
+  - name    : chair
+  - name    : ball
+  - name    : cat
+  
