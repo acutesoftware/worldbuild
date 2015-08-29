@@ -62,6 +62,19 @@ class TestTemplate(unittest.TestCase):
 
         self.assertTrue(os.path.exists(fle))
 
+        
+    def test_02_read_yaml_tiny(self):
+        fle = os.path.join(pth, 'samples', 'tiny_world.yaml')
+        
+        # _print_yaml(fle)  # works
+        y = sample._read_yaml(fle)
+         
+        self.assertEqual(y['location'][0]['name'], 'kitchen')
+        self.assertEqual(y['location'][1]['name'], 'lounge')
+        
+        self.assertEqual(y['object'][0]['name'], 'chair')
+        self.assertEqual(y['object'][1]['name'], 'ball')
+        self.assertEqual(y['object'][2]['name'], 'cat')
 
 if __name__ == '__main__':
     unittest.main()
