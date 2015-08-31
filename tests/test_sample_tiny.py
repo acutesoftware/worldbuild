@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
 # test_sample_tiny.py
+# for examples see https://gist.github.com/bowsersenior/979804
 import os
 import sys
 import unittest
@@ -27,14 +28,28 @@ class TestTemplate(unittest.TestCase):
         
         # _print_yaml(fle)  # works
         y = sample._read_yaml(fle)
-        print(y) 
-        self.assertEqual(y['location'][0]['name'], 'kitchen')
-        self.assertEqual(y['location'][1]['name'], 'lounge')
+        pprint.pprint(y) 
+        self.assertEqual(y['rooms'][0]['name'], 'kitchen')
+        self.assertEqual(y['rooms'][1]['name'], 'lounge')
         
-        self.assertEqual(y['object'][0]['name'], 'chair')
-        self.assertEqual(y['object'][1]['name'], 'ball')
-        self.assertEqual(y['object'][2]['name'], 'cat')
+        self.assertEqual(y['objects'][0]['name'], 'chair')
+        self.assertEqual(y['objects'][1]['name'], 'ball')
+        
+        self.assertEqual(y['characters'][0]['name'], 'cat')
 
+    def test_02_check_mappings(self):
+        fle = os.path.join(pth, 'samples', 'tiny_world.yaml')
+        y = sample._read_yaml(fle)
+        
+        print('mappings[0] = ', y['mappings'][0])
+        print('mappings[1] = ', y['mappings'][1])
+        
+        self.assertEqual(y['mappings'][1], {'people <<': [{'name': 'cat'}]})
+        #self.assertEqual(y['mappings']['locations'][1]['name'], 'lounge')
+        #self.assertEqual(y['mappings']['people'][0]['name'], 'cat')
+        
+        
+        
 if __name__ == '__main__':
     unittest.main()
 
