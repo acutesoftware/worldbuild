@@ -1,13 +1,27 @@
 # tiny_world.yaml
 
-location:
+rooms: &rooms
   - name    : kitchen
-    pos     : 1
+    pos     : [1,1]
   - name    : lounge
-    pos     : 1
+    pos     : [1,2]
   
-object:
+objects:
   - name    : chair
   - name    : ball
+
+characters: &characters  
   - name    : cat
-  
+
+facts:
+  - 
+    name    : where_is_cat
+    desc    : cat is in the kitchen
+  - 
+    name    : where_is_ball
+    desc    : ball is in the lounge
+
+# mappings to standard AIKIF structures using YAML anchors
+mappings:
+  - locations <<: *rooms
+  - people <<: *characters
