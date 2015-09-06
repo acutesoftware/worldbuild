@@ -23,9 +23,24 @@ def main():
 
 def create_wiki_from_yaml(fname):
     dat = sample._read_yaml(fname)
-    pprint.pprint(dat)
-    if 'wiki' in dat:
-        print('generating wiki for ' + fname)
+    #pprint.pprint(dat)
+    if 'wiki' not in dat:
+        print('missing wiki: Yes tag, so cant generate wiki for ' + fname)
+        return
+    if 'contents' not in dat:
+        print('missing content tag, so cant generate wiki for ' + fname)
+        return
+    op = ''    
+    for chap in dat['contents']:
+        op += format_text(chap)
+        op += format_text(dat[chap])
+    
+
+def format_text(txt, op_format='MD', console=True):
+    res = str(txt)
+    if console == True:
+        print(res)
+    return res
     
 def create_sample_wiki(fname=''):
     if fname == '':
