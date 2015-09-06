@@ -32,8 +32,8 @@ culture_categories = [
      {'deep':'attitudes_nature'},
      ]
 
-for c in culture_categories:
-    print(str(c))
+#for c in culture_categories:
+#    print(str(c))
 
 groups_of_people_categories = {
     'location':'location on the map',
@@ -42,4 +42,4 @@ groups_of_people_categories = {
     'religious_leaning':'religion of this group, if applicable',
     }
     
-print(groups_of_people_categories)    
+#print(groups_of_people_categories)    
