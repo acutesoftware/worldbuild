@@ -1,0 +1,53 @@
+--- 
+maps: alrona-map.jpg
+    
+
+wiki: Yes
+
+history: >
+    Alrona is largely unknown due to an ancient war that wiped out
+    all history and most of the people. There is no indication of 
+    how this happened, but in the north there are sections of land
+    haunted by spectres and ancient structures still stand built by
+    unknown architecture.
+    
+    It is assumed the scattered survivors began to rebuilt further 
+    south, and most of the major cities and documents have a history
+    here.
+    
+
+
+terrain: 
+    - Sharnia: >
+        The central continent Sharnia is where most of the people live - it 
+        is mostly green forest, which several mountain ranges.
+    
+    - Zinad: >
+        Zinad is the Elvish continent in the north west, a lush green land well
+        protected by high cliffs 
+    
+    - Helron: >
+        Helron is the Northern continent which mostly untravelled due to the harsh
+        climate and frequent accounts of spectres and dragons - it is wet and mountainous
+        but little grows there. Some tests have shown poison in the soils further inland 
+        and it is assumed this contributed to the downfall of the people in the ancient war.
+    
+
+animals: >
+    Chickens - abundantly bred, and occasionally wild this is a primary source of food
+    Pigs - rich people enjoy this meat as breeding them is dangerous (they grow to 15 feet)
+    Flikz - are dangerous creatures hunting in packs, though they only grow to 1 foot they can
+    take down a warrior when in packs of 5 due to the mild poison on their fangs
+    Dragons - mostly legendary as no survivors have returned from Helrom, but there suspicion 
+    they exist due to large fast airborne attacks on some northern communities
+
+settlements:
+    - Drafton: > 
+        This is the largest city on the East side of Sharnia. 3,000 men live in this strongly 
+        defended city
+
+people: >
+    King Lewkar
+    Current leader of the Eastern city of Drafton
+
+
