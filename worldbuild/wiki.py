@@ -4,8 +4,8 @@
 import os
 import sys
 import config
-
-
+import sample
+import pprint
 
 def main():
     """
@@ -14,20 +14,27 @@ def main():
     > python wiki.py samples
     """
     if len(sys.argv) > 1:
-        if sys.argv[1] == 'samples':
-            create_sample_wiki()
+        print('creating wiki from command line')
+        create_sample_wiki(sys.argv[1])
     else:
-        print('To generate sample wiki pages using the command:\n > python wiki.py samples')
-        
+        print('creating sample wiki from command line')
+        create_wiki_from_yaml(os.path.join('samples','alrona.yaml'))
+    print('remember, to run from cmd line = > python wiki.py samples/filename.yaml')    
 
-def create_sample_wiki():
-    print("Generating sample wiki pages")
-    for p in config.wiki_pages:
-        print('generating ' + p)
+def create_wiki_from_yaml(fname):
+    dat = sample._read_yaml(fname)
+    pprint.pprint(dat)
+    if 'wiki' in dat:
+        print('generating wiki for ' + fname)
+    
+def create_sample_wiki(fname=''):
+    if fname == '':
+        print("Generating sample wiki pages")
+        for p in config.wiki_pages:
+            print('generating ' + p)
+    else:
+        create_wiki_from_yaml(fname)
         
-    
-    
-    
     print("Done")
 
 class Page(object):
@@ -43,21 +50,6 @@ class Page(object):
     def export(self):
         print('exporting..')
         
-class WikiList(Page):
-    """
-    manages a list of pages, like objects, vegetation
-    that includes images etc
-    """
-    pass
-    
-    
-class WikiInfo(Page):
-    """
-    base class to manage the content around the world
-    """
-    pass
-    
-
 
 
 
