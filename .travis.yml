@@ -8,7 +8,7 @@ before_install:
 
 install: 
 - pip install .
-- pip install aikif
+- pip install worldbuild
 - pip install coverage
 - pip install nose coverage
 - pip install coveralls
