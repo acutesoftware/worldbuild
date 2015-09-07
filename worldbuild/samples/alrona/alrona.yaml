@@ -7,6 +7,7 @@ contents:
     - animals
     - races
     - settlements
+    - legends
     
 maps: [alrona-map.jpg]
 history: >
@@ -52,6 +53,11 @@ animals:
         take down a warrior when in packs of 5 due to the mild poison on 
         their fangs.
         They are common in plains and wooded areas, preferring warmer climates.
+  - name: Razan
+    desc: >
+        Razan are monstrous fish like animals with caterpillar legs that can survive for weeks on land. They eat anything and everything and usually destroy an environment or town if left unchecked to breed. 
+        They now only live in the remote islands of alrona, mainly because they were wiped out completely in the mainland continents Sharnia and Zinad.
+        
   - name: Dragon
     desc: >
         Dragons are mostly legendary as no survivors have returned from Helrom, but there suspicion they likely exist due to large fast airborne attacks on some northern communities
@@ -76,3 +82,8 @@ figures: >
     King Lewkar
     Current leader of the Eastern city of Drafton
 
+legends:
+  - name: Ancient Annihilation
+    file: story_ancient_annihilation.rst
+    
+    
