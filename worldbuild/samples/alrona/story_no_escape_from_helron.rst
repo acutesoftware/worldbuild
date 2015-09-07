@@ -1,11 +1,11 @@
-
-*In the 3rd age of Alrona a journal was discovered in a trunk from the stomach of a large Razan found dead near the shores of Sharnia. It was in Elvish written in the hand of the Zinads, and has been translated below.
-
-To this date, this is the only information and map of Helron that is available*
-
 =======================
 Journal of Amy Prenz
 =======================
+
+*In the 3rd age of Alrona a journal was discovered in a trunk from the stomach of a large Razan found dead near the shores of Sharnia. It was in Elvish written in the hand of the Zinads, and has been translated below.*
+
+*To this date, this is the only information available from anyone who has visited Helron.*
+
 
 Account of my travels as a rigger on the expedition to explore Helron
 ======================================================================= 
@@ -63,7 +63,9 @@ As we tended to the wounded and prepared for a rescue of any survivors, the norm
 
 2303-03: We have to leave
 ==============================================
-The Captain said we are abandon the lost as it would be impossible to re-enter with so few remaining crew - our only hope is to return with the information we have and tell the tale. I am deathly afraid - I wish I had never come to this hateful, ghostly land.
+The 2 survivors died in the night even though they had minor scratches from the ghouls, so the Captain said we are abandon the lost as they would be dead anyway, and it would be impossible to re-enter with so few remaining crew. 
+
+Our only hope is to return with the information we have and tell the tale. I am deathly afraid - I wish I had never come to this hateful, ghostly land.
 
 4 of the remaining 7 are on night watch while us 3 are resting, but there is no way I will sleep another second here.
 
