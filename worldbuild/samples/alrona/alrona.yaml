@@ -6,20 +6,24 @@ contents:
     - terrain
     - animals
     - races
+    - people
     - settlements
     - legends
     
 maps: [alrona-map.jpg]
-history: >
-    Alrona is largely unknown due to an ancient war that wiped out
-    all history and most of the people. There is no indication of 
-    how this happened, but in the north there are sections of land
-    haunted by spectres and ancient structures still stand built by
-    unknown architecture.
-    
-    It is assumed the scattered survivors began to rebuilt further 
-    south, and most of the major cities and documents have a history
-    here.
+history: 
+  - name: History of Alrona
+    file: alrona_history.rst
+  - overview: >
+        Alrona is largely unknown due to an ancient war that wiped out
+        all history and most of the people. There is no indication of 
+        how this happened, but in the north there are sections of land
+        haunted by spectres and ancient structures still stand built by
+        unknown architecture.
+        
+        It is assumed the scattered survivors began to rebuilt further 
+        south, and most of the major cities and documents have a history
+        here.
 terrain: 
   - name: Sharnia 
     coords_x_y: [50,50]
@@ -78,9 +82,11 @@ races:
     desc: specter like race apparantly came to live following the ancient annihilation. 
     height: [6,7]
         
-figures: >
-    King Lewkar
-    Current leader of the Eastern city of Drafton
+people:
+  - name: King Lewkar
+    desc: Current leader of the Eastern city of Drafton
+  - name: Amy Prenz
+    desc: Elvish rigger whose journal was discovered containing an account of a trip to Helron. From the journal it is assumed she died on 2303-03
 
 legends:
   - name: Ancient Annihilation
