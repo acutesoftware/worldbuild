@@ -18,7 +18,7 @@ def main():
         create_sample_wiki(sys.argv[1])
     else:
         print('creating sample wiki from command line')
-        create_wiki_from_yaml(os.path.join('samples','alrona.yaml'))
+        create_wiki_from_yaml(os.path.join('samples','alrona','alrona.yaml'))
     print('remember, to run from cmd line = > python wiki.py samples/filename.yaml')    
 
 def create_wiki_from_yaml(fname):
