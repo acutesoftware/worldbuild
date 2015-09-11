@@ -71,6 +71,26 @@ settlements:
     desc: >
         This is the largest city on the East side of Sharnia. 3,000 men live in this strongly 
         defended city
+  - name: Ambyle
+  - name: Slyk
+  - name: Danf
+  - name: Farlon
+  - name: Ruet
+  - name: Watlo
+  - name: Emard
+  - name: Umod
+  - name: Bint
+  - name: Doctade
+  - name: Forst
+  - name: Ciltan
+  - name: Tambent
+  - name: Asint
+  - name: Torep
+  - name: Landel
+  - name: Abylem
+  - name: Nordat
+  - name: Hem
+
 races: 
   - name: Humans
     desc: mainly live on Sharnia, wary of misinformation so need evidence. Neutral to Elves and Drans, but have fought both
