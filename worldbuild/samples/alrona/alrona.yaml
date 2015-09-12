@@ -30,13 +30,16 @@ terrain:
     desc: >
         The central continent Sharnia is where most of the people live - it 
         is mostly green forest, with several mountain ranges.
+    major_cities: ['Draeton', 'Cilton', 'Doctade']
   - name: Zinad
     coords_x_y: [10,10]
+    major_cities: ['Landel', 'Asint', 'Hem']
     desc: >
         Zinad is the Elvish continent in the north west, a lush green land well
         protected by high cliffs 
   - name: Helron
     coords_x_y: [80,20]
+    major_cities: []
     desc: >
         Helron is the Northern continent which mostly untravelled due to the harsh
         climate and frequent accounts of spectres and dragons - it is wet and mountainous
@@ -44,6 +47,7 @@ terrain:
         and it is assumed this contributed to the downfall of the people in the ancient war.
   - name: Evanite
     coords_x_y: [90,80]
+    major_cities: []
     desc: >
         Evanite is home of the Drans, and has no fixed settlements. It is an unnavigable series of jagged islands with the large river "Spline" running up the Eastern wing. Permanent cloud covers the land, make most areas dark and uninviting.
         
@@ -110,7 +114,7 @@ races:
     desc: highly intelligent elite fighting race, living deep in caves on Helron. They are believed to have evolved from the original humans before the first age, and lived in total isolation for thousands of years before integrating with the rest of Alrona in the 2nd age. 
         
 people:
-  - name: King Lewkar
+  - name: King Lekre
     desc: Current leader of the Eastern city of Drafton
   - name: Amy Prenz
     desc: Elvish rigger whose journal was discovered containing an account of a trip to Helron. From the journal it is assumed she died on 2303-03
