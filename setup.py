@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='worldbuild',
-    version='0.0.2',
+    version='0.0.3',
     author='Duncan Murray',
     author_email='djmurray@acutesoftware.com.au',
     packages=['worldbuild', 'worldbuild.data'],
@@ -15,12 +15,13 @@ setup(
     include_package_data = True,
     package_data = {
         'worldbuild': ['data/*.*'],
+        'worldbuild': ['samples/*.*'],
     },   
     license='GNU General Public License v3 (GPLv3)',
     description='Tools for computational world building',
     long_description=open('README.rst').read(),
     classifiers = [
-    'Development Status :: 1 - Planning',
+    'Development Status :: 2 - Pre-Alpha',
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.4',
     'Intended Audience :: Developers',

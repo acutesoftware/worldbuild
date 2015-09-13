@@ -1,2 +1,5 @@
 include *.rst
 include worldbuild/data/*.*
+include worldbuild/samples/*.*
+include worldbuild/samples/alrona/*.*
+include worldbuild/samples/alrona/wiki_op/*.*

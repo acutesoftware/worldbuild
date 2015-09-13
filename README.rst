@@ -19,13 +19,13 @@ Quick Start
 
 Copy your map file (JPG) or scan a hand drawn map.
 
-.. image:: ./worldbuild/samples/alrona/alrona-pen-coloured.jpg
+.. image:: ./worldbuild/samples/alrona/wiki_op/map_med.jpg
 
 
 Create a YAML file with the following sections
 
 .. code:: python
-    --- 
+
     wiki: Yes
     world_name: Alrona
     contents:
@@ -34,8 +34,7 @@ Create a YAML file with the following sections
     maps: [alrona-pen-coloured.jpg]
 
 
-You need to have a root section for each element in contents, and there needs to be a name and desc element at the minimum. You can have other elements such as file to bring in additional text.
-
+You need to have a root section for each element in contents, and there needs to be a name and desc element at the minimum. 
 
 .. code:: python
     
@@ -54,10 +53,16 @@ You need to have a root section for each element in contents, and there needs to
 
 Then modify the params and run the wiki.py program to generate the HTML version of your world.
 
+The main page looks like 
+
 .. image:: ./doc/web_index.jpg
+
+The settlements page shows the description from the yaml file, and also a section of the map based on the coords_x_y parameter
 
 .. image:: ./doc/web_settlements.jpg
 
+
+You can extend the wiki with as many sections as you like and each entry can include a file section to import a text (or html) file to be included in that page.
     
 
 
