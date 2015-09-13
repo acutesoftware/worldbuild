@@ -42,7 +42,7 @@ def create_wiki_from_yaml(src_fldr, fname, op_fldr):
     shutil.copyfile(os.path.join(src_fldr, 'worldbuild.css'), os.path.join(op_fldr, 'worldbuild.css'))    
     
     # make a medium size image of the full map for main page
-    #image_utils.make_map_medium(os.path.join(src_fldr, dat['maps'][0]),  os.path.join(op_fldr, 'map_med.jpg'))
+    image_utils.make_map_medium(os.path.join(src_fldr, dat['maps'][0]),  os.path.join(op_fldr, 'map_med.jpg'))
     
 
     
