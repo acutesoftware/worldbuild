@@ -19,7 +19,7 @@ Quick Start
 
 Copy your map file (JPG) or scan a hand drawn map.
 
-.. image:: ./worldbuild/samples/alrona/wiki_op/map_med.jpg
+.. image:: ./doc/map_sample.jpg
 
 
 Create a YAML file with the following sections
