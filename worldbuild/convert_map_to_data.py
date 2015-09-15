@@ -25,6 +25,14 @@ def extract_data_from_map(fname):
     img = Image.open(fname)
     width, height = img.size
     print(img)
+    pixels = img.load()
+    all_pixels = []
+    for x in range(width):
+        for y in range(height):
+            cpixel = pixels[x, y]
+            all_pixels.append(cpixel)
+    
+    print(all_pixels[0:10])
     
     # identify sea - blue
     
@@ -38,3 +46,4 @@ def extract_data_from_map(fname):
     
     # identify towns - small black circle, with brown roads leading out
     
+extract_data_from_map(os.path.join(os.getcwd(), 'samples','alrona', 'wiki_op', 'map_Slyk.jpg'))
