@@ -75,4 +75,5 @@ def extract_data_from_map(fname):
     
     # identify towns - small black circle, with brown roads leading out
     
-extract_data_from_map(os.path.join(os.getcwd(), 'samples','alrona', 'wiki_op', 'map_Slyk.jpg'))
+if __name__ == '__main__':    
+    extract_data_from_map(os.path.join(os.getcwd(), 'samples','alrona', 'wiki_op', 'map_Slyk.jpg'))
