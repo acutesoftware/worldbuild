@@ -2,12 +2,12 @@
 wiki: Yes
 world_name: Alrona
 contents:
-    - history
     - terrain
-    - animals
-    - races
-    - people
     - settlements
+    - races
+    - history
+    - animals
+    - people
     - legends
     
 maps: [alrona-pen-coloured.jpg]
@@ -80,23 +80,26 @@ animals:
 settlements:
   - name: Draeton 
     continent: Sharnia
-    coords_x_y: [66,58]
+    coords_x_y: [72,62]
     desc: >
-        This is the largest city on the East side of Sharnia. 3,000 men live in this strongly 
-        defended city
-  - name: Ambyle
-    continent: Sharnia
-    coords_x_y: [64,58]
-    desc: >
-        Farming town East of Draeton, known for their famous weekend markets selling exotic produce grown in the warm regions north of the Eastern Desert
+        This is the largest city on the East side of Sharnia. 3,000 people live in this strongly 
+        defended city that lies of the Draeton River. 
+        
+        It is surrounded by green pastures and protected by multiple stone walls. There is a good road to the East docks, which provides valuable trade routes to the other cities.
   - name: Slyk
     continent: Sharnia
     coords_x_y: [63,74]
     desc: >
-        Infamous party town, known as the star of the desert - here you will find Inn's, gambling, blackmarket traders, exotic goods, adult entertainment and plenty of atmosphere. Be careful here, as there are many rogues, thieves and other unsavoury characters who make this their home - you should never flash large amounts of money around, and travellers should stick to the Inn's on the main street and avoid the back alleys.
+        Infamous party town, known as the star of the desert - here you will find Inn's, gambling, blackmarket traders, exotic goods, adult entertainment and plenty of atmosphere. 
+        Be careful here, as there are many rogues, thieves and other unsavoury characters who make this their home - you should never flash large amounts of money around, and travellers should stick to the Inn's on the main street and avoid the back alleys.
+  - name: Ambyle
+    continent: Sharnia
+    coords_x_y: [68,62]
+    desc: >
+        Farming town West of Draeton, known for their famous weekend markets selling exotic produce grown in the warm regions north of the Eastern Desert.
   - name: Danf
     continent: Sharnia
-    coords_x_y: [54,54]
+    coords_x_y: [65,55]
     desc: >
         Located at the exact geographic centre of Alrona, this friendly town is surrounded by forests and creeks and makes for a relaxing place to rest when travelling. North of Danf is the Wolf Mountains, and beyond that lie the ancient ruins, so many adventurers use this town as a stepping stone to the Northern wilds and there are all manner of traders and professions in the town.
   
@@ -108,7 +111,7 @@ settlements:
         
   - name: Forst
     continent: Sharnia
-    coords_x_y: [46,76]
+    coords_x_y: [43,77]
     desc: >
         East of Slyk and built near the Everflow river, Forst is a densely wooded town where some of the best carpernters in Alrona live and work.
   - name: Ruet
