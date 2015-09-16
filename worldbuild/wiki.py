@@ -25,14 +25,12 @@ def main():
 
 def create_wiki_from_yaml(src_fldr, fname, op_fldr):
     dat = sample._read_yaml(fname)
-    #pprint.pprint(dat)
     if 'wiki' not in dat:
         print('missing wiki: Yes tag, so cant generate wiki for ' + fname)
         return
     if 'contents' not in dat:
         print('missing content tag, so cant generate wiki for ' + fname)
         return
-    op = ''
 
     # first create the folder where the wiki files will live
     if not os.path.exists(op_fldr):
@@ -40,11 +38,11 @@ def create_wiki_from_yaml(src_fldr, fname, op_fldr):
         os.makedirs(op_fldr)
     shutil.copyfile(os.path.join(src_fldr, dat['maps'][0]), os.path.join(op_fldr, 'map_full.jpg'))    
     shutil.copyfile(os.path.join(src_fldr, 'worldbuild.css'), os.path.join(op_fldr, 'worldbuild.css'))    
+    shutil.copyfile(os.path.join(src_fldr, 'paper-texture.jpg'), os.path.join(op_fldr, 'paper-texture.jpg'))    
     
     # make a medium size image of the full map for main page
     image_utils.make_map_medium(os.path.join(src_fldr, dat['maps'][0]),  os.path.join(op_fldr, 'map_med.jpg'))
     
-
     
     # make the main page
     ndx_page = os.path.join(op_fldr, dat['world_name'] + '.html')
@@ -52,16 +50,15 @@ def create_wiki_from_yaml(src_fldr, fname, op_fldr):
         f.write(html_utils.get_header(dat['world_name']))
         f.write(get_world_build_menu(dat, 'Welcome to ' + dat['world_name']))
         
-        f.write('<div id = "map">\n')
+        f.write('<div id = content><div id = "map">\n')
         f.write('<center><a href="map_full.jpg"><img src="map_med.jpg"></a></center><BR>') #YUCK - hard coded CSS - TODO
-        f.write('</div>\n')
+        f.write('<BR><BR><BR><BR><BR><BR><BR><BR><BR><BR></div>\n')
 
         
         f.write(html_utils.get_footer(''))
             
     # make the individual pages
     for chap in dat['contents']:
-        #op += format_text(dat[chap])
         op_file = os.path.join(op_fldr, chap + '.html')
         with open(op_file, 'w') as f2:
             f2.write(html_utils.get_header(dat['world_name']))
@@ -70,11 +67,25 @@ def create_wiki_from_yaml(src_fldr, fname, op_fldr):
             f2.write(html_utils.get_footer(''))
             
 def get_world_build_menu(d, heading_str):
+    lf = chr(13) + chr(10)
     txt = ''
     txt += '<H1>' + heading_str + '</H1>'
     txt += '<div id = "mainMenu"><UL>\n'
+    page_name = heading_str[heading_str.find(':') + 1:].strip(' ')
+    print(page_name)
+    # home page
+    if heading_str[0:11] == 'Welcome to ':
+        txt += '<DIV ID=mainMenuItem-sel><LI><a href=' + d['world_name'] + '.html>Home</a></LI></DIV>'
+    else:
+        txt += '<DIV ID=mainMenuItem><LI><a href=' + d['world_name'] + '.html>Home</a></LI></DIV>'
+    
     for chap in d['contents']:
-        txt += '<LI><a href=' + chap + '.html>' + chap + '</a></LI>'
+        #print('heading_str = ',heading_str , 'chap = ', chap)
+        if page_name == chap:
+        
+            txt += '<DIV ID=mainMenuItem-sel><LI><a href=' + chap + '.html>' + chap + '</a></LI></DIV>' + lf
+        else:
+            txt += '<DIV ID=mainMenuItem><LI><a href=' + chap + '.html>' + chap + '</a></LI></DIV>' + lf
     txt += '</UL></div>\n'
     
     return txt
@@ -97,13 +108,13 @@ def format_yaml_section(dct, nme, d, src_fldr, op_fldr):
             image_utils.extract_map_fragment(orig_map, entry['coords_x_y'], map_subfile)
     
             txt += '<img align=left width = 250px src="' + 'map_' + entry['name'] + '.jpg">'
+            txt += '<p>' + entry['desc'] + '</p><BR><BR><HR>'
+        else:    
+            if 'desc' in entry:
+                txt += '<p>' + entry['desc'] + '</p><BR><HR>'
             
-            
-        if 'desc' in entry:
-            txt += '<p>' + entry['desc'] + '</p><BR><BR><BR><HR>'
-        
-        if 'file' in entry:
-            txt += read_ext_file(os.path.join(src_fldr, entry['file']))
+            if 'file' in entry:
+                txt += read_ext_file(os.path.join(src_fldr, entry['file']))
         
     return txt
     
@@ -120,21 +131,6 @@ def read_ext_file(fname):
             txt += line + '<BR>'
     txt += '</p><BR>'
     return txt
-
-class Page(object):
-    """
-    base class for the wiki pages that converts
-    to various outputs
-    """
-    def __init__(self, nme, content):
-        self.nme = nme
-        self.content = content
-        print('creating page ' + nme)
-    
-    def export(self):
-        print('exporting..')
-        
-
 
 
 if __name__ == '__main__':    
