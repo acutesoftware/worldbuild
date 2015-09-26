@@ -69,6 +69,11 @@ animals:
         take down a warrior when in packs of 5 due to the mild poison on 
         their fangs.
         They are common in plains and wooded areas, preferring warmer climates.
+  - name: Melps
+    desc: >
+        Growing only to 40cm, these small gentle creatures appear as a snake on the ground. They have 6 small legs, but usually slither along the ground as they foriage for flowers and other plants to eat.
+        They can fly reasonable distances using their 8 wings along their thin golden body. It is widely assumed that they are an ancient creature, as though they dont communicate with other races - they have no enemies, keep to themselves and seem to have a very long lifespan.
+        
   - name: Razan
     desc: >
         Razan are monstrous fish like animals with caterpillar legs that can survive for weeks on land. They eat anything and everything and usually destroy an environment or town if left unchecked to breed. 
@@ -199,16 +204,22 @@ settlements:
 
 races: 
   - name: Humans
-    desc: mainly live on Sharnia, wary of misinformation so need evidence. Neutral to Elves and Drans, but have fought both
+    desc: >
+        mainly live on Sharnia, wary of misinformation so need evidence. Neutral to Elves and Drans, but have fought both
     height: [5,7]
   - name: Elves
-    desc: lived on Zinad since before the ancient annihilation, neutral to Humans, despise Drans
+    desc: >
+        lived on Zinad since before the ancient annihilation, neutral to Humans, despise Drans
     height: [7,8]
   - name: Drans
-    desc: specter like race apparantly came to live following the ancient annihilation. 
+    desc: >
+        specter like race apparantly came to live following the ancient annihilation. 
     height: [6,7]
   - name: Kandagor
-    desc: highly intelligent elite fighting race, living deep in caves on Helron. They are believed to have evolved from the original humans before the first age, and lived in total isolation for thousands of years before integrating with the rest of Alrona in the 2nd age. 
+    desc: >
+        highly intelligent elite fighting race, living deep in caves on Helron. 
+        
+        They are believed to have evolved from the original humans before the first age, and lived in total isolation for thousands of years before integrating with the rest of Alrona in the 2nd age. 
         
 people:
   - name: King Lekre
