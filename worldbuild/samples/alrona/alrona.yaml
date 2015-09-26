@@ -57,6 +57,7 @@ animals:
         A chicken like bird abundantly bred, and occasionally found wild this 
         is once of the primary sources of food for all races.
   - name: Nujla
+    file: animal_nujla.jpg
     desc: >
         Nujlas are herbivores and grow to over 15 feet long. The meat is a 
         deliciously and they are hunted on occasion (they are quite dangerous)
@@ -64,17 +65,20 @@ animals:
     desc: >
         Wolves can be found in most parts of Alrona, though they are particularly prevelant in the Northern mountains of Sharnia. They are dangerous though will not attack randomly, tending to wait until they have the numbers to overcome their prey - it is for this reason that if you see a wolf, you need to be concerned.
   - name: Flikz
+    file: animal_flikz.jpg
     desc: >
         Flikz are small but dangerous creatures that hunt in packs. They can 
         take down a warrior when in packs of 5 due to the mild poison on 
         their fangs.
         They are common in plains and wooded areas, preferring warmer climates.
   - name: Melps
+    file: animal_melps.jpg  
     desc: >
         Growing only to 40cm, these small gentle creatures appear as a snake on the ground. They have 6 small legs, but usually slither along the ground as they foriage for flowers and other plants to eat.
         They can fly reasonable distances using their 8 wings along their thin golden body. It is widely assumed that they are an ancient creature, as though they dont communicate with other races - they have no enemies, keep to themselves and seem to have a very long lifespan.
         
   - name: Razan
+    file: animal_razan.jpg  
     desc: >
         Razan are monstrous fish like animals with caterpillar legs that can survive for weeks on land. They eat anything and everything and usually destroy an environment or town if left unchecked to breed. 
         They now only live in the remote islands of alrona, mainly because they were wiped out completely in the mainland continents Sharnia and Zinad.
@@ -82,6 +86,7 @@ animals:
   - name: Dragon
     desc: >
         Dragons are mostly legendary as no survivors have returned from Helrom, but there suspicion they likely exist due to large fast airborne attacks on some northern communities
+        
 settlements:
   - name: Draeton 
     continent: Sharnia
@@ -204,18 +209,22 @@ settlements:
 
 races: 
   - name: Humans
+    file: race_humans.jpg  
     desc: >
         mainly live on Sharnia, wary of misinformation so need evidence. Neutral to Elves and Drans, but have fought both
     height: [5,7]
   - name: Elves
+    file: race_elves.jpg  
     desc: >
         lived on Zinad since before the ancient annihilation, neutral to Humans, despise Drans
     height: [7,8]
   - name: Drans
+    file: race_drans.jpg  
     desc: >
         specter like race apparantly came to live following the ancient annihilation. 
     height: [6,7]
   - name: Kandagor
+    file: race_kandagor.jpg  
     desc: >
         highly intelligent elite fighting race, living deep in caves on Helron. 
         
