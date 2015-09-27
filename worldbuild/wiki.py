@@ -39,6 +39,8 @@ def create_wiki_from_yaml(src_fldr, fname, op_fldr):
     shutil.copyfile(os.path.join(src_fldr, dat['maps'][0]), os.path.join(op_fldr, 'map_full.jpg'))    
     shutil.copyfile(os.path.join(src_fldr, 'worldbuild.css'), os.path.join(op_fldr, 'worldbuild.css'))    
     shutil.copyfile(os.path.join(src_fldr, 'paper-texture.jpg'), os.path.join(op_fldr, 'paper-texture.jpg'))    
+ 
+    # TODO - copy ALL jpgs to wiki_op shutil.copy(os.path.join(src_fldr, '*.jpg'), op_fldr)    
     
     # make a medium size image of the full map for main page
     image_utils.make_map_medium(os.path.join(src_fldr, dat['maps'][0]),  os.path.join(op_fldr, 'map_med.jpg'))
@@ -126,9 +128,16 @@ def format_text(txt, op_format='MD', console=True):
 
 def read_ext_file(fname):
     txt = '<h3>File: ' + os.path.basename(fname) + '</h3><p>'
-    with open(fname, 'r') as f:
-        for line in f:
-            txt += line + '<BR>'
+    if os.path.exists(fname):
+        print('READ_EXT_FILE' , fname, ' = ' , fname[-3:])
+        if fname[-3:] == 'jpg':
+            txt += 'image - ' + fname + '<BR>'
+        else:
+            with open(fname, 'r') as f:
+                for line in f:
+                    txt += line + '<BR>'
+    else:
+        txt += '<BR>ERROR - source file doesnt exist<BR><BR>'
     txt += '</p><BR>'
     return txt
 
