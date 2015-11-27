@@ -57,7 +57,7 @@ There is obviously no life in the water, not even fungus and ironically this mak
 ==============================================
 The camp is quite excited as we discovered a cave system today and the initial reports say it leads to massive underground series of halls all linked with additional tunnels going off to who knows where. 
 
-A strongly armed team went into the cave early in the morning and explored 2 of the tunnels but were attacked by some form of ghouls - most died and only 2 returned to base camp. They were to terrified to provide much detail, though did say there was something 'big' living there as well as the ghouls. They also said there were large chests full of jewels and gold made by an unknown race.
+A strongly armed team went into the cave early in the morning and explored 2 of the tunnels but were attacked by some form of ghouls - most died and only 2 returned to base camp. They were too terrified to provide much detail, though did say there was something 'big' living there as well as the ghouls. They also said there were large chests full of jewels and gold made by an unknown race.
 
 As we tended to the wounded and prepared for a rescue of any survivors, the normally deathly silent land was alive with many strange noises - we kept close guard but no direct confrontation occurred.
 
