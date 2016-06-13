@@ -1,3 +1,4 @@
 @Minecraft Server
 /say hello from server, just building a house ~5 ~0 ~0
 /fill -1552 88 1520 -1516 97 1545 minecraft:air 0
+/fill -1552 87 1520 -1516 87 1545 minecraft:hardened_clay
