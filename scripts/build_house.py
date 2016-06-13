@@ -44,22 +44,37 @@ def setup_house_bld():
     x2 = x+int((w+1)/2)+1
     y2 = y+h
     z2 = z+int((d+1)/2)+1
+    
+    posts = 'planks 1'
+    roof = 'planks 1'
+    walls = 'planks 2'
+    floor = 'planks 3'
+    
     res.append(mc_fill(x1,y1,z1,x2,y2,z2, 'minecraft:air 0'))
-    res.append(mc_fill(x1,y1,z1,x2,y2,z2, 'minecraft:planks 1 hollow'))
-    res.append(mc_fill(x1,y1,z1,x2,y1,z2, 'minecraft:planks 3'))  # floor
-    res.append(mc_fill(x1-1,y2+0,z1-0,x2+1,y2+0,z2+0, 'minecraft:planks 2'))  # roof
-    res.append(mc_fill(x1-1,y2+1,z1+1,x2+1,y2+1,z2-1, 'minecraft:planks 2'))  # roof
-    res.append(mc_fill(x1-1,y2+2,z1+2,x2+1,y2+2,z2-2, 'minecraft:planks 2'))  # roof
+    res.append(mc_fill(x1,y1,z1,x2,y2,z2, 'minecraft:' + walls + ' hollow'))
+    res.append(mc_fill(x1,y1,z1,x2,y1,z2, 'minecraft:' + floor))  
+    res.append(mc_fill(x1-1,y2+0,z1-1,x2+1,y2+0,z2+1, 'minecraft:' + roof))  # roof
+    res.append(mc_fill(x1-1,y2+1,z1+1,x2+1,y2+1,z2-1, 'minecraft:' + roof))  # roof
+    res.append(mc_fill(x1-1,y2+2,z1+3,x2+1,y2+2,z2-3, 'minecraft:' + roof))  # roof
+
+    #posts in different wood
+    dbl_width = 0  # set to 1 to have posts wide on short side of house
+    res.append(mc_fill(x1,y1,z1,x1,y2,z1+dbl_width, 'minecraft:' + posts))  # post
+    res.append(mc_fill(x2,y1,z1,x2,y2,z1+dbl_width, 'minecraft:' + posts))  # post
+    res.append(mc_fill(x1,y1,z2,x1,y2,z2-dbl_width, 'minecraft:' + posts))  # post
+    res.append(mc_fill(x2,y1,z2,x2,y2,z2-dbl_width, 'minecraft:' + posts))  # post
+    
     
     # door on short wall
-    res.append('/setblock ' + str(x1) + ' ' + str(y) + ' ' + str(z1 + int((d)/2)+1) + ' wooden_door')  # Door
-    res.append('/setblock ' + str(x1) + ' ' + str(y+1) + ' ' + str(z1 + int((d)/2)+1) + ' wooden_door 8')  # Door
+    res.append('/setblock ' + str(x1) + ' ' + str(y) + ' ' + str(z1 + int((d)/2)+1) + ' wooden_door')  # Side Door
+    res.append('/setblock ' + str(x1) + ' ' + str(y+1) + ' ' + str(z1 + int((d)/2)+1) + ' wooden_door 8')  # Side Door
     
-    """ 
+    
     # door on long wall
     res.append('/setblock ' + str(x1 + int((w)/2)+1) + ' ' + str(y) + ' ' + str(z1) + ' wooden_door')  # Door
     res.append('/setblock ' + str(x1 + int((w)/2)+1) + ' ' + str(y+1) + ' ' + str(z1) + ' wooden_door 8')  # Door
     
+    """ 
     # Windows on short walls perpendicular to door
     # /fill 8 103 5 9 104 5 minecraft:glass 0 
     res.append(mc_fill(x1,y1+2,z1+2,x1,y2-2,z1+2, 'minecraft:glass 0'))  # windows
@@ -90,11 +105,29 @@ def setup_house_bld():
     res.append('/setblock ' + str(x2-1) + ' ' + str(y2-2) + ' ' + str(z1+1) + ' torch 2')  # RHS back wall
     res.append('/setblock ' + str(x2-1) + ' ' + str(y2-2) + ' ' + str(z2-1) + ' torch 2')  # LHS back wall
 
+    res.append('/setblock ' + str(x1-1) + ' ' + str(y2-2) + ' ' + str(z1+1) + ' torch 2')  # outside of side door
+    res.append('/setblock ' + str(x1-1) + ' ' + str(y2-2) + ' ' + str(z2-1) + ' torch 2')  # outside of side door
 
-
- 
     
-    print(res)
+    #res.append('/setblock ' + str(x2-3) + ' ' + str(y2-4) + ' ' + str(z2-1) + ' wall_sign 5 replace {Text1:\"hi\", Text2:\"\"}')
+    
+    """
+    Furniture
+    """
+    res.append(mc_fill(x2-1,y1,z1+1,x2-3,y1,z1+3, 'minecraft:stained_hardened_clay 14'))  # red carpet in bedroom
+
+    res.append('/setblock ' + str(x2-2) + ' ' + str(y1+1) + ' ' + str(z1+2) + ' bed 3')  # bed
+    res.append('/setblock ' + str(x2-1) + ' ' + str(y1+1) + ' ' + str(z1+2) + ' bed 11') # bed head
+    res.append(mc_fill(x2-1,y1+1,z2-1,x2-1,y1+1,z2-2, 'minecraft:bookshelf 0'))  # bookshelves next to bed
+
+    res.append('/setblock ' + str(x1+3) + ' ' + str(y1+1) + ' ' + str(z1+1) + ' chest 3') 
+    res.append('/setblock ' + str(x1+2) + ' ' + str(y1+1) + ' ' + str(z1+1) + ' chest 3') 
+    res.append('/setblock ' + str(x1+1) + ' ' + str(y1+1) + ' ' + str(z1+1) + ' furnace 0')  # oven next to chest
+ 
+    res.append('/setblock ' + str(x1+1) + ' ' + str(y1+1) + ' ' + str(z2-1) + ' crafting_table 4') 
+    res.append('/setblock ' + str(x1+2) + ' ' + str(y1+1) + ' ' + str(z2-1) + ' anvil 4') 
+    res.append('/setblock ' + str(x1+3) + ' ' + str(y1+1) + ' ' + str(z2-1) + ' enchanting_table 4')  # face north
+     
     with open('build_house.bld', 'w') as f:
         for line in res:
             f.write(line + '\n')
