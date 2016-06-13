@@ -1,0 +1,42 @@
+@Minecraft Server
+/say hello from server, just building a house ~5 ~0 ~0
+/fill -1531 87 1527 -1523 91 1533 minecraft:air 0
+/fill -1531 87 1527 -1523 91 1533 minecraft:stone 0 hollow
+/fill -1531 87 1527 -1523 87 1533 minecraft:stone 4
+/fill -1532 91 1526 -1522 91 1534 minecraft:planks 1
+/fill -1532 92 1528 -1522 92 1532 minecraft:planks 1
+/fill -1532 93 1530 -1522 93 1530 minecraft:planks 1
+/fill -1531 87 1527 -1531 90 1527 minecraft:stone 0
+/fill -1523 87 1527 -1523 90 1527 minecraft:stone 0
+/fill -1531 87 1533 -1531 90 1533 minecraft:stone 0
+/fill -1523 87 1533 -1523 90 1533 minecraft:stone 0
+/setblock -1531 88 1530 wooden_door
+/setblock -1531 89 1530 wooden_door 8
+/setblock -1527 88 1527 wooden_door
+/setblock -1527 89 1527 wooden_door 8
+/fill -1529 89 1527 -1529 89 1527 minecraft:glass 0
+/fill -1525 89 1527 -1525 89 1527 minecraft:glass 0
+/fill -1529 89 1533 -1528 89 1533 minecraft:glass 0
+/fill -1525 89 1533 -1526 89 1533 minecraft:glass 0
+/setblock -1530 89 1528 torch 1
+/setblock -1530 89 1532 torch 1
+/setblock -1524 89 1528 torch 2
+/setblock -1524 89 1532 torch 2
+/setblock -1532 90 1527 torch 2
+/setblock -1532 90 1533 torch 2
+/setblock -1522 90 1527 torch 1
+/setblock -1522 90 1533 torch 1
+/setblock -1531 90 1526 torch 4
+/setblock -1523 90 1526 torch 4
+/setblock -1531 90 1534 torch 3
+/setblock -1523 90 1534 torch 3
+/fill -1524 87 1528 -1526 87 1530 minecraft:stained_hardened_clay 14
+/setblock -1525 88 1529 bed 3
+/setblock -1524 88 1529 bed 11
+/fill -1524 88 1532 -1524 88 1531 minecraft:bookshelf 0
+/setblock -1528 88 1528 chest 3
+/setblock -1529 88 1528 chest 3
+/setblock -1530 88 1528 furnace 0
+/setblock -1530 88 1532 crafting_table 4
+/setblock -1529 88 1532 anvil 4
+/setblock -1528 88 1532 enchanting_table 4
