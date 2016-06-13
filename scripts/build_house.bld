@@ -1,36 +1,42 @@
 @Minecraft Server
 /say hello from server, just building a house ~5 ~0 ~0
-/fill -1544 87 1537 -1536 92 1543 minecraft:air 0
-/fill -1544 87 1537 -1536 92 1543 minecraft:planks 2 hollow
-/fill -1544 87 1537 -1536 87 1543 minecraft:planks 3
-/fill -1545 92 1536 -1535 92 1544 minecraft:planks 1
-/fill -1545 93 1538 -1535 93 1542 minecraft:planks 1
-/fill -1545 94 1540 -1535 94 1540 minecraft:planks 1
-/fill -1544 87 1537 -1544 92 1537 minecraft:planks 1
-/fill -1536 87 1537 -1536 92 1537 minecraft:planks 1
-/fill -1544 87 1543 -1544 92 1543 minecraft:planks 1
-/fill -1536 87 1543 -1536 92 1543 minecraft:planks 1
-/setblock -1544 88 1540 wooden_door
-/setblock -1544 89 1540 wooden_door 8
-/setblock -1540 88 1537 wooden_door
-/setblock -1540 89 1537 wooden_door 8
-/fill -1542 89 1537 -1542 90 1537 minecraft:glass 0
-/fill -1538 89 1537 -1538 90 1537 minecraft:glass 0
-/fill -1542 89 1543 -1541 90 1543 minecraft:glass 0
-/fill -1538 89 1543 -1539 90 1543 minecraft:glass 0
-/setblock -1543 90 1538 torch 1
-/setblock -1543 90 1542 torch 1
-/setblock -1537 90 1538 torch 2
-/setblock -1537 90 1542 torch 2
-/setblock -1545 90 1538 torch 2
-/setblock -1545 90 1542 torch 2
-/fill -1537 87 1538 -1539 87 1540 minecraft:stained_hardened_clay 14
-/setblock -1538 88 1539 bed 3
-/setblock -1537 88 1539 bed 11
-/fill -1537 88 1542 -1537 88 1541 minecraft:bookshelf 0
-/setblock -1541 88 1538 chest 3
-/setblock -1542 88 1538 chest 3
-/setblock -1543 88 1538 furnace 0
-/setblock -1543 88 1542 crafting_table 4
-/setblock -1542 88 1542 anvil 4
-/setblock -1541 88 1542 enchanting_table 4
+/fill -1545 87 1536 -1535 92 1544 minecraft:air 0
+/fill -1545 87 1536 -1535 92 1544 minecraft:planks 2 hollow
+/fill -1545 87 1536 -1535 87 1544 minecraft:planks 3
+/fill -1546 92 1535 -1534 92 1545 minecraft:planks 1
+/fill -1546 93 1537 -1534 93 1543 minecraft:planks 1
+/fill -1546 94 1539 -1534 94 1541 minecraft:planks 1
+/fill -1545 87 1536 -1545 91 1536 minecraft:planks 1
+/fill -1535 87 1536 -1535 91 1536 minecraft:planks 1
+/fill -1545 87 1544 -1545 91 1544 minecraft:planks 1
+/fill -1535 87 1544 -1535 91 1544 minecraft:planks 1
+/setblock -1545 88 1540 wooden_door
+/setblock -1545 89 1540 wooden_door 8
+/setblock -1540 88 1536 wooden_door
+/setblock -1540 89 1536 wooden_door 8
+/fill -1543 89 1536 -1543 90 1536 minecraft:glass 0
+/fill -1537 89 1536 -1537 90 1536 minecraft:glass 0
+/fill -1543 89 1544 -1542 90 1544 minecraft:glass 0
+/fill -1537 89 1544 -1538 90 1544 minecraft:glass 0
+/setblock -1544 90 1537 torch 1
+/setblock -1544 90 1543 torch 1
+/setblock -1536 90 1537 torch 2
+/setblock -1536 90 1543 torch 2
+/setblock -1546 91 1536 torch 2
+/setblock -1546 91 1544 torch 2
+/setblock -1534 91 1536 torch 1
+/setblock -1534 91 1544 torch 1
+/setblock -1545 91 1535 torch 4
+/setblock -1535 91 1535 torch 4
+/setblock -1545 91 1545 torch 3
+/setblock -1535 91 1545 torch 3
+/fill -1536 87 1537 -1538 87 1539 minecraft:stained_hardened_clay 14
+/setblock -1537 88 1538 bed 3
+/setblock -1536 88 1538 bed 11
+/fill -1536 88 1543 -1536 88 1542 minecraft:bookshelf 0
+/setblock -1542 88 1537 chest 3
+/setblock -1543 88 1537 chest 3
+/setblock -1544 88 1537 furnace 0
+/setblock -1544 88 1543 crafting_table 4
+/setblock -1543 88 1543 anvil 4
+/setblock -1542 88 1543 enchanting_table 4
