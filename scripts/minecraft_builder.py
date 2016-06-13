@@ -3,9 +3,11 @@ import time
 
 import aikif.toolbox.interface_windows_tools as mod_tool
 
-fname = 'build_box.bld'
-
 def main():
+    make_structure('build_box.bld')
+    make_structure('build_house.bld')
+
+def make_structure(fname):
     print('NOTE - you need to set focus to the command textbox in the Minecraft server')
     print('and do NOT lose focus to the server (dont touch or select anything while this runs)')
 
@@ -22,7 +24,9 @@ def main():
             else:
                 print('sending keys ' , line.strip('\n'))
                 mod_tool.send_keys(line.strip('\n'))
-                time.sleep(0.2) 
+                time.sleep(0.01) 
                 mod_tool.send_keys("{ENTER}")
-                time.sleep(1) 
-main()            
+                time.sleep(0.1) 
+
+if __name__ == '__main__':                
+    main()            
