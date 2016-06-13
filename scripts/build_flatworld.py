@@ -33,6 +33,7 @@ def main():
     res.append('@Minecraft Server')
     res.append('/say hello from server, just building a house ~5 ~0 ~0')
     res.append(mc_fill(x, y, z, x+w, y+h, z+d, 'minecraft:air 0'))
+    res.append(mc_fill(x, y-1, z, x+w, y-1, z+d, 'minecraft:hardened_clay'))
     #res.append(mc_fill(x, y-1, z, x+w, y-1, z+d, 'minecraft:grass 0'))
     print(res)
     with open('build_flatworld.bld', 'w') as f:
