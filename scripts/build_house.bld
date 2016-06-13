@@ -1,0 +1,14 @@
+@Minecraft Server
+/say hello from server, just building a house ~5 ~0 ~0
+/fill -1544 87 1537 -1536 92 1543 minecraft:air 0
+/fill -1544 87 1537 -1536 92 1543 minecraft:planks 1 hollow
+/fill -1544 87 1537 -1536 87 1543 minecraft:planks 3
+/fill -1545 92 1537 -1535 92 1543 minecraft:planks 2
+/fill -1545 93 1538 -1535 93 1542 minecraft:planks 2
+/fill -1545 94 1539 -1535 94 1541 minecraft:planks 2
+/setblock -1544 88 1540 wooden_door
+/setblock -1544 89 1540 wooden_door 8
+/fill -1542 89 1537 -1542 90 1537 minecraft:glass 0
+/fill -1538 89 1537 -1538 90 1537 minecraft:glass 0
+/fill -1542 89 1543 -1541 90 1543 minecraft:glass 0
+/fill -1538 89 1543 -1539 90 1543 minecraft:glass 0
