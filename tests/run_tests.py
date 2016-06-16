@@ -21,3 +21,4 @@ time.sleep(10)
 
 wipe_file('test_world.txt')
 wipe_file('world_traversed.txt')
+wipe_file('agent.txt')
