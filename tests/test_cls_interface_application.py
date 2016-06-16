@@ -22,9 +22,9 @@ class TestAgentInterfaceEnvironment(unittest.TestCase):
     def test_02_activate_minecraft(self):
         res = mod_if.InterfaceMineCraft('Minecraft server')
         res.activate()
-        res.send_command('/say hello')
         
-
+        return_val = res.send_command('/say hello')
+        self.assertEqual(return_val, '/say hello{ENTER}')
         
 if __name__ == '__main__':
     unittest.main()
