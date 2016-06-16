@@ -20,7 +20,9 @@ class InterfaceApplication(object):
     the applications code once API details are working.
     """
     
-    def __init__(self, app_caption):
+    def __init__(self, app_caption=''):
+        
+            
         self.app_caption = app_caption
         
     def __str__(self):
@@ -38,8 +40,13 @@ class InterfaceApplication(object):
         
 class InterfaceMineCraft(InterfaceApplication):
     """
-    Class to handle how to talk to the application.
+    Class to handle how to talk to MineCraft
     """
+    def __init__(self, app_caption):
+        self.string_execute = '{ENTER}'
+        self.time_delay = 0.01
+        InterfaceApplication.__init__(self, app_caption='')
+
     def __str__(self):
         res = ''
         res += 'BuildMap '
@@ -50,6 +57,7 @@ class InterfaceMineCraft(InterfaceApplication):
         Sends a command to the application
         """
         mod_tool.send_keys(cmd)
-        time.sleep(0.01) 
-        mod_tool.send_keys("{ENTER}")
-        time.sleep(0.1) 
+        time.sleep(self.time_delay) 
+        mod_tool.send_keys(self.string_execute)
+        time.sleep(self.time_delay) 
+        return cmd + self.string_execute
