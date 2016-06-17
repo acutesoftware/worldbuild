@@ -36,16 +36,14 @@ class InterfaceApplication(object):
         time.sleep(.5)
         
 
-        
-        
 class InterfaceMineCraft(InterfaceApplication):
     """
     Class to handle how to talk to MineCraft
     """
-    def __init__(self, app_caption):
+    def __init__(self, app_caption, time_delay=0.01):
         self.string_execute = '{ENTER}'
-        self.time_delay = 0.01
-        InterfaceApplication.__init__(self, app_caption='')
+        self.time_delay = time_delay
+        InterfaceApplication.__init__(self, app_caption)
 
     def __str__(self):
         res = ''
