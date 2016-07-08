@@ -11,13 +11,15 @@ server = '1.10'
 
 if server ==  '1.10':
     locations = [ 
-        {'name':'v2-home',            'loc':'248 66 -61'},
-        {'name':'v2-farm',            'loc':'977 94 -228' },
-        {'name':'v2-floating-garden', 'loc':'685 107 -588' },
-        {'name':'v2-floating-castle', 'loc':'-202 105 -655' },
-        {'name':'v2-stronghold',      'loc':'415 72 -2198' },
-        {'name':'v2-village',         'loc':'121 77 -2019' },
-        {'name':'v2-overhang-lookout', 'loc':'-449 110 -1830' },
+        {'name':'home',             'loc':'248 66 -61'},
+        {'name':'farm',             'loc':'960 77 -260' },
+        {'name':'floating-garden',  'loc':'685 107 -588' },
+        {'name':'floating-castle',  'loc':'-202 105 -655' },
+        {'name':'stronghold',       'loc':'415 72 -2198' },
+        {'name':'village',          'loc':'121 77 -2019' },
+        {'name':'overhang-lookout', 'loc':'-449 110 -1830' },
+        {'name':'rock-island',      'loc':'154 98 384' },
+        
     ]    
 else:
     locations = [ 
