@@ -17,11 +17,14 @@ style_stone = {'roof':'planks 1', 'walls':'stone 0', 'floor':'stone 4', 'posts':
 
 
 def main():
-    setup_house_bld(op_file='build_house.bld', x=-1540,y=88,z=1540,w=8,h=4,d=6, style=style_wood)
-    setup_house_bld(op_file='build_cottage.bld', x=-1527,y=88,z=1530,w=6,h=3,d=4, style=style_stone)
+    setup_house_bld(op_file='hut_by_beach.bld', x=182,y=66,z=519,w=8,h=4,d=12, style=style_stone)
+    minecraft_builder.make_structure('hut_by_beach.bld')
     
-    minecraft_builder.make_structure('build_house.bld')
-    minecraft_builder.make_structure('build_cottage.bld')
+ 
+    #setup_house_bld(op_file='build_house.bld', x=-1540,y=88,z=1540,w=8,h=4,d=6, style=style_wood)
+    #setup_house_bld(op_file='build_cottage.bld', x=-1527,y=88,z=1530,w=6,h=3,d=4, style=style_stone)
+    #minecraft_builder.make_structure('build_house.bld')
+    #minecraft_builder.make_structure('build_cottage.bld')
 
     
 def setup_house_bld(op_file, x,y,z,w,h,d, style):    
