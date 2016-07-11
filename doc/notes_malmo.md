@@ -9,6 +9,11 @@ My install of Minecraft is on Windows, so following windows install via
 https://github.com/Microsoft/malmo/blob/master/doc/install_windows.md
 
 
+Status
+----------
+- installation works well, but having issues with python examples (I didnt have 2.7 setup as default)
+- minecraft loads all mods correctly
+
 
 
 
@@ -86,7 +91,7 @@ T:\user\dev\src\python\Malmo\Malmo\samples\Python_examples>.\run_mission.py
                                   ^
 SyntaxError: invalid syntax
 
-Changed to python 3 function syntax which was fine , but still says cant
+Changed to python 3 function syntax which was fine , but still says cant find module MalmoPython
 
   File "T:\user\dev\src\python\Malmo\Malmo\samples\Python_examples\run_mission.py", line 21, in <module>
     import MalmoPython
@@ -98,7 +103,11 @@ T:\user\dev\src\python\Malmo\Malmo\samples\Python_examples>pip install MalmoPyth
 Downloading/unpacking MalmoPython
   Could not find any downloads that satisfy the requirement MalmoPython
   
-  
+checked pypi - no module containing malmo so not on pip
+
+Comment on Malmo issue - https://github.com/Microsoft/malmo/issues/166
+2 others have same problem
+
 
 
 
