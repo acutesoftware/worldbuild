@@ -11,11 +11,21 @@ https://github.com/Microsoft/malmo/blob/master/doc/install_windows.md
 
 Status
 ----------
-- installation works well, but having issues with python examples (I didnt have 2.7 setup as default)
+- installation works well, but had issues with python examples (I didnt have 2.7 setup as default)
 - minecraft loads all mods correctly
+- runs sample python bots well
+- TODO - create own bots in worldbuild package
 
-
-
+Running bots (after install)
+------------------------------
+1. start new command prompt
+2. Launch Minecraft with mods
+    `cd T:\user\dev\src\python\Malmo\Minecraft`
+    `launchClient.bat`
+    
+3. Launch samples 
+    `cd T:\user\dev\src\python\Malmo\Malmo\Python_examples`
+    `c:\python27\python.exe ./run_mission.py`
 
 Installation notes
 ------------------------
@@ -72,6 +82,9 @@ i. Run python agent
 cd T:\user\dev\src\python\Malmo\Malmo\samples\Python_examples
 c:\python27\python ./run_mission.py
 
+
+Issues during install
+-----------------------
 Error - ImportError: No module named MalmoPython (forgot to reboot)
 
 checked github issues, 
@@ -108,9 +121,16 @@ checked pypi - no module containing malmo so not on pip
 Comment on Malmo issue - https://github.com/Microsoft/malmo/issues/166
 2 others have same problem
 
+Problem was fixed - the readme was updated to make sure we download the install not the build (I picked wrong one)
+installed and unzipped to T:\user\dev\src\python\Malmo
+ran launchClient ok
+cd T:\user\dev\src\python\Malmo\Malmo\Python_examples  (original text - should have known when previous one had /samples/ in it)
 
+ran run_mission and import MalmoPython now works ok
+but still got print 'ERROR:',e SyntaxError
 
-
+Fixed by explicity launching with Python2.7 as follows
+c:\python27\python.exe ./run_mission.py
 
 
 
