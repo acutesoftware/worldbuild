@@ -24,13 +24,15 @@ def main():
     setup_road_bld(op_file='road.bld', x=10,y=70,z=10,direction=West, width=2,length=6, style=style_stone)
     #setup_road_bld(op_file='road.bld', x=10,y=70,z=10,direction=North, width=2,length=6, style=style_stone)
     minecraft_builder.make_structure('road.bld')
+    
+    mcb.make_from_list(road(x=4,y=86,z=10,direction=South, width=4,length=12, style=style_stone))
+    mcb.make_from_list(road(x=10,y=86,z=10,direction=West, width=3,length=6, style=style_wood))
+    
     """
     
     # build multiple roads
-    mcb.make_from_list(road(x=4,y=86,z=10,direction=South, width=4,length=12, style=style_stone))
-    mcb.make_from_list(road(x=4,y=86,z=10,direction=North, width=4,length=30, style=style_wood))
-    mcb.make_from_list(road(x=10,y=86,z=10,direction=East, width=3,length=12, style=style_stone))
-    mcb.make_from_list(road(x=10,y=86,z=10,direction=West, width=3,length=6, style=style_wood))
+    mcb.make_from_list(road(x=100,y=70,z=10,direction=North, width=5,length=30, style=style_wood))
+    mcb.make_from_list(road(x=100,y=70,z=10,direction=East, width=4,length=12, style=style_stone))
     
 
     
