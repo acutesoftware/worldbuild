@@ -1,0 +1,6 @@
+@Minecraft Server
+/say hello from server, just building a road
+/fill 10 67 10 12 70 4 minecraft:air 0
+/fill 10 70 10 12 70 4 minecraft:stone 0
+/fill 10 70 10 10 70 4 minecraft:stone 2
+/fill 12 70 10 12 70 4 minecraft:stone 2
