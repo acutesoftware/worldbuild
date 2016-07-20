@@ -2,7 +2,7 @@
 import os
 import sys
 
-sys.path.append(os.path.join('..','worldbuild'))
+sys.path.append(os.path.join('..','..','worldbuild'))
 import cls_interface_application as mod_if
 
 mc = mod_if.InterfaceMineCraft('Minecraft server', 0.2)
