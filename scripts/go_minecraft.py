@@ -19,6 +19,8 @@ if server ==  '1.10':
         {'name':'village',          'loc':'121 77 -2019' },
         {'name':'overhang-lookout', 'loc':'-449 110 -1830' },
         {'name':'rock-island',      'loc':'154 98 384' },
+        {'name':'enchanted-village','loc':'1082 87 -1297' },
+        
         
     ]    
 else:
