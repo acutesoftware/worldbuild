@@ -22,10 +22,6 @@ sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)  # flush print output immedi
 agent_host = MalmoPython.AgentHost()
 agent_host.setObservationsPolicy(MalmoPython.ObservationsPolicy.LATEST_OBSERVATION_ONLY)
 
-print(agent_host)
-
-print('Environment ok - TODO - specify and run mission')
-
 
 with open(mission_file, 'r') as f:
     print ("Loading mission from %s" % mission_file)
