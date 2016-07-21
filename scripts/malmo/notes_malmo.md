@@ -132,6 +132,19 @@ but still got print 'ERROR:',e SyntaxError
 Fixed by explicity launching with Python2.7 as follows
 c:\python27\python.exe ./run_mission.py
 
+Running own agents
+---------------------------
+made a copy of a tutorial from malmo and copied a sample mission.xml file to local folder.
+
+  File "mc_test1.py", line 31, in <module>
+    my_mission = MalmoPython.MissionSpec(mission_xml, True)
+RuntimeError: Schema file Mission.xsd not found. Please set the MALMO_XSD_PATH environment variable to the location of the .xsd schema files.
+
+
+
+Doesn't run as it needs the path to the XSD Schema - in Windows10 add System variable
+MALMO_XSD_PATH = T:\user\dev\src\python\Malmo\Schemas
+
 
 
 
