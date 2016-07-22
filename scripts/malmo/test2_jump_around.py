@@ -7,7 +7,7 @@ import random
 
 malmo_path = 'T:\\user\\dev\\src\\python\\Malmo\\Python_Examples'
 sys.path.append(malmo_path)
-mission_file = os.path.join(os.getcwd(), 'mission1.xml')
+mission_file = os.path.join(os.getcwd(), 'mission2.xml')
 import MalmoPython
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0)  # flush print output immediately
     
