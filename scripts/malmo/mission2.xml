@@ -45,6 +45,15 @@
           <DrawBlock type="planks" x="20" y="229" z="20"/>
           
           <DrawBlock type="planks" x="19" y="230" z="19"/>
+          <DrawBlock type="obsidian" x="15" y="227" z="19"/>
+          <DrawBlock type="obsidian" x="15" y="228" z="19"/>
+          <DrawBlock type="obsidian" x="15" y="229" z="19"/>
+          <DrawBlock type="obsidian" x="15" y="230" z="19"/>
+          <DrawBlock type="obsidian" x="15" y="231" z="19"/>
+          <DrawBlock type="obsidian" x="15" y="232" z="19"/>
+          <DrawBlock type="obsidian" x="15" y="233" z="19"/>
+          
+                    
       </DrawingDecorator>  
       <ServerQuitFromTimeUp description="" timeLimitMs="100000"/>
       <ServerQuitWhenAnyAgentFinishes/>
@@ -54,7 +63,7 @@
   <AgentSection mode="Survival">
     <Name>TESTING123</Name>
     <AgentStart>
-      <Placement pitch="0" x="0.5" y="227.0" yaw="0" z="0.5"/>
+      <Placement pitch="0" x="3.5" y="227.0" yaw="0" z="4.5"/>
     </AgentStart>
     <AgentHandlers>
       <ContinuousMovementCommands turnSpeedDegs="180"/>
