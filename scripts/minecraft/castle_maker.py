@@ -8,15 +8,15 @@ import sys
 import minecraft_builder as mcb
 
 style_stone = {'base':'stone 0', 'side':'cobblestone', 'corner':'stone 0'}
-
 style_wood = {'base':'planks 1', 'side':'planks 2', 'corner':'stone 0'}
+style_wool = {'base':'wool 1', 'side':'wool 2', 'corner':'wool 0'}
 
 start_x = 30
 start_y = 63
 start_z = 30
-width = 10
-height = 5
-length = 10
+width = 16
+height = 6
+length = 28
 wall_width = 4
 
 North = (1,0)
@@ -41,10 +41,15 @@ def main():
     wipe_area()
     
     # build outer walls
-    mcb.make_from_list(castle_wall(start_x,start_y,start_z,North, length,height, style=style_stone))
-    mcb.make_from_list(castle_wall(start_x,start_y,start_z,East,  length,height, style=style_stone))
+    mcb.make_from_list(castle_wall(start_x,start_y,start_z,North, width,height, style=style_stone)) # TOK
+    mcb.make_from_list(castle_wall(start_x,start_y,start_z,East,  length,height, style=style_stone)) # TOK
     
+    mcb.make_from_list(castle_wall(start_x,start_y,start_z+length-wall_width,North, width ,height, style=style_stone))
+    mcb.make_from_list(castle_wall(start_x+width-wall_width,start_y,start_z, East, length, height, style=style_stone))
     
+    #mcb.make_from_list(castle_wall(start_x+wall_width,start_y,start_z+length,North, width ,height, style=style_wool))
+    #mcb.make_from_list(castle_wall(start_x+width,start_y,start_z+wall_width, East, length, height, style=style_wood))
+     
     mcb.make_from_list(touchups)
     
     
@@ -92,7 +97,8 @@ def castle_wall(x,y,z,direction, length, height, style):
             res.append('/setblock ' + str(x2) + ' ' + str(y2+2) + ' ' + str(n) + ' torch 0')  # torch on outer wall
         
         # clear battlements on wall joins
-        res.append(mc_fill(x1+2,y2+1,z1+2,x2,y2+2,z+wall_width, 'minecraft:air'))
+        #if wall_width > 3:
+        #    res.append(mc_fill(x1+2,y2+1,z1+2,x2,y2+2,z+wall_width, 'minecraft:air'))
         
         
     else:                   # North / South
