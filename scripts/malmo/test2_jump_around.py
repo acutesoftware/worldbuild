@@ -45,14 +45,14 @@ total_reward = 0.0
 while world_state.is_mission_running:
     try:
         # For manual commands on the keyboard
-        #  nb = raw_input('Enter command: ')
-        #  agent_host.sendCommand(nb)
+        nb = raw_input('Enter command: ')
+        agent_host.sendCommand(nb)
         
         # Hardwired moves
         agent_host.sendCommand("move " + str(0.5*(random.random()*2-0.5)) )
         #agent_host.sendCommand("pitch " + str(0.2*(random.random()*2-1)) )
 #        agent_host.sendCommand("pitch -1")
-        agent_host.sendCommand("jump 1")
+#        agent_host.sendCommand("jump 1")
 #        agent_host.sendCommand("attack 1")
 #         agent_host.sendCommand("drop")
         agent_host.sendCommand( "turn " + str(0.5*(random.random()*2-1)) )
