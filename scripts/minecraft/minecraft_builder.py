@@ -15,9 +15,15 @@ def make_structure(fname):
         for line in f:
             res.append(line)
     make_from_list(res)
-                
+ 
+
+def log_list(lst):
+    with open('last_build.log', 'a') as f:
+        for line in lst:
+            f.write(line + '\n')
                 
 def make_from_list(lst):
+    log_list(lst)
     for line in lst:
         if line.strip('\n') == '':
             pass
