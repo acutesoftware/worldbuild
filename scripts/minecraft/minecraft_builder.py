@@ -38,9 +38,28 @@ def make_from_list(lst):
             mod_tool.send_keys(line.strip('\n'))
             time.sleep(0.01) 
             mod_tool.send_keys("{ENTER}")
-            time.sleep(0.1) 
+            time.sleep(0.01) 
     
+def mc_fill(x1, y1, z1, x2, y2, z2, item):
+    """
+    formats the fill params to a minecraft command
+    /fill 1 79 1 9 88 9 minecraft:air 0
+    /fill 1 80 1 4 84 4 minecraft:sandstone 0 hollow
+    /fill 1 79 1 4 79 4 minecraft:stone 0
+    /fill 1 85 1 4 85 4 minecraft:wool 3
+    /fill 1 81 2 1 83 3 minecraft:air 0
 
+    
+    """
+    r = '/fill ' 
+    r += str(x1) + ' '
+    r += str(y1) + ' ' 
+    r += str(z1) + ' ' 
+    r += str(x2) + ' ' 
+    r += str(y2) + ' ' 
+    r += str(z2) + ' ' 
+    r += item
+    return r 
                 
 if __name__ == '__main__':                
     main()            
