@@ -11,13 +11,17 @@ style_stone = {'base':'stone 0', 'side':'cobblestone', 'corner':'stone 0'}
 style_wood = {'base':'planks 1', 'side':'planks 2', 'corner':'stone 0'}
 style_wool = {'base':'wool 1', 'side':'wool 2', 'corner':'wool 0'}
 
+
+
+"""
 start_x = 30
 start_y = 63
 start_z = 30
 width = 16
 height = 6
 length = 28
-wall_width = 4
+"""
+
 
 North = (1,0)
 South = (-1, 0)
@@ -26,40 +30,54 @@ West = (0, -1)
 
 touchups = []  # must be done after all walls, structures complete to avoid overwrites
 
-def main():
+
+
+def TEST():
     """
     build a castle
+    start_x = 30
+    start_y = 63
+    start_z = 30
+    width = 12
+    height = 4
+    length = 18
+    def wipe_area():
+        res = []
+        res.append('@Minecraft Server')
+        res.append(mc_fill(start_x,start_y-1,start_z,start_x+width,start_y+height+2,start_z+length, 'minecraft:air 0'))
+        mcb.make_from_list(res)    
+        
     """
+    #make_castle_walls(30,63,30,12,4,18, 2)  # small walls
+    #make_castle_walls(30,63,30,10,3,6, 0)  # tiny walls
+    make_castle_walls(30,63,30,20,7,30, 4)  # large walls
 
+    
+def make_castle_walls(start_x, start_y, start_z, width, height, length, wall_width):
+    
     with open('last_build.log', 'w') as f:
         f.write('Building Castle - \n')
         f.write('start_x = ' + str(start_x)  + ', start_y = ' +  str(start_y)  + ', start_z = ' +  str(start_z)  + '\n' )
         f.write('width   = ' + str(width)    + ', height = ' +  str(height)  + ', length = ' +  str(length)  + '\n' )
         
      
-    # clear space
-    wipe_area()
-    
+   
     # build outer walls
-    mcb.make_from_list(castle_wall(start_x,start_y,start_z,North, width,height, style=style_stone)) # TOK
-    mcb.make_from_list(castle_wall(start_x,start_y,start_z,East,  length,height, style=style_stone)) # TOK
+    mcb.make_from_list(castle_wall(start_x,start_y,start_z,North, width,height, style_stone, wall_width)) # TOK
+    mcb.make_from_list(castle_wall(start_x,start_y,start_z,East,  length,height, style_stone, wall_width)) # TOK
     
-    mcb.make_from_list(castle_wall(start_x,start_y,start_z+length-wall_width,North, width ,height, style=style_stone))
-    mcb.make_from_list(castle_wall(start_x+width-wall_width,start_y,start_z, East, length, height, style=style_stone))
+    mcb.make_from_list(castle_wall(start_x,start_y,start_z+length-wall_width,North, width ,height, style_stone, wall_width))
+    mcb.make_from_list(castle_wall(start_x+width-wall_width,start_y,start_z, East, length, height, style_stone, wall_width))
     
-    #mcb.make_from_list(castle_wall(start_x+wall_width,start_y,start_z+length,North, width ,height, style=style_wool))
-    #mcb.make_from_list(castle_wall(start_x+width,start_y,start_z+wall_width, East, length, height, style=style_wood))
+    #mcb.make_from_list(castle_wall(start_x+wall_width,start_y,start_z+length,North, width ,height, style_wool))
+    #mcb.make_from_list(castle_wall(start_x+width,start_y,start_z+wall_width, East, length, height, style_wood))
      
     mcb.make_from_list(touchups)
     
     
-def wipe_area():
-    res = []
-    res.append('@Minecraft Server')
-    res.append(mc_fill(start_x,start_y-1,start_z,start_x+width,start_y+height+2,start_z+length, 'minecraft:air 0'))
-    mcb.make_from_list(res)
+
     
-def castle_wall(x,y,z,direction, length, height, style):    
+def castle_wall(x,y,z,direction, length, height, style, wall_width):    
     """
     creates a build list
     """
@@ -154,4 +172,5 @@ def mc_fill(x1, y1, z1, x2, y2, z2, item):
   
     
     
-main()
+if __name__ == '__main__':     
+    TEST()
