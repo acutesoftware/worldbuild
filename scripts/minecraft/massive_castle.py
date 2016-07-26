@@ -29,7 +29,7 @@ import clear_area
 #clear_area.wipe_all(x = 28, y = 63, z = 25, w = 275, h = 15, d = 150)
 # make_castle_walls(start_x, start_y, start_z, width, height, length, wall_width)
 
-"""
+
 # make outer walls (make a BIG square, a smaller square, then wipe the corners to match
 castle_maker.make_castle_walls(30,63,30,120,4,90, 6)  # TOK massive outer wall
 castle_maker.make_castle_walls(70,63,30,40,4,20, 6)  # TOK gate inset wall
@@ -46,7 +46,7 @@ castle_maker.make_castle_walls(70,63,75,40,7,30, 2)  # main building
 castle_maker.make_castle_walls(55, 63,100,6,22, 6, 0)  # bottom left tower
 castle_maker.make_castle_walls(120,63,100,6,22,6, 0)  # bottom right tower
 
-"""
+
 
 # main building- - multi layers
 castle_maker.tower_building(x=71, y=63, z=76, width=38, height=11, length=30, butt_height=7)
