@@ -6,7 +6,7 @@ import minecraft_builder as mcb
 def TEST():
     print('clearing castle area')
     # TOK - clears all walls (all inner area of castle 
-    #wipe_all(x = 28, y = 63, z = 25, w = 275, h = 75, d = 150)
+    wipe_all(x = 28, y = 63, z = 25, w = 275, h = 75, d = 150)
     wipe_all(x=72, y=63, z=77,w=36,h=30,d=26)
     wipe_all(x=70, y=74, z=70,w=46,h=50,d=36)
 
