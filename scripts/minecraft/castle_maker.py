@@ -7,7 +7,7 @@ import os
 import sys
 import minecraft_builder as mcb
 
-style_stone = {'base':'stone 0', 'side':'cobblestone', 'corner':'stone 0'}
+style_stone = {'base':'stone 0', 'side':'cobblestone 0', 'corner':'stone 6'}
 style_wood = {'base':'planks 1', 'side':'planks 2', 'corner':'stone 0'}
 style_wool = {'base':'wool 1', 'side':'wool 2', 'corner':'wool 0'}
 
@@ -54,7 +54,7 @@ def TEST():
 
     
 def make_castle_walls(start_x, start_y, start_z, width, height, length, wall_width):
-    
+    touchups = []
     with open('last_build.log', 'w') as f:
         f.write('Building Castle - \n')
         f.write('start_x = ' + str(start_x)  + ', start_y = ' +  str(start_y)  + ', start_z = ' +  str(start_z)  + '\n' )
@@ -147,6 +147,24 @@ def castle_wall(x,y,z,direction, length, height, style, wall_width):
          
     return res
 
+def tower_building(x, y, z, width, height, length, butt_height, style=style_stone): 
+    """
+    make a tower building with some multi width blocks to give 
+    some detail
+    """
+    res = []
+    res.append('@Minecraft Server')
+    
+    # ground floor
+    res.append(mc_fill(x,y,z,x+width,y+butt_height,z+length, 'minecraft:' + style['side'] + ' hollow'))
+    
+    # top floor - remaining height
+    res.append(mc_fill(x+1,y+butt_height,z+1,x+width-2,y + height,z+length-2, 'minecraft:' + style['corner'] + ' hollow'))
+    
+    
+    mcb.make_from_list(res)
+
+    
     
 def mc_fill(x1, y1, z1, x2, y2, z2, item):
     """
