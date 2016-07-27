@@ -7,10 +7,11 @@ def TEST():
     print('clearing castle area')
     # TOK - clears all walls (all inner area of castle 
     wipe_all(x = 28, y = 63, z = 25, w = 275, h = 75, d = 150)
+    
+    # TOK - clears main castle building
     wipe_all(x=72, y=63, z=77,w=36,h=30,d=26)
     wipe_all(x=70, y=74, z=70,w=46,h=50,d=36)
-
-    wipe_all(x=30, y=74, z=30,w=46,h=50,d=20)  # 37,96,36,11,3,8, 0)  
+    wipe_all(x=30, y=74, z=30,w=126,h=110,d=80)  # 37,96,36,11,3,8, 0)  
     
 def wipe_all(x,y,z,w,h,d):
     res = []
