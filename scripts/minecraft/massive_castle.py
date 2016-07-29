@@ -30,10 +30,10 @@ import clear_area
 # make_castle_walls(start_x, start_y, start_z, width, height, length, wall_width)
 
 def main():
-    #do_walls()
-    #do_castle()
+    do_walls()
+    do_castle()
     do_towers()
-    #do_garden()
+    do_garden()
     
 def do_garden():    
     # set the ground
@@ -128,19 +128,23 @@ def do_castle():
     castle_maker.tower_building(x=73, y=110, z=93, width=10, height=22, length=10, butt_height=0)  # back right tower on top of main
     castle_maker.tower_building(x=97, y=110, z=93, width=10, height=22, length=10, butt_height=0)  # back left tower on top of main
 
-    castle_maker.main_door(x=90, y=64, z=75)  # coords for door are bottom centre - ornate stuff built out from there
 
     # Tower battlements - mid height
     #clear_area.wipe_all(x = 28, y = 63, z = 25, w = 275, h = 15, d = 150)
     # make_castle_walls(start_x, start_y, start_z, width, height, length, wall_width)
 
-    castle_maker.make_castle_walls(35, 63,35,14,9,10, 2)  # top left tower
-    castle_maker.make_castle_walls(130,63,35,14,9,10, 2)  # top right tower
-    castle_maker.make_castle_walls(70,63,75,40,7,30, 2)  # main building 
+    #castle_maker.make_castle_walls(70,63,75,40,7,30, 2)  # main building 
+    
+    castle_maker.main_door(x=90, y=64, z=75)  # coords for door are bottom centre - ornate stuff built out from there
 
+    
 def do_towers():
         
     #      tower_building(x, y, z, width, height, length, butt_height, style=style_stone)
+    
+    castle_maker.make_castle_walls(35, 63,35,14,9,10, 2)  # top left tower
+    castle_maker.make_castle_walls(130,63,35,14,9,10, 2)  # top right tower
+    
     castle_maker.make_castle_walls(35, 63,35,14,9,10, 3)  # top left tower
     castle_maker.tower_building(   37, 72,37,10,25,8, 3)  # top left tower
     castle_maker.make_castle_walls(37, 96,37, 9, 2,7, 0) 
