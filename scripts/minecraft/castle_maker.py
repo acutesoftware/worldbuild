@@ -150,11 +150,6 @@ def castle_wall(x,y,z,direction, length, height, style, wall_width):
                 res.append('/setblock ' + str(x1) + ' ' + str(y2+2) + ' ' + str(n) + ' torch 0')  # torch on inner wall
                 res.append('/setblock ' + str(x2) + ' ' + str(y2+2) + ' ' + str(n) + ' torch 0')  # torch on outer wall
         
-        # clear battlements on wall joins
-        #if wall_width > 3:
-        #    res.append(mc_fill(x1+2,y2+1,z1+2,x2,y2+2,z+wall_width, 'minecraft:air'))
-        
-        
     else:                   # North / South
         x1 = x
         z1 = z
@@ -177,7 +172,7 @@ def castle_wall(x,y,z,direction, length, height, style, wall_width):
             res.append(mc_fill(n,y2+1,z1,n,y2+1,z1, 'minecraft:' + side))
             res.append(mc_fill(n,y2+1,z2,n,y2+1,z2, 'minecraft:' + side))
 
-            if n % 4 == 0:  # TODO - if length/width < 7 then torch every block ELSE torches every 4*2 blocks
+            if n % 8 == 0:  # TODO - if length/width < 7 then torch every block ELSE torches every 4*2 blocks
                 res.append('/setblock ' + str(n) + ' ' + str(y2+2) + ' ' + str(z1) + ' torch 0')  # torch on outer wall
                 res.append('/setblock ' + str(n) + ' ' + str(y2+2) + ' ' + str(z2) + ' torch 0')  # torch on inner wall
         
@@ -199,24 +194,36 @@ def tower_building(x, y, z, width, height, length, butt_height, style=style_ston
     res.append(mc_fill(x+1,y+butt_height,z+1,x+width-2,y + height,z+length-2, 'minecraft:' + style['corner'] + ' hollow'))
     
     # windows
+    torch_name = ' wool ' # ' torch '   # to switch between floating wool colours and torchs (painful to set)
     if width < 15:  # simple window with torch on normal towers (across vert axis)
         x_pos = x + (width/2)
         z_pos = z + (length/2)
-        for y_pos in range(y+2, y+height, 5):
-            res.append(mc_fill(x-1,y_pos,z_pos,x+length+1,y_pos+1,z_pos, 'minecraft:air'))  # windows right through
-            res.append(mc_fill(x_pos,y_pos,z-1,x_pos,y_pos+1,z+width+1, 'minecraft:air'))
-            res.append('/setblock ' + str(x+length-1) + ' ' + str(y_pos-1) + ' ' + str(z_pos) + ' torch 1')  # torch - 2 = E
-            res.append('/setblock ' + str(x+length-1) + ' ' + str(y_pos-1) + ' ' + str(z_pos+width) + ' torch 2')  # torch - 2 = W
-            res.append('/setblock ' + str(x_pos+0) + ' ' + str(y_pos-1) + ' ' + str(z_pos) + ' torch 3')  # torch - 3 = S
-            res.append('/setblock ' + str(x_pos+length) + ' ' + str(y_pos-1) + ' ' + str(z_pos) + ' torch 4')  # torch - 4 = north (TOK)
+        for y_pos in range(y+2, y+height-2, 5):
+            # floor
+            res.append(mc_fill(x+2,y_pos-2,z+2,x+width-3,y_pos-2,z+length-3, 'minecraft:planks 1'))    
             
+            # windows
+            res.append(mc_fill(x-1,y_pos-1,z_pos,x+length+1,y_pos,z_pos, 'minecraft:air'))  # windows right through
+            res.append(mc_fill(x_pos,y_pos-1,z-1,x_pos,y_pos,z+width+1, 'minecraft:air'))
+ 
+            res.append('/setblock ' + str(x+length-1) + ' ' + str(y_pos+1) + ' '  + str(z_pos) + ' wool 2')  # inner wall facing west
+            # torches
+            res.append('/setblock ' + str(x+width-1) + ' ' + str(y_pos+1) + ' ' + str(z_pos) + ' torch 1')  # torch - 2 = E
+            res.append('/setblock ' + str(x) + ' ' + str(y_pos+1) + ' ' + str(z_pos) + ' torch 2')  # torch - 2 = W - outer wall facing west
+            res.append('/setblock ' + str(x+length-1) + ' ' + str(y_pos+1) + ' '  + str(z_pos) + ' torch 2')  # inner wall facing west
+            res.append('/setblock ' + str(x_pos) + ' ' + str(y_pos+1) + ' ' + str(z)  + ' torch 4')  # outer north torch - 4 = north (TOK)
+            res.append('/setblock ' + str(x_pos) + ' ' + str(y_pos+1) + ' ' + str(z+length-1)  + ' torch 3')  # torch - 3 = S
         
     else:   # larger ornate glass windows for main building (across horiz axis)
-         
-        for x_pos in range(x+2, x+width-2, 8):
-            res.append(mc_fill(x_pos,y+2,z-1,x_pos+2,y+6,z, 'minecraft:air'))  # make sure nothing in front of window
-            res.append(mc_fill(x_pos,y+2,z,x_pos+2,y+6,z, 'minecraft:glass 0'))
-    
+        if butt_height > 5: 
+            for x_pos in range(x+2, x+width-2, 8):
+                res.append(mc_fill(x_pos,y+2,z-1,x_pos+2,y+6,z, 'minecraft:air'))  # make sure nothing in front of window
+                res.append(mc_fill(x_pos,y+2,z,x_pos+2,y+6,z, 'minecraft:glass 0'))
+        else:
+            for x_pos in range(x+2, x+width-2, 8):
+                res.append(mc_fill(x_pos,y+butt_height+2,z-1,x_pos+2,y+butt_height+6,z+1, 'minecraft:air'))  # make sure nothing in front of window
+                res.append(mc_fill(x_pos,y+butt_height+2,z+1,x_pos+2,y+butt_height+6,z+1, 'minecraft:glass 0'))
+            
     mcb.make_from_list(res)
 
  
