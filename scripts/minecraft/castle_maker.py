@@ -406,7 +406,7 @@ def main_door(x=90, y=64, z=75):
 
 def stairs_as_list(x, z, width, y_base, y_top, step='minecraft:stone 4', bannister='minecraft:air', step_spacing=1):
     res = []
-    step_num = 1
+    step_num = 0
     res.append('@Minecraft Server')
     for y in range(y_base, y_top):
         #for z_pos in (z, z+width):
