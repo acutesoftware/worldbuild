@@ -26,14 +26,11 @@ import clear_area
                                  <S>
 """
 
-#clear_area.wipe_all(x = 28, y = 63, z = 25, w = 275, h = 15, d = 150)
-# make_castle_walls(start_x, start_y, start_z, width, height, length, wall_width)
-
 def main():
+    do_garden()
     do_walls()
     do_castle()
     do_towers()
-    do_garden()
     
 def do_garden():    
     # set the ground
@@ -50,6 +47,13 @@ def do_garden():
         castle_maker.set_block(87, 65, z,'minecraft:torch 0')
         castle_maker.set_block(93, 65, z,'minecraft:torch 0')
 
+    # plant some trees near main path
+    castle_maker.set_block(79, 63, 54,'minecraft:sapling 2')
+    castle_maker.set_block(79, 63, 61,'minecraft:sapling 2')
+    castle_maker.set_block(79, 63, 68,'minecraft:sapling 2')
+    castle_maker.set_block(101, 63, 54,'minecraft:sapling 2')
+    castle_maker.set_block(101, 63, 61,'minecraft:sapling 2')
+    castle_maker.set_block(101, 63, 68,'minecraft:sapling 2')
 
     # front left corner
     castle_maker.fill_area(33,62,33,68,62,71, 'minecraft:grass')
@@ -58,28 +62,12 @@ def do_garden():
     castle_maker.plant(x1=52,z1=47,x2=64,z2=59,y1=62, item='minecraft:wheat 4') # 'wheat', 
     castle_maker.plant(x1=52,z1=59,x2=64,z2=71,y1=62, item='minecraft:pumpkin 2') # 'wheat', 
 
-    #castle_maker.fill_area(49,65,53,55,62,59, 'minecraft:wheat_seeds 2')
-
-
-
     # front right corner
     castle_maker.fill_area(112,62,33,142,62,71, 'minecraft:grass')
-
     castle_maker.plant(x1=115,z1=47,x2=127,z2=59,y1=62, item='minecraft:wheat 4') # 'wheat', 
     castle_maker.plant(x1=115,z1=59,x2=127,z2=71,y1=62, item='minecraft:potatoes 3') # 'wheat', 
-
     castle_maker.plant(x1=129,z1=47,x2=141,z2=59,y1=62, item='minecraft:carrots 4') # 'wheat', 
     castle_maker.plant(x1=129,z1=59,x2=141,z2=71,y1=62, item='minecraft:pumpkin 4') # 'wheat', 
-
-
-
-    # plant some trees
-    castle_maker.set_block(79, 63, 54,'minecraft:sapling 2')
-    castle_maker.set_block(79, 63, 61,'minecraft:sapling 2')
-    castle_maker.set_block(79, 63, 68,'minecraft:sapling 2')
-    castle_maker.set_block(101, 63, 54,'minecraft:sapling 2')
-    castle_maker.set_block(101, 63, 61,'minecraft:sapling 2')
-    castle_maker.set_block(101, 63, 68,'minecraft:sapling 2')
 
 
 def do_walls():
@@ -129,29 +117,44 @@ def do_castle():
     castle_maker.tower_building(x=97, y=110, z=93, width=10, height=22, length=10, butt_height=0)  # back left tower on top of main
 
 
-    # Tower battlements - mid height
-    #clear_area.wipe_all(x = 28, y = 63, z = 25, w = 275, h = 15, d = 150)
-    # make_castle_walls(start_x, start_y, start_z, width, height, length, wall_width)
-
-    #castle_maker.make_castle_walls(70,63,75,40,7,30, 2)  # main building 
+    # merge 1st and 2nd floors
+    castle_maker.fill_area(73,70,78,106,70,103, 'minecraft:air')
+    # merge 2nd and 3rd floors
+    castle_maker.fill_area(73,80,78,106,80,103, 'minecraft:air')
     
-    castle_maker.main_door(x=90, y=64, z=75)  # coords for door are bottom centre - ornate stuff built out from there
+    # floor
+    castle_maker.fill_area(72,63,77,109,63,105, 'minecraft:stone 4')
+    
+    # floor lighting (and roof of above floor using glowstones)
+    castle_maker.tile_block(74, 63, 78, 106, 105, 5, 'minecraft:glowstone 0')
+    castle_maker.tile_block(74, 74, 78, 106, 103, 5, 'minecraft:glowstone 0')
+    castle_maker.tile_block(74, 86, 78, 106, 103, 5, 'minecraft:glowstone 0')
+    castle_maker.tile_block(74, 98, 78, 106, 103, 5, 'minecraft:glowstone 0')
+    castle_maker.tile_block(74, 110, 78, 106, 103, 5, 'minecraft:glowstone 0')
+    
+    castle_maker.main_door(x=90, y=63, z=75)  # coords for door are bottom centre - ornate stuff built out from there
 
+    castle_maker.stairs_NS(x=88, z=87, width=4, y_base=64, y_top=74, step='minecraft:quartz_stairs 2', bannister='minecraft:quartz_block 2', step_spacing=1)
+
+    # 2nd floor
+    castle_maker.stairs_NS(x=74, z=90, width=2, y_base=74, y_top=87, step='minecraft:stone 4', bannister='minecraft:stone 4', step_spacing=1)
+    castle_maker.stairs_NS(x=101, z=90, width=2, y_base=74, y_top=87, step='minecraft:stone 4', bannister='minecraft:stone 4', step_spacing=1)
+    
+    # 3rd floor 90,86,90 --> 98 
+    castle_maker.stairs_NS(x=90, z=85, width=2, y_base=87, y_top=99, step='minecraft:quartz_stairs 2', bannister='minecraft:quartz_block 2', step_spacing=1)
+    
+    # 4th floor - 90 90 (y=98 -> 110
+    castle_maker.stairs_NS(x=90, z=85, width=2, y_base=99, y_top=111, step='minecraft:quartz_stairs 2', bannister='minecraft:quartz_block 2', step_spacing=1)
+    
     
 def do_towers():
-        
-    #      tower_building(x, y, z, width, height, length, butt_height, style=style_stone)
-    
-    castle_maker.make_castle_walls(35, 63,35,14,9,10, 2)  # top left tower
-    castle_maker.make_castle_walls(130,63,35,14,9,10, 2)  # top right tower
-    
     castle_maker.make_castle_walls(35, 63,35,14,9,10, 3)  # top left tower
-    castle_maker.tower_building(   37, 72,37,10,25,8, 3)  # top left tower
-    castle_maker.make_castle_walls(37, 96,37, 9, 2,7, 0) 
+    castle_maker.tower_building(   37, 72,37,10,25,9, 0)  # top left tower
+    castle_maker.make_castle_walls(37, 96,37, 9, 2,8, 0) 
     
     castle_maker.make_castle_walls(130,63,35,14,9,10, 2)  # top right tower
-    castle_maker.tower_building(   132, 72,37,10,25,8, 3)  # top right tower
-    castle_maker.make_castle_walls(132, 96,37, 9, 2,7, 0) 
+    castle_maker.tower_building(   132, 72,37,10,25,9, 0)  # top right tower
+    castle_maker.make_castle_walls(132, 96,37, 9, 2,8, 0) 
     
     #castle_maker.make_castle_walls(50, 63,108,14,9, 10, 3)  # bottom left tower
     castle_maker.tower_building(   50, 63,106,9,34,9, 0)  # bottom left tower
@@ -161,10 +164,6 @@ def do_towers():
     castle_maker.tower_building(   122,63,106,9,34,9, 0)  # bottom left tower
     castle_maker.make_castle_walls(122,96,106,8,2,8, 0)  # bottom right tower
 
-    # tower buildings
-
-
- 
 
 if __name__ == '__main__':                
     main()            
