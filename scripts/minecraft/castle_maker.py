@@ -198,22 +198,44 @@ def tower_building(x, y, z, width, height, length, butt_height, style=style_ston
     if width < 15:  # simple window with torch on normal towers (across vert axis)
         x_pos = x + (width/2)
         z_pos = z + (length/2)
+        floor_height = 0
         for y_pos in range(y+2, y+height-2, 5):
             # floor
+            if floor_height == 0:
+                floor_height = y_pos-y+2  # take the first iteration as floor height of tower
             res.append(mc_fill(x+2,y_pos-2,z+2,x+width-3,y_pos-2,z+length-3, 'minecraft:planks 1'))    
+            
+
             
             # windows
             res.append(mc_fill(x-1,y_pos-1,z_pos,x+length+1,y_pos,z_pos, 'minecraft:air'))  # windows right through
             res.append(mc_fill(x_pos,y_pos-1,z-1,x_pos,y_pos,z+width+1, 'minecraft:air'))
  
-            res.append('/setblock ' + str(x+length-1) + ' ' + str(y_pos+1) + ' '  + str(z_pos) + ' wool 2')  # inner wall facing west
+            #res.append('/setblock ' + str(x+length-1) + ' ' + str(y_pos+1) + ' '  + str(z_pos) + ' wool 2')  # inner wall facing west
             # torches
-            res.append('/setblock ' + str(x+width-1) + ' ' + str(y_pos+1) + ' ' + str(z_pos) + ' torch 1')  # torch - 2 = E
+            #res.append('/setblock ' + str(x+width-1) + ' ' + str(y_pos+1) + ' ' + str(z_pos) + ' torch 1')  # torch - 2 = E
             res.append('/setblock ' + str(x) + ' ' + str(y_pos+1) + ' ' + str(z_pos) + ' torch 2')  # torch - 2 = W - outer wall facing west
-            res.append('/setblock ' + str(x+length-1) + ' ' + str(y_pos+1) + ' '  + str(z_pos) + ' torch 2')  # inner wall facing west
+            res.append('/setblock ' + str(x+length-1) + ' ' + str(y_pos+1) + ' '  + str(z_pos) + ' torch 1')  # inner wall facing west
             res.append('/setblock ' + str(x_pos) + ' ' + str(y_pos+1) + ' ' + str(z)  + ' torch 4')  # outer north torch - 4 = north (TOK)
             res.append('/setblock ' + str(x_pos) + ' ' + str(y_pos+1) + ' ' + str(z+length-1)  + ' torch 3')  # torch - 3 = S
-        
+
+        # now loop through floors AGAIN, and put in the stairs
+        for y_pos in range(y+2, y+height-2, 5):
+            # stairs
+            #res.append(tower_stairs_as_list(x+3, z+2, width=1, y_base=y_pos-2, y_top=y_pos+2, step='minecraft:stone 0', bannister='minecraft:air', step_spacing=1))
+            step_num = 0
+            for stair_y in range(y_pos-1, y_pos+floor_height):
+                res.append(mc_fill(x+2,stair_y,z+2+step_num,x+2,stair_y+4,z+2+step_num, 'minecraft:air')) # clear headroom
+                res.append(mc_fill(x+2,stair_y,z+2+step_num,x+2,stair_y,z+2+step_num, 'minecraft:oak_stairs 2')) # planks 1
+                step_num +=1     
+            #torches and bed on each floor
+            res.append('/setblock ' + str(x+4) + ' ' + str(y_pos-1) + ' ' + str(z+4) + ' bed 3')  # bed
+            res.append('/setblock ' + str(x+5) + ' ' + str(y_pos-1) + ' ' + str(z+4) + ' bed 11') # bed head
+            res.append('/setblock ' + str(x+5) + ' ' + str(y_pos-1) + ' ' + str(z+3) + ' torch 0') # torch
+            
+
+
+            
     else:   # larger ornate glass windows for main building (across horiz axis)
         if butt_height > 5: 
             for x_pos in range(x+2, x+width-2, 8):
@@ -305,6 +327,9 @@ def main_door(x=90, y=64, z=75):
 
     res.append(mc_fill(x-1,y+1,z-5,x+1,y+3,z+1, 'minecraft:air'))
     
+    # fix for lower ground floor
+    res.append(mc_fill(x-2,y,z-4,x+2,y,z+1, 'minecraft:stone 4'))
+    
     # door
     res.append('/setblock ' + str(x-1) + ' ' + str(y+1) + ' ' + str(z) + ' acacia_door 4')  # Door
     res.append('/setblock ' + str(x-1) + ' ' + str(y+2) + ' ' + str(z) + ' acacia_door 8')  # Door
@@ -341,7 +366,32 @@ def main_door(x=90, y=64, z=75):
     
     
     mcb.make_from_list(res)
+
+def stairs_as_list(x, z, width, y_base, y_top, step='minecraft:stone 4', bannister='minecraft:air', step_spacing=1):
+    res = []
+    step_num = 0
+    res.append('@Minecraft Server')
+    for y in range(y_base, y_top):
+        #for z_pos in (z, z+width):
+        res.append(mc_fill(x,y+1,z+step_num,x+width,y+5,z+step_num+step_spacing, 'minecraft:air')) # clear headroom
+        res.append(mc_fill(x,y,z+step_num,x+width,y,z+step_num+step_spacing, step))
+        
+        # bannister
+        if bannister != 'minecraft:air':  # torches on edge of stairs (NO - because most are on walls)
+            res.append(mc_fill(x-1,y,z+step_num,x-1,y+2,z+step_num+step_spacing, bannister))
+            res.append(mc_fill(x+width+1,y,z+step_num,x+width+1,y+2,z+step_num+step_spacing, bannister))
+            res.append('/setblock ' + str(x-1) + ' ' + str(y+3) + ' ' + str(z+step_num) + ' torch 0')  # torch on right bannister
+            res.append('/setblock ' + str(x+width+1) + ' ' + str(y+3) + ' ' + str(z+step_num) + ' torch 0') # torch on left bannister
+        step_num +=step_spacing     
+    return res
     
+def stairs_NS(x, z, width, y_base, y_top, step='minecraft:stone 4', bannister='minecraft:air', step_spacing=1):
+    """
+    make a staircase to join floor to roof
+    """
+    res = []
+    res = stairs_as_list(x, z, width, y_base, y_top, step, bannister, step_spacing)
+    mcb.make_from_list(res)
 
 def set_block(x,y,z,item):
     """
