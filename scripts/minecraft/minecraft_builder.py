@@ -31,7 +31,7 @@ def make_from_list(lst):
             pass
         elif line[0:1] == '@':
             mod_tool.app_activate(line.strip('\n')[1:])
-            time.sleep(1)     
+            time.sleep(.1)     
             
         else:
             print('sending keys ' , line.strip('\n'))
