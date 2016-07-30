@@ -146,7 +146,7 @@ def castle_wall(x,y,z,direction, length, height, style, wall_width):
             res.append(mc_fill(x1,y2+1,n,x1,y2+1,n, 'minecraft:' + side))
             res.append(mc_fill(x2,y2+1,n,x2,y2+1,n, 'minecraft:' + side))
 
-            if n % 8 == 0:  # torches every 4*2 blocks
+            if n % 4 == 0:  # torches every 4*2 blocks
                 res.append('/setblock ' + str(x1) + ' ' + str(y2+2) + ' ' + str(n) + ' torch 0')  # torch on inner wall
                 res.append('/setblock ' + str(x2) + ' ' + str(y2+2) + ' ' + str(n) + ' torch 0')  # torch on outer wall
         
@@ -171,8 +171,9 @@ def castle_wall(x,y,z,direction, length, height, style, wall_width):
         for n in range(x1, x2, 2):
             res.append(mc_fill(n,y2+1,z1,n,y2+1,z1, 'minecraft:' + side))
             res.append(mc_fill(n,y2+1,z2,n,y2+1,z2, 'minecraft:' + side))
+            #res.append('/setblock ' + str(n) + ' ' + str(y2+2) + ' ' + str(z1) + ' torch 0')  # torch on inner wall
 
-            if n % 8 == 0:  # TODO - if length/width < 7 then torch every block ELSE torches every 4*2 blocks
+            if n % 4 == 0:  # TODO - if length/width < 7 then torch every block ELSE torches every 4*2 blocks
                 res.append('/setblock ' + str(n) + ' ' + str(y2+2) + ' ' + str(z1) + ' torch 0')  # torch on outer wall
                 res.append('/setblock ' + str(n) + ' ' + str(y2+2) + ' ' + str(z2) + ' torch 0')  # torch on inner wall
         
@@ -215,9 +216,9 @@ def tower_building(x, y, z, width, height, length, butt_height, style=style_ston
             # torches
             #res.append('/setblock ' + str(x+width-1) + ' ' + str(y_pos+1) + ' ' + str(z_pos) + ' torch 1')  # torch - 2 = E
             res.append('/setblock ' + str(x) + ' ' + str(y_pos+1) + ' ' + str(z_pos) + ' torch 2')  # torch - 2 = W - outer wall facing west
-            res.append('/setblock ' + str(x+length-1) + ' ' + str(y_pos+1) + ' '  + str(z_pos) + ' torch 1')  # inner wall facing west
+            res.append('/setblock ' + str(x+length) + ' ' + str(y_pos+1) + ' '  + str(z_pos) + ' torch 1')  # inner wall facing west
             res.append('/setblock ' + str(x_pos) + ' ' + str(y_pos+1) + ' ' + str(z)  + ' torch 4')  # outer north torch - 4 = north (TOK)
-            res.append('/setblock ' + str(x_pos) + ' ' + str(y_pos+1) + ' ' + str(z+length-1)  + ' torch 3')  # torch - 3 = S
+            res.append('/setblock ' + str(x_pos) + ' ' + str(y_pos+1) + ' ' + str(z+length)  + ' torch 3')  # torch - 3 = S
 
         # now loop through floors AGAIN, and put in the stairs
         for y_pos in range(y+2, y+height-2, 5):
@@ -229,9 +230,15 @@ def tower_building(x, y, z, width, height, length, butt_height, style=style_ston
                 res.append(mc_fill(x+2,stair_y,z+2+step_num,x+2,stair_y,z+2+step_num, 'minecraft:oak_stairs 2')) # planks 1
                 step_num +=1     
             #torches and bed on each floor
-            res.append('/setblock ' + str(x+4) + ' ' + str(y_pos-1) + ' ' + str(z+4) + ' bed 3')  # bed
-            res.append('/setblock ' + str(x+5) + ' ' + str(y_pos-1) + ' ' + str(z+4) + ' bed 11') # bed head
-            res.append('/setblock ' + str(x+5) + ' ' + str(y_pos-1) + ' ' + str(z+3) + ' torch 0') # torch
+            #TOK - centre of room - res.append('/setblock ' + str(x+4) + ' ' + str(y_pos-1) + ' ' + str(z+4) + ' bed 3')  # bed
+            #TOK - centre of room - res.append('/setblock ' + str(x+5) + ' ' + str(y_pos-1) + ' ' + str(z+4) + ' bed 11') # bed head
+            res.append('/setblock ' + str(x+5) + ' ' + str(y_pos-1) + ' ' + str(z+3) + ' bed 3')  # bed
+            res.append('/setblock ' + str(x+6) + ' ' + str(y_pos-1) + ' ' + str(z+3) + ' bed 11') # bed head
+            res.append('/setblock ' + str(x+5) + ' ' + str(y_pos-1) + ' ' + str(z+5) + ' bed 3')  # bed
+            res.append('/setblock ' + str(x+6) + ' ' + str(y_pos-1) + ' ' + str(z+5) + ' bed 11') # bed head
+            
+            res.append('/setblock ' + str(x+3) + ' ' + str(y_pos-1) + ' ' + str(z+4) + ' torch 0') # torch
+            res.append('/setblock ' + str(x+6) + ' ' + str(y_pos-1) + ' ' + str(z+4) + ' torch 0') # torch
             
 
 
@@ -241,10 +248,19 @@ def tower_building(x, y, z, width, height, length, butt_height, style=style_ston
             for x_pos in range(x+2, x+width-2, 8):
                 res.append(mc_fill(x_pos,y+2,z-1,x_pos+2,y+6,z, 'minecraft:air'))  # make sure nothing in front of window
                 res.append(mc_fill(x_pos,y+2,z,x_pos+2,y+6,z, 'minecraft:glass 0'))
+                res.append('/setblock ' + str(x_pos-1) + ' ' + str(y+3) + ' ' + str(z-1) + ' torch 4') # torch - outer LHS
+                res.append('/setblock ' + str(x_pos-1) + ' ' + str(y+3) + ' ' + str(z+1) + ' torch 3') # torch - inner LHS
+                res.append('/setblock ' + str(x_pos+3) + ' ' + str(y+3) + ' ' + str(z-1) + ' torch 4') # torch - outer RHS
+                res.append('/setblock ' + str(x_pos+3) + ' ' + str(y+3) + ' ' + str(z+1) + ' torch 3') # torch - inner RHS
+                
         else:
             for x_pos in range(x+2, x+width-2, 8):
                 res.append(mc_fill(x_pos,y+butt_height+2,z-1,x_pos+2,y+butt_height+6,z+1, 'minecraft:air'))  # make sure nothing in front of window
                 res.append(mc_fill(x_pos,y+butt_height+2,z+1,x_pos+2,y+butt_height+6,z+1, 'minecraft:glass 0'))
+                res.append('/setblock ' + str(x_pos-1) + ' ' + str(y+butt_height+4) + ' ' + str(z+1) + ' torch 4') # torch - outer LHS
+                res.append('/setblock ' + str(x_pos-1) + ' ' + str(y+butt_height+4) + ' ' + str(z+1) + ' torch 3') # torch - inner LHS
+                res.append('/setblock ' + str(x_pos+3) + ' ' + str(y+butt_height+4) + ' ' + str(z+1) + ' torch 4') # torch - outer RHS
+                res.append('/setblock ' + str(x_pos+3) + ' ' + str(y+butt_height+4) + ' ' + str(z+1) + ' torch 3') # torch - inner RHS
             
     mcb.make_from_list(res)
 
