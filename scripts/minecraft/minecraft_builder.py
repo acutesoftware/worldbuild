@@ -34,8 +34,8 @@ def make_from_list(lst):
             time.sleep(.1)     
             
         else:
-            print('sending keys ' , line.strip('\n'))
-            mod_tool.send_keys(line.strip('\n'))
+            print('sending keys ' , str(line).strip('\n'))
+            mod_tool.send_keys(str(line).strip('\n'))
             time.sleep(0.01) 
             mod_tool.send_keys("{ENTER}")
             time.sleep(0.01) 
