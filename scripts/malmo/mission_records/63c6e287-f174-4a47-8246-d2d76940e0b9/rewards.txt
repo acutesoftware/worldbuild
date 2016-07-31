@@ -1,0 +1,1 @@
+20160723T141150.284465 <?xml version="1.0" encoding="UTF-8" standalone="no" ?><Reward xmlns="http://ProjectMalmo.microsoft.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ProjectMalmo.microsoft.com MissionEnded.xsd"><Value dimension="0" value="100"/></Reward>
