@@ -141,6 +141,8 @@ def castle_wall(x,y,z,direction, length, height, style, wall_width):
         touchups.append(mc_fill(x1,y1+1,z2-1,x1,y1+1,z2, 'minecraft:' + corner)) 
         touchups.append(mc_fill(x1,y1+1,z2-0,x1,y1+2,z2, 'minecraft:' + corner))
         
+        
+        
         # battlements (also known as crenellations)
         for n in range(z1, z2, 2):
             res.append(mc_fill(x1,y2+1,n,x1,y2+1,n, 'minecraft:' + side))
@@ -149,6 +151,35 @@ def castle_wall(x,y,z,direction, length, height, style, wall_width):
             if n % 4 == 0:  # torches every 4*2 blocks
                 res.append('/setblock ' + str(x1) + ' ' + str(y2+2) + ' ' + str(n) + ' torch 0')  # torch on inner wall
                 res.append('/setblock ' + str(x2) + ' ' + str(y2+2) + ' ' + str(n) + ' torch 0')  # torch on outer wall
+                
+        # corner pillars - stone pillars on inside
+        res.append(mc_fill(x1,y1-2,z1,x1,y2,z1, 'minecraft:' + corner))
+        res.append(mc_fill(x1,y1-2,z2,x1,y2,z2, 'minecraft:' + corner))
+        
+        res.append(mc_fill(x2,y1-2,z1,x2,y2,z1, 'minecraft:' + corner))
+        res.append(mc_fill(x2,y1-2,z2,x2,y2,z2, 'minecraft:' + corner))
+        """
+        # now top inverted stair on top rail all the way around
+        # Bits	Description
+        0x1
+        0x2	A two-bit field containing a value from 0 to 3 specifying the direction of the stairs' full-block side:
+        0: East
+        1: West
+        2: South
+        3: North
+        0x4	Set if stairs are upside-down
+        """
+        #castle_maker.fill_area(30,63,30,150,66,30, 'minecraft:air')   # front wall across very front
+        
+        # front wall lip
+        #res.append(mc_fill(x1,y1,z1,x2,y2-1,z1, 'minecraft:air'))  # make the lower wall insetted  (NO - 
+        res.append(mc_fill(x1,y2-1,z1-1,x2,y2-1,z1-1, 'minecraft:stone_brick_stairs 6'))  # front wall (need to tidy over gate)
+        res.append(mc_fill(x1,y2-1,z2+1,x2,y2-1,z2+1, 'minecraft:stone_brick_stairs 7'))
+        res.append(mc_fill(x1-1,y2-1,z1,x1-1,y2-1,z2, 'minecraft:stone_brick_stairs 4'))
+        res.append(mc_fill(x2+1,y2-1,z1,x2+1,y2-1,z2, 'minecraft:stone_brick_stairs 5'))
+      
+        
+        
         
     else:                   # North / South
         x1 = x
@@ -162,10 +193,11 @@ def castle_wall(x,y,z,direction, length, height, style, wall_width):
         res.append(mc_fill(x1,y1,z1,x2,y1+0,z2, 'minecraft:' + base))
 
         # corner base support
-        touchups.append(mc_fill(x1,y1+1,z1,x1+1,y1+1,z1, 'minecraft:' + corner))
+        touchups.append(mc_fill(x1,y1+1,z1,x1+1,y1+1,z1, 'minecraft:' + corner)) #
         touchups.append(mc_fill(x1,y1+1,z1,x1+0,y1+2,z1, 'minecraft:' + corner))
         touchups.append(mc_fill(x2-1,y1+1,z1,x2,y1+1,z1, 'minecraft:' + corner))
         touchups.append(mc_fill(x2-0,y1+1,z1,x2,y1+2,z1, 'minecraft:' + corner))
+
         
         #battlements
         for n in range(x1, x2, 2):
@@ -177,7 +209,21 @@ def castle_wall(x,y,z,direction, length, height, style, wall_width):
                 res.append('/setblock ' + str(n) + ' ' + str(y2+2) + ' ' + str(z1) + ' torch 0')  # torch on outer wall
                 res.append('/setblock ' + str(n) + ' ' + str(y2+2) + ' ' + str(z2) + ' torch 0')  # torch on inner wall
         
-         
+        # corner pillars - stone pillars on inside
+        res.append(mc_fill(x1,y1-2,z1,x1,y2,z1, 'minecraft:' + corner)) #'minecraft:wool 1')) # corner))
+        res.append(mc_fill(x1,y1-2,z2,x1,y2,z2, 'minecraft:' + corner)) #'minecraft:wool 2')) # corner))
+        
+        res.append(mc_fill(x2,y1-2,z1,x2,y2,z1, 'minecraft:' + corner)) #'minecraft:wool 3')) #corner))
+        res.append(mc_fill(x2,y1-2,z2,x2,y2,z2, 'minecraft:' + corner)) #'minecraft:wool 4')) #corner))
+ 
+        # front wall lip
+        #res.append(mc_fill(x1,y1,z1,x2,y2-1,z1, 'minecraft:air'))  # make the lower wall insetted  (NO - 
+        res.append(mc_fill(x1,y2-1,z1-1,x2,y2-1,z1-1, 'minecraft:stone_brick_stairs 6'))  # front wall (need to tidy over gate)
+        res.append(mc_fill(x1,y2-1,z2+1,x2,y2-1,z2+1, 'minecraft:stone_brick_stairs 7'))
+        res.append(mc_fill(x1-1,y2-1,z1,x1-1,y2-1,z2, 'minecraft:stone_brick_stairs 4'))
+        res.append(mc_fill(x2+1,y2-1,z1,x2+1,y2-1,z2, 'minecraft:stone_brick_stairs 5'))
+
+ 
     return res
 
 def tower_building(x, y, z, width, height, length, butt_height, style=style_stone): 
@@ -285,7 +331,86 @@ def window_EW(x,y,z,width=2,height=4):
     return res
 
     
+  
+def catapult(x,y, z):
+    """
+    makes a catapult with small footprint to fit on tower or walls
+    x = centre, y = base, z = front centre
+    Bits    Values
+    0x1  0x2    A two-bit field storing a value of 0 to 3 specifying the type of wood:
+        0:  Oak Wood   (oak up/dn = 0, oak EW = 4, oak NS = 8
+        1:  Spruce Wood
+        2:  Birch Wood
+        3:  Jungle Wood
+    0x4 0x8 A two-bit field storing a value of 0 to 3 specifying the orientation of the wood:
+        0:  Facing Up/Down
+        1:  Facing East/West
+        2:  Facing North/South
+        3:  Only bark    
+    """
     
+    height = 8
+    arm_fr = 3
+    arm_bk = 8
+    #fill_area(x-3,y,z-10,x+3,y+height+5,z+10, 'minecraft:air')
+    
+    res = []
+    res.append('@Minecraft Server')
+ 
+    res.append(mc_fill(x-2,y,z,x-2,y+height-1,z, 'minecraft:log 0'))  # LHS post
+    res.append(mc_fill(x+2,y,z,x+2,y+height-1,z, 'minecraft:log 0'))  # RHS post
+    res.append(mc_fill(x-2,y+height,z,x+2,y+height,z, 'minecraft:log 4'))  # main support beam
+    res.append(mc_fill(x,y+height+1,z-arm_fr,x,y+height+1,z+arm_bk, 'minecraft:iron_block'))  # catapult arm - log 9
+    res.append(mc_fill(x,y+height+2,z,x,y+height+2,z, 'minecraft:rail 1'))
+    res.append(mc_fill(x-1,y+height+1,z,x-1,y+height+1,z, 'minecraft:rail 2'))
+    res.append(mc_fill(x+1,y+height+1,z,x+1,y+height+1,z, 'minecraft:rail 3'))
+    
+    
+
+ 
+    res.append(mc_fill(x-1,y,z+2,x-1,y+2,z+4, 'minecraft:stone 0'))  # support base to hold winder
+    res.append(mc_fill(x+1,y,z+2,x+1,y+2,z+4, 'minecraft:stone 0'))  # support base to hold winder
+    res.append(mc_fill(x-1,y+2,z+2,x+1,y+2,z+2, 'minecraft:air'))  # make corners nice
+    res.append(mc_fill(x-1,y+2,z+4,x+1,y+2,z+4, 'minecraft:air'))  # make corners nice
+    res.append(mc_fill(x+1,y+2,z+2,x+1,y+2,z+2, 'minecraft:air'))  # make corners nice
+    res.append(mc_fill(x+1,y+2,z+4,x+1,y+2,z+4, 'minecraft:air'))  # make corners nice
+
+    res.append(mc_fill(x-2,y+1,z+3,x+2,y+1,z+3, 'minecraft:iron_block'))  # beam to support winding - log 4
+    res.append(mc_fill(x+3,y,z+3,x+3,y+2,z+3, 'minecraft:fence'))  # handle to wind down beam
+    res.append(mc_fill(x,y+2,z+3,x,y+height,z+3, 'minecraft:fence'))  # rope to top catapult arm
+ 
+    # counterweight
+    # simple rope res.append(mc_fill(x,y+height-1,z-3,x,y+height,z-3, 'minecraft:fence'))  # rope to hold counterweight
+    res.append(mc_fill(x-1,y+height,z-3,x-1,y+height+1,z-3, 'minecraft:nether_brick_fence'))  # rope to hold counterweight
+    res.append(mc_fill(x+1,y+height,z-3,x+1,y+height+1,z-3, 'minecraft:nether_brick_fence'))  # rope to hold counterweight
+    res.append(mc_fill(x-1,y+height-2,z-2,x+1,y+height-1,z-4, 'minecraft:cobblestone 0'))  # stone mass as counterweight
+    res.append(mc_fill(x-1,y+height-3,z-2,x+1,y+height-3,z-4, 'minecraft:planks 3'))  # wood base for counterweight
+    
+    # lighting
+    res.append('/setblock ' + str(x+1) + ' ' + str(y+3) + ' ' + str(z+3) + ' torch 0')
+    res.append('/setblock ' + str(x-1) + ' ' + str(y+3) + ' ' + str(z+3) + ' torch 0')
+    res.append('/setblock ' + str(x+1) + ' ' + str(y+2) + ' ' + str(z+2) + ' torch 0')
+    res.append('/setblock ' + str(x-1) + ' ' + str(y+2) + ' ' + str(z+2) + ' torch 0')
+    res.append('/setblock ' + str(x+1) + ' ' + str(y+2) + ' ' + str(z+4) + ' torch 0')
+    res.append('/setblock ' + str(x-1) + ' ' + str(y+2) + ' ' + str(z+4) + ' torch 0')
+    
+    res.append('/setblock ' + str(x-2) + ' ' + str(y+height+1) + ' ' + str(z) + ' torch 0')
+    res.append('/setblock ' + str(x+2) + ' ' + str(y+height+1) + ' ' + str(z) + ' torch 0')
+    
+    
+    res.append('/setblock ' + str(x) + ' ' + str(y+height+2) + ' ' + str(z-3) + ' torch 0')  # torch on counterweight
+    res.append('/setblock ' + str(x) + ' ' + str(y+height) + ' ' + str(z-3) + ' torch 0')  # torch on counterweight
+
+    
+    # payload 
+    res.append(mc_fill(x-1,y+height,z+arm_bk-1,x+1,y+height,z+arm_bk+2, 'minecraft:stone_slab 8'))  # catapult tray
+    res.append(mc_fill(x-1,y+height+1,z+arm_bk,x+1,y+height+1,z+arm_bk+1, 'minecraft:netherrack 1'))  # payload to launch
+    res.append('/setblock ' + str(x-1) + ' ' + str(y+height+2) + ' ' + str(z+arm_bk+1) + ' fire')
+    res.append('/setblock ' + str(x+1) + ' ' + str(y+height+2) + ' ' + str(z+arm_bk+1) + ' fire')
+    res.append('/setblock ' + str(x) + ' ' + str(y+height+2) + ' ' + str(z+arm_bk) + ' fire')
+    
+    mcb.make_from_list(res)
+ 
 
 def gate(x, y, z, width=5, height=5, length=7, style=style_gate1): 
     """
@@ -410,16 +535,28 @@ def stairs_as_list(x, z, width, y_base, y_top, step='minecraft:stone 4', bannist
     res.append('@Minecraft Server')
     for y in range(y_base, y_top):
         #for z_pos in (z, z+width):
-        res.append(mc_fill(x-1,y+1,z+step_num,x+width+1,y+5,z+step_num+step_spacing, 'minecraft:air')) # clear headroom
-        res.append(mc_fill(x,y,z+step_num,x+width,y,z+step_num+step_spacing, step))
+        res.append(mc_fill(x,y,z+step_num,x+width,y+5,z+step_num+step_spacing, 'minecraft:air')) # clear headroom
+        res.append(mc_fill(x,y,z+step_num+step_spacing,x+width,y,z+step_num+step_spacing, step))
         
         # bannister
         if bannister != 'minecraft:air':  # torches on edge of stairs (NO - because most are on walls)
+            res.append(mc_fill(x-1,y+1,z+step_num,x+width+1,y+5,z+step_num+step_spacing, 'minecraft:air')) # clear headroom
             res.append(mc_fill(x-1,y,z+step_num,x-1,y+2,z+step_num+step_spacing, bannister))
             res.append(mc_fill(x+width+1,y,z+step_num,x+width+1,y+2,z+step_num+step_spacing, bannister))
             res.append('/setblock ' + str(x-1) + ' ' + str(y+3) + ' ' + str(z+step_num) + ' torch 0')  # torch on right bannister
             res.append('/setblock ' + str(x+width+1) + ' ' + str(y+3) + ' ' + str(z+step_num) + ' torch 0') # torch on left bannister
+        else:
+            if y > y_base and y< y_top:
+                res.append('/setblock ' + str(x+width) + ' ' + str(y+1) + ' ' + str(z+step_num) + ' torch 2')
+                res.append('/setblock ' + str(x+width-1) + ' ' + str(y+1) + ' ' + str(z+step_num) + ' torch 1')
+                
         step_num +=step_spacing     
+        
+    # plus a torch under the stairs
+    res.append('/setblock ' + str(x+width) + ' ' + str(y_base) + ' ' + str(z+3) + ' torch 0')
+    res.append('/setblock ' + str(x+width-1) + ' ' + str(y_base) + ' ' + str(z+3) + ' torch 0')
+                
+        
     return res
     
 def stairs_NS(x, z, width, y_base, y_top, step='minecraft:stone 4', bannister='minecraft:air', step_spacing=1):
@@ -450,7 +587,7 @@ def set_block(x,y,z,item):
    
     res = []
     res.append('@Minecraft Server')
-    res.append('/setblock ' + str(x) + ' ' + str(y) + ' ' + str(z) + ' ' + item) 
+    res.append('/setblock ' + str(x) + ' ' + str(y) + ' ' + str(z) + ' ' + str(item)) 
     
     mcb.make_from_list(res)
     
