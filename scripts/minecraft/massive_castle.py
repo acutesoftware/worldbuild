@@ -67,11 +67,22 @@ def stables():
     
     
     # Chickens and Cows on West side
-    castle_maker.fill_area(66,63,36,66,63,47, 'minecraft:fence') 
+    castle_maker.fill_area(50,60,33,65,62,44, 'minecraft:grass') # sunken stables
+    castle_maker.fill_area(50,61,33,66,65,39, 'minecraft:planks 2 hollow') # sunken stables
+    castle_maker.fill_area(51,62,34,65,64,42, 'minecraft:air') # sunken stables
+    
+    castle_maker.fill_area(66,63,40,66,63,47, 'minecraft:fence') 
     castle_maker.set_block(49,63,46, 'fence_gate 1')
     castle_maker.set_block(51,63,47, 'fence_gate')
     castle_maker.set_block(65,63,47, 'fence_gate')
     
+    castle_maker.set_block(52,64,34, 'minecraft:torch 3') 
+    castle_maker.set_block(58,64,34, 'minecraft:torch 3') 
+    castle_maker.set_block(64,64,34, 'minecraft:torch 3') 
+    
+    castle_maker.set_block(56,62,36,'hay_block')
+    castle_maker.set_block(62,62,38,'hay_block')
+    castle_maker.set_block(61,61,41,'water')
     
     
     
