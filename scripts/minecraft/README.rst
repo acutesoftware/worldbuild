@@ -40,10 +40,12 @@ Castle Wall - single castle wall
 Window - place a window
 
 Main_door - fancy door
+
 .. image:: https://github.com/acutesoftware/worldbuild/blob/master/scripts/minecraft/screenshots/screenshot_path_castle.png
 
 
 Make castle wall - makes 4 walls joined
+
 .. image:: https://github.com/acutesoftware/worldbuild/blob/master/scripts/minecraft/screenshots/sample_castle_walls_complex.jpg
 
 
@@ -54,6 +56,7 @@ build_tower - enclosed tower, with floors if very tall and stairs between them
 .. image:: https://github.com/acutesoftware/worldbuild/blob/master/scripts/minecraft/screenshots/castle_towers_inside.png
 
 stairs - fancy stairs for main buildings (tower stairs are fixed at moment)
+
 .. image:: https://github.com/acutesoftware/worldbuild/blob/master/scripts/minecraft/screenshots/castle_inside_empty_ground_flr.png
 
 
