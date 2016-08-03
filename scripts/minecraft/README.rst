@@ -9,9 +9,7 @@ Builds structures in Minecraft local server using sendkeys to a local server
 Basic Usage
 ----------------
 Download this package using
-
-.. code:: python
-    git clone https://github.com/acutesoftware/worldbuild.git
+git clone https://github.com/acutesoftware/worldbuild.git
 
 
 Start a local minecraft server on the PC (Windows only at this stage), and select the text box in the servers GUI
