@@ -27,12 +27,12 @@ import clear_area
 """
 
 def main():
-    #do_garden()
-    #do_walls()
-    #do_castle()
-    #do_towers()
-    #defend_walls()
-    #do_vertical_garden()
+    do_garden()
+    do_walls()
+    do_castle()
+    do_towers()
+    defend_walls()
+    do_vertical_garden()
     stables()
 
 def stables():    
