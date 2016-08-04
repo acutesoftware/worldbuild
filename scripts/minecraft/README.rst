@@ -82,6 +82,7 @@ Using the Make castle wall function (makes 4 walls joined) and wipe_area you can
 
     
 .. code:: python
+
     castle_maker.make_castle_walls(30,63,30,120,4,90, 6)  # massive outer wall
     castle_maker.make_castle_walls(70,63,30,40,4,20, 6)  # gate inset wall
     castle_maker.make_castle_walls(30,63,74,20,4,46, 6)  # lower left inset wall
@@ -90,6 +91,7 @@ Using the Make castle wall function (makes 4 walls joined) and wipe_area you can
     clear_area.wipe_all(x=137, y=63, z=81, w=13, h=7, d=49) # clear bottom right corner
     clear_area.wipe_all(x=77,  y=63, z=30, w=26, h=7, d=8) # clear front gate inset
 
+    
 Will create a structure like 
 
 .. image:: https://github.com/acutesoftware/worldbuild/blob/master/scripts/minecraft/screenshots/sample_castle_walls_complex.jpg
