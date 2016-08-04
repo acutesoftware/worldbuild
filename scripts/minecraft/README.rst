@@ -37,7 +37,11 @@ Castle Wall - single castle wall
 
 .. image:: https://github.com/acutesoftware/worldbuild/blob/master/scripts/minecraft/screenshots/sample_castle_walls.png
 
+
 Window - place a window
+
+.. image:: https://github.com/acutesoftware/worldbuild/blob/master/scripts/minecraft/screenshots/window.png
+
 
 Main_door - fancy door
 
@@ -51,10 +55,13 @@ Make castle wall - makes 4 walls joined
 
 gate - gate for outer castle wall
 
+.. image:: https://github.com/acutesoftware/worldbuild/blob/master/scripts/minecraft/screenshots/gate.png
+
 
 build_tower - enclosed tower, with floors if very tall and stairs between them
 
 .. image:: https://github.com/acutesoftware/worldbuild/blob/master/scripts/minecraft/screenshots/castle_towers_inside.png
+
 
 stairs - fancy stairs for main buildings (tower stairs are fixed at moment)
 
@@ -68,4 +75,4 @@ Catapult - place a catapult (non working)
 
 Plant - setout fenced grass area and plant veges (has torches and water holes)
 
-.. image:: https://github.com/acutesoftware/worldbuild/blob/master/scripts/minecraft/screenshots/tiny_castle.png
+.. image:: https://github.com/acutesoftware/worldbuild/blob/master/scripts/minecraft/screenshots/garden.png
