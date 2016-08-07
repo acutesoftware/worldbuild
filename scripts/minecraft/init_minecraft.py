@@ -10,7 +10,8 @@ mc.activate()
 print(mc.send_command('/difficulty 2'))
 print(mc.send_command('/op DynamiteBuilder'))
 print(mc.send_command('/op craftandstore'))
-
+print(mc.send_command('/give DynamiteBuilder minecraft:command_block'))
+print(mc.send_command('/give craftandstore minecraft:command_block'))
 
 
 
