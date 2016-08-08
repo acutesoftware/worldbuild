@@ -21,6 +21,9 @@ class TestAgentInterfaceEnvironment(unittest.TestCase):
         self.assertEqual(str(res),'Base class Interface for MINECRAFT')
         
     def test_02_activate_minecraft(self):
+        """
+        TODO - check if server running before calling this
+        """
         start_time = time.time()
         res = mod_if.InterfaceMineCraft('Minecraft server')
         res.activate()
