@@ -28,7 +28,24 @@ class BuildMap(object):
     
     def __str__(self):
         res = ''
-        res += 'BuildMap '
+        res += 'BuildMap ' + '\n'
+        if type(self.struct_data) is list:
+            for l in self.struct_data:
+                res += 'data:' + str(l) + '\n'
+        else:   # assume dictionary
+            for k,v in self.struct_data.items():
+                res += 'data:' + str(k) + ' = ' + str(v) + '\n'
+                
+                
+        if type(self.style) is list:
+            for l in self.style:
+                res += 'style:' + str(l) + '\n'
+        else:   # assume dictionary
+            for k,v in self.style.items():
+                res += 'style:' + str(k) + ' = ' + str(v) + '\n'
+                
+                
+                
         return res
 
 class BuildMapMineCraft(BuildMap):
