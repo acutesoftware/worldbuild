@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-# cls_build_map.py
+# world_builder.py
 
 
 
@@ -28,7 +28,6 @@ class BuildMapMineCraft(BuildMap):
 
     
 
-
 class BuildMapGrid(BuildMap):
     """
     Not much to do here, simply returns a standard grid or 
@@ -36,4 +35,16 @@ class BuildMapGrid(BuildMap):
     to create objects in the Minecraft world.
     """
     pass
+    
+    
+class BuildMapImage(BuildMap):
+    """
+    Generates an image of the world, which is a 2d grid, or 
+    multiple images if multiple floors (not much point calling this 
+    for a proper 3d world ( Unity) , but useful for castle/dungeon 
+    game maps with multiple floors.
+    """
+    pass
+    
+    
     
