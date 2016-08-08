@@ -12,6 +12,20 @@ class BuildMap(object):
     create the map in Minecraft or create in other virtual
     environments.
     """
+    def __init__(self, struct_data, style):
+        """
+        struct_data = details of coords to fill, make  
+        style = details on colours, textures, if applicable
+        
+        The assert checks that both are NOT strings, but should
+        be iterable lists / dicts or subclasses of 
+        """
+        assert not isinstance(struct_data, str)
+        assert not isinstance(style, str)
+    
+        self.struct_data = struct_data
+        self.style =  style
+    
     def __str__(self):
         res = ''
         res += 'BuildMap '
