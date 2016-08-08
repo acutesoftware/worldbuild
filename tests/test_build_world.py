@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 # -*- coding: utf-8 -*-
-# test_build_world.py
+# test_aikif_agent_explore.py
 import os
 import sys
 import unittest
@@ -9,7 +9,7 @@ root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.se
 pth = root_folder + os.sep + 'worldbuild'
 sys.path.append(pth)
 
-import build_world
+import aikif_agent_explore
 
 
 class TestTemplate(unittest.TestCase):
@@ -22,7 +22,7 @@ class TestTemplate(unittest.TestCase):
 
     
     def test_01_instantiate_class(self):
-        build_world.main()
+        aikif_agent_explore.main()
         op_file = os.path.join(pth, 'data', 'world_traversed.txt')
         #print('op_file = ', op_file)
         self.assertTrue(os.path.exists(op_file))
