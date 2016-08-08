@@ -1,4 +1,4 @@
-# build_world.py
+# aikif_agent_explore.py
 
 import os
 import sys
