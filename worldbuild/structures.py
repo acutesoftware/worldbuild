@@ -10,6 +10,9 @@ class StructureDefinition(object):
     """
     
     def __init__(self, name, definition):
+
+        assert isinstance(name, str)
+        assert not isinstance(definition, str)
         self.name = name
         self.type = ''
         self.definition = definition
