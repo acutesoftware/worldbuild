@@ -46,8 +46,18 @@ class TestTemplate(unittest.TestCase):
         self.assertEqual(s2.type, 'shelter')
         self.assertEqual(len(s2.definition), 6)
         
-        
-
+    def test_03_house_small(self):    
+        s3 = structures.StructureHouse('small_house', 4, 4, 4)
+        self.assertEqual(s3.name, 'small_house')
+        self.assertEqual(s3.type, 'shelter')
+        self.assertEqual(len(s3.definition), 6)
+ 
+    def test_04_house_large(self):    
+        s4 = structures.StructureHouse('big_house', 16, 6, 20)
+        self.assertEqual(s4.name, 'big_house')
+        self.assertEqual(s4.type, 'shelter')
+        self.assertEqual(len(s4.definition), 6)
+ 
         
 if __name__ == '__main__':
     unittest.main()
