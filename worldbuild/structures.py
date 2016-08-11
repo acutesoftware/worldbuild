@@ -34,5 +34,16 @@ class StructureHut(StructureDefinition):
         definition['z2'] = 8       
         StructureDefinition.__init__(self, name, definition)
         self.type = 'shelter'
-    
-
+  
+class StructureHouse(StructureDefinition):
+    def __init__(self, name, width, height, length):
+        definition = {}
+        definition['x1'] = 1
+        definition['x2'] = width
+        definition['y1'] = 1
+        definition['y2'] = height
+        definition['z1'] = 1
+        definition['z2'] = length       
+        StructureDefinition.__init__(self, name, definition)
+        self.type = 'shelter'
+        
