@@ -21,7 +21,23 @@ class StructureDefinition(object):
         res = ''
         res += 'StructureDefinition = ' + self.name + '\n'
         res += ' has ' + str(len(self.definition)) + ' components' + '\n'
+        a,v = self._calc_size()
+        res += ' area   =  ' + str(a)  + '\n'
+        res += ' volume =  ' + str(v)  + '\n'
+        
         return res
+        
+        
+    def _calc_size(self):
+        vol = 'unknown'
+        area = 'unknown'
+        try:
+            area = (self.definition['x2'] - self.definition['x1'] ) * (self.definition['z2'] - self.definition['z1'] )
+            vol = area * (self.definition['y2'] - self.definition['y1'])
+        except Exception as ex:
+            area = ''
+            vol = ''
+        return area, vol
         
 class StructureHut(StructureDefinition):
     def __init__(self, name):
