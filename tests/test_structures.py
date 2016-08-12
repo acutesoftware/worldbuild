@@ -39,6 +39,11 @@ class TestTemplate(unittest.TestCase):
         self.assertEqual(s1.name, 'hut')
         self.assertEqual(s1.type, '')
         self.assertEqual(len(s1.definition), 7)
+        area, vol =  s1._calc_size()
+        self.assertEqual(area, 20)
+        self.assertEqual(vol, 60)
+        
+        
         
     def test_02_hut(self):
         s2 = structures.StructureHut('hut')
@@ -63,7 +68,6 @@ class TestTemplate(unittest.TestCase):
         self.assertEqual(area, 285)
         self.assertEqual(vol, 1425)
  
-        
 if __name__ == '__main__':
     unittest.main()
 
