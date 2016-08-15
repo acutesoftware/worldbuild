@@ -2,6 +2,15 @@
 # -*- coding: utf-8 -*-
 # structures.py
 
+def debug(fn):
+    def wrapper(*args):
+        res = fn(*args)
+        print (fn.__name__ + ' ' +  str(args) + ': ' + str(res))
+        return res
+    return wrapper
+  
+  
+
 class StructureDefinition(object):
     """
     base class for structure definitions. Application
@@ -17,6 +26,7 @@ class StructureDefinition(object):
         self.type = ''
         self.definition = definition
         
+    @debug
     def __str__(self):
         res = ''
         res += 'StructureDefinition = ' + self.name + '\n'
