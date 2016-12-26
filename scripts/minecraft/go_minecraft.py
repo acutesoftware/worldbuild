@@ -17,7 +17,7 @@ if server ==  '1.10':
         {'name':'floating-castle',  'loc':'-202 105 -655' },
         {'name':'stronghold',       'loc':'415 72 -2198' },
         {'name':'village',          'loc':'121 77 -2019' },
-        {'name':'overhang-lookout/ zoo', 'loc':'-449 110 -1830' },
+        {'name':'overhang-lookout/evil storm and zoo / garage', 'loc':'-449 110 -1830' },
         {'name':'rock-island / harbour',      'loc':'154 98 384' },
         {'name':'enchanted-village','loc':'1082 87 -1297' },
         
