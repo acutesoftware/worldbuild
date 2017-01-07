@@ -20,6 +20,8 @@ if server ==  '1.10':
         {'name':'overhang-lookout/evil storm and zoo / garage', 'loc':'-449 110 -1830' },
         {'name':'rock-island / harbour',      'loc':'154 98 384' },
         {'name':'enchanted-village','loc':'1082 87 -1297' },
+        {'name':'flower-garden','loc':'1254 105 -1807' },
+        
         
         
     ]    
