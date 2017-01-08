@@ -46,10 +46,13 @@ def main():
     
     castle_maker.make_castle_walls(267, 80, 188, 28, 7,43, 1)  # base
     
-    castle_maker.make_castle_walls(273, 122, 208, 22, 3,18, 0) # top parapet
+    castle_maker.make_castle_walls(272, 122, 207, 24, 4,20, 0) # top parapet
+    # works - matches line  - castle_maker.make_castle_walls(273, 122, 208, 22, 3,18, 0) # top parapet
 
+    # lower area
     castle_maker.tower_building(267, 86, 189, width=28, height=16, length=41, butt_height=10)
-       
+    castle_maker.make_castle_walls(267, 93, 189, 28, 4,41, 0) # lower parapet
+   
        
        
        
