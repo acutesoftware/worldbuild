@@ -33,7 +33,7 @@ def main():
         
      # courtyard
     castle_base(250,79,164,273,84,204)
-    clear_area.wipe_all(253, 80, 200, 12, 7, 12)  # clear area
+    clear_area.wipe_all(255, 80, 200, 12, 7, 12)  # clear area
     
     
     # Main Building (The Keep)
@@ -46,7 +46,7 @@ def main():
     
     castle_maker.make_castle_walls(267, 80, 188, 28, 7,43, 1)  # base
     
-    castle_maker.make_castle_walls(273, 122, 207, 22, 3,18, 0) # top parapet
+    castle_maker.make_castle_walls(273, 122, 208, 22, 3,18, 0) # top parapet
 
     castle_maker.tower_building(267, 86, 189, width=28, height=16, length=41, butt_height=10)
        
@@ -68,7 +68,8 @@ def main():
     
     
     # decorations, doors, gates, etc
-    
+    castle_maker.stairs_NS(x=256, z=204, width=6, y_base=74, y_top=79, step='minecraft:stone_brick_stairs 2', bannister='minecraft:air', step_spacing=1)
+
     
     
     # buildings 
