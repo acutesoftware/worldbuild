@@ -6,10 +6,21 @@ import aikif.toolbox.interface_windows_tools as mod_tool
 
 players = ['DynamiteBuilder', 'craftandstore']
 
-server = '1.9'
-server = '1.10'
+#server = '1.9'
+#server = '1.10'
+server = '1.11.2'
 
-if server ==  '1.10':
+if server ==  '1.11.2':
+    locations = [ 
+        {'name':'home',             'loc':'61 64 239'},
+        {'name':'Woodlands Mansion',             'loc':'4473 66 5773'},
+        {'name':'Stronghold',             'loc':'-184 67 1736'},
+        {'name':'Village',             'loc':'-710 87 548'},
+      
+
+    ]
+      
+elif server ==  '1.10':
     locations = [ 
         {'name':'home',             'loc':'248 66 -61'},
         {'name':'farm',             'loc':'960 77 -260' },
@@ -22,7 +33,7 @@ if server ==  '1.10':
         {'name':'enchanted-village','loc':'1082 87 -1297' },
         {'name':'flower-garden','loc':'1254 105 -1807' },
         
-        
+                
         
     ]    
 else:
