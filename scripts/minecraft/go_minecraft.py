@@ -10,17 +10,21 @@ players = ['DynamiteBuilder', 'craftandstore']
 #server = '1.10'
 server = '1.11.2'
 
-if server ==  '1.11.2':
+seed = 0
+
+if server ==  '1.11.2':   
+    seed = -7560993781265470572
     locations = [ 
-        {'name':'home',             'loc':'61 64 239'},
-        {'name':'Woodlands Mansion',             'loc':'4473 66 5773'},
-        {'name':'Stronghold',             'loc':'-184 67 1736'},
-        {'name':'Village',             'loc':'-710 87 548'},
+        {'name':'home',               'loc':'61 64 239'},
+        {'name':'Woodlands Mansion',  'loc':'4473 66 5773'},
+        {'name':'Stronghold',         'loc':'-184 67 1736'},
+        {'name':'Village',            'loc':'-710 87 548'},
       
 
     ]
       
 elif server ==  '1.10':
+    seed = 8239770600742919613
     locations = [ 
         {'name':'home',             'loc':'248 66 -61'},
         {'name':'farm',             'loc':'960 77 -260' },
@@ -37,6 +41,7 @@ elif server ==  '1.10':
         
     ]    
 else:
+    seed = 2677023417700615710
     locations = [ 
         {'name':'v1-home',      'loc':'151 103 736'},
         {'name':'v1-treehouse', 'loc':'120 72 662' },
@@ -47,6 +52,7 @@ else:
     ]    
     
 print('Minecraft Teleport Service for players ' + str(players))
+print('(server version=' + server + ', seed = ' + str(seed) + ' )')
 for num, l in enumerate(locations):
     print(str(num+1) + ' = ' + l['name'])
     
