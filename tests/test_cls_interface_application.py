@@ -59,7 +59,8 @@ class TestAgentInterfaceEnvironment(unittest.TestCase):
         out_length = struct.pack('<i', len(net_send))
         mcsock.send(out_length + net_send)
         
-      
+        mcsock.close()
+        mcsock = None
     
         
         
