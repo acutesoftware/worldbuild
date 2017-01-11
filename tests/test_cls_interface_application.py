@@ -41,6 +41,31 @@ class TestAgentInterfaceEnvironment(unittest.TestCase):
         print('Time for delayed send_keys = ', end_time - start_time)
         self.assertTrue((end_time - start_time) > 3)
         self.assertTrue((end_time - start_time) < 5)
+     
+    def test_04_network_minecraft(self):
+        """
+        Test of rcon connection to minecraft
+        """
+        print('Test_04_network_minecraft')
         
+        import socket
+        import struct
+        mcsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        mcsock.connect(('192.168.1.9', 25565))
+        msg = 'hello via network'
+        
+        
+        net_send = struct.pack('<ii', 0, 2) + msg.encode('utf8') + b'\x00\x00'
+        out_length = struct.pack('<i', len(net_send))
+        net_send.send(out_length + net_send)
+        
+      
+    
+        
+        
+        
+        
+        
+     
 if __name__ == '__main__':
     unittest.main()
