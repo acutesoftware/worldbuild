@@ -52,12 +52,12 @@ class TestAgentInterfaceEnvironment(unittest.TestCase):
         import struct
         mcsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         mcsock.connect(('192.168.1.9', 25565))
-        msg = 'hello via network'
+        msg = '/say hello via network'
         
         
         net_send = struct.pack('<ii', 0, 2) + msg.encode('utf8') + b'\x00\x00'
         out_length = struct.pack('<i', len(net_send))
-        net_send.send(out_length + net_send)
+        mcsock.send(out_length + net_send)
         
       
     
