@@ -1,0 +1,8 @@
+CREDITS.TXT
+
+
+Minecraft Rcon implementation
+-----------------------------
+Barnaby Gale  
+https://github.com/barneygale/MCRcon
+
