@@ -65,7 +65,7 @@ class TestAgentInterfaceEnvironment(unittest.TestCase):
         rcon = mcrcon.MCRcon()
         rcon.connect('192.168.1.9', 25575)
         rcon.login(pwd)
-        
+        rcon.command('/say hi from rcon')
         
         rcon.disconnect()
         
