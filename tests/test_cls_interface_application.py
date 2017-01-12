@@ -45,24 +45,29 @@ class TestAgentInterfaceEnvironment(unittest.TestCase):
     def test_04_network_minecraft(self):
         """
         Test of rcon connection to minecraft
+        
+        Notes
+        - RCON protocol = http://wiki.vg/RCON
+        - some network code based on https://github.com/barneygale/MCRcon/blob/master/mcrcon.py
+        
+        TODO - make sure you modify the server.properties file as follows
+        enable-rcon=true
+        rcon.password=minecraft_server.cred
+        rcon.port=25575
+        broadcast-rcon-to-ops=false
+        
         """
-        print('Test_04_network_minecraft')
         
-        import socket
-        import struct
-        mcsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        mcsock.connect(('192.168.1.9', 25565))
-        msg = '/say hello via network'
+        pwd = open('T:\\user\\AIKIF\\pers_data\\credentials\\minecraft_server.cred').read()
+        
+        import mcrcon
+
+        rcon = mcrcon.MCRcon()
+        rcon.connect('192.168.1.9', 25575)
+        rcon.login(pwd)
         
         
-        net_send = struct.pack('<ii', 0, 2) + msg.encode('utf8') + b'\x00\x00'
-        out_length = struct.pack('<i', len(net_send))
-        mcsock.send(out_length + net_send)
-        
-        mcsock.close()
-        mcsock = None
-    
-        
+        rcon.disconnect()
         
         
         
