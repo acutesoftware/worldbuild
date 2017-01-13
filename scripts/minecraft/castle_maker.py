@@ -7,6 +7,16 @@ import os
 import sys
 import minecraft_builder as mcb
 
+root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + ".." ) 
+pth = root_folder + os.sep + 'worldbuild'
+
+sys.path.append(pth)
+
+import mcrcon
+
+mycon = None    # this is the network rcon object that will be set by calling program
+
+
 style_stone = {'base':'stone 0', 'side':'cobblestone 0', 'corner':'stone 6'}
 style_wood = {'base':'planks 1', 'side':'planks 2', 'corner':'stone 0'}
 style_wool = {'base':'wool 1', 'side':'wool 2', 'corner':'wool 0'}
@@ -88,7 +98,7 @@ def plant(x1,z1,x2,z2,y1, item): # 'wheat',
 
     mcb.make_from_list(res)
  
-def make_castle_walls(start_x, start_y, start_z, width, height, length, wall_width):
+def make_castle_walls(start_x, start_y, start_z, width, height, length, wall_width, rcon=None):
     touchups = []
     with open('last_build.log', 'w') as f:
         f.write('Building Castle - \n')
@@ -97,19 +107,27 @@ def make_castle_walls(start_x, start_y, start_z, width, height, length, wall_wid
         
      
    
-    # build outer walls
-    mcb.make_from_list(castle_wall(start_x,start_y,start_z,North, width,height, style_stone, wall_width)) # TOK
-    mcb.make_from_list(castle_wall(start_x,start_y,start_z,East,  length,height, style_stone, wall_width)) # TOK
-    
-    mcb.make_from_list(castle_wall(start_x,start_y,start_z+length-wall_width,North, width ,height, style_stone, wall_width))
-    mcb.make_from_list(castle_wall(start_x+width-wall_width,start_y,start_z, East, length, height, style_stone, wall_width))
     
     #mcb.make_from_list(castle_wall(start_x+wall_width,start_y,start_z+length,North, width ,height, style_wool))
     #mcb.make_from_list(castle_wall(start_x+width,start_y,start_z+wall_width, East, length, height, style_wood))
      
-    mcb.make_from_list(touchups)
+    if rcon == None:  # no network, so use sendkeys
+    # build outer walls
+        mcb.make_from_list(castle_wall(start_x,start_y,start_z,North, width,height, style_stone, wall_width)) # TOK
+        mcb.make_from_list(castle_wall(start_x,start_y,start_z,East,  length,height, style_stone, wall_width)) # TOK
+        
+        mcb.make_from_list(castle_wall(start_x,start_y,start_z+length-wall_width,North, width ,height, style_stone, wall_width))
+        mcb.make_from_list(castle_wall(start_x+width-wall_width,start_y,start_z, East, length, height, style_stone, wall_width))
     
+        mcb.make_from_list(touchups)
+    else:
+        mcb.make_from_list_rcon(castle_wall(start_x,start_y,start_z,North, width,height, style_stone, wall_width), rcon) # TOK
+        mcb.make_from_list_rcon(castle_wall(start_x,start_y,start_z,East,  length,height, style_stone, wall_width), rcon) # TOK
+        
+        mcb.make_from_list_rcon(castle_wall(start_x,start_y,start_z+length-wall_width,North, width ,height, style_stone, wall_width), rcon)
+        mcb.make_from_list_rcon(castle_wall(start_x+width-wall_width,start_y,start_z, East, length, height, style_stone, wall_width), rcon)
     
+        mcb.make_from_list_rcon(touchups, rcon)
 
     
 def castle_wall(x,y,z,direction, length, height, style, wall_width):    
@@ -612,7 +630,22 @@ def mc_fill(x1, y1, z1, x2, y2, z2, item):
     r += item
     return r 
     
-  
+def rcon_connection():
+    """
+    function to handle connection to local minecraft server
+    and return the rcon connection for use in minecraft_builder
+    """
+    
+    f = open('T:\\user\\AIKIF\\pers_data\\credentials\\minecraft_server.cred')
+    pwd = f.read()
+    f.close()
+    
+    
+    rcon = mcrcon.MCRcon()
+    rcon.connect('192.168.1.9', 25575)
+    rcon.login(pwd)
+    return rcon
+    
     
     
 if __name__ == '__main__':     
