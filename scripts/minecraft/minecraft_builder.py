@@ -3,6 +3,7 @@ import time
 
 import aikif.toolbox.interface_windows_tools as mod_tool
 
+
 def main():
     make_structure('build_box.bld')
     make_structure('build_house.bld')
@@ -39,7 +40,25 @@ def make_from_list(lst):
             time.sleep(0.01) 
             mod_tool.send_keys("{ENTER}")
             time.sleep(0.01) 
-    
+
+
+def make_from_list_rcon(lst, rcon_connection):
+    log_list(lst)
+    for line in lst:
+        if line.strip('\n') == '':
+            pass
+        elif line[0:1] == '#':
+            pass
+        elif line[0:1] == '@':
+            pass
+        else:
+            print('rcon ' , str(line).strip('\n'))
+            rcon_connection.command(line)
+
+
+
+
+            
 def mc_fill(x1, y1, z1, x2, y2, z2, item):
     """
     formats the fill params to a minecraft command
