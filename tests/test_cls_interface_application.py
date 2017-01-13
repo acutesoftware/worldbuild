@@ -46,32 +46,25 @@ class TestAgentInterfaceEnvironment(unittest.TestCase):
         """
         Test of rcon connection to minecraft
         
-        Notes
-        - RCON protocol = http://wiki.vg/RCON
-        - some network code based on https://github.com/barneygale/MCRcon/blob/master/mcrcon.py
-        
+        Notes on RCON protocol at http://wiki.vg/RCON
         TODO - make sure you modify the server.properties file as follows
         enable-rcon=true
         rcon.password=minecraft_server.cred
         rcon.port=25575
         broadcast-rcon-to-ops=false
-        
         """
         
-        pwd = open('T:\\user\\AIKIF\\pers_data\\credentials\\minecraft_server.cred').read()
+        f = open('T:\\user\\AIKIF\\pers_data\\credentials\\minecraft_server.cred')
+        pwd = f.read()
+        f.close()
         
         import mcrcon
-
         rcon = mcrcon.MCRcon()
         rcon.connect('192.168.1.9', 25575)
         rcon.login(pwd)
         rcon.command('/say hi from rcon')
-        
+        rcon.command('/fill 0 100 0 2 101 2 minecraft:glass 0')
         rcon.disconnect()
-        
-        
-        
-        
      
 if __name__ == '__main__':
     unittest.main()
