@@ -110,24 +110,14 @@ def make_castle_walls(start_x, start_y, start_z, width, height, length, wall_wid
     
     #mcb.make_from_list(castle_wall(start_x+wall_width,start_y,start_z+length,North, width ,height, style_wool))
     #mcb.make_from_list(castle_wall(start_x+width,start_y,start_z+wall_width, East, length, height, style_wood))
-     
-    if rcon == None:  # no network, so use sendkeys
-    # build outer walls
-        mcb.make_from_list(castle_wall(start_x,start_y,start_z,North, width,height, style_stone, wall_width)) # TOK
-        mcb.make_from_list(castle_wall(start_x,start_y,start_z,East,  length,height, style_stone, wall_width)) # TOK
-        
-        mcb.make_from_list(castle_wall(start_x,start_y,start_z+length-wall_width,North, width ,height, style_stone, wall_width))
-        mcb.make_from_list(castle_wall(start_x+width-wall_width,start_y,start_z, East, length, height, style_stone, wall_width))
+
+    mcb.make_from_list(castle_wall(start_x,start_y,start_z,North, width,height, style_stone, wall_width), rcon) # TOK
+    mcb.make_from_list(castle_wall(start_x,start_y,start_z,East,  length,height, style_stone, wall_width), rcon) # TOK
     
-        mcb.make_from_list(touchups)
-    else:
-        mcb.make_from_list_rcon(castle_wall(start_x,start_y,start_z,North, width,height, style_stone, wall_width), rcon) # TOK
-        mcb.make_from_list_rcon(castle_wall(start_x,start_y,start_z,East,  length,height, style_stone, wall_width), rcon) # TOK
-        
-        mcb.make_from_list_rcon(castle_wall(start_x,start_y,start_z+length-wall_width,North, width ,height, style_stone, wall_width), rcon)
-        mcb.make_from_list_rcon(castle_wall(start_x+width-wall_width,start_y,start_z, East, length, height, style_stone, wall_width), rcon)
-    
-        mcb.make_from_list_rcon(touchups, rcon)
+    mcb.make_from_list(castle_wall(start_x,start_y,start_z+length-wall_width,North, width ,height, style_stone, wall_width), rcon)
+    mcb.make_from_list(castle_wall(start_x+width-wall_width,start_y,start_z, East, length, height, style_stone, wall_width), rcon)
+
+    mcb.make_from_list(touchups, rcon)
 
     
 def castle_wall(x,y,z,direction, length, height, style, wall_width):    
