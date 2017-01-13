@@ -23,37 +23,35 @@ def log_list(lst):
         for line in lst:
             f.write(line + '\n')
                 
-def make_from_list(lst):
+def make_from_list(lst, rcon_connection = None):
     log_list(lst)
-    for line in lst:
-        if line.strip('\n') == '':
-            pass
-        elif line[0:1] == '#':
-            pass
-        elif line[0:1] == '@':
-            mod_tool.app_activate(line.strip('\n')[1:])
-            time.sleep(.1)     
-            
-        else:
-            print('sending keys ' , str(line).strip('\n'))
-            mod_tool.send_keys(str(line).strip('\n'))
-            time.sleep(0.01) 
-            mod_tool.send_keys("{ENTER}")
-            time.sleep(0.01) 
-
-
-def make_from_list_rcon(lst, rcon_connection):
-    log_list(lst)
-    for line in lst:
-        if line.strip('\n') == '':
-            pass
-        elif line[0:1] == '#':
-            pass
-        elif line[0:1] == '@':
-            pass
-        else:
-            print('rcon ' , str(line).strip('\n'))
-            rcon_connection.command(line)
+    if rcon_connection == None:   # use sendkeys
+        for line in lst:
+            if line.strip('\n') == '':
+                pass
+            elif line[0:1] == '#':
+                pass
+            elif line[0:1] == '@':
+                mod_tool.app_activate(line.strip('\n')[1:])
+                time.sleep(.1)     
+                
+            else:
+                print('sending keys ' , str(line).strip('\n'))
+                mod_tool.send_keys(str(line).strip('\n'))
+                time.sleep(0.01) 
+                mod_tool.send_keys("{ENTER}")
+                time.sleep(0.01) 
+    else:  # use the network rcon to build 
+        for line in lst:
+            if line.strip('\n') == '':
+                pass
+            elif line[0:1] == '#':
+                pass
+            elif line[0:1] == '@':
+                pass
+            else:
+                print('rcon ' , str(line).strip('\n'))
+                rcon_connection.command(line)
 
 
 
