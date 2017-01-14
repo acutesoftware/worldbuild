@@ -636,7 +636,9 @@ def rcon_connection():
     rcon.login(pwd)
     return rcon
     
-    
+def teleport_player(rcon, player_name,x,y,z):
+    rcon.command('/tp ' + player_name + ' ' + str(x) + ' ' + str(y) + ' ' + str(z))
+
     
 if __name__ == '__main__':     
     TEST()
