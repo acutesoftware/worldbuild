@@ -4,6 +4,8 @@ import time
 import aikif.toolbox.interface_windows_tools as mod_tool
 
 
+network_delay = 0.05  # pause after sending command (was 0.01 with sendkeys)
+
 def main():
     make_structure('build_box.bld')
     make_structure('build_house.bld')
@@ -52,7 +54,7 @@ def make_from_list(lst, rcon_connection = None):
             else:
                 print('rcon ' , str(line).strip('\n'))
                 rcon_connection.command(line)
-
+                time.sleep(network_delay) 
 
 
 
