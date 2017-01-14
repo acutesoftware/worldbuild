@@ -62,14 +62,14 @@ def TEST():
     #make_castle_walls(30,63,30,10,3,6, 0)  # tiny walls
     make_castle_walls(30,63,30,20,7,30, 4)  # large walls
 
-def fill_area(x1,y1,z1,x2,y2,z2, item):
+def fill_area(x1,y1,z1,x2,y2,z2, item, myrcon=None):
     res = []
     res.append('@Minecraft Server')
     res.append(mc_fill(x1,y1,z1,x2,y2,z2,item))
 
-    mcb.make_from_list(res)
+    mcb.make_from_list(res, myrcon)
     
-def plant(x1,z1,x2,z2,y1, item): # 'wheat',  
+def plant(x1,z1,x2,z2,y1, item, myrcon=None): # 'wheat',  
     res = []
     res.append('@Minecraft Server')
     res.append(mc_fill(x1,y1-2,z1,x2,y1+3,z2,'minecraft:air'))  # clear area vertically
@@ -96,7 +96,7 @@ def plant(x1,z1,x2,z2,y1, item): # 'wheat',
             else:    
                 res.append('/setblock ' + str(x) + ' ' + str(y1+1) + ' ' + str(z) + ' ' + item) 
 
-    mcb.make_from_list(res)
+    mcb.make_from_list(res, myrcon)
  
 def make_castle_walls(start_x, start_y, start_z, width, height, length, wall_width, rcon=None):
     touchups = []
@@ -234,7 +234,7 @@ def castle_wall(x,y,z,direction, length, height, style, wall_width):
  
     return res
 
-def tower_building(x, y, z, width, height, length, butt_height, style=style_stone): 
+def tower_building(x, y, z, width, height, length, butt_height, style=style_stone, myrcon=None): 
     """
     make a tower building with some multi width blocks to give 
     some detail
@@ -301,7 +301,7 @@ def tower_building(x, y, z, width, height, length, butt_height, style=style_ston
                 res.extend(window_NS(x_pos,y+butt_height+2,z+1,       width=4,height=12)) # front Windows
                 res.extend(window_NS(x_pos,y+butt_height+2,z+length-2,width=3,height=12)) # back Windows
                 
-    mcb.make_from_list(res)
+    mcb.make_from_list(res, myrcon)
 
 def window_NS(x,y,z,width=2,height=4):
     """
@@ -340,7 +340,7 @@ def window_EW(x,y,z,width=2,height=4):
 
     
   
-def catapult(x,y, z):
+def catapult(x,y, z, myrcon):
     """
     makes a catapult with small footprint to fit on tower or walls
     x = centre, y = base, z = front centre
@@ -417,10 +417,10 @@ def catapult(x,y, z):
     res.append('/setblock ' + str(x+1) + ' ' + str(y+height+2) + ' ' + str(z+arm_bk+1) + ' fire')
     res.append('/setblock ' + str(x) + ' ' + str(y+height+2) + ' ' + str(z+arm_bk) + ' fire')
     
-    mcb.make_from_list(res)
+    mcb.make_from_list(res, myrcon)
  
 
-def gate(x, y, z, width=5, height=5, length=7, style=style_gate1): 
+def gate(x, y, z, width=5, height=5, length=7, style=style_gate1, myrcon=None): 
     """
     make a gate on the main wall
       FRONT                SIDE                TOP
@@ -469,10 +469,10 @@ def gate(x, y, z, width=5, height=5, length=7, style=style_gate1):
     res.append('/setblock ' + str(x+1) + ' ' + str(y+2) + ' ' + str(z) + ' torch 4')  # torch on outer wall
     res.append('/setblock ' + str(x+width-1) + ' ' + str(y+2) + ' ' + str(z) + ' torch 4')  # torch on outer wall
     
-    mcb.make_from_list(res)
+    mcb.make_from_list(res, myrcon)
  
     
-def main_door(x=90, y=64, z=75):
+def main_door(x=90, y=64, z=75, myrcon=None):
     """
     Makes a fancy main door at the entrance of the castle building
     coords for door are bottom centre - ornate stuff built out from there    
@@ -535,7 +535,7 @@ def main_door(x=90, y=64, z=75):
     res.append('/setblock ' + str(x+1) + ' ' + str(y+4) + ' ' + str(z+1) + ' torch 3')  # torch on inner wall
     
     
-    mcb.make_from_list(res)
+    mcb.make_from_list(res, myrcon)
 
 def stairs_as_list(x, z, width, y_base, y_top, step='minecraft:stone 4', bannister='minecraft:air', step_spacing=1):
     res = []
@@ -567,16 +567,16 @@ def stairs_as_list(x, z, width, y_base, y_top, step='minecraft:stone 4', bannist
         
     return res
     
-def stairs_NS(x, z, width, y_base, y_top, step='minecraft:stone 4', bannister='minecraft:air', step_spacing=1):
+def stairs_NS(x, z, width, y_base, y_top, step='minecraft:stone 4', bannister='minecraft:air', step_spacing=1, myrcon=None):
     """
     make a staircase to join floor to roof
     """
     res = []
     res = stairs_as_list(x, z, width, y_base, y_top, step, bannister, step_spacing)
-    mcb.make_from_list(res)
+    mcb.make_from_list(res, myrcon)
 
     
-def tile_block(start_x, y, start_z, end_x, end_z, spacing, block):
+def tile_block(start_x, y, start_z, end_x, end_z, spacing, block, myrcon=None):
     """
     used for lighting, puts a block (torch or glowstone) every 'spacing'
     blocks on a floor or roof
@@ -586,9 +586,9 @@ def tile_block(start_x, y, start_z, end_x, end_z, spacing, block):
     for z in range(start_z, end_z, spacing):
         for x in range(start_x, end_x, spacing):
             res.append('/setblock ' + str(x) + ' ' + str(y) + ' ' + str(z) + ' ' + block)
-    mcb.make_from_list(res)        
+    mcb.make_from_list(res, myrcon)        
     
-def set_block(x,y,z,item):
+def set_block(x,y,z,item, myrcon=None):
     """
         set_block(x,y,z,'minecraft:sapling')
     """
@@ -597,7 +597,7 @@ def set_block(x,y,z,item):
     res.append('@Minecraft Server')
     res.append('/setblock ' + str(x) + ' ' + str(y) + ' ' + str(z) + ' ' + str(item)) 
     
-    mcb.make_from_list(res)
+    mcb.make_from_list(res, myrcon)
     
 def mc_fill(x1, y1, z1, x2, y2, z2, item):
     """
@@ -636,8 +636,8 @@ def rcon_connection():
     rcon.login(pwd)
     return rcon
     
-def teleport_player(rcon, player_name,x,y,z):
-    rcon.command('/tp ' + player_name + ' ' + str(x) + ' ' + str(y) + ' ' + str(z))
+def teleport_player(player_name,x,y,z, myrcon):
+    myrcon.command('/tp ' + player_name + ' ' + str(x) + ' ' + str(y) + ' ' + str(z))
 
     
 if __name__ == '__main__':     

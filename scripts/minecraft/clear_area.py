@@ -14,13 +14,13 @@ def TEST():
     wipe_all(x=30, y=74, z=30,w=126,h=110,d=80)  # 37,96,36,11,3,8, 0)  
     
     
-def wipe_all(x,y,z,w,h,d):
+def wipe_all(x,y,z,w,h,d, myrcon=None):
     res = []
     res.append('@Minecraft Server')
     res.append('/say hello from server, just clearing the area')
     for n in range(x, x + w, 1):
         res.append(mcb.mc_fill(n, y, z, n+1, y+h, z+d, 'minecraft:air 0'))
-    mcb.make_from_list(res)
+    mcb.make_from_list(res, myrcon)
     
 
     
