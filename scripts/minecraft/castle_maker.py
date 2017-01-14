@@ -637,7 +637,14 @@ def rcon_connection():
     return rcon
     
 def teleport_player(player_name,x,y,z, myrcon):
-    myrcon.command('/tp ' + player_name + ' ' + str(x) + ' ' + str(y) + ' ' + str(z))
+    if myrcon == None: # use sendkeys
+        res = []
+        res.append('@Minecraft Server')
+        res.append('/tp ' + player_name + ' ' + str(x) + ' ' + str(y) + ' ' + str(z))
+        mcb.make_from_list(res)
+        
+    else: # using network rcon
+        myrcon.command('/tp ' + player_name + ' ' + str(x) + ' ' + str(y) + ' ' + str(z))
 
     
 if __name__ == '__main__':     
