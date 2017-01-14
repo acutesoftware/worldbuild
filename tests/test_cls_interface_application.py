@@ -61,6 +61,7 @@ class TestAgentInterfaceEnvironment(unittest.TestCase):
         rcon.connect('192.168.1.9', 25575)
         rcon.login(pwd)
         say_hi = rcon.command('/say hi from rcon')
+        rcon.command('/tp craftandstore 4 102 4')
         rcon.command('/fill 0 100 0 2 101 2 minecraft:air') # clear area first
         res2 = rcon.command('/fill 0 100 0 2 101 2 minecraft:glass 0')
         rcon.disconnect()
