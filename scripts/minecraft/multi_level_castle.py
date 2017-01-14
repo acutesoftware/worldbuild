@@ -27,7 +27,9 @@ def main():
     
     
     """
-    myrcon = castle_maker.rcon_connection()
+    #myrcon = castle_maker.rcon_connection()  # use this to build via network
+    myrcon = None  # use this line to build via SendKeys
+    
     castle_maker.teleport_player('craftandstore',227,76,197, myrcon)
     time.sleep(1) 
 
