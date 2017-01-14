@@ -19,7 +19,7 @@ class TestAgentInterfaceEnvironment(unittest.TestCase):
     def test_01_instantiate_base_class(self):
         res = mod_if.InterfaceApplication('MINECRAFT')
         self.assertEqual(str(res),'Base class Interface for MINECRAFT')
-    """    
+        
     def test_02_activate_minecraft(self):
 
         start_time = time.time()
@@ -39,7 +39,7 @@ class TestAgentInterfaceEnvironment(unittest.TestCase):
         print('Time for delayed send_keys = ', end_time - start_time)
         self.assertTrue((end_time - start_time) > 3)
         self.assertTrue((end_time - start_time) < 5)
-    """ 
+     
     def test_04_network_minecraft(self):
         """
         Test of rcon connection to minecraft
@@ -68,8 +68,6 @@ class TestAgentInterfaceEnvironment(unittest.TestCase):
         res2 = rcon.command('/fill 0 100 0 2 101 2 minecraft:glass 0')
         rcon.disconnect()
         self.assertEqual(res2, '18 blocks filled')
-        print('say_hi = ', say_hi)
-        print('res2 [setblock] = ', res2)
         
      
 if __name__ == '__main__':
