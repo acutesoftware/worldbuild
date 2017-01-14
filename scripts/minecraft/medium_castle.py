@@ -14,6 +14,7 @@ d = 33
 def main():
     
     myrcon = castle_maker.rcon_connection()
+    castle_maker.teleport_player(myrcon, 'craftandstore',x-10,y,z)
     clear_area.wipe_all(x-1, y, z-1, w+3, h+50, d+3)  # TOK clear bottom left corner
 
     castle_maker.fill_area(x,y,z,x+w,y,z+d, 'minecraft:grass')
