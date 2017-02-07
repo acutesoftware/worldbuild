@@ -4,7 +4,8 @@ import os
 import sys
 import math
 from random import randint 
-import aikif.environments.worlds as my_world
+#import aikif.environments.worlds as my_world
+import vais.worlds as my_world
 import aikif.agents.explore.agent_explore_grid as agt
 
 temp_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'temp') + os.sep
