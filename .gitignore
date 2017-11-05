@@ -1,5 +1,7 @@
 # temp files to be excluded
 worldbuild/data/temp/
+venv/
+venv2/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
