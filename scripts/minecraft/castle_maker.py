@@ -632,9 +632,9 @@ def rcon_connection():
     f.close()
 
 
-    rcon = mcrcon.MCRcon()
-    rcon.connect('192.168.1.5', 25575)
-    rcon.login(pwd)
+    rcon = mcrcon.MCRcon('192.168.1.5', pwd, port=25576)
+    rcon.connect()
+    #rcon.login(pwd)  :25576
     return rcon
 
 def teleport_player(player_name,x,y,z, myrcon):
