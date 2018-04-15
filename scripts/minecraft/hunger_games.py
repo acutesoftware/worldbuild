@@ -14,17 +14,17 @@ style_wood = {'roof':'planks 1', 'walls':'planks 2', 'floor':'planks 3', 'posts'
 style_stone = {'roof':'planks 1', 'walls':'stone 0', 'floor':'stone 4', 'posts':'stone 0'}
 
 x = 12000
-y = 58
+y = 62
 z = 12000
 w = 34+18
-h = 12
-d = 33
-r = 75
+h = 9
+d = 7
+r = 170
 
 def main():
 
     myrcon = castle_maker.rcon_connection()
-    castle_maker.teleport_player('craftandstore',x-10,y,z, myrcon)
+    #castle_maker.teleport_player('craftandstore',x-10,y,z, myrcon)
 
     PI = math.pi
     for angle in range(1, 360, 1):
@@ -32,7 +32,7 @@ def main():
         cx = int(x + r * math.cos(angle_rad))
         cz = int(z + r * math.sin(angle_rad))
         print('angle=', angle, ' x=', cx, ', z = ', cz)
-        castle_maker.fill_area(cx-2, y, cz-2, cx+2, y+h, cz+2, 'minecraft:stone 0',myrcon)
+        castle_maker.fill_area(cx-d, y, cz-d, cx+d, y+h, cz+d, 'minecraft:stone 3',myrcon)
 
 
 
