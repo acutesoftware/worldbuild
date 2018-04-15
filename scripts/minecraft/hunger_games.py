@@ -8,28 +8,32 @@ import sys
 import minecraft_builder
 import castle_maker
 import clear_area
+import math
 
 style_wood = {'roof':'planks 1', 'walls':'planks 2', 'floor':'planks 3', 'posts':'planks 1'}
 style_stone = {'roof':'planks 1', 'walls':'stone 0', 'floor':'stone 4', 'posts':'stone 0'}
 
 x = 12000
-y = 90
+y = 58
 z = 12000
 w = 34+18
-h = 6
+h = 12
 d = 33
-
+r = 75
 
 def main():
 
     myrcon = castle_maker.rcon_connection()
     castle_maker.teleport_player('craftandstore',x-10,y,z, myrcon)
-    clear_area.wipe_all(x-1, y, z-1, w+3, h+50, d+3, myrcon)  # TOK clear bottom left corner
 
-    castle_maker.fill_area(x,y,z,x+w,y,z+d, 'minecraft:grass', myrcon)
+    PI = math.pi
+    for angle in range(1, 360, 1):
+        angle_rad = angle / PI
+        cx = int(x + r * math.cos(angle_rad))
+        cz = int(z + r * math.sin(angle_rad))
+        print('angle=', angle, ' x=', cx, ', z = ', cz)
+        castle_maker.fill_area(cx-2, y, cz-2, cx+2, y+h, cz+2, 'minecraft:stone 0',myrcon)
 
-    # make_castle_walls(start_x, start_y, start_z, width, height, length, wall_width):
-    castle_maker.make_castle_walls(x,y,z,w,h,d, 4, myrcon)  # outer wall
 
 
 main()
