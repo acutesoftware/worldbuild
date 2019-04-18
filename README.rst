@@ -2,8 +2,8 @@
 World Build
 =========================================
 
-    
-(Planning) Tools for computational world building
+
+Tools for computational world building (work in progress)
 
 Overview
 --------------------------------
@@ -34,16 +34,16 @@ Create a YAML file with the following sections
     maps: [alrona-pen-coloured.jpg]
 
 
-You need to have a root section for each element in contents, and there needs to be a name and desc element at the minimum. 
+You need to have a root section for each element in contents, and there needs to be a name and desc element at the minimum.
 
 .. code:: python
-    
+
     settlements:
-      - name: Draeton 
+      - name: Draeton
         continent: Sharnia
         coords_x_y: [66,58]
         desc: >
-            This is the largest city on the East side of Sharnia. 3,000 men live in this strongly 
+            This is the largest city on the East side of Sharnia. 3,000 men live in this strongly
             defended city
       - name: Ambyle
         continent: Sharnia
@@ -53,7 +53,7 @@ You need to have a root section for each element in contents, and there needs to
 
 Then modify the params and run the wiki.py program to generate the HTML version of your world.
 
-The main page looks like 
+The main page looks like
 
 .. image:: ./doc/web_index.jpg
 
@@ -63,14 +63,14 @@ The settlements page shows the description from the yaml file, and also a sectio
 
 
 You can extend the wiki with as many sections as you like and each entry can include a file section to import a text (or html) file to be included in that page.
-    
+
 
 
 Future Functionality
 ============================
 This isn't, and will never be a true rendered 3d representation of a world, rather a macro level world builder for hobbyists and gamers.
 
-Future version will include ability to scan and convert images of world maps, and manage of the narrative of the world. 
+Future version will include ability to scan and convert images of world maps, and manage of the narrative of the world.
 
 Terrain Generation [Random Generation] (in progress)
 Use planet.py to create a random planet
@@ -83,8 +83,7 @@ Object builder
 - start simple with a name and some stats and can them flesh out details with images icons for map right up to 3d blender models or sgi cad models.
 
 Creature Builder
-specify creatures 
+specify creatures
 simple = rogue specs + icon for moving on 2d map
 complex = armour and weapon tables like wow - basic image
 path finding - send AI’s around your world to map paths
-
