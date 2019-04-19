@@ -22,7 +22,7 @@ def build_world(height, width, op_file):
 
     myWorld = my_world.World( height, width, ['.','X','#'])  # TODO - fix passing
     myWorld.build_random( num_seeds, perc_land, perc_sea, perc_blocked)
-    myWorld.grd.save(op_file)
+    #myWorld.grd.save(op_file) # made sample file, so leave as is for testing
     return myWorld
 
 
