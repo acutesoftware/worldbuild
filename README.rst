@@ -66,24 +66,22 @@ You can extend the wiki with as many sections as you like and each entry can inc
 
 
 
-Future Functionality
+Random Grid Generation
 ============================
-This isn't, and will never be a true rendered 3d representation of a world, rather a macro level world builder for hobbyists and gamers.
+Create a random grid as follows
 
-Future version will include ability to scan and convert images of world maps, and manage of the narrative of the world.
+.. code:: python
 
-Terrain Generation [Random Generation] (in progress)
-Use planet.py to create a random planet
-Should also allow modifying and saving to proper data format with layers for plants, etc
+    pip install worldbuild
+    build_random_grid.py
 
-Scan from picture
-Takes an image of a scanned map and extracts the content into multiple layers based on image clustering like hills and trees.  Users can tweak how it converts.
 
-Object builder
-- start simple with a name and some stats and can them flesh out details with images icons for map right up to 3d blender models or sgi cad models.
+.. image:: ./doc/Screenshot_test_world_txt.png
 
-Creature Builder
-specify creatures
-simple = rogue specs + icon for moving on 2d map
-complex = armour and weapon tables like wow - basic image
-path finding - send AI’s around your world to map paths
+You can convert this grid to a Tiled TMX file for manual editing
+
+.. code:: python
+
+    convert_grid_to_tiled_map.py
+
+.. image:: ./doc/Tiled_example_test_world.png
