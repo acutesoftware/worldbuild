@@ -4,12 +4,15 @@
 
 import random
 
-grid_x = 80
-grid_y = 25
+grid_x = 120
+grid_y = 45
 grd = []
+ROOM_SIZE_START = 3
+ROOM_SIZE_FINISH = 5
+ROOM_SIZE_NORMAL = 9
 
 layout = [
-    {'name':'start', 'min_x':3, 'min_y':3, 'max_x':5, 'max_y':5, 'marker':'!', 'desc':'Map starting area'},
+    {'name':'start', 'min_x':5, 'min_y':5, 'max_x':5, 'max_y':5, 'marker':'!', 'desc':'Map starting area'},
     {'name':'exit', 'min_x':grid_x-15, 'min_y':grid_y-12, 'max_x':grid_x-2, 'max_y':grid_y - 1, 'marker':'?', 'desc':'Map starting area'},
     {'name':'en1', 'min_x':5, 'min_y':3, 'max_x':grid_x-10, 'max_y':grid_y-4, 'marker':'L', 'desc':'Monster'},
     {'name':'en1', 'min_x':5, 'min_y':3, 'max_x':grid_x-10, 'max_y':grid_y-4, 'marker':'p', 'desc':'Bandit'},
@@ -43,12 +46,12 @@ def add_layout(layout):
         x = random.randint(l['min_x'], l['max_x'])
         y = random.randint(l['min_y'], l['max_y'])
         if l['name'] == 'exit':
-            make_room(y,x, 3)
+            make_room(y,x, ROOM_SIZE_FINISH)
         elif l['name'] == 'start':
-            make_room(y,x, 2)
+            make_room(y,x, ROOM_SIZE_START)
             print('START')
         else:
-            make_room(y,x, 5)
+            make_room(y,x, ROOM_SIZE_NORMAL)
         grd[y][x] = l['marker']
 
 
@@ -62,10 +65,10 @@ def make_room(y,x, radius):
     """
     builds a room around a coordinate
     """
-    left = y-2-rnum()
-    right = y+1+rnum()
-    top = x-1-rnum()
-    bot = x+2+rnum()
+    left = y-2-rnum(radius)
+    right = y+1+rnum(radius)
+    top = x-1-rnum(radius)
+    bot = x+2+rnum(radius)
     for r in range(left, right):
         for c in range(top, bot):
             if c < 1: break
