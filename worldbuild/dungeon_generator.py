@@ -65,7 +65,7 @@ def make_room(y,x, radius):
     left = y-2-rnum()
     right = y+1+rnum()
     top = x-1-rnum()
-    bot = x+2++rnum()
+    bot = x+2+rnum()
     for r in range(left, right):
         for c in range(top, bot):
             if c < 1: break
