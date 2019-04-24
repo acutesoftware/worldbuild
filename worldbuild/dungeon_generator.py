@@ -5,12 +5,12 @@
 import sys
 import random
 
-grid_x = 120
-grid_y = 40
+grid_x = 128
+grid_y = 48
 grd = []
 ROOM_SIZE_START = 5
 ROOM_SIZE_FINISH = 5
-ROOM_SIZE_NORMAL = 8
+ROOM_SIZE_NORMAL = 7
 
 
 EXIT_X = -1
@@ -18,7 +18,7 @@ EXIT_Y = -1
 START_X = -1
 START_Y = -1
 
-SEED = 8392900704256678713 # 1633707415 # 351
+SEED = 1633707415 #8392900704256678713 # 1633707415 # 351
 
 TILESET = ' 1234.6789+-#' # note leading space, so 'box' is drawn as per numeric keypad
 TILESET = ' ####.####+-#'
@@ -69,7 +69,7 @@ layout = [
 
 def main():
 
-    SEED = random.randrange(sys.maxsize)
+    #SEED = random.randrange(sys.maxsize)
     random.seed(SEED)
     create_grid(grid_x,grid_y)
     add_layout(layout)
@@ -143,7 +143,7 @@ def add_corridors():
     passages = create_passage_list()
 
     for passage in passages:
-        print(passage)
+        #print(passage)
         for x in range(passage['start_x'], passage['end_x']):
             grd[passage['y']][x+1] = TILE_FLOOR
         grd[passage['y']][passage['start_x']+1] = TILE_DOOR_OPEN_VERT #'+'
@@ -176,8 +176,8 @@ def create_passage_list():
             break
 
         passages.extend(get_path_end_points_HORIZ(cur_y))
-    print('START_Y = ', START_Y)
-    print('EXIT_Y = ', EXIT_Y)
+    #print('START_Y = ', START_Y)
+    #print('EXIT_Y = ', EXIT_Y)
     passages.extend(get_path_end_points_HORIZ(START_Y))  # starting horiz
     passages.extend(get_path_end_points_HORIZ(EXIT_Y))  # end horiz
 
