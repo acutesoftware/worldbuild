@@ -1,4 +1,26 @@
 generating map
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
 START
 merging room
 merging room
@@ -361,31 +383,251 @@ merging room
 merging room
 merging room
 merging room
-/--------------------------------------------------------------------------------\
-|                                                                                |
-|                                                                                |
-|                                                                                |
-|                                                                                |
-|   !             #####                                                          |
-|                 #...#                                                          |
-|                 #...#                                      ###########         |
-|                 #...#            #######          #######  #.........##        |
-|                 #...#            #.....#          #.....#  #..........#        |
-|                 #.p.#            #.....#          #.....#  #..........#        |
-|                 #...#       ######.....#    #######.....#  #..........#        |
-|                 #####       #..........#    #...........#  #....r.....#        |
-|                             #..........######...........#  #..........#        |
-|                  ########## #......L.................#..#  #####......#        |
-|                  #........# #..r........................# ######......#        |
-|                  #........# #......####...p.............###...........#        |
-|                  #........# #......#  #..............##...........#...#        |
-|                  #........# #......####........L.....##...............#        |
-|   #########      #........###......##.......#........##...............#        |
-|   #.......#      #...p....#......####.......#........##.....r.....#####        |
-|   #.......#      #........#......#  #.......#........######.......#            |
-|   #.......#      #........#......#  #.....L.#........#    #....p..#            |
-|   #.......#      ##########.p....#  ##################    #.......#            |
-|   #.......#               #......#                        #.......#            |
-|   #....r..#               #......#                        #.......#            |
-\--------------------------------------------------------------------------------/
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+merging room
+/------------------------------------------------------------------------------------------------------------------------\
+|                                                                                                                        |
+|  #......#             #############                                                        #..............#            |
+|  #......#             #...........#                                                        #..............#            |
+|  #......#             #...........#                                                        #..............#            |
+| ##......##########    #...........#                                               ##########.....#........#            |
+| #................#    #...........#                                               #.......................#            |
+| #................#    #...........#                                               #.......................#            |
+| #................#    #...r.......#                                               #................########            |
+| #................#    #...........#                                               #......r.........#                   |
+| #................#    #...........#                                               #................#                   |
+| #................#    #...........#                                               #................#                   |
+| #................######...........#                                               #................#                   |
+| #........L........................#                                         #######................#                   |
+| #.................................#                                         #......................#                   |
+| #.................................#                                         #......................#####               |
+| #...............................###                                         #.......###................#               |
+| #...............................#                                           #..........................#               |
+| #...............................#                                           #..........................#               |
+| #...............................#                                           #.................p........#               |
+| #################...............#                                           #..r.......................#               |
+|                 #.......p.......#                                           ###........................#               |
+|                 #...............#                                             #........................#               |
+|                 #...............############                                  #........................#               |
+|                 #...............##.........#                                  #........................#               |
+|                 #...............##.........#                                  #........................#               |
+|                 #...............##.........#                                  #.........####.......#####               |
+|                 #...............##.........#                                  #.L.......#  #.......#                   |
+|                 #...............##.........#                                  #.........#  #.......#                   |
+|                 #...............##...r.....#                                  ##############.......#                   |
+|                 ##################.........#                                         #.............#                   |
+|                                  #.........#                                         #.............#                   |
+|                                  #.........#                                         #.............#                   |
+|                                  #.........######                                    #.............#                   |
+|                                  #..............#                                    #.......p.....#                   |
+|                                  #####..........#                                    #.............#                   |
+|                                      #..........###                                  #.............#   ############    |
+|                                      #............#                                  #######.......#   #..........#    |
+|                                      #............#                                        #.......#   #..........#    |
+|                                      #............#                                        #.......#   #..........#    |
+|                                      #............#                                        #.......#   #..........#    |
+|                                      #............#                                        #.......#   #..........#    |
+|                                      #.........p..#                                        #.......#   #....?.....#    |
+|                                      #............#                                        #########   #..........#    |
+|                                      ##############                                                    #..........#    |
+|                                                                                                        #..........#    |
+\------------------------------------------------------------------------------------------------------------------------/
 
