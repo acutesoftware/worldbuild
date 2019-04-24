@@ -8,9 +8,15 @@ import random
 grid_x = 128
 grid_y = 48
 grd = []
-ROOM_SIZE_START = 5
-ROOM_SIZE_FINISH = 5
+NUM_ROOMS = 18
+ROOM_SIZE_START = 12
+ROOM_SIZE_FINISH = 12
 ROOM_SIZE_NORMAL = 7
+PATH_NUM_HORIZ = 14
+PATH_NUM_VERT = 5
+PATH_NUM_VERT_PERC_DROP = 10
+PATH_NUM_HORIZ_PERC_DROP = 60
+
 
 
 EXIT_X = -1
@@ -47,29 +53,18 @@ TILE_DOOR_OPEN_VERT     = TILESET[11]
 TILE_DOOR_FRAME_VERT    = TILESET[12]
 
 
-layout = [
-    {'name':'en1', 'min_x':15, 'min_y':5, 'max_x':grid_x-10, 'max_y':grid_y-4, 'marker':'L', 'desc':'Monster'},
-    {'name':'en1', 'min_x':15, 'min_y':5, 'max_x':grid_x-10, 'max_y':grid_y-4, 'marker':'p', 'desc':'Bandit'},
-    {'name':'en1', 'min_x':15, 'min_y':5, 'max_x':grid_x-5, 'max_y':grid_y-6, 'marker':'p', 'desc':'Thief'},
-    {'name':'en1', 'min_x':15, 'min_y':5, 'max_x':grid_x-5, 'max_y':grid_y-6, 'marker':'r', 'desc':'rat'},
-    {'name':'en1', 'min_x':15, 'min_y':5, 'max_x':grid_x-20, 'max_y':grid_y-6, 'marker':'r', 'desc':'rat'},
-    {'name':'en1', 'min_x':11, 'min_y':5, 'max_x':grid_x-20, 'max_y':grid_y-6, 'marker':'r', 'desc':'rat'},
-    {'name':'en1', 'min_x':15, 'min_y':5, 'max_x':grid_x-10, 'max_y':grid_y-6, 'marker':'L', 'desc':'Monster'},
-    {'name':'en1', 'min_x':15, 'min_y':5, 'max_x':grid_x-10, 'max_y':grid_y-6, 'marker':'p', 'desc':'Bandit'},
-    {'name':'en1', 'min_x':15, 'min_y':5, 'max_x':grid_x-9, 'max_y':grid_y-6, 'marker':'p', 'desc':'Thief'},
-    {'name':'en1', 'min_x':15, 'min_y':5, 'max_x':grid_x-9, 'max_y':grid_y-6, 'marker':'r', 'desc':'rat'},
-    {'name':'en1', 'min_x':15, 'min_y':5, 'max_x':grid_x-10, 'max_y':grid_y-4, 'marker':'L', 'desc':'Monster'},
-    {'name':'en1', 'min_x':15, 'min_y':5, 'max_x':grid_x-10, 'max_y':grid_y-6, 'marker':'p', 'desc':'Bandit'},
-    {'name':'en1', 'min_x':15, 'min_y':5, 'max_x':grid_x-9, 'max_y':grid_y-6, 'marker':'p', 'desc':'Thief'},
-    {'name':'en1', 'min_x':15, 'min_y':5, 'max_x':grid_x-9, 'max_y':grid_y-6, 'marker':'r', 'desc':'rat'},
-    {'name':'start', 'min_x':3, 'min_y':5, 'max_x':5, 'max_y':5, 'marker':'!', 'desc':'Map starting area'},
-    {'name':'exit', 'min_x':grid_x-15, 'min_y':grid_y-12, 'max_x':grid_x-2, 'max_y':grid_y - 1, 'marker':'?', 'desc':'Map starting area'},
+MONSTERS = 'pLrcF'
+layout = []
+for i in range(NUM_ROOMS):
+    m = random.choice(MONSTERS)
+    layout.append({'name':'en1', 'min_x':8, 'min_y':5, 'max_x':grid_x-8, 'max_y':grid_y-4, 'marker':m})
 
-    ]
+layout.append({'name':'start', 'min_x':3, 'min_y':5, 'max_x':5, 'max_y':5, 'marker':'!', 'desc':'Map starting area'})
+layout.append({'name':'exit', 'min_x':grid_x-15, 'min_y':grid_y-12, 'max_x':grid_x-2, 'max_y':grid_y - 1, 'marker':'?', 'desc':'Map starting area'})
 
 def main():
 
-    #SEED = random.randrange(sys.maxsize)
+    SEED = random.randrange(sys.maxsize)
     random.seed(SEED)
     create_grid(grid_x,grid_y)
     add_layout(layout)
@@ -143,7 +138,7 @@ def add_corridors():
     passages = create_passage_list()
 
     for passage in passages:
-        #print(passage)
+        print(passage)
         for x in range(passage['start_x'], passage['end_x']):
             grd[passage['y']][x+1] = TILE_FLOOR
         grd[passage['y']][passage['start_x']+1] = TILE_DOOR_OPEN_VERT #'+'
@@ -169,10 +164,9 @@ def create_passage_list():
     """
     passages = []
     cur_y = 2
-    num_horiz_passages = int(grid_y/5)
-    for y in range(num_horiz_passages):
-        cur_y += rnum(10) + 3
-        if cur_y > grid_y - 3:
+    for y in range(PATH_NUM_HORIZ):
+        cur_y += rnum(int(grid_y / PATH_NUM_HORIZ)) + 2
+        if cur_y > grid_y - 4:
             break
 
         passages.extend(get_path_end_points_HORIZ(cur_y))
@@ -184,6 +178,12 @@ def create_passage_list():
     return passages
 
 def get_path_end_points_HORIZ(cur_y):
+    """
+    PATH_NUM_HORIZ = 10
+    PATH_NUM_VERT = 5
+    PATH_NUM_VERT_PERC_DROP = 10
+    PATH_NUM_HORIZ_PERC_DROP = 10
+    """
     horiz_paths = []
 
     # we make a passage BETWEEN 2 rooms only
@@ -192,13 +192,14 @@ def get_path_end_points_HORIZ(cur_y):
     end_x = grid_x
     for x in range(2, grid_x-1):
         #print('y,x = ', cur_y, x, mode, grd[cur_y][x],  grd[cur_y][x+1])
-        if grd[cur_y][x] == '.' and grd[cur_y][x+1] == ' ':
+        if grd[cur_y][x] == TILE_FLOOR and grd[cur_y][x+1] == TILE_BLANK:
             mode = 'PATH'  # start of path
             start_x = x
-        if grd[cur_y][x] == ' ' and grd[cur_y][x+1] == '.' and mode == 'PATH':
+        if grd[cur_y][x] == TILE_BLANK and grd[cur_y][x+1] == TILE_FLOOR and mode == 'PATH':
             mode = 'END'
             end_x = x
-            horiz_paths.append({'y':cur_y,'start_x':start_x,'end_x':end_x})
+            if random.randint(1,100) > PATH_NUM_HORIZ_PERC_DROP:   # skip about half the horiz tunnels
+                horiz_paths.append({'y':cur_y,'start_x':start_x,'end_x':end_x})
             start_x = 0
             end_x = grid_x
 
@@ -227,16 +228,20 @@ def add_layout(layout):
                 break
         x = random.randint(l['min_x'], l['max_x'])
         y = random.randint(l['min_y'], l['max_y'])
+
+
+        print('add_layout: x,y,layout = ', x,y,str(l))
+
         if l['name'] == 'exit':
-            make_room(y,x, ROOM_SIZE_FINISH)
+            make_room(y,x, ROOM_SIZE_FINISH, l['name'])
             EXIT_X = x
             EXIT_Y = y
         elif l['name'] == 'start':
-            make_room(y,x, ROOM_SIZE_START)
+            make_room(y,x, ROOM_SIZE_START, l['name'])
             START_X = x
             START_Y = y
         else:
-            make_room(y,x, ROOM_SIZE_NORMAL)
+            make_room(y,x, ROOM_SIZE_NORMAL, l['name'])
         grd[y][x] = l['marker']
 
 
@@ -246,16 +251,45 @@ def rnum(max_val=5):
     """
     return random.randint(1, max_val)
 
-def make_room(y,x, radius):
+def make_room(y,x, radius, nme):
     """
     builds a room around a coordinate
     """
-    left = y-2-rnum(radius)
-    right = y+2+rnum(radius)
-    top = x-2-rnum(radius)
-    bot = x+2+rnum(radius)
-    for r in range(left, right):
-        for c in range(top, bot):
+    if nme  == 'start':
+        left = x-9-rnum(radius)
+        right = x+2+rnum(radius)
+        top = y-99-rnum(radius)
+        bot = y+2+rnum(radius)
+    elif nme  == 'exit':
+        left = x-2-rnum(radius)
+        right = x+99+rnum(radius)
+        top = y-2-rnum(radius)
+        bot = y+99+rnum(radius)
+
+    else:
+        left = x-2-rnum(radius)
+        right = x+2+rnum(radius)
+        top = y-2-rnum(radius)
+        bot = y+2+rnum(radius)
+
+    #print('make_room : left,right,top,bot,grid_y,grid_x    = ', left,right,top,bot,grid_y,grid_x)
+
+    """
+    validations
+    """
+    if left < 2:
+        left = 2
+    if right > grid_x:
+        right = grid_x - 2
+    if bot > grid_y - 2:
+        bot = grid_y - 2
+    if top < 2:
+        top = 2
+
+    #print('make_room AFTER validations: left,right,top,bot = ', left,right,top,bot)
+
+    for r in range(top, bot):
+        for c in range(left, right):
             if c < 1: c =  0
             if r < 1: r = 0
             #if c > grid_x-1: break
