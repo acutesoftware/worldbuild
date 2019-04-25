@@ -207,6 +207,6 @@ It also uses the pathfinding package to make a path through the map
 Optionally, you can uncomment the line to save it as a TMX file for use in Tiled.
 Doing this will allow you to use the above grid with a tileset to get better graphics.
 
-.. image:: ./samples/dungeon_resized_in_Tiled.png
+.. image:: ./worldbuild/samples/dungeon_resized_in_Tiled.png
 
 Coming soon - better example of tileset graphics
