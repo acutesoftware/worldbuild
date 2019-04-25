@@ -8,14 +8,14 @@ import random
 grid_x = 128
 grid_y = 48
 grd = []
-NUM_ROOMS = 18
-ROOM_SIZE_START = 12
-ROOM_SIZE_FINISH = 12
-ROOM_SIZE_NORMAL = 7
-PATH_NUM_HORIZ = 14
+NUM_ROOMS = 99
+ROOM_SIZE_START = 8
+ROOM_SIZE_FINISH = 8
+ROOM_SIZE_NORMAL = 2
+PATH_NUM_HORIZ = 12
 PATH_NUM_VERT = 5
 PATH_NUM_VERT_PERC_DROP = 10
-PATH_NUM_HORIZ_PERC_DROP = 60
+PATH_NUM_HORIZ_PERC_DROP = 40
 
 
 
@@ -25,6 +25,15 @@ START_X = -1
 START_Y = -1
 
 SEED = 1633707415 #8392900704256678713 # 1633707415 # 351
+
+
+SEED = 2951322320659409853  # simple path, 96x96 (saved as dungeon_map_solved_v1.txt) 18 rooms, 12
+
+SEED = 1612603902922459220  # good for pathfinding with 64 x 64
+
+SEED = 3320746558832866108  # 128x48, 30 rooms, 4 wide, 12 hor cor, 40pc chance drop
+
+SEED = 5529128865878819600
 
 TILESET = ' 1234.6789+-#' # note leading space, so 'box' is drawn as per numeric keypad
 TILESET = ' ####.####+-#'
@@ -36,7 +45,7 @@ TILESET  = ' ' + u'\u255A' +  u'\u2550' + u'\u255D'
 TILESET +=       u'\u2551' +  '.'       + u'\u2551'
 TILESET +=       u'\u2554' +  u'\u2550' + u'\u2557' + '+-#'
 """
-
+csv_export_file = 'dungeon.csv'
 
 TILE_BLANK              = TILESET[0]
 TILE_WALL_BOTTOM_LEFT   = TILESET[1]
@@ -64,15 +73,116 @@ layout.append({'name':'exit', 'min_x':grid_x-15, 'min_y':grid_y-12, 'max_x':grid
 
 def main():
 
-    SEED = random.randrange(sys.maxsize)
+    #SEED = random.randrange(sys.maxsize)
     random.seed(SEED)
     create_grid(grid_x,grid_y)
     add_layout(layout)
     add_corridors()
     add_walls()
     print(grid_as_str(grd))
-    #print(grd)
-    print("Seed was:", SEED)
+    # optional - make a path through the grid
+    print("Finding path..... Seed was:", SEED)
+    path_find()
+
+    # optional - export as TMX file
+    convert_grid_to_TileEditor_map()
+
+
+
+def convert_grid_to_TileEditor_map():
+    """
+    202,206,188,39,
+    187,251, 46, 0,
+    201,44, 189,39,
+    tileset_index = { # for Runeset_32x32.png (ascii_runeset)
+        ' ': -1,  # TILE_BLANK
+        ' ': -1,  # TILE_WALL_BOTTOM_LEFT
+        ' ': -1,  # TILE_WALL_BOTTOM
+        ' ': -1,  # TILE_WALL_BOTTOM_RIGHT
+        ' ': -1,  # TILE_WALL_LEFT
+        ' ': -1,  # TILE_FLOOR
+        ' ': -1,  # TILE_WALL_RIGHT
+        ' ': -1,  # TILE_WALL_TOP_LEFT
+        ' ': -1,  # TILE_WALL_TOP
+        ' ': -1,  # TILE_WALL_TOP_RIGHT
+        ' ': -1,  # TILE_DOOR_CLOSED_VERT
+        ' ': -1,  # TILE_DOOR_OPEN_VERT
+        ' ': -1,  # TILE_DOOR_FRAME_VERT
+    }
+
+
+    """
+
+    import convert_grid_to_tiled_map
+
+    tileset_index = { # for Runeset_32x32.png (ascii_runeset)
+        TILE_BLANK: 0,
+        TILE_WALL_BOTTOM_LEFT:201,
+        TILE_WALL_BOTTOM: 206,
+        TILE_WALL_BOTTOM_RIGHT: 189,
+        TILE_WALL_LEFT:187,
+        TILE_FLOOR: 251,
+        TILE_WALL_TOP_LEFT:202,
+        TILE_WALL_TOP_RIGHT:188,
+        TILE_DOOR_CLOSED_VERT:46,
+        TILE_DOOR_OPEN_VERT:44,
+        TILE_DOOR_FRAME_VERT:39,
+    }
+
+
+
+    tmx_grid = convert_grid_to_tiled_map.build_tiled_map(grd, tileset_index)
+    convert_grid_to_tiled_map.save_tmx_file(tmx_grid, 'samples/dungeon.tmx', 'samples/ascii_runeset.tsx')
+
+
+
+
+
+def path_find():
+    import pathfind
+    st = [START_X,START_Y]
+    ex = [EXIT_X,EXIT_Y]
+    #st = [START_Y,START_X]
+    #ex = [EXIT_Y,EXIT_X]
+
+    path = pathfind.path_find(grid_to_int(), st, ex)
+    #print('PATH = ', path)
+    if len(path) < 2:
+        print('no path found')
+        return
+    print(display_solved_grid(path))
+
+
+
+def grid_to_int():
+    #print('START_Y = ', START_Y)
+    #print('EXIT_Y = ', EXIT_Y)
+
+    search_grid = []
+    for row in grd:
+        op_row = []
+        for col in row:
+            if col == TILE_FLOOR:
+                cell = 1
+            elif col == TILE_DOOR_OPEN_VERT:
+                cell = 1
+            elif col == TILE_DOOR_CLOSED_VERT:
+                cell = 5
+            elif col == TILE_DOOR_CLOSED_VERT:
+                cell = 9
+            elif col == TILE_BLANK:
+                cell = 0
+            else:
+                cell = 99 # 9  # can dig through walls if needed but expensive
+            op_row.append(cell)
+        search_grid.append(op_row)
+    #print(search_grid)
+
+    return search_grid
+
+
+
+
 
 def add_walls():
     """
@@ -318,6 +428,27 @@ def grid_as_str(grd):
         r_str = '|'
         for col_num, col in enumerate(row):
             r_str += grd[row_num][col_num]
+        r_str += '|'
+        res += r_str + '\n'
+    res += bot_wall
+    return res
+
+def display_solved_grid(path):
+    """
+    displays the grid with path overlayed on top
+    """
+    res = ''
+    top_wall = '/' + ''.join('-' for x in grd[0]) + '\\\n'
+    bot_wall = '\\' + ''.join('-' for x in grd[0]) + '/\n'
+
+    res += top_wall
+    for row_num, row in enumerate(grd):
+        r_str = '|'
+        for col_num, col in enumerate(row):
+            if (col_num, row_num) in path:
+                r_str += 'x'
+            else:
+                r_str += grd[row_num][col_num]
         r_str += '|'
         res += r_str + '\n'
     res += bot_wall
