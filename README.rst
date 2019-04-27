@@ -91,9 +91,23 @@ You can convert this grid to a Tiled TMX file for manual editing
 
 Dungeon Map Generator
 ============================
-Create a rogue like dungeon grid by running dungeon_generator.py to produce a random map
+Create a rogue like dungeon grid by running code below to produce a random map
 
 .. code:: python
+
+    import worldbuild.dungeon_generator as dg
+
+    grid = dg.create_dungeon(grid_y=30, grid_x=80, NUM_ROOMS=16, ROOM_SIZE = 3, NUM_HORIZ = 10)
+    print(dg.grid_as_str(grid))
+
+    # optional - make a path through the grid
+    print(dg.path_find(grid))
+
+    # optional - export as TMX file
+    dg.convert_grid_to_TileEditor_map('dungeon.tmx', 'samples/ascii_runeset.tsx')
+
+
+
 
     /--------------------------------------------------------------------------------------------------------------------------------\
     |                                                                                                                                |

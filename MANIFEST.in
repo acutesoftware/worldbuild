@@ -1,4 +1,5 @@
 include *.rst
+include *.txt
 include worldbuild/data/*.*
 include worldbuild/samples/*.*
 include worldbuild/samples/alrona/*.*

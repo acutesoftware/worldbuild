@@ -13,7 +13,6 @@ tile_indexes = { # for mountain_landscapes.png
 '#': 76, # blocking rocks
 }
 
-
 def main():
     print('takes a grid built via the build_random_grid and converts to TMX file')
     grid = []
