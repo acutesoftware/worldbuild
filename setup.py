@@ -30,7 +30,6 @@ setup(
     'Operating System :: OS Independent',
     'Topic :: Software Development :: Libraries :: Python Modules',
     'Topic :: Games/Entertainment :: Simulation',
-    'Topic :: Scientific/Engineering :: Artificial Life',
     ],
 
 )
