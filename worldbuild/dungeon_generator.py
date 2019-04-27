@@ -4,15 +4,15 @@
 
 import sys
 import random
+import worldbuild.pathfind as pathfind
+import worldbuild.convert_grid_to_tiled_map as convert_grid_to_tiled_map
 
-grid_x = 128
-grid_y = 48
 grd = []
-NUM_ROOMS = 99
+
 ROOM_SIZE_START = 8
 ROOM_SIZE_FINISH = 8
-ROOM_SIZE_NORMAL = 2
-PATH_NUM_HORIZ = 12
+
+
 PATH_NUM_VERT = 5
 PATH_NUM_VERT_PERC_DROP = 10
 PATH_NUM_HORIZ_PERC_DROP = 40
@@ -24,16 +24,6 @@ EXIT_Y = -1
 START_X = -1
 START_Y = -1
 
-SEED = 1633707415 #8392900704256678713 # 1633707415 # 351
-
-
-SEED = 2951322320659409853  # simple path, 96x96 (saved as dungeon_map_solved_v1.txt) 18 rooms, 12
-
-SEED = 1612603902922459220  # good for pathfinding with 64 x 64
-
-SEED = 3320746558832866108  # 128x48, 30 rooms, 4 wide, 12 hor cor, 40pc chance drop
-
-SEED = 5529128865878819600
 
 TILESET = ' 1234.6789+-#' # note leading space, so 'box' is drawn as per numeric keypad
 TILESET = ' ####.####+-#'
@@ -62,34 +52,57 @@ TILE_DOOR_OPEN_VERT     = TILESET[11]
 TILE_DOOR_FRAME_VERT    = TILESET[12]
 
 
-MONSTERS = 'pLrcF'
-layout = []
-for i in range(NUM_ROOMS):
-    m = random.choice(MONSTERS)
-    layout.append({'name':'en1', 'min_x':8, 'min_y':5, 'max_x':grid_x-8, 'max_y':grid_y-4, 'marker':m})
-
-layout.append({'name':'start', 'min_x':3, 'min_y':5, 'max_x':5, 'max_y':5, 'marker':'!', 'desc':'Map starting area'})
-layout.append({'name':'exit', 'min_x':grid_x-15, 'min_y':grid_y-12, 'max_x':grid_x-2, 'max_y':grid_y - 1, 'marker':'?', 'desc':'Map starting area'})
 
 def main():
 
-    #SEED = random.randrange(sys.maxsize)
-    random.seed(SEED)
-    create_grid(grid_x,grid_y)
-    add_layout(layout)
-    add_corridors()
-    add_walls()
-    print(grid_as_str(grd))
+    grid = create_dungeon()
+    print(grid_as_str(grid))
+
     # optional - make a path through the grid
-    print("Finding path..... Seed was:", SEED)
-    path_find()
+    print(path_find(grid))
 
     # optional - export as TMX file
-    convert_grid_to_TileEditor_map()
+    convert_grid_to_TileEditor_map('dungeon.tmx', 'samples/ascii_runeset.tsx')
+
+
+def create_dungeon(grid_y=30, grid_x=80, NUM_ROOMS=16, ROOM_SIZE = 3, NUM_HORIZ = 10, lv_SEED = -1):
+    if grid_x < 30:
+        grid_x = 30
+    if grid_y < 15:
+        grid_y = 15
+
+    if lv_SEED == -1:
+        SEED = random.randrange(sys.maxsize)
+    else:
+        SEED = 1633707415 #8392900704256678713 # 1633707415 # 351
+        SEED = 2951322320659409853  # simple path, 96x96 (saved as dungeon_map_solved_v1.txt) 18 rooms, 12
+        SEED = 1612603902922459220  # good for pathfinding with 64 x 64
+        SEED = 3320746558832866108  # 128x48, 30 rooms, 4 wide, 12 hor cor, 40pc chance drop
+        SEED = 5529128865878819600
+
+    random.seed(SEED)
+    print('SEED=',SEED )
+
+    MONSTERS = 'pLrcF'
+    layout = []
+    for i in range(NUM_ROOMS):
+        m = random.choice(MONSTERS)
+        layout.append({'name':'en1', 'min_x':8, 'min_y':5, 'max_x':grid_x-8, 'max_y':grid_y-4, 'marker':m})
+
+    layout.append({'name':'start', 'min_x':3, 'min_y':5, 'max_x':5, 'max_y':5, 'marker':'!', 'desc':'Map starting area'})
+    layout.append({'name':'exit', 'min_x':grid_x-15, 'min_y':grid_y-12, 'max_x':grid_x-2, 'max_y':grid_y - 1, 'marker':'?', 'desc':'Map starting area'})
+
+
+    create_grid(grid_x,grid_y)
+    add_layout(layout, grid_y, grid_x, ROOM_SIZE)
+    add_corridors(grid_y, grid_x, NUM_HORIZ)
+    add_walls(grid_y, grid_x)
+    return grd
 
 
 
-def convert_grid_to_TileEditor_map():
+
+def convert_grid_to_TileEditor_map(op_file, tileset_file_def):
     """
     202,206,188,39,
     187,251, 46, 0,
@@ -113,7 +126,7 @@ def convert_grid_to_TileEditor_map():
 
     """
 
-    import convert_grid_to_tiled_map
+
 
     tileset_index = { # for Runeset_32x32.png (ascii_runeset)
         TILE_BLANK: 0,
@@ -132,34 +145,25 @@ def convert_grid_to_TileEditor_map():
 
 
     tmx_grid = convert_grid_to_tiled_map.build_tiled_map(grd, tileset_index)
-    convert_grid_to_tiled_map.save_tmx_file(tmx_grid, 'samples/dungeon.tmx', 'samples/ascii_runeset.tsx')
+    convert_grid_to_tiled_map.save_tmx_file(tmx_grid, op_file, tileset_file_def)
 
 
 
 
 
-def path_find():
-    import pathfind
+def path_find(grid):
+
     st = [START_X,START_Y]
     ex = [EXIT_X,EXIT_Y]
-    #st = [START_Y,START_X]
-    #ex = [EXIT_Y,EXIT_X]
-
-    path = pathfind.path_find(grid_to_int(), st, ex)
-    #print('PATH = ', path)
+    path = pathfind.path_find(grid_to_int(grid), st, ex)
     if len(path) < 2:
-        print('no path found')
-        return
-    print(display_solved_grid(path))
+        return 'no path found'
+    return display_solved_grid(path)
 
 
-
-def grid_to_int():
-    #print('START_Y = ', START_Y)
-    #print('EXIT_Y = ', EXIT_Y)
-
+def grid_to_int(grid):
     search_grid = []
-    for row in grd:
+    for row in grid:
         op_row = []
         for col in row:
             if col == TILE_FLOOR:
@@ -176,15 +180,13 @@ def grid_to_int():
                 cell = 99 # 9  # can dig through walls if needed but expensive
             op_row.append(cell)
         search_grid.append(op_row)
-    #print(search_grid)
-
     return search_grid
 
 
 
 
 
-def add_walls():
+def add_walls(grid_y, grid_x):
     """
     traces the entire map and puts walls around all '.' which are
     either rooms or corridors
@@ -240,15 +242,14 @@ def add_walls():
 
 
 
-def add_corridors():
+def add_corridors(grid_y, grid_x, PATH_NUM_HORIZ):
     """
     randomly add corridors hor and vert only, to join big rooms
     """
 
-    passages = create_passage_list()
+    passages = create_passage_list(grid_y, grid_x, PATH_NUM_HORIZ)
 
     for passage in passages:
-        print(passage)
         for x in range(passage['start_x'], passage['end_x']):
             grd[passage['y']][x+1] = TILE_FLOOR
         grd[passage['y']][passage['start_x']+1] = TILE_DOOR_OPEN_VERT #'+'
@@ -267,7 +268,7 @@ def add_corridors():
 
 
 
-def create_passage_list():
+def create_passage_list(grid_y, grid_x, PATH_NUM_HORIZ):
     """
     looks at the map and makes a list of places where corridors
     should exist
@@ -279,15 +280,13 @@ def create_passage_list():
         if cur_y > grid_y - 4:
             break
 
-        passages.extend(get_path_end_points_HORIZ(cur_y))
-    #print('START_Y = ', START_Y)
-    #print('EXIT_Y = ', EXIT_Y)
-    passages.extend(get_path_end_points_HORIZ(START_Y))  # starting horiz
-    passages.extend(get_path_end_points_HORIZ(EXIT_Y))  # end horiz
+        passages.extend(get_path_end_points_HORIZ(cur_y, grid_y, grid_x))
+    passages.extend(get_path_end_points_HORIZ(START_Y, grid_y, grid_x))  # starting horiz
+    passages.extend(get_path_end_points_HORIZ(EXIT_Y, grid_y, grid_x))  # end horiz
 
     return passages
 
-def get_path_end_points_HORIZ(cur_y):
+def get_path_end_points_HORIZ(cur_y, grid_y, grid_x):
     """
     PATH_NUM_HORIZ = 10
     PATH_NUM_VERT = 5
@@ -301,7 +300,6 @@ def get_path_end_points_HORIZ(cur_y):
     start_x = 0
     end_x = grid_x
     for x in range(2, grid_x-1):
-        #print('y,x = ', cur_y, x, mode, grd[cur_y][x],  grd[cur_y][x+1])
         if grd[cur_y][x] == TILE_FLOOR and grd[cur_y][x+1] == TILE_BLANK:
             mode = 'PATH'  # start of path
             start_x = x
@@ -316,7 +314,7 @@ def get_path_end_points_HORIZ(cur_y):
     return horiz_paths
 
 
-def add_layout(layout):
+def add_layout(layout, grid_y, grid_x, ROOM_SIZE_NORMAL):
     """
     add features to map defined by layout
 
@@ -339,19 +337,16 @@ def add_layout(layout):
         x = random.randint(l['min_x'], l['max_x'])
         y = random.randint(l['min_y'], l['max_y'])
 
-
-        print('add_layout: x,y,layout = ', x,y,str(l))
-
         if l['name'] == 'exit':
-            make_room(y,x, ROOM_SIZE_FINISH, l['name'])
+            make_room(y,x, ROOM_SIZE_FINISH, l['name'], grid_y, grid_x)
             EXIT_X = x
             EXIT_Y = y
         elif l['name'] == 'start':
-            make_room(y,x, ROOM_SIZE_START, l['name'])
+            make_room(y,x, ROOM_SIZE_START, l['name'], grid_y, grid_x)
             START_X = x
             START_Y = y
         else:
-            make_room(y,x, ROOM_SIZE_NORMAL, l['name'])
+            make_room(y,x, ROOM_SIZE_NORMAL, l['name'], grid_y, grid_x)
         grd[y][x] = l['marker']
 
 
@@ -361,7 +356,7 @@ def rnum(max_val=5):
     """
     return random.randint(1, max_val)
 
-def make_room(y,x, radius, nme):
+def make_room(y,x, radius, nme, grid_y, grid_x):
     """
     builds a room around a coordinate
     """
@@ -382,8 +377,6 @@ def make_room(y,x, radius, nme):
         top = y-2-rnum(radius)
         bot = y+2+rnum(radius)
 
-    #print('make_room : left,right,top,bot,grid_y,grid_x    = ', left,right,top,bot,grid_y,grid_x)
-
     """
     validations
     """
@@ -396,8 +389,6 @@ def make_room(y,x, radius, nme):
     if top < 2:
         top = 2
 
-    #print('make_room AFTER validations: left,right,top,bot = ', left,right,top,bot)
-
     for r in range(top, bot):
         for c in range(left, right):
             if c < 1: c =  0
@@ -409,7 +400,6 @@ def make_room(y,x, radius, nme):
                 if r < grid_y-1 and c < grid_x-1:
                     if grd[r][c] != TILE_FLOOR:
                         pass
-                        #grd[r][c] = '#'
                         #print('merging room')
             else:
                 if r < grid_y and c < grid_x:
