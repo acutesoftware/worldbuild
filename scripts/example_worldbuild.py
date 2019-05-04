@@ -10,7 +10,7 @@
 
 import worldbuild.dungeon_generator as dg
 
-grid = dg.create_dungeon(grid_y=30, grid_x=80, NUM_ROOMS=16, ROOM_SIZE = 3, NUM_HORIZ = 10)
+grid = dg.create_dungeon(grid_y=90, grid_x=150, NUM_ROOMS=90, ROOM_SIZE = 3, NUM_HORIZ = 35)
 print(dg.grid_as_str(grid))
 
 # optional - make a path through the grid
