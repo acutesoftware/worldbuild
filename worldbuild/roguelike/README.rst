@@ -18,7 +18,7 @@ Create a random grid as follows
     build_random_grid.py
 
 
-.. image:: ./doc/Screenshot_test_world_txt.png
+.. image:: ../doc/Screenshot_test_world_txt.png
 
 You can convert this grid to a Tiled TMX file for manual editing
 
@@ -26,7 +26,7 @@ You can convert this grid to a Tiled TMX file for manual editing
 
     convert_grid_to_tiled_map.py
 
-.. image:: ./doc/Tiled_example_test_world.png
+.. image:: ../doc/Tiled_example_test_world.png
 
 
 
@@ -163,6 +163,6 @@ It also uses the pathfinding package to make a path through the map
 Optionally, you can uncomment the line to save it as a TMX file for use in Tiled.
 Doing this will allow you to use the above grid with a tileset to get better graphics.
 
-.. image:: ./../worldbuild/samples/dungeon_resized_in_Tiled.png
+.. image:: ../samples/dungeon_resized_in_Tiled.png
 
 Coming soon - better example of tileset graphics
