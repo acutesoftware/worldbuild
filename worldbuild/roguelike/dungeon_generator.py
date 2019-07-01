@@ -5,7 +5,9 @@
 import sys
 import random
 import worldbuild.pathfind as pathfind
-import worldbuild.convert_grid_to_tiled_map as convert_grid_to_tiled_map
+#from worldbuild.roguelike 
+
+import convert_grid_to_tiled_map as convert_grid_to_tiled_map
 
 grd = []
 
