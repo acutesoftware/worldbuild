@@ -9,7 +9,7 @@ root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.se
 pth = root_folder + os.sep + 'worldbuild'
 sys.path.append(pth)
 
-img_file = os.path.join(os.getcwd(), '..', 'worldbuild', 'samples', 'alrona', 'alrona-pen-coloured.jpg')
+img_file = os.path.join(pth, 'samples', 'alrona', 'alrona-pen-coloured.jpg')
 
 import convert_map_to_data
 
