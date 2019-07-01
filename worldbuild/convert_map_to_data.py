@@ -13,20 +13,6 @@ import html_utils
 import image_utils
 import aikif.toolbox.image_tools as mod_img
 
-def trace(fn):
-
-    def build_trace_line(fn, args, ret_val):
-        return "   " + fn.__name__ + str(args) + " -> " + str(ret_val) + "\n"
-
-    def wrapper(*args):
-        ret_val = fn(*args)
-        trace_line = build_trace_line(fn, args, ret_val)
-        print(trace_line.ljust(10))
-        return ret_val
-
-    return wrapper
-
-@trace
 def extract_data_from_map(fname):
     """
     read in a jpg file containing a map and attempt to 
