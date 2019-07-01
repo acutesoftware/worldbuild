@@ -1,0 +1,11 @@
+Person loses object
+
+Person goes to find object
+
+Person gets attacked by Monsters
+
+Person defeats monsters
+
+Helper helps person 
+
+Person finds object
