@@ -1,3 +1,8 @@
+
+.. image:: https://api.travis-ci.org/repositories/acutesoftware/worldbuild.svg
+    :target: https://travis-ci.org/acutesoftware/worldbuild
+    :alt: Build Status
+
 =========================================
 Dungeon Generator
 =========================================
