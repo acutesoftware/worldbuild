@@ -1,0 +1,12 @@
+PLOT: 'A dwarf wants you to retrieve a green falcon stolen from his home by bandits'
+QUEST: '1', 'investigate the site', 'broken pipe' 
+QUEST: '2', 'talk to trader', 'info' 
+QUEST: '3', 'talk to drunk', 'info' 
+QUEST: '3', 'find bandits hideout', 'location' 
+QUEST: '4', 'do bandit favour by distracting guards during heist', 'respect' 
+QUEST: '5', 'get info on where object was sold to, 'directions to remote town' 
+QUEST: '6', 'travel to remote town to go to trade store', '' 
+QUEST: '7', 'do owner favour by fighting thugs outside shop', 'respect' 
+QUEST: '8', 'retrieve the green falcon', 'green falcon' 
+QUEST: '9', 'hand in the green falcon', '500G' 
+
