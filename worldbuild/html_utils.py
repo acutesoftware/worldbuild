@@ -9,7 +9,7 @@ def get_header(pge=''):
     txt += '<meta name="viewport" content="width=device-width, initial-scale=1.0" />\n'
     txt += '<link rel="stylesheet" type="text/css" href="worldbuild.css" media="screen" />\n'
     txt += '<link rel="stylesheet" href="worldbuild_mob.css"'
-    txt += '" media="only screen and (min-device-width : 320px) and (max-device-width : 480px)">\n'
+    txt += ' media="only screen and (min-device-width : 320px) and (max-device-width : 480px)">\n'
     txt += '</HEAD>\n'
     txt += '<body>\n'
     return txt
