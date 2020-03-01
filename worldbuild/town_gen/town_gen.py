@@ -13,14 +13,14 @@ import random
 import aikif.toolbox.cls_grid as mod_grid
 
 
-buildings = ['H','h', 'P', 'S', 'T']
+buildings = [ 'H','h', 'H','h', 'H','h', 'P', 'S', 'S', 'S']
 build_specs = {
     'H':99, 'h':99, 'P':2, 'S':5, 'T':1
 }
 
 def TEST():
     print('generating town...')
-    dat_town = make_town(4)
+    dat_town = make_town(14)
     print_town(dat_town)
 
 
@@ -32,10 +32,6 @@ def make_town(sze):
     #agt = mod_agt.ExploreAgent('TEST - exploring_agent',  os.getcwd(), 4, True)
     grd = mod_grid.Grid(grid_height=3, grid_width=sze, pieces=buildings, spacing=2)   
 
-    #grd.new_tile()
-    #grd.new_tile()
-    #agt.set_world( grd, [3,4], [6,6])
-    print(grd)
 
 
     for col in range(sze):
@@ -44,23 +40,29 @@ def make_town(sze):
        # if build_specs[current_building] > 1
         grd.set_tile(0, col, current_building)
         grd.set_tile(1, col, '-')
-        if current_building in ['P','S','T']:
+        if current_building in ['P','S']:
             grd.set_tile(2, col, '.')
         else:
             grd.set_tile(2, col, 'H')
         
+    # add 1 pub near outskirts (even if one exists)
+    tx = random.randint(0, 3)
+    grd.set_tile(2, tx, 'P')
 
+    # add one and only one town hall near the centre
+    tx = random.randint(int(sze/2) - 2, int(sze/2) + 2)
+    grd.set_tile(2, tx, 'T')
 
     return grd
     
 
 
 
-def print_town(dat_town):
+def print_town(lgrd):
     """
     prints the town to console
     """
-    print(dat_town)
+    print(lgrd)
 
 
 
