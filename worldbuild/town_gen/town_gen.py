@@ -2,7 +2,21 @@
 # -*- coding: utf-8 -*-
 # town_gen.py
 
+import os 
+import sys
 import random 
+
+
+
+#import aikif.agents.explore.agent_explore_grid as mod_agt
+
+import aikif.toolbox.cls_grid as mod_grid
+
+
+buildings = ['H','h', 'P', 'S', 'T']
+build_specs = {
+    'H':99, 'h':99, 'P':2, 'S':5, 'T':1
+}
 
 def TEST():
     print('generating town...')
@@ -15,16 +29,29 @@ def make_town(sze):
     generates the town
     [1,1,1,1,1,1,1]
     """
-    dat = []
+    #agt = mod_agt.ExploreAgent('TEST - exploring_agent',  os.getcwd(), 4, True)
+    grd = mod_grid.Grid(grid_height=3, grid_width=sze, pieces=buildings, spacing=2)   
 
-    buildings = 'HSP'
+    #grd.new_tile()
+    #grd.new_tile()
+    #agt.set_world( grd, [3,4], [6,6])
+    print(grd)
 
-    for s in range(sze):
+
+    for col in range(sze):
+
         current_building = random.choice(buildings)
-        dat.append([s, current_building])
+       # if build_specs[current_building] > 1
+        grd.set_tile(0, col, current_building)
+        grd.set_tile(1, col, '-')
+        if current_building in ['P','S','T']:
+            grd.set_tile(2, col, '.')
+        else:
+            grd.set_tile(2, col, 'H')
+        
 
 
-    return dat
+    return grd
     
 
 
