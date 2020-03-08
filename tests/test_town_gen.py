@@ -22,23 +22,55 @@ class TestTemplate(unittest.TestCase):
         unittest.TestCase.tearDown(self)
 
 
-    def test_01_make_town(self):
-        town_x = 60
-        town_y = 3
-        res = town_gen.make_town(town_y,town_x)
+    def test_01_make_huge_sparse_town(self):
+        town_x = 78
+        town_y = 50
+        res = town_gen.make_town('Huge Empty Town', town_y,town_x, 99)
         self.assertEqual(len(res.town_grid), town_y)
         self.assertEqual(len(res.town_grid[0]), town_x)
         #self.assertTrue(res.grid.get_grid_width() > 14)
         print(res)
 
-    def test_02_print_town(self):
+    def test_02_make_huge_dense_town(self):
+        town_x = 78
+        town_y = 50
+        res = town_gen.make_town('Huge Populated Town',town_y,town_x, 5)
+        self.assertEqual(len(res.town_grid), town_y)
+        self.assertEqual(len(res.town_grid[0]), town_x)
+        #self.assertTrue(res.grid.get_grid_width() > 14)
+        print(res)
 
-        #med_town = town_gen.make_town(10, 10)
+    def test_03_make_tiny_town(self):
+        town_x = 5
+        town_y = 3
+        res = town_gen.make_town('Tiny Town - sparse',town_y,town_x, 80)
+        self.assertEqual(len(res.town_grid), town_y)
+        self.assertEqual(len(res.town_grid[0]), town_x)
+        print(res)
 
-        #self.assertEqual(len(med_town),10)
-        #town_gen.print_town(med_town)
-        pass
+    def test_04_make_tiny_town(self):
+        town_x = 5
+        town_y = 3
+        res = town_gen.make_town('Tiny Town - dense',town_y,town_x, 1)
+        self.assertEqual(len(res.town_grid), town_y)
+        self.assertEqual(len(res.town_grid[0]), town_x)
+        print(res)
 
+    def test_05_make_normal_town_sparse(self):
+        town_x = 20
+        town_y = 5
+        res = town_gen.make_town('Starting Town - sparse',town_y,town_x, 90)
+        self.assertEqual(len(res.town_grid), town_y)
+        self.assertEqual(len(res.town_grid[0]), town_x)
+        print(res)
+
+    def test_06_make_normal_town_dense(self):
+        town_x = 20
+        town_y = 5
+        res = town_gen.make_town('Starting Town - dense',town_y,town_x, 25)
+        self.assertEqual(len(res.town_grid), town_y)
+        self.assertEqual(len(res.town_grid[0]), town_x)
+        print(res)
 
 
 

@@ -3,17 +3,51 @@
 prototype code to create random towns for games / worlds.
 
 ## Quick Start
-See tests folder for examples
+
+1. Install worldbuild
+
+```
+pip install worldbuild
+```
+
+2. generate a random town 
+
+```
+import worldbuild.town_gen.town_gen as town_gen
+res = town_gen.make_town('MyTown',town_y=5,town_x=20, 90)
+```
+
+3. print the town (or use in your code)
+
+```
+print(res)
+
+Town "MyTown" located at  x=0/ y=0
+SIZE:  x=20/ y=5
+h..ShhHPhh.hhHHHPP..
+====================
+.hShHhH.HHhHT.H..H.h
+hhhhHhH..HHhH.H.Hh.H
+HhhH.HHh....hhHH.Hhh
+Shops    = 2 [0/3,2/2]
+Pubs     = 3 [0/7,0/16,0/17]
+TownHall = 1 [2/12]
+Houses   = 52
+
+```
 
 
-test_town_generate.py = shows how to generate quest code
+See tests folder for more examples
+
 
 ## Standard buildings
+Buildings are randomly placed and based on the following Building objects
 
-Tavern ( 1 - 4 )
+road = Building(5,5,0,  building_type = '=')
+pub = Building(7,8,2,  building_type = 'P')
+shop = Building(4,6,1,  building_type = 'S')
+town_hall = Building(9,9,1,  building_type = 'T')
+house_small = Building(2,3,1,  building_type = 'h')
+house_big = Building(4,5,2,  building_type = 'H')
+empty_plot = Building(0,0,0,  building_type = '.')
 
-Shop ( 1 - 8 )
-
-Weaponsmith ( 0 - 4 )
-
-Houses ( 3 - 300 )
