@@ -23,15 +23,21 @@ class TestTemplate(unittest.TestCase):
 
 
     def test_01_make_town(self):
-        res = town_gen.make_town(5,5)
-        self.assertTrue(res.grid.get_grid_height() > 3)
-        self.assertTrue(res.grid.get_grid_width() > 3)
+        town_x = 60
+        town_y = 3
+        res = town_gen.make_town(town_y,town_x)
+        self.assertEqual(len(res.town_grid), town_y)
+        self.assertEqual(len(res.town_grid[0]), town_x)
+        #self.assertTrue(res.grid.get_grid_width() > 14)
+        print(res)
 
     def test_02_print_town(self):
-        med_town = town_gen.make_town(10, 10)
+
+        #med_town = town_gen.make_town(10, 10)
 
         #self.assertEqual(len(med_town),10)
-        town_gen.print_town(med_town)
+        #town_gen.print_town(med_town)
+        pass
 
 
 
