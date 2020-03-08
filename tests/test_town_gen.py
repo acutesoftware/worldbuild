@@ -72,6 +72,15 @@ class TestTemplate(unittest.TestCase):
         self.assertEqual(len(res.town_grid[0]), town_x)
         print(res)
 
+    def test_07_output_town_image(self):
+        town_x = 12
+        town_y = 5
+        res = town_gen.make_town('PrintableTown',town_y,town_x, 75)
+        self.assertEqual(len(res.town_grid), town_y)
+        self.assertEqual(len(res.town_grid[0]), town_x)
+        print(res)
+        print(res.output_detail('town_gen_test_result.png'))
+
 
 
 

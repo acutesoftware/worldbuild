@@ -64,9 +64,19 @@ class Building(object):
             self.y = 0        
             self.z = 0      
         else:
-            self.x = random.randint(1, max_x)        
-            self.y = random.randint(1, max_y)        
-            self.z = random.randint(0, max_z)      
+            # for random size buildings (maybe houses - DO LATER)
+
+            if building_type in ['s', 'S']:
+                self.x = random.randint(1, max_x)  + 4      
+                self.y = random.randint(1, max_y)  + 4   
+                self.z = random.randint(0, max_z)      
+            else:
+                self.x = max_x       
+                self.y = max_y       
+                self.z = max_z
+
+
+
         self.current_building = random.choice(buildings)
         self.building_type = building_type 
         #print(self)
@@ -92,9 +102,9 @@ class Town(object):
         self.size_x = size_x  
         self.size_y =size_y
 
-        self.road = Building(5,5,0,  building_type = '=')
+        self.road = Building(6, 10,0,  building_type = '=')
         self.pub = Building(7,8,2,  building_type = 'P')
-        self.shop = Building(4,6,1,  building_type = 'S')
+        self.shop = Building(3,4,1,  building_type = 'S')
         self.town_hall = Building(9,9,1,  building_type = 'T')
         self.house_small = Building(2,3,1,  building_type = 'h')
         self.house_big = Building(4,5,2,  building_type = 'H')
@@ -115,6 +125,11 @@ class Town(object):
         self.house_list = []
         self.townhall_list = []
         self.update_building_lists()
+
+        # 2D image variables
+        self.y_space_building = 100
+        self.x_space_building = 100
+
 
 
         #print('town_grid = ', self.town_grid)
@@ -220,14 +235,14 @@ class Town(object):
         shop_cluster_x = random.randint(int(self.size_x/4),int(self.size_x/2)) - int(self.size_x/4)
         if self.sparse_percent > 50:
             if self.size_x < 10:
-                num_shops = 1  + random.randint(0, 1)
+                num_shops = 1  + random.randint(1, 2)
             else:
-                num_shops = 1 + random.randint(1, 4)
+                num_shops = 2 + random.randint(2, 4)
         else:
             if self.size_x < 10:
-                num_shops = 1 + random.randint(1, 2)
+                num_shops = 1 + random.randint(2, 3)
             else:
-                num_shops = 1 + random.randint(1, int(self.size_x/10)  - int(self.sparse_percent/30))
+                num_shops = 2 + random.randint(1, int(self.size_x/10)  - int(self.sparse_percent/30))
 
         if num_shops < 1:
             num_shops = 1
@@ -298,6 +313,102 @@ class Town(object):
         #print('house list = ', self.house_list)
 
 
+    def output_detail(self, op_file_name, show_grid='N'):
+        """
+        outputs detailled view of town using grid as well as 
+        the building sizes
+        """
+        from PIL import Image, ImageDraw
+
+        col_blue = (0,0, 255)
+        col_green = (0,255,0)
+        col_red = (255,0, 0)
+
+        res = []
+
+        pic_x = self.size_x * self.x_space_building + self.x_space_building
+        pic_y = self.size_y * self.y_space_building + self.y_space_building
+
+
+        print('Generating town image...')
+
+
+        im= Image.new('RGB', (pic_x, pic_y))
+        # im.putdata([(255,0,0), (0,255,0), (0,0,255)]) -- puts 3 pixels on screen
+        draw = ImageDraw.Draw(im) 
+        base_x = int( self.x_space_building / 2 )
+        base_y = int( self.y_space_building / 2 )
+        
+        if show_grid !='N':
+            # draw a debug grid
+            for y in range(self.size_y):
+                draw.line((base_x,y * self.y_space_building, pic_x - base_x, y * self.y_space_building), fill=col_red)
+
+            for x in range(self.size_x):
+                draw.line((x * self.x_space_building, base_y, x * self.x_space_building, pic_y - base_y), fill=col_blue)
+
+
+        # Now draw the buildings
+        for y in range(self.size_y):
+
+            for x in range(self.size_x):
+                building = self.town_grid[y][x]
+                #im.putdata([(255,0,0), (0,255,0), (0,0,255)])
+                print(' drawing building', str(building))
+                start_y =  base_y + y * self.y_space_building
+                start_x =  base_x + x * self.x_space_building
+                width = building.x * self.x_space_building/10 #+  x_space_building/10
+                length = building.y * self.y_space_building/10 #+  y_space_building/10
+                self._draw_building_2d( draw, start_y, start_x, length, width, building)
+        
+        im.show()
+
+
+
+
+        im.save(op_file_name)
+
+
+        return res
+
+
+    def _draw_building_2d(self, draw, y, x, width, length, building):
+        """
+        draw a 2D building on the image 
+        """
+
+        if y > self.road_y: # make shops and pub hard against road
+            y += int(self.y_space_building/2) #+ 50
+        else:
+            y -=  int(self.y_space_building/2)# - 50
+           
+
+        road_edge_y = 25
+        road_edge_col = (181,101,29)
+        if building.building_type == '=':
+            draw.rectangle(((x, y-road_edge_y), (x+width, y+length+road_edge_y)), fill=road_edge_col)
+            draw.rectangle(((x, y), (x+width, y+length)), fill="grey")
+            line_y = int(y+length/2)
+            space_x = int(x + width/4)
+            for line_x in range(x, int(x + width) - int(width/10), 25):
+                draw.rectangle(((line_x  , line_y-2), (line_x + 14, line_y+2)), fill="white")
+
+        if building.building_type in ['h', 'H']:
+            draw.rectangle(((x-1, y-1), (x+width+1, y+length+1)), fill="grey")
+            draw.rectangle(((x, y), (x+width, y+length)), fill="green")
+
+
+        if building.building_type in ['p', 'P']:
+            draw.rectangle(((x-1, y-1), (x+width+1, y+length+1)), fill="white")
+            draw.rectangle(((x, y), (x+width, y+length)), fill="blue")
+
+        if building.building_type in ['s', 'S']:
+            draw.rectangle(((x-1, y-1), (x+width+1, y+length+1)), fill="red")
+            draw.rectangle(((x, y), (x+width, y+length)), fill="yellow")
+
+        if building.building_type in ['t', 'T']:
+            draw.rectangle(((x-1, y-1), (x+width+1, y+length+1)), fill="white")
+            draw.rectangle(((x, y), (x+width, y+length)), fill="red")
 
 if __name__ == '__main__':
     TEST()

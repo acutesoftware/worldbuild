@@ -43,6 +43,7 @@ See tests folder for more examples
 ## Standard buildings
 Buildings are randomly placed and based on the following Building objects
 
+```
 road = Building(5,5,0,  building_type = '=')
 pub = Building(7,8,2,  building_type = 'P')
 shop = Building(4,6,1,  building_type = 'S')
@@ -50,4 +51,5 @@ town_hall = Building(9,9,1,  building_type = 'T')
 house_small = Building(2,3,1,  building_type = 'h')
 house_big = Building(4,5,2,  building_type = 'H')
 empty_plot = Building(0,0,0,  building_type = '.')
+```
 
