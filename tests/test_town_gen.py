@@ -65,8 +65,8 @@ class TestTemplate(unittest.TestCase):
         print(res)
 
     def test_06_make_normal_town_dense(self):
-        town_x = 20
-        town_y = 5
+        town_x = 10
+        town_y = 6
         res = town_gen.make_town('Starting Town - dense',town_y,town_x, 25)
         self.assertEqual(len(res.town_grid), town_y)
         self.assertEqual(len(res.town_grid[0]), town_x)
@@ -74,7 +74,7 @@ class TestTemplate(unittest.TestCase):
 
     def test_07_output_town_image(self):
         town_x = 12
-        town_y = 5
+        town_y = 6
         res = town_gen.make_town('PrintableTown',town_y,town_x, 75)
         self.assertEqual(len(res.town_grid), town_y)
         self.assertEqual(len(res.town_grid[0]), town_x)

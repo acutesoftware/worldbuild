@@ -22,20 +22,22 @@ res = town_gen.make_town('MyTown',town_y=5,town_x=20, 90)
 ```
 print(res)
 
-Town "MyTown" located at  x=0/ y=0
-SIZE:  x=20/ y=5
-h..ShhHPhh.hhHHHPP..
-====================
-.hShHhH.HHhHT.H..H.h
-hhhhHhH..HHhH.H.Hh.H
-HhhH.HHh....hhHH.Hhh
-Shops    = 2 [0/3,2/2]
-Pubs     = 3 [0/7,0/16,0/17]
-TownHall = 1 [2/12]
-Houses   = 52
+Town "PrintableTown" located at  x=0/ y=0
+SIZE:  x=12/ y=6
+...SSP..hSPS
+============
+h....HS.TH.S
+H.....H.h.Hh
+.HH..H......
+...........H
+Shops    = 6 [0/3,0/4,0/9,0/11,2/6,2/11]
+Pubs     = 2 [0/5,0/10]
+TownHall = 1 [2/8]
+Houses   = 13
 
 ```
 
+![2D Rendered image of generated town](https://github.com/acutesoftware/worldbuild/blob/master/tests/town_gen_test_result.png)
 
 See tests folder for more examples
 

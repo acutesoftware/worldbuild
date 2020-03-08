@@ -354,7 +354,7 @@ class Town(object):
             for x in range(self.size_x):
                 building = self.town_grid[y][x]
                 #im.putdata([(255,0,0), (0,255,0), (0,0,255)])
-                print(' drawing building', str(building))
+                #print(' drawing building', str(building))
                 start_y =  base_y + y * self.y_space_building
                 start_x =  base_x + x * self.x_space_building
                 width = building.x * self.x_space_building/10 #+  x_space_building/10
@@ -395,7 +395,14 @@ class Town(object):
 
         if building.building_type in ['h', 'H']:
             draw.rectangle(((x-1, y-1), (x+width+1, y+length+1)), fill="grey")
-            draw.rectangle(((x, y), (x+width, y+length)), fill="green")
+            draw.rectangle(((x, y), (x+width, y+length)), fill="peru")
+            # now draw a little roof
+            roof_left = (x-2, y-1)
+            roof_top = (x+width/2, y-25)
+            roof_right = (x+width+2,y-1)
+
+            draw.polygon([roof_top, roof_left, roof_right], fill = 'firebrick')
+
 
 
         if building.building_type in ['p', 'P']:
@@ -409,6 +416,27 @@ class Town(object):
         if building.building_type in ['t', 'T']:
             draw.rectangle(((x-1, y-1), (x+width+1, y+length+1)), fill="white")
             draw.rectangle(((x, y), (x+width, y+length)), fill="red")
+
+
+        if building.building_type ==  '.':   # empty plot
+            if random.randint(1,100) > 40:   # draw trees sometimes
+                x += random.randint(8,29) - 15
+                y += random.randint(8,29) - 15
+                #print('drawing tree')
+                r = 12 + random.randint(1,20)
+                leftUpPoint = (x-r/2, y-r)
+                rightDownPoint = (x+r, y+r)
+                twoPointList = [leftUpPoint, rightDownPoint]
+                draw.ellipse(twoPointList, fill="green")
+                draw.rectangle(((x+2, y+r), (x+9, y+r+30)), fill="brown")
+                # add random fruit
+                if random.randint(1,100) > 20:
+                    fruit = random.choice(['red', 'yellow', 'orange', 'lime'])
+                    draw.rectangle(((x, y-r+3), (x+4, y-r+6)), fill=fruit)
+                    draw.rectangle(((x+12, y), (x+16, y+4)), fill=fruit)
+                    draw.rectangle(((x-2, y-4), (x+2, y)), fill=fruit)
+                    draw.rectangle(((x-3, y+r-3), (x+1, y+r+1)), fill=fruit)
+
 
 if __name__ == '__main__':
     TEST()
