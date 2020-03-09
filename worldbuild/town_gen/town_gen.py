@@ -6,55 +6,28 @@ import os
 import sys
 import random 
 
-
-
 #import aikif.agents.explore.agent_explore_grid as mod_agt
 
 import aikif.toolbox.cls_grid as mod_grid
-
-
-buildings = [ 'H','h', 'H','h', 'H','h', 'P', 'S', 'S', 'S']
-build_specs = {
-    'H':99, 'h':99, 'P':2, 'S':5, 'T':1
-}
-
-
+from . import town_gen_config as cfg
 
 def TEST():
     print('generating town...')
     dat_town = make_town(3, 5, 50)
-    print_town(dat_town)
+    print(dat_town)
 
 
 def make_town(town_name, sze_y, sze_x, sparseness):
     """
     generates the town
-
-    road = Building(5,5,0,  building_type = '=')
-    pub = Building(7,8,2,  building_type = 'P')
-    shop = Building(4,6,1,  building_type = 'S')
-    town_hall = Building(9,9,1,  building_type = 'T')
-    house_small = Building(2,3,1,  building_type = 'h')
-    house_big = Building(4,5,2,  building_type = 'H')
-
     """
     #agt = mod_agt.ExploreAgent('TEST - exploring_agent',  os.getcwd(), 4, True)
     #grd = mod_grid.Grid(grid_height=3, grid_width=sze, pieces=buildings, spacing=2)   
-
 
     t = Town(town_name, 0,0,sze_y,sze_x, sparseness)
 
     return t
     
-
-
-
-def print_town(lgrd):
-    """
-    prints the town to console
-    """
-    print(lgrd)
-
 
 
 class Building(object):
@@ -75,11 +48,8 @@ class Building(object):
                 self.y = max_y       
                 self.z = max_z
 
-
-
-        self.current_building = random.choice(buildings)
         self.building_type = building_type 
-        #print(self)
+
 
     def __str__(self):
         res = self.building_type + ' at w=' + str(self.x) + ', l=' + str(self.y) + '\n'    
@@ -102,13 +72,13 @@ class Town(object):
         self.size_x = size_x  
         self.size_y =size_y
 
-        self.road = Building(6, 10,0,  building_type = '=')
-        self.pub = Building(7,8,2,  building_type = 'P')
-        self.shop = Building(3,4,1,  building_type = 'S')
-        self.town_hall = Building(9,9,1,  building_type = 'T')
-        self.house_small = Building(2,3,1,  building_type = 'h')
-        self.house_big = Building(4,5,2,  building_type = 'H')
-        self.empty_plot = Building(0,0,0,  building_type = '.')
+        self.road = Building(*cfg.road_size,  cfg.road_building_type)
+        self.pub = Building(*cfg.pub_size,  cfg.pub_building_type)
+        self.shop = Building(*cfg.shop_size,  cfg.shop_building_type)
+        self.town_hall = Building(*cfg.town_hall_size,  cfg.town_hall_building_type)
+        self.house_small = Building(*cfg.house_small_size,  cfg.house_small_building_type)
+        self.house_big = Building(*cfg.house_big_size,  cfg.house_big_building_type)
+        self.empty_plot = Building(*cfg.empty_plot_size,  cfg.empty_plot_building_type)
 
         self.sparse_percent = sparseness # 50
         self.town_grid = [ [ self.empty_plot for dummy_x in range( size_x ) ] for dummy_y in range( size_y ) ]
@@ -127,8 +97,8 @@ class Town(object):
         self.update_building_lists()
 
         # 2D image variables
-        self.y_space_building = 100
-        self.x_space_building = 100
+        self.y_space_building = cfg.y_space_building
+        self.x_space_building = cfg.x_space_building
 
 
 
@@ -209,22 +179,6 @@ class Town(object):
                         house_type = random.choice([self.house_small, self.house_big])
                         self.add_building(y_pos,x_pos,house_type)   
 
-                ''' 
-                # also, possibly add building on other side of road
-                if random.randint(1,100) > self.sparse_percent:
-                    farm_y = random.randint(2,self.size_y)-1
-                    
-                    if farm_y == self.road_y+1:
-                        farm_y = self.road_y-1
-                    if farm_y == self.road_y:
-                        farm_y = self.road_y+1
-
-                    if y_pos == 0:
-                        self.add_building(farm_y, x_pos, random.choice([self.house_small, self.house_big]))
-                    else:
-                        self.add_building(farm_y, x_pos, random.choice([self.house_small, self.house_big]))
-                '''
-        
 
     def add_random_shops(self):
         """
@@ -244,10 +198,10 @@ class Town(object):
             else:
                 num_shops = 2 + random.randint(1, int(self.size_x/10)  - int(self.sparse_percent/30))
 
-        if num_shops < 1:
-            num_shops = 1
-        #if num_shops > int(t.size_x/5):
-        #    num_shops = int(t.size_x/5)
+        if num_shops < cfg.num_shops_min:
+            num_shops = cfg.num_shops_min
+        if num_shops > cfg.num_shops_max:
+            num_shops = cfg.num_shops_max
         #print('num_shops = ', num_shops, ' starting at shop_cluster_x=' , shop_cluster_x)
         cur_shop_x = shop_cluster_x + random.randint(0,1)
         for shop_x in range(0, num_shops):
@@ -268,11 +222,11 @@ class Town(object):
         tx = random.randint(1, self.size_x-1)
         self.add_building(self.road_y-1,tx,self.pub)
 
-        if self.size_x > 10:   # add another pub if large width
+        if self.size_x > cfg.pub_add_if_size_x_greater:   # add another pub if large width
             tx = random.randint(5, 8)
             self.add_building(self.road_y-1,tx,self.pub)
 
-        if self.sparse_percent < 50:   # add another pub if med population
+        if self.sparse_percent < cfg.pub_add_if_sparse_perc_less:   # add another pub if med population
             tx = random.randint(self.size_x-4, self.size_x-1)
             self.add_building(self.road_y-1,tx,self.pub)
 
@@ -382,44 +336,41 @@ class Town(object):
         else:
             y -=  int(self.y_space_building/2)# - 50
            
-
-        road_edge_y = 25
-        road_edge_col = (181,101,29)
         if building.building_type == '=':
-            draw.rectangle(((x, y-road_edge_y), (x+width, y+length+road_edge_y)), fill=road_edge_col)
-            draw.rectangle(((x, y), (x+width, y+length)), fill="grey")
+            draw.rectangle(((x, y-cfg.road_edge_y), (x+width, y+length+cfg.road_edge_y)), fill=cfg.road_edge_colour)
+            draw.rectangle(((x, y), (x+width, y+length)), fill=cfg.road_colour)
             line_y = int(y+length/2)
             space_x = int(x + width/4)
             for line_x in range(x, int(x + width) - int(width/10), 25):
-                draw.rectangle(((line_x  , line_y-2), (line_x + 14, line_y+2)), fill="white")
+                draw.rectangle(((line_x  , line_y-2), (line_x + 14, line_y+2)), fill=cfg.road_white_line_colour)
 
         if building.building_type in ['h', 'H']:
-            draw.rectangle(((x-1, y-1), (x+width+1, y+length+1)), fill="grey")
-            draw.rectangle(((x, y), (x+width, y+length)), fill="peru")
+            draw.rectangle(((x-1, y-1), (x+width+1, y+length+1)), fill=cfg.house_border_colour)
+            draw.rectangle(((x, y), (x+width, y+length)), fill=cfg.house_body_colour)
             # now draw a little roof
             roof_left = (x-2, y-1)
             roof_top = (x+width/2, y-25)
             roof_right = (x+width+2,y-1)
 
-            draw.polygon([roof_top, roof_left, roof_right], fill = 'firebrick')
+            draw.polygon([roof_top, roof_left, roof_right], fill = cfg.house_roof_colour)
 
 
 
         if building.building_type in ['p', 'P']:
-            draw.rectangle(((x-1, y-1), (x+width+1, y+length+1)), fill="white")
-            draw.rectangle(((x, y), (x+width, y+length)), fill="blue")
+            draw.rectangle(((x-1, y-1), (x+width+1, y+length+1)), fill=cfg.pub_border_colour)
+            draw.rectangle(((x, y), (x+width, y+length)), fill=cfg.pub_colour)
 
         if building.building_type in ['s', 'S']:
-            draw.rectangle(((x-1, y-1), (x+width+1, y+length+1)), fill="red")
-            draw.rectangle(((x, y), (x+width, y+length)), fill="yellow")
+            draw.rectangle(((x-1, y-1), (x+width+1, y+length+1)), fill=cfg.shop_border_colour)
+            draw.rectangle(((x, y), (x+width, y+length)), fill=cfg.shop_colour)
 
         if building.building_type in ['t', 'T']:
-            draw.rectangle(((x-1, y-1), (x+width+1, y+length+1)), fill="white")
-            draw.rectangle(((x, y), (x+width, y+length)), fill="red")
+            draw.rectangle(((x-1, y-1), (x+width+1, y+length+1)), fill=cfg.town_hall_border_colour)
+            draw.rectangle(((x, y), (x+width, y+length)), fill=cfg.town_hall_colour)
 
 
         if building.building_type ==  '.':   # empty plot
-            if random.randint(1,100) > 40:   # draw trees sometimes
+            if random.randint(1,100) < cfg.empty_plot_chance_tree:   # draw trees sometimes
                 x += random.randint(8,29) - 15
                 y += random.randint(8,29) - 15
                 #print('drawing tree')
@@ -427,11 +378,11 @@ class Town(object):
                 leftUpPoint = (x-r/2, y-r)
                 rightDownPoint = (x+r, y+r)
                 twoPointList = [leftUpPoint, rightDownPoint]
-                draw.ellipse(twoPointList, fill="green")
-                draw.rectangle(((x+2, y+r), (x+9, y+r+30)), fill="brown")
+                draw.ellipse(twoPointList, fill=cfg.tree_leaf_colour)
+                draw.rectangle(((x+2, y+r), (x+9, y+r+30)), fill=cfg.tree_trunk_colour)
                 # add random fruit
-                if random.randint(1,100) > 20:
-                    fruit = random.choice(['red', 'yellow', 'orange', 'lime'])
+                if random.randint(1,100) < cfg.tree_chance_fruit:
+                    fruit = random.choice(cfg.tree_fruit_colours)
                     draw.rectangle(((x, y-r+3), (x+4, y-r+6)), fill=fruit)
                     draw.rectangle(((x+12, y), (x+16, y+4)), fill=fruit)
                     draw.rectangle(((x-2, y-4), (x+2, y)), fill=fruit)

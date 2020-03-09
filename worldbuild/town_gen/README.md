@@ -14,7 +14,8 @@ pip install worldbuild
 
 ```
 import worldbuild.town_gen.town_gen as town_gen
-res = town_gen.make_town('MyTown',town_y=5,town_x=20, 90)
+res = town_gen.make_town('PrintableTown',town_y=6,town_x=12, sparseness=90)
+
 ```
 
 3. print the town (or use in your code)
