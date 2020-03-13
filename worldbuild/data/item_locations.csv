@@ -1,0 +1,7 @@
+name,location_found,chance_forage,chance_drop,forage_renews
+wood,forest,50,10,1
+wood,hills,20,20,1
+wood,woods,60,0,2
+string, hills,10,10,1
+shells,beach,50,50,1
+
