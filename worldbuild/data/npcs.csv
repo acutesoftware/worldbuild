@@ -1,0 +1,4 @@
+name,location,status,items_needed
+jason,shop,idle,[]
+frank,road,walking,[food]
+meatball,old_house,hunting,[mouse]

@@ -1,0 +1,9 @@
+name,desc,coord_x,coord_y
+home,your home,0,0
+road,main street,1,0
+shop,General Store, 1,1
+town_square,Town square with a nice fountain, 2,0
+weapons, Weapons shop, 3,0
+tavern,4,0
+old_house,Abandoned House,5,1
+
