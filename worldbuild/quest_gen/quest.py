@@ -58,10 +58,7 @@ def main():
 
     # generate quest list
     my_quests = []
-    #q1 = Quest().create_next_quest_via_npc_needs(jim)
     my_quests.append(Quest().create_next_quest_via_npc_needs(jim))
-
-    #q2 = Quest().create_next_quest_via_npc_needs(sandy)
     my_quests.append(Quest().create_next_quest_via_npc_needs(sandy))
     
     # Display game
@@ -85,8 +82,49 @@ class Location(object):
     def __str__(self):
         res = ''
         res += self.name + ' - ' + self.desc 
-        res += self.coords
+        res += str(self.coords)
         return     res   
+
+class DataSet(object):
+    """
+    handles a collection of Objects loaded from a reference file
+    """
+    def __init__(self):
+        self.raw_data = []
+        self.object_list = []
+
+    def __str__(self):
+        return ''.join([d for d in self.raw_data])
+
+
+    def fill_from_csv(self, fname):
+        with open(fname, 'r') as fip:
+            for line in fip:
+                self.raw_data.append(line)
+
+class Locations(DataSet):
+    """
+    handles a collection of Locations loaded from a reference file
+    """
+    def __init__(self):
+        DataSet.__init__(self)
+
+
+class NPCs(DataSet):
+    """
+    handles a collection of NPC Characters loaded from a reference file
+    """
+    def __init__(self):
+        DataSet.__init__(self)
+
+class Items(DataSet):
+    """
+    handles a collection of Items loaded from a reference file
+    """
+    def __init__(self):
+        DataSet.__init__(self)
+
+
 
 
 
@@ -101,10 +139,9 @@ class Item(object):
         self.spawns_at_locations =  spawns_at_locations
     def __str__(self):
         res = ''
-        res += self.name + ' - ' + self.desc + '\nSpawns at locations:'
-        for l in self.spawns_at_locations:
-            res += str(l.name) #+ ' = ' + l.spawn_rate + ' spawn chance'
-
+        res += self.name + ' - ' + self.desc + ' (Spawns at locations:'
+        res += '|'.join([l.name for l in self.spawns_at_locations])
+        res += ')\n'
 
         return     res   
 
@@ -120,11 +157,13 @@ class NPC(object):
         self.items_needed = items_needed
     def __str__(self):
         res = ''
-        res += self.name + ' is at ' + self.location.name + '. Status = ' + self.status
-        res += 'This NPC needs : '
-        #for i in self.items_needed:
-        #    res += str(i.name)
-        res += ', '.join([i.name for i in self.items_needed])
+        res += self.name + ' is at ' + self.location.name + '. Status = ' + self.status 
+
+        if len(self.items_needed) > 0:
+            res += '\nThis NPC needs : '
+            #for i in self.items_needed:
+            #    res += str(i.name)
+            res += ', '.join([i.name for i in self.items_needed])
 
         return     res   
 
