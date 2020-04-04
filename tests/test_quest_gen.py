@@ -42,7 +42,7 @@ class TestTemplate(unittest.TestCase):
 
     def test_03_locations(self):
         locations = mod_quest.Locations()
-        locations.fill_from_csv('..\worldbuild\data\locations.csv')
+        locations.fill_from_csv(os.path.join(root_folder,'worldbuild','data', 'locations.csv'))
         print(locations)
 
 
