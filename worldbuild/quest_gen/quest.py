@@ -109,6 +109,14 @@ class Locations(DataSet):
     def __init__(self):
         DataSet.__init__(self)
 
+    def rebuild_list(self):
+        self.object_list = []  # clear the object list
+        for raw_line in self.raw_data:
+            cols = raw_line.split(',')
+            print('LOCATION RAW = ', cols)
+            cur_loc = Location(cols[0], cols[1], cols[2])
+            self.object_list.append(cur_loc)
+
 
 class NPCs(DataSet):
     """
@@ -116,6 +124,14 @@ class NPCs(DataSet):
     """
     def __init__(self):
         DataSet.__init__(self)
+
+    def rebuild_list(self):
+        self.object_list = []  # clear the object list
+        for raw_line in self.raw_data:
+            cols = raw_line.split(',')
+            cur_npc = NPC(cols[0], cols[1], cols[2], [cols[3]])
+            self.object_list.append(cur_npc)
+
 
 class Items(DataSet):
     """
@@ -155,15 +171,24 @@ class NPC(object):
         self.location = location
         self.status = status
         self.items_needed = items_needed
+        """
+        print('init NPC!')
+        print('self.name = ', self.name )
+        print('self.location = ', self.location )
+        print('self.status = ', self.status )
+        print('self.items_needed = ', self.items_needed )
+        """
+
     def __str__(self):
         res = ''
-        res += self.name + ' is at ' + self.location.name + '. Status = ' + self.status 
+        res += self.name + ' is at ' + self.location + '. Status = ' + self.status 
 
         if len(self.items_needed) > 0:
-            res += '\nThis NPC needs : '
-            #for i in self.items_needed:
-            #    res += str(i.name)
-            res += ', '.join([i.name for i in self.items_needed])
+            if self.items_needed is list:
+                res += '\nThis NPC needs : '
+                #for i in self.items_needed:
+                #    res += str(i.name)
+                res += ', '.join([i.name for i in self.items_needed])
 
         return     res   
 

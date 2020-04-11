@@ -10,13 +10,14 @@ root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.se
 # setup simulation
 locations = quest.Locations()
 locations.fill_from_csv(os.path.join(root_folder,'data', 'locations_town.csv'))
+locations.rebuild_list()
 
 items = quest.Items()
 items.fill_from_csv(os.path.join(root_folder,'data', 'items.csv'))
 
 npcs = quest.NPCs()
 npcs.fill_from_csv(os.path.join(root_folder,'data', 'npcs.csv'))
-
+npcs.rebuild_list()
 
 def main():
     cmd = 'start'
@@ -24,6 +25,10 @@ def main():
         cmd = get_command()
         if cmd == '1':
             command_move()
+        if cmd == '2':
+            command_help()
+        if cmd == '3':
+            command_fight()
 
 
 def get_command():
@@ -42,14 +47,30 @@ def command_move():
     move the NPCs
     """
     import random 
-    new_location = locations.raw_data[random.randint(1,3)]
 
     print('moving NPCs')
 
-    for n in npcs.raw_data:
-        print(str(n) + ' moving to ' + str(new_location))
-        print(str(n))
+    for n in npcs.object_list:
+        new_location = locations.object_list[random.randint(1,3)]
+        print(str(n.name) + ' moving to ' + new_location.name + ' (' + new_location.desc + ')')
+    
 
+
+def command_help():
+    """
+    help the NPCs
+    """
+    print('Help Screen')
+    print(' - modify the locations_town.csv for different coords')
+    print(' - modify this file for different NPCs')
+    
+    
+
+def command_fight():
+    """
+    NPCs attack
+    """
+    print('not yet implemented')
 
 
 if __name__ == '__main__':
