@@ -19,17 +19,11 @@ npcs.fill_from_csv(os.path.join(root_folder,'data', 'npcs.csv'))
 
 
 def main():
-    cmd = get_command()
+    cmd = 'start'
     while cmd != '':
-        show_status()
         cmd = get_command()
-
-
-
-def show_status():
-
-    for n in npcs.raw_data:
-        print(n)
+        if cmd == '1':
+            command_move()
 
 
 def get_command():
@@ -38,11 +32,24 @@ def get_command():
     print('1 = move')
     print('2 = help')
     print('3 = fight')
-    print('4 = pass')
-    
+ 
     
     cmd = input("enter command: ")
     return cmd
+
+def command_move():
+    """
+    move the NPCs
+    """
+    import random 
+    new_location = locations.raw_data[random.randint(1,3)]
+
+    print('moving NPCs')
+
+    for n in npcs.raw_data:
+        print(str(n) + ' moving to ' + str(new_location))
+        print(str(n))
+
 
 
 if __name__ == '__main__':
