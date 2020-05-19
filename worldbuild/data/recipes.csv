@@ -1,3 +1,6 @@
-recipe_code,recipe_name,base_time_to_build,base_cost_to_build,sell_price,rarity,description
-torch,Torch,1,0,1,0,Torch to see things
-wood_plank,Wooden Plank,3,1,1,0,Wooden Plank for building
+recipe_id,recipe_name,base_time_to_build,base_cost_to_build
+torch,Torch,1,0,0
+wooden_plank,Wooden Plank,3,1
+charcoal,Charcoal,3,0
+butter,Butter,5,0
+bread,Bread,4,03

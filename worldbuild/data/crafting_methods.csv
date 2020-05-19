@@ -1,3 +1,11 @@
-crafting_method_id,crafting_action,base_time,base_cost,tools_required
-mix,Mix,5,0,bowl|stick
-hammer,Hammer,1,1,hammer
+crafting_method_id,crafting_action,base_time,base_cost,tools_required,consumables_required
+mix,Mix in a bowl,5,0,bowl|stick
+hammer,Hit with Hammer,1,1,hammer
+melt_pot,Melt in a pot,5,2,melting_pot
+burn_flame,Burn with fire,2,0,flame
+cut_saw,Cut with a saw,2,0,saw
+attach_nail,Nail items together,1,1,hammer,nail
+attach_screw,Screw items together,1,1,screw_driver,screw
+attach_string,Tie items together with string,1,1,,string
+attach_glue,Glue items together,1,1,,glue
+attach_misc,Attach the items together,0,0,,,

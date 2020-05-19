@@ -1,4 +1,9 @@
-recipe_id,item_id,quantity
-torch,stick,1
-torch,sap,1
-wooden_plank,wood,1
+recipe_id,item_id,quantity,crafting_method_id
+torch,stick,1,attach_misc
+torch,sap,1,attach_misc
+wooden_plank,wood,1,cut_saw
+charcoal,wooden_plank,1,burn_flame
+butter,milk,1,mix
+bread,yeast,1,mix
+bread,water,3,mix
+bread,flour,5,mix
