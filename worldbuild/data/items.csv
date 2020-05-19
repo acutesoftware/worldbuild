@@ -4,6 +4,9 @@ wood_twig,Wooden Twig,2,0
 string, Used for fishing rods and bows,2,1
 shells,Shells,5,3
 torch,Torch,1,1
+nail,Nail,1,0
+glue,Glue,1,0
+screw,Screw,1,0
 wooden_plank,Wooden Plank,4,1
 charcoal,Charcoal,2,1
 flour,Flour,2,1

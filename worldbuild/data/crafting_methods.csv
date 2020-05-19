@@ -9,3 +9,4 @@ attach_screw,Screw items together,1,1,screw_driver,screw,woodwork
 attach_string,Tie items together with string,1,1,,string,crafting
 attach_glue,Glue items together,1,1,,glue,crafting
 attach_misc,Attach the items together,0,0,,,crafting
+bake,Bake in the oven,1,0,oven,wood,cooking
