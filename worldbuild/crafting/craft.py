@@ -30,7 +30,7 @@ def main():
         print('--------ingredients ----------')
         for ing in ingred.object_list:
             if ing.recipe_id == recipe.recipe_id:
-                print(ing.crafting_method_id + ' ' + ing.item_id)
+                print(ing.crafting_method_id + ' ' + ing.quantity + ' ' + ing.item_id)
 
 
 

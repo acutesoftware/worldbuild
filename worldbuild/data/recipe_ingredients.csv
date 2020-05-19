@@ -7,3 +7,8 @@ butter,milk,1,mix
 bread,yeast,1,mix
 bread,water,3,mix
 bread,flour,5,mix
+bread,oven,25,bake
+biscuit,egg,2,mix
+biscuit,milk,1,mix
+biscuit,flour,3,mix
+biscuit,oven,30,bake
