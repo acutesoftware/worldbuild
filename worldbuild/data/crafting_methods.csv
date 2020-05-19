@@ -1,0 +1,3 @@
+crafting_method_id,crafting_action,base_time,base_cost,tools_required
+mix,Mix,5,0,bowl|stick
+hammer,Hammer,1,1,hammer

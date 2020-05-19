@@ -1,0 +1,3 @@
+recipe_code,recipe_name,base_time_to_build,base_cost_to_build,sell_price,rarity,description
+torch,Torch,1,0,1,0,Torch to see things
+wood_plank,Wooden Plank,3,1,1,0,Wooden Plank for building
