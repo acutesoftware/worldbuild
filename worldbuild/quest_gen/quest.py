@@ -181,7 +181,7 @@ class NPC(object):
 
     def __str__(self):
         res = ''
-        res += self.name + ' is at ' + self.location + '. Status = ' + self.status 
+        res += self.name + ' is at ' + str(self.location) + '. Status = ' + self.status 
 
         if len(self.items_needed) > 0:
             if self.items_needed is list:
