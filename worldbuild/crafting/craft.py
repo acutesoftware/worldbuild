@@ -29,14 +29,15 @@ def main():
             if ing.recipe_id == recipe.recipe_id:
                 #print(ing.crafting_method_id + ' ' + ing.quantity + ' ' + ing.item_id)
                 pass
+    for method in methods.object_list:
+        print(method)
 
     print(items)
     print(recipes)
     print(ingred)
     print(methods)
+    print(methods.column_headings)
 
-    for method in methods.object_list:
-        print(method)
 
 
 class DataSet(object):
@@ -48,6 +49,7 @@ class DataSet(object):
         self.object_list = []
         self.fname = fname
         self.objectClass = objectClass  # Recipe, Item, RecipeIngredient
+        self.column_headings = []
         self.fill_from_csv(self.fname)
         self.rebuild_list()
         
@@ -55,6 +57,16 @@ class DataSet(object):
         #return ''.join([d for d in self.raw_data])
         res = 'Dataset containing ' + str(len(self.object_list))
         res += ' ' + str(self.objectClass.__name__) + ' objects'
+        return res
+    def str_object_list(self):
+        """
+        returns full object list formatted by object definition __str__
+        """
+        res = '    -=< ' + str(self.objectClass.__name__) + ' >=-\n'
+        res += '/=======================\\\n'
+        for obj_num, obj in enumerate(self.object_list):
+            res += '  ' + str(obj_num+1) + ' - ' + str(obj) + '\n'
+        res += '\\=======================/\n'
         return res
 
 
@@ -65,12 +77,16 @@ class DataSet(object):
 
     def rebuild_list(self):
         self.object_list = []  # clear the object list
-        for raw_line in self.raw_data:
-            cols = raw_line.split(',')
-            #print('RECIPE DATA = ', cols)
-            cur_obj = self.objectClass(*cols) # cols[0], cols[1], cols[2], cols[3])
-            self.object_list.append(cur_obj)
-            #print('object = ' + str(cur_obj))
+        for line_num, raw_line in enumerate(self.raw_data):
+            if raw_line.strip(' ') != '':
+                cols = raw_line.split(',')
+                if line_num == 0:
+                    self.column_headings = cols
+                else:
+                    #print('RECIPE DATA = ', cols)
+                    cur_obj = self.objectClass(*cols) # cols[0], cols[1], cols[2], cols[3])
+                    self.object_list.append(cur_obj)
+                    #print('object = ' + str(cur_obj))
 
 
 class Recipe(object):
