@@ -8,30 +8,69 @@ root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.se
 
 import random
 
-
+def get_fullname(fname):
+    """
+    gets full filename of crafting data from this folder
+    """
+    return os.path.join(root_folder,'data', fname)
 
 def main():
     # setup the main dataset definitions here
-    items = Items()
-    items.fill_from_csv(os.path.join(root_folder,'data', 'items.csv'))
-    items.rebuild_list()
+    items = DataSet(Item, get_fullname('items.csv'))
+    recipes = DataSet(Recipe, get_fullname('recipes.csv'))
+    ingred = DataSet(RecipeIngredient, get_fullname('recipe_ingredients.csv'))
+    methods = DataSet(CraftingMethod, get_fullname('crafting_methods.csv') )
 
-
-    recipes = Recipes()
-    recipes.fill_from_csv(os.path.join(root_folder,'data', 'recipes.csv'))
-    recipes.rebuild_list()
-
-    ingred = RecipeIngredients()
-    ingred.fill_from_csv(os.path.join(root_folder,'data', 'recipe_ingredients.csv'))
-    ingred.rebuild_list()
 
     for recipe in recipes.object_list:
         print(recipe)
-        print('--------ingredients ----------')
+        #print('--------ingredients ----------')
         for ing in ingred.object_list:
             if ing.recipe_id == recipe.recipe_id:
-                print(ing.crafting_method_id + ' ' + ing.quantity + ' ' + ing.item_id)
+                #print(ing.crafting_method_id + ' ' + ing.quantity + ' ' + ing.item_id)
+                pass
 
+    print(items)
+    print(recipes)
+    print(ingred)
+    print(methods)
+
+    for method in methods.object_list:
+        print(method)
+
+
+class DataSet(object):
+    """
+    handles a collection of Objects loaded from a reference file
+    """
+    def __init__(self, objectClass, fname):
+        self.raw_data = []
+        self.object_list = []
+        self.fname = fname
+        self.objectClass = objectClass  # Recipe, Item, RecipeIngredient
+        self.fill_from_csv(self.fname)
+        self.rebuild_list()
+        
+    def __str__(self):
+        #return ''.join([d for d in self.raw_data])
+        res = 'Dataset containing ' + str(len(self.object_list))
+        res += ' ' + str(self.objectClass.__name__) + ' objects'
+        return res
+
+
+    def fill_from_csv(self, fname):
+        with open(fname, 'r') as fip:
+            for line in fip:
+                self.raw_data.append(line.strip('\n'))
+
+    def rebuild_list(self):
+        self.object_list = []  # clear the object list
+        for raw_line in self.raw_data:
+            cols = raw_line.split(',')
+            #print('RECIPE DATA = ', cols)
+            cur_obj = self.objectClass(*cols) # cols[0], cols[1], cols[2], cols[3])
+            self.object_list.append(cur_obj)
+            #print('object = ' + str(cur_obj))
 
 
 class Recipe(object):
@@ -45,56 +84,9 @@ class Recipe(object):
         self.base_cost_to_build =  base_cost_to_build
         
     def __str__(self):
-        res = '\n----------------------------\n' + self.recipe_name
+        res = self.recipe_name
         return     res   
 
-class DataSet(object):
-    """
-    handles a collection of Objects loaded from a reference file
-    """
-    def __init__(self):
-        self.raw_data = []
-        self.object_list = []
-
-    def __str__(self):
-        return ''.join([d for d in self.raw_data])
-
-
-    def fill_from_csv(self, fname):
-        with open(fname, 'r') as fip:
-            for line in fip:
-                self.raw_data.append(line.strip('\n'))
-
-class Recipes(DataSet):
-    """
-    handles a collection of Locations loaded from a reference file
-    """
-    def __init__(self):
-        DataSet.__init__(self)
-
-    def rebuild_list(self):
-        self.object_list = []  # clear the object list
-        for raw_line in self.raw_data:
-            cols = raw_line.split(',')
-            #print('RECIPE RAW = ', cols)
-            cur_loc = Recipe(cols[0], cols[1], cols[2], cols[3])
-            self.object_list.append(cur_loc)
-
-
-class Items(DataSet):
-    """
-    handles a collection of Items loaded from a reference file
-    """
-    def __init__(self):
-        DataSet.__init__(self)
-
-    def rebuild_list(self):
-        self.object_list = []  # clear the object list
-        for raw_line in self.raw_data:
-            cols = raw_line.split(',')
-            #print('ITEMS RAW = ', cols)
-            cur_item = Item(cols[0], cols[1], cols[2], cols[3])
-            self.object_list.append(cur_item)
 
 class Item(object):
     """
@@ -111,23 +103,8 @@ class Item(object):
         res = ''
         res += self.name + ' - ' + self.desc
         res += ' (sells for ' + self.sell_price + ')'
-
         return     res   
 
-class RecipeIngredients(DataSet):
-    """
-    handles a collection of ingredients loaded from a reference file
-    """
-    def __init__(self):
-        DataSet.__init__(self)
-
-    def rebuild_list(self):
-        self.object_list = []  # clear the object list
-        for raw_line in self.raw_data:
-            cols = raw_line.split(',')
-            #print('INGREDIENTS RAW = ', cols)
-            cur_item = RecipeIngredient(cols[0], cols[1], cols[2], cols[3])
-            self.object_list.append(cur_item)
 
 class RecipeIngredient(object):
     """
@@ -145,6 +122,32 @@ class RecipeIngredient(object):
         res += self.recipe_id + ' - ' + self.item_id
 
         return     res   
+
+class CraftingMethod(object):
+    """
+    crafting_method_id,crafting_action,base_time,base_cost,tools_required,consumables_required,skill_area
+    """
+    def __init__(self,crafting_method_id,crafting_action,base_time,base_cost,tools_required,consumables_required,skill_area):
+        self.crafting_method_id =  crafting_method_id
+        self.crafting_action = crafting_action
+        self.base_time = base_time
+        self.base_cost = base_cost
+        self.tools_required = tools_required
+        self.consumables_required = consumables_required
+        self.skill_area =  skill_area
+        
+    def __str__(self):
+        res = ''
+        res += self.crafting_method_id + ' - ' + self.crafting_action
+        if self.tools_required:
+            tools_needed = self.tools_required + ' and skill in '
+        else:
+            tools_needed = 'no tools, but skill in '
+
+        res += ' (needs ' + tools_needed + self.skill_area + ')'
+
+        return     res   
+
 
 
 
