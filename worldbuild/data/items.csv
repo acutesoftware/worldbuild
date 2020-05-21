@@ -1,18 +1,31 @@
-name,desc,buy_price,sell_price
-wood_stick,Wooden stick,2,0
-wood_twig,Wooden Twig,2,0
-string, Used for fishing rods and bows,2,1
-shells,Shells,5,3
-torch,Torch,1,1
-nail,Nail,1,0
-glue,Glue,1,0
-screw,Screw,1,0
-wooden_plank,Wooden Plank,4,1
-charcoal,Charcoal,2,1
-flour,Flour,2,1
-eggs,Eggs,2,1
-milk,Milk,2,1
-water,Water,0,0
-butter,Butter,2,1
-yeast,Yeast,2,1
-bread,Bread,4,3
+category,name,type,buy_price,sell_price,description
+forage,wood_stick,Wooden stick,2,0,
+forage,wood_twig,Wooden Twig,2,0,
+material,string, Used for fishing rods and bows,2,1,
+forage,shells,Shells,5,3,
+material,torch,Torch,1,1,
+material,nail,Nail,1,0,
+material,glue,Glue,1,0,
+material,screw,Screw,1,0,
+material,wooden_plank,Wooden Plank,4,1,
+material,charcoal,Charcoal,2,1,
+food,flour,Flour,2,1,
+food,eggs,Eggs,2,1,
+food,milk,Milk,2,1,
+food,water,Water,0,0,
+food,butter,Butter,2,1,
+food,yeast,Yeast,2,1,
+food,bread,Bread loaf,3,2,
+tools,pick,Wood,2,1,Cheap wooden pick axe used to dig
+tools,pick,Iron,4,2,Iron pick used for mining
+tools,pick,Steel,9,3,Steel pick axe used to dig
+tools,axe,Iron,4,2,Iron axe for cutting wood
+tools,sword,wooden,4,2,pretty useless sword made of wood
+tools,knife,plastic,1,0,literally the worst knife to take to a gunfight
+tools,screwdriver,flat,4,2,flathead screwdriver
+material,dirt,,4,2,dirt
+material,stone,,4,2,stone
+material,iron ore,,4,2,iron ore
+food,vegetables,potato,4,2,raw potato
+food,meat,sausages,4,2, raw sausages
+food,meat,pie,4,2,hot pie from the oven

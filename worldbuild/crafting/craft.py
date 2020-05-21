@@ -52,7 +52,8 @@ class DataSet(object):
         self.column_headings = []
         self.fill_from_csv(self.fname)
         self.rebuild_list()
-        
+
+
     def __str__(self):
         #return ''.join([d for d in self.raw_data])
         res = 'Dataset containing ' + str(len(self.object_list))
@@ -109,11 +110,13 @@ class Item(object):
     Items / objects that are in the world. Can be collected
     or crafted
     """
-    def __init__(self, name,desc,buy_price,sell_price):
+    def __init__(self,category,name,type,buy_price,sell_price,desc):
+        self.category = category
         self.name = name
-        self.desc = desc
+        self.type = type
         self.buy_price = buy_price
         self.sell_price = sell_price
+        self.desc = desc
         
     def __str__(self):
         res = ''

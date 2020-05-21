@@ -1,0 +1,89 @@
+Profession Name , Task Name , Ticks taken 
+Admin , General Office housekeeping , 1 
+Admin , Filing , 1 
+Admin , Process orders , 1 
+Manager , Motivate Staff , 1 
+Manager , Review plan , 1 
+Manager , Teach team , 1 
+Sales , Find Lead , 1 
+Sales , Meet Client , 1 
+Sales , Close Sale , 1 
+Carpenter , Build wall , 1 
+Carpenter , demolish , 1 
+Carpenter , repair wood , 1 
+Labourer , labour , 1 
+Stone Mason , cut stone , 1  
+Stone Mason , shape stone , 1 
+Stone Mason , assemble , 1 
+Artist , Paint , 1 
+Artist , Draw , 1 
+Artist , Sculpt , 1 
+Engineer , Design a widget , 1 
+Engineer , Build a widget , 1 
+Engineer , Test , 1 
+Leatherworker , Skin , 1 
+Leatherworker , Cure Leather , 1 
+Leatherworker , Assemble , 1 
+Mechanic , Repair item , 1 
+Mechanic , Build widget , 1 
+Mechanic , Improve widget , 1 
+Plastic Worker , process raw plastic (collect) , 1 
+Plastic Worker , Build forms , 1 
+Plastic Worker , Shape plastic , 1 
+Steel worker , Process Iron to steel , 1 
+Steel worker , cut and polish , 1 
+Steel worker , use anvil to make something , 1 
+Tailor , spin cloth , 1 
+Tailor , knit , 1 
+Tailor , sew , 1 
+Wood Worker , Hammer , 1 
+Wood Worker , Cut and sand , 1 
+Wood Worker , Assemble , 1 
+Angler , Fish with rod , 1 
+Angler , Net Fishing , 1 
+Angler , Fillet fish , 1 
+Brewer , collect hops , 1 
+Brewer , mix brew , 1 
+Brewer , harvest , 1 
+Cook , collect and prep veges , 1 
+Cook , fry , 1 
+Cook , plate up , 1 
+Diver , spear fishing , 1 
+Diver , oyster hunting , 1 
+Diver , forage for shells , 1 
+Farmer , plough , 1 
+Farmer , plant , 1 
+Farmer , harvest , 1 
+Hunter , stalk , 1 
+Hunter , kill , 1  
+Hunter , fillet , 1 
+Wait Staff , take orders , 1  
+Wait Staff , deliver food , 1  
+Wait Staff , clean tables , 1  
+Chemist , design drug , 1  
+Chemist , administer drug , 1  
+Chemist , test drug , 1 
+Doctor , diagnose , 1  
+Doctor , consult , 1  
+Doctor , surgery , 1  
+Nurse , triage , 1  
+Nurse , clean , 1  
+Nurse , administer drug , 1  
+Researcher , study , 1  
+Researcher , invent , 1  
+Researcher , deploy , 1 
+Student , read , 1  
+Student , practice , 1 
+Student , cram , 1 
+Teacher , prepare lessons , 1 
+Teacher , teach , 1 
+Teacher , feedback , 1
+Guard , move prisoners , 1 
+Guard , watch , 1
+Guard , paperwork , 1 ,
+Police Officer , assist , 1 
+Police Officer , serve , 1 
+Police Officer , arrest , 1 
+Soldier , gun battle , 1 
+Soldier , training , 1 
+Soldier , combat , 1 

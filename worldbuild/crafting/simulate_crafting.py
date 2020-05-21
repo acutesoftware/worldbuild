@@ -16,9 +16,14 @@ methods = craft.DataSet(craft.CraftingMethod, craft.get_fullname('crafting_metho
 class InventoryItem(object):
     def __init__(self, item_id, quantity):
         self.item_id = item_id
+        assert type(quantity) is str # should be int, but CSV generic import to be fixed later
         self.quantity = quantity
     def __str__(self):
         return str(self.item_id)  + ' (x' + str(self.quantity) + ')'
+    def __gt__(self, inv2):
+        return self.item_id > inv2.item_id
+    def __lt__(self, inv2):
+        return self.item_id < inv2.item_id
 
 
 inv = craft.DataSet(InventoryItem, craft.get_fullname('inventory.csv'))
@@ -61,6 +66,31 @@ def command_buy():
         inv_to_add = InventoryItem(itm.name, str(random.randint(1,50)))
         print('Adding ' + str(inv_to_add))
         inv.object_list.append(inv_to_add)
+    #print(inv.str_object_list())
+    inventory_sort()
+    print(inv.str_object_list())
+
+def inventory_sort():
+    """
+    sorts the inventory and consolidates slots
+    """
+    print('sorting bags...')
+    for orig_num, orig_item in enumerate(inv.object_list):
+        for dupe_num, dupe_item in enumerate(inv.object_list):
+            if dupe_num != orig_num:
+                if dupe_item.item_id == orig_item.item_id:
+                    merge_inv_items(orig_item, dupe_item)
+                    del inv.object_list[dupe_num]
+    inv.object_list.sort()
+                    
+
+def merge_inv_items(orig_item, dupe_item):
+    """
+    takes 2 items from a list and merges to 1 or at least slot size
+    """
+    print('dupe : ' + str(orig_item) +  str(dupe_item))
+    orig_item.quantity = str(int(orig_item.quantity) + int(dupe_item.quantity))
+    dupe_item.quantity = '0'
 
 
 
