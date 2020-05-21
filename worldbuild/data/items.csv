@@ -1,6 +1,7 @@
 category,name,type,buy_price,sell_price,description
 forage,wood_stick,Wooden stick,2,0,
 forage,wood_twig,Wooden Twig,2,0,
+forage,wood,Wood,2,0,
 material,string, Used for fishing rods and bows,2,1,
 forage,shells,Shells,5,3,
 material,torch,Torch,1,1,

@@ -56,7 +56,62 @@ def get_cmd_list(menu):
     return res
 
 def command_craft(recipe_num):
-    print('crafting ', str(recipes.object_list[recipe_num]))
+
+    if not do_we_have_ingredients_for_recipe(recipe_num):
+        print('Not enough ingredients to make ' + str(recipes.object_list[recipe_num]))
+        return 0
+
+    rec_to_make = recipes.object_list[recipe_num]
+    print('crafting', str(rec_to_make))
+
+    ing_needed = []
+    rec_to_make = recipes.object_list[recipe_num]
+    for ing in ingred.object_list:
+        if ing.recipe_id == rec_to_make.recipe_id:
+            ing_needed.append([ing.item_id,ing.quantity])
+
+    # remove items from inventory
+    for needed in ing_needed:
+        for i in inv.object_list:
+            if i.item_id == needed[0]:
+                i.quantity = str(int(i.quantity) - int(needed[1]))
+    
+    # added the crafted item to the inventory
+    inv_to_add = InventoryItem(rec_to_make.recipe_id, '1')
+    inv.object_list.append(inv_to_add)
+    inventory_sort()
+    # display the inventory to show new item in bags
+    print(inv.str_object_list())
+
+def do_we_have_ingredients_for_recipe(recipe_num):
+    """
+    checks the users inventory to make sure there are 
+    enough items to make the recipe. returns True/False
+    """
+    have_items = True
+    ing_needed = []
+    rec_to_make = recipes.object_list[recipe_num]
+    for ing in ingred.object_list:
+        if ing.recipe_id == rec_to_make.recipe_id:
+            ing_needed.append([ing.item_id,ing.quantity])
+    
+    #print('to make this recipe, you need: ')
+    #print(str(ing_needed))
+
+    # from list of ingredients, check inventory
+    have_items = False # assume false until we have quant in inv
+    for needed in ing_needed:
+        for i in inv.object_list:
+            if i.item_id == needed[0]:
+                if i.quantity < needed[1]:
+                    # at least one ingred doesnt have quant, so bail 
+                    return False
+                have_items = True # so far, so good    
+            #print(str(ing))
+
+
+    return have_items
+
 
 def command_buy():
     num_items_to_add = random.randint(1,3)

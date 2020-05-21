@@ -138,7 +138,7 @@ class RecipeIngredient(object):
         
     def __str__(self):
         res = ''
-        res += self.recipe_id + ' - ' + self.item_id
+        res += self.recipe_id + ' - ' + self.item_id + ' (' + str(self.quantity) + ')'
 
         return     res   
 
