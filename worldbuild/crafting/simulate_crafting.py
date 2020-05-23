@@ -40,29 +40,36 @@ def main():
         cmd = input("enter command: ")
         if cmd in ['1','2','3','4','5','6','7','8','9']:
             command_craft(int(cmd)-1)
+            # display the inventory to show new item in bags
+            print(inv.str_object_list())
+
         if cmd == 'a':
             command_buy()
         if cmd == 'r':
             print(recipes.str_object_list())
         if cmd == 'i':
             print(inv.str_object_list())
+        if cmd == 'b':
+            command_build_all()
 
 def get_cmd_list(menu):
     res = '<'
     if menu == 'main':
-        res += '[1-9] craft recipe  [a]dd random inv  [r]ecipes [i]nventory  [0] Help  [Enter] to exit'
+        res += '[1-9] craft recipe  [a]dd random inv  [r]ecipes [i]nventory  [b]uild all  [Enter] to exit'
 
     res += '>'
     return res
 
-def command_craft(recipe_num):
+def command_craft(recipe_num, print_results='Y'):
 
     if not do_we_have_ingredients_for_recipe(recipe_num):
-        print('Not enough ingredients to make ' + str(recipes.object_list[recipe_num]))
+        if print_results != 'N':
+            print('Not enough ingredients to make ' + str(recipes.object_list[recipe_num]))
         return 0
 
     rec_to_make = recipes.object_list[recipe_num]
-    print('crafting', str(rec_to_make))
+    if print_results != 'N':
+        print('crafting', str(rec_to_make))
 
     ing_needed = []
     rec_to_make = recipes.object_list[recipe_num]
@@ -80,8 +87,6 @@ def command_craft(recipe_num):
     inv_to_add = InventoryItem(rec_to_make.recipe_id, '1')
     inv.object_list.append(inv_to_add)
     inventory_sort()
-    # display the inventory to show new item in bags
-    print(inv.str_object_list())
 
 def do_we_have_ingredients_for_recipe(recipe_num):
     """
@@ -129,7 +134,7 @@ def inventory_sort():
     """
     sorts the inventory and consolidates slots
     """
-    print('sorting bags...')
+    #print('sorting bags...')
     for orig_num, orig_item in enumerate(inv.object_list):
         for dupe_num, dupe_item in enumerate(inv.object_list):
             if dupe_num != orig_num:
@@ -143,7 +148,7 @@ def merge_inv_items(orig_item, dupe_item):
     """
     takes 2 items from a list and merges to 1 or at least slot size
     """
-    print('dupe : ' + str(orig_item) +  str(dupe_item))
+    #print('dupe : ' + str(orig_item) +  str(dupe_item))
     orig_item.quantity = str(int(orig_item.quantity) + int(dupe_item.quantity))
     dupe_item.quantity = '0'
 
@@ -157,8 +162,26 @@ def command_help():
     print(' - modify the recipes.csv for different recipes')
     print(' - update item ingredients')
     
-    
+def command_build_all():
+    """
+    using all the current inventory, build all recipes until 
+    running out of ingredients.
+    """
+    num_ingredients_left = len(inv.object_list)    
+    total_things_crafted = 0
+    can_still_make_stuff = 'Y'
 
+    # try making a recipe
+    while can_still_make_stuff == 'Y':
+        can_still_make_stuff = 'N'
+        for recipe_num, recipe in enumerate(recipes.object_list):
+            if do_we_have_ingredients_for_recipe(recipe_num):
+                can_still_make_stuff = 'Y'
+                total_things_crafted += 1
+            command_craft(recipe_num, 'N')
+            
+    print('Finished Build all - you made ', str(total_things_crafted) + ' items')
+    print(inv.str_object_list())
 
 if __name__ == '__main__':
 	main()
