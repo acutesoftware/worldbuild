@@ -34,23 +34,25 @@ inv = craft.DataSet(InventoryItem, craft.get_fullname('inventory.csv'))
 def main():
     cmd = 'start'
     print(recipes.str_object_list())
-    print(inv.str_object_list())
+    print(inv.str_object_list('N'))
     while cmd != '':
         print(get_cmd_list('main'))
         cmd = input("enter command: ")
         if cmd in ['1','2','3','4','5','6','7','8','9']:
             command_craft(int(cmd)-1)
             # display the inventory to show new item in bags
-            print(inv.str_object_list())
+            print(inv.str_object_list('N'))
 
         if cmd == 'a':
             command_buy()
         if cmd == 'r':
             print(recipes.str_object_list())
         if cmd == 'i':
-            print(inv.str_object_list())
+            print(inv.str_object_list('N'))
         if cmd == 'b':
             command_build_all()
+            inventory_sort()
+
 
 def get_cmd_list(menu):
     res = '<'
@@ -68,8 +70,8 @@ def command_craft(recipe_num, print_results='Y'):
         return 0
 
     rec_to_make = recipes.object_list[recipe_num]
-    if print_results != 'N':
-        print('crafting', str(rec_to_make))
+    #if print_results != 'N':
+    print('crafting', str(rec_to_make))
 
     ing_needed = []
     rec_to_make = recipes.object_list[recipe_num]
@@ -85,6 +87,7 @@ def command_craft(recipe_num, print_results='Y'):
     
     # added the crafted item to the inventory
     inv_to_add = InventoryItem(rec_to_make.recipe_id, '1')
+
     inv.object_list.append(inv_to_add)
     inventory_sort()
 
@@ -128,7 +131,7 @@ def command_buy():
         inv.object_list.append(inv_to_add)
     #print(inv.str_object_list())
     inventory_sort()
-    print(inv.str_object_list())
+    print(inv.str_object_list('N'))
 
 def inventory_sort():
     """
@@ -142,6 +145,11 @@ def inventory_sort():
                     merge_inv_items(orig_item, dupe_item)
                     del inv.object_list[dupe_num]
     inv.object_list.sort()
+
+    # now remove any items that have zero quantity
+    for orig_num, orig_item in enumerate(inv.object_list):
+        if orig_item.quantity == '0':
+            del inv.object_list[orig_num]
                     
 
 def merge_inv_items(orig_item, dupe_item):
@@ -181,7 +189,7 @@ def command_build_all():
             command_craft(recipe_num, 'N')
             
     print('Finished Build all - you made ', str(total_things_crafted) + ' items')
-    print(inv.str_object_list())
+    print(inv.str_object_list('N'))
 
 if __name__ == '__main__':
 	main()

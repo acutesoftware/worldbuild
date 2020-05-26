@@ -18,31 +18,45 @@ run simulate_crafting.py to build objects from random inventory items
 
     -=< InventoryItem >=-
 /=======================\
-  1 - cheese (x1)
-  2 - wood_stick (x2)
-  3 - wood_twig (x2)
-  4 - wood (x20)
-  5 - string (x1)
-  6 - shells (x5)
+  sap (x1)
+  wood (x2)
+  stick (x1)
+  milk (x2)
 \=======================/
-```
-
-Press 2 and press Enter to craft a wooden plank (which uses 1x wood)
 
 ```
-enter command: 2
+
+Press 'b' and Enter to craft craft all items
+
+```
+enter command: b
+crafting Torch
 crafting Wooden Plank
-sorting bags...
+crafting Charcoal
+crafting Butter
+crafting Biscuit
+Finished Build all - you made  5 items
     -=< InventoryItem >=-
 /=======================\
-  1 - cheese (x1)
-  2 - shells (x5)
-  3 - string (x1)
-  4 - wood (x19)
-  5 - wood_stick (x2)
-  6 - wood_twig (x2)
-  7 - wooden_plank (x1)
+  biscuit (x1)
+  butter (x1)
+  charcoal (x1)
+  torch (x1)
+  wooden_plank (x1)
 \=======================/
 
 ```
+
+You can add random inventory items to check crafting lots of recipes
+
+```
+
+enter command: a
+Adding glue (x3)
+Adding pick (x31)
+
+```
+
+or just edit inventory.csv
+
 

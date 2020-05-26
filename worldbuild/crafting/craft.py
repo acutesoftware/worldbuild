@@ -59,14 +59,17 @@ class DataSet(object):
         res = 'Dataset containing ' + str(len(self.object_list))
         res += ' ' + str(self.objectClass.__name__) + ' objects'
         return res
-    def str_object_list(self):
+    def str_object_list(self, show_number='Y'):
         """
         returns full object list formatted by object definition __str__
         """
         res = '    -=< ' + str(self.objectClass.__name__) + ' >=-\n'
         res += '/=======================\\\n'
         for obj_num, obj in enumerate(self.object_list):
-            res += '  ' + str(obj_num+1) + ' - ' + str(obj) + '\n'
+            if show_number == 'Y':
+                res += '  ' + str(obj_num+1) + ' - ' + str(obj) + '\n'
+            else:
+                res += '  ' + str(obj) + '\n'
         res += '\\=======================/\n'
         return res
 
