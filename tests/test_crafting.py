@@ -29,7 +29,7 @@ class TestTemplate(unittest.TestCase):
 
     def test_02_dataset_recipe(self):
         recipes = mod_craft.DataSet(mod_craft.Recipe, mod_craft.get_fullname('recipes.csv'))
-        self.assertEqual(str(recipes),'Dataset containing 6 Recipe objects')
+        self.assertTrue(len(recipes.object_list) > 18)
         tot_time_to_build = 0
         for recipe in recipes.object_list:
             #print(recipe)
@@ -37,7 +37,7 @@ class TestTemplate(unittest.TestCase):
         #print('total time to build all recipes = ' +  str(tot_time_to_build))
         self.assertEqual(str(recipes.object_list[0]), 'Torch')
         self.assertEqual(str(recipes.object_list[1]), 'Wooden Plank')
-        self.assertEqual(19, tot_time_to_build)
+        self.assertTrue(tot_time_to_build > 10)
     
 
 
