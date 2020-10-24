@@ -2,21 +2,27 @@ category,name,type,buy_price,sell_price,description
 forage,wood_stick,Wooden stick,2,0,
 forage,wood_twig,Wooden Twig,2,0,
 forage,wood,Wood,2,0,
+forage,wood_log_pine,Pine Log,2,1,
+forage,wood_log_oak,Oak Log,3,2,
+forage,wood_log_cedar,Cedar Log,4,2,
 material,string, Used for fishing rods and bows,2,1,
 forage,shells,Shells,5,3,
 material,torch,Torch,1,1,
 material,nail,Nail,1,0,
 material,glue,Glue,1,0,
 material,screw,Screw,1,0,
-material,wooden_plank,Wooden Plank,4,1,
-material,charcoal,Charcoal,2,1,
-food,flour,Flour,2,1,
-food,eggs,Eggs,2,1,
-food,milk,Milk,2,1,
-food,water,Water,0,0,
-food,butter,Butter,2,1,
-food,yeast,Yeast,2,1,
-food,bread,Bread loaf,3,2,
+material,wooden_plank,Wooden Plank,4,1,Planks of misc wood
+material,wooden_plank_pine,Wooden Plank - Pine,2,1,Planks of Pine wood
+material,wooden_plank_oak,Wooden Plank - Oak,3,2,Planks of Oak wood
+material,wooden_plank_cedar,Wooden Plank - Cedar,4,3,Planks of Cedar wood
+material,charcoal,Charcoal,2,1,Charcoal
+food,flour,Flour,2,1,Plain Flour
+food,eggs,Eggs,2,1,Fresh Eggs
+food,milk,Milk,2,1,Fresh Milk
+food,water,Water,0,0,Clean water
+food,butter,Butter,2,1,Butter
+food,yeast,Yeast,2,1,fresh yeast
+food,bread,Bread loaf,3,2,Loaf of bread
 tools,pick,Wood,2,1,Cheap wooden pick axe used to dig
 tools,pick,Iron,4,2,Iron pick used for mining
 tools,pick,Steel,9,3,Steel pick axe used to dig
@@ -26,7 +32,16 @@ tools,knife,plastic,1,0,literally the worst knife to take to a gunfight
 tools,screwdriver,flat,4,2,flathead screwdriver
 material,dirt,,4,2,dirt
 material,stone,,4,2,stone
-material,iron ore,,4,2,iron ore
+material,copper_ore,Copper,4,2,Copper ore
+material,iron_ore,Iron,5,3,Iron ore
+material,silver_ore,Silver,6,4,Silver ore
+material,gold_ore,Gold,7,4,Gold ore
+material,titanium_ore,Titanium,9,5,Titanium ore
+material,copper_bar,Copper,7,3,Copper Bar
+material,iron_bar,Iron,8,4,Iron Bar
+material,silver_bar,Silver,10,5,Silver Bar
+material,gold_bar,Gold,12,6,Gold Bar
+material,titanium_bar,Titanium,14,7,Titanium Bar
 food,vegetables,potato,4,2,raw potato
 food,meat,sausages,4,2, raw sausages
 food,meat,pie,4,2,hot pie from the oven

@@ -2,6 +2,9 @@ recipe_id,item_id,quantity,crafting_method_id
 torch,stick,1,attach_misc
 torch,sap,1,attach_misc
 wooden_plank,wood,1,cut_saw
+wooden_plan_pine,wood_log_pine,2,cut_saw
+wooden_plan_oak,wood_log_oak,2,cut_saw
+wooden_plan_cedar,wood_log_cedar,2,cut_saw
 charcoal,wood,1,burn_flame
 butter,milk,1,mix
 bread,yeast,1,mix
@@ -12,3 +15,17 @@ biscuit,egg,2,mix
 biscuit,milk,1,mix
 biscuit,flour,3,mix
 biscuit,oven,30,bake
+chair_pine,wooden_plan_pine,8,attach_glue
+chair_oak,wooden_plan_oak,8,attach_glue
+chair_cedar,wooden_plan_cedar,8,attach_glue
+table_pine,wooden_plan_pine,12,attach_screw
+table_oak,wooden_plan_oak,12,attach_screw
+table_cedar,wooden_plan_cedar,12,attach_screw
+shelf_pine,wooden_plan_pine,6,attach_screw
+shelf_oak,wooden_plan_oak,6,attach_screw
+shelf_cedar,wooden_plan_cedar,6,attach_screw
+copper_bar,copper_ore,2,smelt
+iron_bar,iron_ore,2,smelt
+silver_bar,silver_ore,2,smelt
+gold_bar,gold_ore,2,smelt
+titanium_bar,titanium_ore,2,smelt
