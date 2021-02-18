@@ -1,0 +1,7 @@
+recipe,item_id,step_num,process,time,desc
+wood planks,wood logs,1,chop,2,you chop down a tree
+round stick,wood branch,1,whittling,3,you carve the stick 
+bread,flour,1,sift,1,sift flour
+bread,yeast,2,mix,1,mix in the yeast
+bread,water,3,mix,1,mix in the water
+bread,[none],4,bake,45,bake in oven
