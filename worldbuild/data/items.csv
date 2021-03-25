@@ -45,3 +45,8 @@ material,titanium_bar,Titanium,14,7,Titanium Bar
 food,vegetables,potato,4,2,raw potato
 food,meat,sausages,4,2, raw sausages
 food,meat,pie,4,2,hot pie from the oven
+fish,pike,Pike,5,2,Pike
+fish,carp,Carp,5,2,Carp
+fish,shark,Shark,10,6,Shark
+
+
