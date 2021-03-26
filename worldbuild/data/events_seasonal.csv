@@ -1,0 +1,4 @@
+event_day,event_id,chance_occurring,min_duration_days,max_duration_days
+1,season_start,100,1,1
+28,season_end,100,1,1
+Any,meteor_hit,1,1,1

@@ -1,0 +1,15 @@
+event_id,event_name,description
+sunrise,Sunrise,The sun rises
+sunset,Sunset,The sun sets
+week_start,Week Start,A new week begins
+week_end,Week End,The week is over
+season_start,Season Start,A new season begins
+season_end,Season End,The end of another season
+env_rain,Rain,Rain begins to fall
+env_thunder,Thunder,Thunder rumbles
+env_meteor,Meteor!,A loud crash is heard in the distance
+env_fog,Fog,a fog rolls in
+env_light_god_rays,God Rays,beautiful shafts of sunlight beam across the land
+summer_storm,Summer Storm,summer shower
+autumn_storm,Autumn Storm,autumn shower
+winter_storm,Winter Storm,winter shower

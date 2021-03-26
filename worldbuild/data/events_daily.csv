@@ -1,0 +1,8 @@
+event_time,event_name,chance_occurring,min_duration_minutes,max_duration_minutes
+0600,sunrise,100,60,60
+0700,env_fog,20,10,70
+0700,env_light_god_rays,10,10,70
+1900,sunset,100,60,60
+Any,env_rain,2,40,60
+Any,env_fog,2,40,90
+Any,storm,1,360,500

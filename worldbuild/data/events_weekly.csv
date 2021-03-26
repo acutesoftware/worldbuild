@@ -1,0 +1,5 @@
+event_day,event_name,chance_occurring,min_duration_hours,max_duration_hours
+Mon,week_start,1.0,2,2
+Sun,week_end,1.0,2,2
+Any,env_rain,0.15,2,9
+Any,env_thunder,0.2,4,8
