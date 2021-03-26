@@ -32,7 +32,7 @@ def run_time(tbl_chance):
     loops through calculated list, running events
     """
     tbl_events_occurred = []
-    tbl_events_occurred.append(['Day', 'Time', 'Event_id', 'Length'])
+    tbl_events_occurred.append(['Day', 'Time', 'Event_id', 'Length', 'Units'])
     for ev in tbl_chance:
         ev_day = ev[0]
         ev_hh = ev[1]
