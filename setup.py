@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='worldbuild',
-    version='0.0.9',
+    version='0.1.0',
     author='Duncan Murray',
     author_email='djmurray@acutesoftware.com.au',
     packages=['worldbuild', 'worldbuild.data'],
@@ -22,7 +22,7 @@ setup(
     description='Tools for computational world building',
     long_description=open('README.txt').read(),
     classifiers = [
-    'Development Status :: 3 - Alpha',
+    'Development Status :: 4 - Beta',
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.4',
     'Intended Audience :: Developers',

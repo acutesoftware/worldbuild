@@ -1,2 +1,2 @@
-status='planning'
+status='beta'
 author='djmurray@acutesoftware.com.au'
