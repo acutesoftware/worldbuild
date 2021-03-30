@@ -11,6 +11,8 @@ hours = ['0600','0700','0800','0900','1000','1100','1200','1300','1400','1500','
 fname_chance = 'all_event_chances.csv'
 fname_events = 'all_events_occurred.csv'
 
+id_length = 6
+
 def main():
     print('running simulation')
     events_daily = read_csv_to_list('../data/events_daily.csv')
@@ -31,6 +33,7 @@ def create_change_table(events_annual, events_daily):
     (the table will be loaded to UE4 as data table
      for simple lookup to process)
     """
+    rowid = 0
     tbl_chance = []
     for day in range(1,28*4):
         for ev in events_annual:
@@ -39,17 +42,21 @@ def create_change_table(events_annual, events_daily):
             elif ev[0] == 'Any':
                 hh = random.choice(hours)
                 chance = int(ev[2])
-                tbl_chance.append([day,hh, ev[1],chance, ev[3], ev[4], 'days'])
+                rowid += 1
+                tbl_chance.append([get_id(rowid), day,hh, ev[1],chance, ev[3], ev[4], 'days'])
             else:
                 if day == int(ev[0]):
                     hh = random.choice(hours)
                     chance = int(ev[2])
-                    tbl_chance.append([day,'0000',ev[1],chance, ev[3], ev[4], 'days'])
+                    rowid += 1
+                    tbl_chance.append([get_id(rowid), day,'0000',ev[1],chance, ev[3], ev[4], 'days'])
         
         
         # now loop through the daily events for this day
-        tbl_chance.extend(loop_day(day,events_annual, events_daily))
+        daily_events, rowid = loop_day(rowid, day,events_annual, events_daily)
+        tbl_chance.extend(daily_events)
     tbl_chance.sort()
+    tbl_chance.insert(0,['RowName', 'Day', 'HHMM', 'event_id', 'chance', 'min_length', 'max_length', 'time_unit'])
 
     #TODO - aggregate multiple chances at same time?
     #"3","0700","env_fog","0.2",
@@ -59,56 +66,32 @@ def create_change_table(events_annual, events_daily):
 
     save_list_to_csv(tbl_chance, fname_chance)
     
+def get_id(rowid):
+    return str(rowid).zfill(id_length)
 
-
-def loop_day(day, events_annual, events_daily):
+def loop_day(rowid_start, day, events_annual, events_daily):
     """
     loops through a day, checking daily events and running randomly
     """
     tbl_chance = []
+    rowid = rowid_start
     for hh in hours:
         for ev in events_daily:
             if hh == ev[0]:
                 chance = int(ev[2]) #get_chance_day_event_modified_by_year(ev, events_annual)
-                tbl_chance.append([day,hh,ev[1],chance, ev[3], ev[4], 'minutes'])
-                if chance_event(chance):
-                    print('Day ' + str(day) + ' - ' + hh + ' = ' + ev[1])
-                    
+                rowid += 1
+                tbl_chance.append([get_id(rowid), day,hh,ev[1],chance, ev[3], ev[4], 'minutes'])
+                
     for ev in events_daily:
         if ev[0] == 'Any':
             hh = random.choice(hours)
             chance = int(ev[2]) #get_chance_day_event_modified_by_year(ev, events_annual)
-            tbl_chance.append([day,hh,ev[1],chance, ev[3], ev[4], 'minutes'])
-            if chance_event(chance):
-                print('Day ' + str(day) + ' - ' + hh + ' = ' + ev[1])
+            rowid += 1
+            tbl_chance.append([get_id(rowid), day,hh,ev[1],chance, ev[3], ev[4], 'minutes'])
 
 
-    return tbl_chance
+    return tbl_chance, rowid
 
-def get_chance_day_event_modified_by_year(ev, events_annual):
-    """
-    takes a days event and modifies the chance based on 
-    the day of the year and the complete annual events
-    (eg change of rain at 0900 may be 0.03 but in winter
-    this increases by 0.2)
-    NO - dont do this
-    """
-    chance = int(ev[2])/100
-    for ann_ev in events_annual:
-        if ann_ev[1] == ev[1]:
-            print('modifying event')
-            chance += int(ann_ev[2])/100
-    return chance
-
-
-def chance_event(rate):
-    """
-    this takes a param and time and runs a probability to see if
-    the event occurrs - returns True or False
-    """
-    if random.randint(0,99) < int(rate):
-        return True
-    return False
 
 
 
