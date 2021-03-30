@@ -24,29 +24,6 @@ def main():
 
     create_change_table(events_annual[1:], events_daily[1:])
 
-    tbl_chance = read_csv_to_list(fname_chance)
-    run_time(tbl_chance)
-
-def run_time(tbl_chance):
-    """
-    loops through calculated list, running events
-    """
-    tbl_events_occurred = []
-    tbl_events_occurred.append(['Day', 'Time', 'Event_id', 'Length', 'Units'])
-    for ev in tbl_chance:
-        ev_day = ev[0]
-        ev_hh = ev[1]
-        ev_id = ev[2]
-        ev_chance = ev[3]
-        ev_min = int(ev[4])
-        ev_max = int(ev[5])
-        ev_units = ev[6]
-
-        ev_length = random.randint(ev_min, ev_max)
-        if chance_event(ev_chance):
-            tbl_events_occurred.append([ev_day, ev_hh, ev_id, ev_length, ev_units])
-    save_list_to_csv(tbl_events_occurred, fname_events)    
-
 
 def create_change_table(events_annual, events_daily):
     """
