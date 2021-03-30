@@ -1,15 +1,15 @@
-event_id,event_name,description
-sunrise,Sunrise,The sun rises
-sunset,Sunset,The sun sets
-week_start,Week Start,A new week begins
-week_end,Week End,The week is over
-season_start,Season Start,A new season begins
-season_end,Season End,The end of another season
-env_rain,Rain,Rain begins to fall
-env_thunder,Thunder,Thunder rumbles
-env_meteor,Meteor!,A loud crash is heard in the distance
-env_fog,Fog,a fog rolls in
-env_light_god_rays,God Rays,beautiful shafts of sunlight beam across the land
-summer_storm,Summer Storm,summer shower
-autumn_storm,Autumn Storm,autumn shower
-winter_storm,Winter Storm,winter shower
+RowName,event_id,event_name,event_description,action_id,action_param,action_desc
+autumn_storm,autumn_storm,Autumn Storm,autumn shower,spawn_actor,niagra_rain,start autumn shower
+env_fog,env_fog,Fog,a fog rolls in,spawn_actor,niagra_fog,a fog rolls in
+env_light_god_rays,env_light_god_rays,God Rays,beautiful shafts of sunlight beam across the land,function,god_ray,call god ray light function
+env_meteor,env_meteor,Meteor!,A loud crash is heard in the distance,spawn,meteor,spawn a meteor on the ground randomly
+env_rain,env_rain,Rain,Rain begins to fall,spawn_actor,niagra_rain,start rain
+env_thunder,env_thunder,Thunder,Thunder rumbles,spawn_actor,niagra_thunder,start thunder
+season_end,season_end,Season End,The end of another season,function,remove_seasonal_forage,remove leftover forage
+season_start,season_start,Season Start,A new season begins,function,spawn_seasonal_forage,spawn new forage
+summer_storm,summer_storm,Summer Storm,summer shower,spawn_actor,niagra_rain,start summer shower
+sunrise,sunrise,Sunrise,The sun rises,light,2,increase light level
+sunset,sunset,Sunset,The sun sets,light,-2,decrease light level
+week_end,week_end,Week End,The week is over,function,remove_forage,remove leftover forage
+week_start,week_start,Week Start,A new week begins,function,spawn_forage,spawn new forage
+winter_storm,winter_storm,Winter Storm,winter shower,spawn_actor,niagra_rain,start winter shower
