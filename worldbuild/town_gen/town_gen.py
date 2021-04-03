@@ -7,24 +7,35 @@ import sys
 import random 
 
 #import aikif.agents.explore.agent_explore_grid as mod_agt
+import os
+import sys 
 
+root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + ".." )
+pth = root_folder #+ os.sep + 'worldbuild'
+sys.path.append(pth)
+
+
+import worldbuild.town_gen.town_gen_config as cfg
+
+
+#sys.path.append('.')
 import aikif.toolbox.cls_grid as mod_grid
-from . import town_gen_config as cfg
+#from . import town_gen_config as cfg
 
 def TEST():
     print('generating town...')
-    dat_town = make_town(3, 5, 50)
+    dat_town = make_town('test town', 3, 5, 20, 30, 90)
     print(dat_town)
 
 
-def make_town(town_name, sze_y, sze_x, sparseness):
+def make_town(town_name, start_x, start_y, sze_y, sze_x, sparseness):
     """
     generates the town
     """
     #agt = mod_agt.ExploreAgent('TEST - exploring_agent',  os.getcwd(), 4, True)
     #grd = mod_grid.Grid(grid_height=3, grid_width=sze, pieces=buildings, spacing=2)   
 
-    t = Town(town_name, 0,0,sze_y,sze_x, sparseness)
+    t = Town(town_name, start_y, start_x, sze_y, sze_x, sparseness)
 
     return t
     
@@ -64,13 +75,13 @@ class Town(object):
     """
     def __init__(self, town_name, pos_y, pos_x, size_y, size_x, sparseness):
         self.pos_x = pos_x
-        self.pos_y =pos_y
+        self.pos_y = pos_y
         #self.size_x = random.randint(2, max_x)        
         #self.size_y = random.randint(2, max_y)     
 
         self.town_name = town_name   
         self.size_x = size_x  
-        self.size_y =size_y
+        self.size_y = size_y
 
         self.road = Building(*cfg.road_size,  cfg.road_building_type)
         self.pub = Building(*cfg.pub_size,  cfg.pub_building_type)
