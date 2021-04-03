@@ -32,6 +32,7 @@ def TEST():
     print('generating NPC list...')
     make_npcs(10)
 
+
 def make_npcs(num_npcs):
     """
     generates the NPC list
