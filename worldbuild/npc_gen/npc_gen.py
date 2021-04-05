@@ -30,15 +30,16 @@ locations = [  # name,desc,coord_x,coord_y
 
 def TEST():
     print('generating NPC list...')
-    make_npcs(10)
-
+    res = make_npcs(20)
+    save_list_to_csv(res, 'random_npc.csv')
+    print("Done")
 
 def make_npcs(num_npcs):
     """
     generates the NPC list
     """
     list_names = generate.get_list_people()
-    npcs = []
+    npcs = [['npc_name', 'age', 'location']]
     for i in range(1, num_npcs):
         nme = random.choice(list_names)
         age = random.randint(16,60)
@@ -46,8 +47,23 @@ def make_npcs(num_npcs):
 
         npcs.append([nme, age, location])
 
-    print(npcs)
+    return npcs
     
+
+def save_list_to_csv(lst, filename):
+    """
+    takes a list and saves to CSV
+    """
+
+    with open(filename, 'w', encoding='UTF-8') as f:
+        for row in lst:
+            for col in row:
+                if col:
+                    f.write( '"' + str(col) + '",')
+                else:
+                    f.write('"",')
+            f.write('\n')
+
 
 if __name__ == '__main__':
     TEST()
