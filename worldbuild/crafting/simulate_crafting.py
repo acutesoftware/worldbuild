@@ -103,19 +103,23 @@ def do_we_have_ingredients_for_recipe(recipe_num):
         if ing.recipe_id == rec_to_make.recipe_id:
             ing_needed.append([ing.item_id,ing.quantity])
     
-    #print('to make this recipe, you need: ')
-    #print(str(ing_needed))
+    print('to make the recipe "' + rec_to_make.recipe_name + '", you need: ')
+    print(str(ing_needed))
 
     # from list of ingredients, check inventory
     have_items = False # assume false until we have quant in inv
     for needed in ing_needed:
         for i in inv.object_list:
             if i.item_id == needed[0]:
-                if i.quantity < needed[1]:
+                if i.quantity >= needed[1]:
                     # at least one ingred doesnt have quant, so bail 
+                    print('MISSING - ' + str(i))
+                    #print('i.quantity - ' + str(i.quantity))
+                    #print('i.item_id - ' + str(i.item_id))
+                    #print('needed - ' + str(needed))
                     return False
                 have_items = True # so far, so good    
-            #print(str(ing))
+        print('you need - ' + str(needed))
 
 
     return have_items
