@@ -11,10 +11,10 @@ material,torch,Torch,1,1,
 material,nail,Nail,1,0,
 material,glue,Glue,1,0,
 material,screw,Screw,1,0,
-material,wooden_plank,Wooden Plank,4,1,Planks of misc wood
-material,wooden_plank_pine,Wooden Plank - Pine,2,1,Planks of Pine wood
-material,wooden_plank_oak,Wooden Plank - Oak,3,2,Planks of Oak wood
-material,wooden_plank_cedar,Wooden Plank - Cedar,4,3,Planks of Cedar wood
+material,wood_plank,Wooden Plank,4,1,Planks of misc wood
+material,wood_plank_pine,Wooden Plank - Pine,2,1,Planks of Pine wood
+material,wood_plank_oak,Wooden Plank - Oak,3,2,Planks of Oak wood
+material,wood_plank_cedar,Wooden Plank - Cedar,4,3,Planks of Cedar wood
 material,charcoal,Charcoal,2,1,Charcoal
 food,flour,Flour,2,1,Plain Flour
 food,eggs,Eggs,2,1,Fresh Eggs
