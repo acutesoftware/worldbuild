@@ -1,7 +1,11 @@
-recipe,item_id,step_num,process,time,desc
-wood planks,wood logs,1,chop,2,you chop down a tree
-round stick,wood branch,1,whittling,3,you carve the stick 
-bread,flour,1,sift,1,sift flour
-bread,yeast,2,mix,1,mix in the yeast
-bread,water,3,mix,1,mix in the water
-bread,[none],4,bake,45,bake in oven
+recipe,item_id,step_num,process,tools_needed,time,desc
+wood planks,wood logs,1,chop,axe,2,you chop down a tree
+round stick,wood branch,1,whittling,knife,3,you carve the stick 
+bread,flour,1,sift,bowl|sifter,1,sift flour
+bread,yeast,2,mix,spoon,1,mix in the yeast
+bread,water,3,mix,spoon,1,mix in the water
+bread,,4,bake,baking_tray_bread|oven,45,bake in oven
+biscuit,egg,1,mix,bowl,1,beat eggs in a bowl
+biscuit,milk,2,mix,bowl,1,stir in milk
+biscuit,flour,3,mix,bowl,1,stir in flour
+biscuit,oven,4,bake,baking_tray_flat|oven,35,bake in oven
