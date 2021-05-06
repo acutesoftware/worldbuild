@@ -1,0 +1,11 @@
+UE4_id,recipe_id,item_id,step_num,process,tools_needed,time,desc
+wood planks1,wood planks,wood logs,1,chop,axe,2,you chop down a tree
+round stick1,round stick,wood branch,1,whittling,knife,3,you carve the stick 
+bread1,bread,flour,1,sift,bowl|sifter,1,sift flour
+bread2,bread,yeast,2,mix,spoon,1,mix in the yeast
+bread3,bread,water,3,mix,spoon,1,mix in the water
+bread4,bread,,4,bake,baking_tray_bread|oven,45,bake in oven
+biscuit1,biscuit,egg,1,mix,bowl,1,beat eggs in a bowl
+biscuit2,biscuit,milk,2,mix,bowl,1,stir in milk
+biscuit3,biscuit,flour,3,mix,bowl,1,stir in flour
+biscuit4,biscuit,oven,4,bake,baking_tray_flat|oven,35,bake in oven
