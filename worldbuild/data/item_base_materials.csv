@@ -1,0 +1,11 @@
+item_base_material_id,base_material_name,durability
+wood,Wood,1
+hardwood,Hardwood,2
+stone,Stone,3
+copper,Copper,4
+iron,Iron,5
+steel,Steel,6
+gold,Gold,5
+diamond,Diamond,7
+platnium,Platium,8
+obsidium,Obsidium,9

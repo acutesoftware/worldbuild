@@ -1,0 +1,6 @@
+tool_id,tool_name,base_dmg,base_dig,base_wgt,base_speed,durability
+axe,Axe,2,1,2,3,1
+shovel,Shovel,1,4,2,3,1
+sword,Sword,5,1,2,2,1
+dagger,Dagger,4,1,1,4,1
+pick,Pick,2,3,3,1,1
