@@ -57,7 +57,7 @@ def generate_all_combinations():
                 new_tool.tool_name = new_mat.base_material_name + ' ' + t.tool_name 
 
                 new_tool.add_random_post_modifier(mod_num)
-                new_tool.durability = new_mat.durability
+                new_tool.durability += new_mat.durability
                 print(str(new_tool))
                 new_tool_list.append(new_tool.get_list())
     wb_utils.save_list_to_csv(new_tool_list, 'all_tools_list.csv')
@@ -126,6 +126,12 @@ class Tool(object):
             self.base_speed += 3
         if 'Toughness' in res:
             self.durability += 3
+            self.base_wgt += 1
+        if 'Agility' in res:
+            self.base_dmg += 2
+            self.base_speed += 1
+
+
 
 
 class Material(object):

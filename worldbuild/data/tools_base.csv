@@ -3,4 +3,6 @@ axe,Axe,2,1,2,3,1
 shovel,Shovel,1,4,2,3,1
 sword,Sword,5,1,2,2,1
 dagger,Dagger,4,1,1,4,1
-pick,Pick,2,3,3,1,1
+pickaxe,Pick Axe,2,3,3,1,1
+fishing_rod,Fishing Rod,0,0,1,2,1
+hammer,Hammer,2,2,2,3,1
