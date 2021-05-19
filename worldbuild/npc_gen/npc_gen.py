@@ -34,8 +34,11 @@ childhoods = ['poor', 'normal', 'privileged']
 
 def TEST():
     print('generating NPC list...')
-    res = make_npcs(50)
-    save_list_to_csv(res, 'random_npc.csv')
+    npcs = make_npcs(5)
+    save_list_to_csv(npcs, 'random_npc.csv')
+
+    relationships = estimate_npc_relationships(npcs)
+    save_list_to_csv(relationships, 'npc_relationships.csv')
     print("Done")
 
 def make_npcs(num_npcs):
@@ -58,6 +61,12 @@ def make_npcs(num_npcs):
         npcs.append(this_npc)
 
     return npcs
+
+def get_attitude_id_from_name(nme):
+    for att in attitudes:
+        if nme == att[1]:
+            return att[0]
+    return 0
 
 def get_random_attitude():
     """
@@ -135,6 +144,70 @@ def save_list_to_csv(lst, filename):
                 else:
                     f.write('"",')
             f.write('\n')
+
+
+def estimate_npc_relationships(npcs):
+    """
+    does a cartesian product of all npcs to see how they might
+    relate to each other based on location, background, etc
+    """
+    res = []
+    for npc1 in npcs[1:]:
+        for npc2 in npcs[1:]:
+            if npc1 != npc2:
+                relationship_score = find_relationship(npc1, npc2)
+                msg = get_welcome_message(relationship_score)
+                relationship = [npc1[0], npc2[0], str(relationship_score), msg]
+                res.append(relationship)
+    return res
+
+def find_relationship(npc1, npc2):
+    """
+    returns a score from -100 to 100 between 2 npcs
+    """
+    score = 50
+
+    #print('npc1 = ' + str(npc1) + '  npc2 = ' + str(npc2))
+
+    att1 = get_attitude_id_from_name(npc1[4])
+    att2 = get_attitude_id_from_name(npc2[4])
+    #print('att1 = ' + str(att1) + '  att2 = ' + str(att2))
+    score += att1 # assume niceness or nastiness affects relationships in general
+    score += att2 # assume niceness or nastiness affects relationships in general
+    
+    age_diff = abs(npc1[1] - npc2[1])
+
+    if age_diff == 0 :
+        score += 10     # wow, we are the same age!
+    elif age_diff < 10:
+        score += age_diff    
+    else:
+        score -= age_diff    
+        
+
+    if npc2[1] - npc1[1] < 5:
+        score += 10
+    if npc2[1] - npc1[1] < 15:
+        score += 5
+    
+    if npc1[1] - npc2[1] < 5:
+        score += 10
+    if npc1[1] - npc2[1] < 15:
+        score += 5
+        
+    return score
+
+
+def get_welcome_message(relationship_score):
+    
+    if relationship_score < 60:
+        return "hey"
+    if relationship_score < 80:
+        return "Hi, hows it going"
+    if relationship_score < 100:
+        return "Hey, great to see you again"
+        
+    return "Hi love"
 
 
 if __name__ == '__main__':
