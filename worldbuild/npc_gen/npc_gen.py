@@ -34,7 +34,7 @@ childhoods = ['poor', 'normal', 'privileged']
 
 def TEST():
     print('generating NPC list...')
-    npcs = make_npcs(5)
+    npcs = make_npcs(10)
     save_list_to_csv(npcs, 'random_npc.csv')
 
     relationships = estimate_npc_relationships(npcs)
@@ -151,17 +151,17 @@ def estimate_npc_relationships(npcs):
     does a cartesian product of all npcs to see how they might
     relate to each other based on location, background, etc
     """
-    res = []
+    res = [['npc1', 'npc2', 'relationship_score','welcome_message']]
     for npc1 in npcs[1:]:
         for npc2 in npcs[1:]:
             if npc1 != npc2:
-                relationship_score = find_relationship(npc1, npc2)
-                msg = get_welcome_message(relationship_score)
+                relationship_score = find_relationship_score(npc1, npc2)
+                msg = get_welcome_message(npc1,npc2, relationship_score)
                 relationship = [npc1[0], npc2[0], str(relationship_score), msg]
                 res.append(relationship)
     return res
 
-def find_relationship(npc1, npc2):
+def find_relationship_score(npc1, npc2):
     """
     returns a score from -100 to 100 between 2 npcs
     """
@@ -184,30 +184,33 @@ def find_relationship(npc1, npc2):
     else:
         score -= age_diff    
         
-
-    if npc2[1] - npc1[1] < 5:
-        score += 10
-    if npc2[1] - npc1[1] < 15:
-        score += 5
-    
-    if npc1[1] - npc2[1] < 5:
-        score += 10
-    if npc1[1] - npc2[1] < 15:
-        score += 5
+    # check professions
+    if npc1[5] == npc2[5]:
+        score += 20
         
     return score
 
 
-def get_welcome_message(relationship_score):
+def get_welcome_message(npc1,npc2, relationship_score):
     
+
+    msg = ''
+    if npc1[5] == npc2[5]:
+        msg = 'Cool, another ' + npc1[5] + '! '
+
+
+    if relationship_score < 40:
+        return msg + " What do you want!"
+    if relationship_score < 50:
+        return  msg + " <mutters to themselves>"
     if relationship_score < 60:
-        return "hey"
+        return  msg + " hey"
     if relationship_score < 80:
-        return "Hi, hows it going"
+        return  msg + " Hi, hows it going"
     if relationship_score < 100:
-        return "Hey, great to see you again"
+        return  msg + " Hey, great to see you again"
         
-    return "Hi love"
+    return  msg + " Hi love"
 
 
 if __name__ == '__main__':
