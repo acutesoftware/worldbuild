@@ -34,7 +34,7 @@ childhoods = ['poor', 'normal', 'privileged']
 
 def TEST():
     print('generating NPC list...')
-    res = make_npcs(5)
+    res = make_npcs(50)
     save_list_to_csv(res, 'random_npc.csv')
     print("Done")
 
@@ -46,18 +46,57 @@ def make_npcs(num_npcs):
     npcs = [['npc_name', 'age', 'location', 'born', 'attitude', 'profession', 'work_location', 'childhood']]
     for i in range(1, num_npcs):
         nme = random.choice(list_names)
-        age = random.randint(16,60)
+        age = get_random_age()
         location = random.choice(locations[1:])[1]
-        born = random.choice(generate.get_list_places())
-        attitude = random.choice(attitudes)[1]
+        born =  random_fantasy_name() #random.choice(generate.get_list_places())
+        attitude = get_random_attitude() # random.choice(attitudes)[1]
         profession = random.choice(professions)
-        work_location = random.choice(locations[1:])[1]
+        work_location =  random_fantasy_name() #random.choice(locations[1:])[1]
         childhood = random.choice(childhoods)
         this_npc = [nme, age, location, born, attitude, profession, work_location, childhood]
         describe_npc(this_npc)
         npcs.append(this_npc)
 
     return npcs
+
+def get_random_attitude():
+    """
+    mostly gets a nice attitude, but occasionally random
+    """
+    att = random.choice(attitudes)
+    if att[0] < 3 :
+        att =random.choice(attitudes)
+    if att[0] < 3 :
+        att =random.choice(attitudes)
+    if att[0] < 3 :
+        att =random.choice(attitudes)
+    if att[0] < 3 :
+        att =random.choice(attitudes)
+    return att[1]    
+
+
+def random_fantasy_name():
+    pre = ['Al', 'El', 'Prom', 'Wec', 'Plab', 'Son', 'Isa', 'Wol']
+    post = ['form', 'lest', 'gorn', 'sed', 'ard', 'stand', 'kite']
+
+    return random.choice(pre) + random.choice(post)
+
+def get_random_age():
+    """
+    mostly gets a young person, but occasionally random
+    """
+    age = random.randint(16,50)
+    if age > 30:
+        age = random.randint(16,50)
+    else:
+        return age
+    if age > 25:
+        age = random.randint(16,50)
+    else:
+        return age
+    if age > 20:
+        age = random.randint(16,50)
+    return age
 
 
 def describe_npc(npc_spec):
