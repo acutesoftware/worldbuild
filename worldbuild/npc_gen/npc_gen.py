@@ -8,15 +8,26 @@ import random
 
 import os
 import sys 
+import random
 
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + ".." )
+
 pth = root_folder #+ os.sep + 'worldbuild'
 sys.path.append(pth)
 
 import worldbuild.town_gen.town_gen_config as cfg
 
-import rawdata.generate as generate
-import random
+
+### LOCAL PC (rawdata)
+rawdata_folder = os.path.abspath(os.path.dirname(root_folder  + os.sep + ".." + os.sep + ".." ))  + os.sep + "rawdata"  + os.sep + "rawdata"
+print('rawdata_folder = ' + rawdata_folder)
+sys.path.append(rawdata_folder)
+import generate as generate
+
+
+### Public (when rawdata updated via pip install)
+#import rawdata.generate as generate
+
 
 locations = [  # name,desc,coord_x,coord_y
 ['home','your home',0,0],
@@ -51,10 +62,10 @@ def make_npcs(num_npcs):
         nme = random.choice(list_names)
         age = get_random_age()
         location = random.choice(locations[1:])[1]
-        born =  random_fantasy_name() #random.choice(generate.get_list_places())
+        born =  generate.get_fantasy_name() #random.choice(generate.get_list_places())
         attitude = get_random_attitude() # random.choice(attitudes)[1]
         profession = random.choice(professions)
-        work_location =  random_fantasy_name() #random.choice(locations[1:])[1]
+        work_location = generate.get_fantasy_name() #random.choice(locations[1:])[1]
         childhood = random.choice(childhoods)
         this_npc = [nme, age, location, born, attitude, profession, work_location, childhood]
         describe_npc(this_npc)
@@ -84,11 +95,6 @@ def get_random_attitude():
     return att[1]    
 
 
-def random_fantasy_name():
-    pre = ['Al', 'El', 'Prom', 'Wec', 'Plab', 'Son', 'Isa', 'Wol']
-    post = ['form', 'lest', 'gorn', 'sed', 'ard', 'stand', 'kite']
-
-    return random.choice(pre) + random.choice(post)
 
 def get_random_age():
     """
