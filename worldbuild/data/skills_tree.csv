@@ -1,0 +1,27 @@
+skill_id,parent_node,skill_name,skill_desc
+ROOT,,base of skill tree - not to be shown,you will not see this in game
+gathering,ROOT,Gathering skills,collect things
+crafting,ROOT,Crafting skills,make things
+farming,ROOT,farming,Plant crops and harvest food
+social,ROOT,Social skills,get on with people
+cooking,crafting,cooking,make food
+fishing,gathering,Fishing,catch fish
+mining,gathering,Mining,dig for ores and gems
+artist,crafting,Artist,create art
+engineering,crafting,Engineering,invent new gadgets	
+leatherworking,gathering,Leatherworking,make jackets and armour
+mechanic,crafting,Mechanic,fix and build anything mechanical
+steel_worker,crafting,Steel Worker,uses forge to make armour etc
+tailoring,crafting,Tailor,make clothes and bags
+woodworking,crafting,Wood Working,fine woodworking
+brewing,crafting,Brewing,make ales and beers	
+winemaking,crafting,Wine Making,make wines and spirits
+diving,gathering,Diving,Dive for seafood
+hunting,gathering,Hunting,kill animals for food (mutually exclusive with animal_trainer)
+animal_trainer,social,Animal Trainer,tame wild animals (mutually exclusive with hunting)
+cooking_baking,cooking,Baking,Make Cakes and Pies
+cooking_stirfry,cooking,Salad,specialise in making Stir fry food
+cooking_roast,cooking,Roaster,specialise in making roast food
+cooking_pan,cooking,Pan Fry,specialise in making pan fry food
+cooking_soup,cooking,Soup,specialise in making Soup
+cooking_salad,cooking,Salad Expert,specialise in making salads
