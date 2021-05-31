@@ -1,0 +1,14 @@
+item_name,num_items_spawned_per_day
+wood_log_pine,40
+wood_log_oak,20
+wood_log_cedar,10
+string,10
+shells,10
+copper_ore,40
+iron_ore,20
+silver_ore,15
+gold_ore,8
+titanium_ore,5
+milk,5
+stick,100
+sap,70

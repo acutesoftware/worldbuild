@@ -127,6 +127,19 @@ class Item(object):
         res += ' (sells for ' + self.sell_price + ')'
         return     res   
 
+class ItemSpawnRate(object):
+    """
+    Items that spawn in the world
+    """
+    def __init__(self,name,quant):
+        self.name = name
+        self.quant = quant
+        
+    def __str__(self):
+        res = ''
+        res += self.name + ' - ' + self.quant
+        return     res   
+
 
 class RecipeIngredient(object):
     """
