@@ -9,6 +9,7 @@ import random
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." )
 
 items = craft.DataSet(craft.Item, craft.get_fullname('items.csv'))
+spawn_rate = craft.DataSet(craft.ItemSpawnRate, craft.get_fullname('item_spawn_rate.csv'))
 recipes = craft.DataSet(craft.Recipe, craft.get_fullname('recipes.csv'))
 ingred = craft.DataSet(craft.RecipeIngredient, craft.get_fullname('recipe_ingredients.csv'))
 methods = craft.DataSet(craft.CraftingMethod, craft.get_fullname('crafting_methods.csv') )
@@ -52,12 +53,14 @@ def main():
         if cmd == 'b':
             command_build_all()
             inventory_sort()
+        if cmd == 'g':
+            gather_mats()
 
 
 def get_cmd_list(menu):
     res = '<'
     if menu == 'main':
-        res += '[1-9] craft recipe  [a]dd random inv  [r]ecipes [i]nventory  [b]uild all  [Enter] to exit'
+        res += '[1-9] craft recipe  [a]dd random inv  [g]ather [r]ecipes [i]nventory  [b]uild all  [Enter] to exit'
 
     res += '>'
     return res
@@ -103,23 +106,23 @@ def do_we_have_ingredients_for_recipe(recipe_num):
         if ing.recipe_id == rec_to_make.recipe_id:
             ing_needed.append([ing.item_id,ing.quantity])
     
-    print('to make the recipe "' + rec_to_make.recipe_name + '", you need: ')
-    print(str(ing_needed))
+    #print('to make the recipe "' + rec_to_make.recipe_name + '", you need: ')
+    #print(str(ing_needed))
 
     # from list of ingredients, check inventory
     have_items = False # assume false until we have quant in inv
     for needed in ing_needed:
         for i in inv.object_list:
             if i.item_id == needed[0]:
-                if i.quantity >= needed[1]:
+                if int(i.quantity) <= int(needed[1]):
                     # at least one ingred doesnt have quant, so bail 
-                    print('MISSING - ' + str(i))
+                    #print('MISSING - ' + str(i))
                     #print('i.quantity - ' + str(i.quantity))
                     #print('i.item_id - ' + str(i.item_id))
-                    #print('needed - ' + str(needed))
+                    #print('needed - ' + str(needed[1]))
                     return False
                 have_items = True # so far, so good    
-        print('you need - ' + str(needed))
+        #print('you need - ' + str(needed))
 
 
     return have_items
@@ -194,6 +197,21 @@ def command_build_all():
             
     print('Finished Build all - you made ', str(total_things_crafted) + ' items')
     print(inv.str_object_list('N'))
+
+def gather_mats(num_days = 1):
+    """
+    using rough daily gathering stats, assume player spent day gathering
+    everything and add them to inventory
+    """
+    print('collecting mats')
+    for i in range(0, num_days):
+
+        for pickup in spawn_rate.object_list:
+            num_found = random.randint(round(int(pickup.quant) / 2)+2, int(pickup.quant))
+            itm = InventoryItem(pickup.name, str(num_found))
+            print('found ' + str(itm))
+            inv.object_list.append(itm)
+    inventory_sort()
 
 if __name__ == '__main__':
 	main()
