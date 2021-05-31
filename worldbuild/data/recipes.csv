@@ -1,6 +1,9 @@
 recipe_id,recipe_name,base_time_to_build,base_cost_to_build
 torch,Torch,1,0
 wooden_plank,Wooden Plank,3,1
+wood_plank_pine,pine planks,2,cut_saw
+wood_plank_oak,oak planks,2,cut_saw
+wood_plank_cedar,cedar planks,2,cut_saw
 charcoal,Charcoal,3,0
 butter,Butter,5,0
 bread,Bread,4,0

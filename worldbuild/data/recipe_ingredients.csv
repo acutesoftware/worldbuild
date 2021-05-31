@@ -2,9 +2,9 @@ recipe_id,item_id,quantity,crafting_method_id
 torch,stick,1,attach_misc
 torch,sap,1,attach_misc
 wood_plank,wood,1,cut_saw
-wood_plan_pine,wood_log_pine,2,cut_saw
-wood_plan_oak,wood_log_oak,2,cut_saw
-wood_plan_cedar,wood_log_cedar,2,cut_saw
+wood_plank_pine,wood_log_pine,2,cut_saw
+wood_plank_oak,wood_log_oak,2,cut_saw
+wood_plank_cedar,wood_log_cedar,2,cut_saw
 charcoal,wood,1,burn_flame
 butter,milk,1,mix
 bread,yeast,1,mix
