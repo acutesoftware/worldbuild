@@ -9,6 +9,7 @@ social_animal_trainer,social,Animal Trainer,tame wild animals (mutually exclusiv
 social_seller,social,Sales Person,Sell items at higher price at individual level
 social_marketing,social,Marketer,advertise and sell items large scale
 cooking,crafting,cooking,make food
+foraging,gathering,Foraging,collect resources from the land
 fishing,gathering,Fishing,catch fish
 mining,gathering,Mining,dig for ores and gems
 mining_pan,mining,Panning,Pan for gold in rivers 
@@ -28,7 +29,10 @@ engineering_civil,engineering,Civil Engineering,make roads and bridges
 engineering_mechanical,engineering,Mechanical Engineering,make gadgets
 leatherworking,crafting,Leatherworking,make jackets and armour
 mechanic,crafting,Mechanic,fix and build anything mechanical
-steel_worker,crafting,Steel Worker,uses forge to make armour etc
+blacksmith,crafting,Blacksmith,uses forge to make metal products
+armourer,blacksmith,Armourer,makes armour
+weaponsmith,blacksmith,Weaponsmth,makes weapons
+toolcrafter,blacksmith,Tool Crafter,makes tools
 tailoring,crafting,Tailor,make clothes and bags
 woodworking,crafting,Wood Working,fine woodworking
 brewing,crafting,Brewing,make ales and beers	
