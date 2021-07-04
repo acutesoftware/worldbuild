@@ -3,9 +3,9 @@ move_walk_stam,move_walk,stamina,0.01
 move_walk_energy,move_walk,energy,-0.01
 move_run_stam,move_run,stamina,0.02
 move_run_energy,move_run,energy,-0.1
-move_jump_stam,move_jump,stamina,-0.2
+move_jump_stam,move_jump,stamina,0.02
 move_jump_energy,move_jump,energy,-0.2
-move_leap_stam,move_leap,stamina,-0.3
+move_leap_stam,move_leap,stamina,0.03
 move_leap_energy,move_leap,energy,-0.3
 sleep_stam,sleep,stamina,-0.0001
 sleep_energy,sleep,energy,9
@@ -15,4 +15,6 @@ climb_up_stam,climb_up,stamina,0.03
 climb_up_energy,climb_up,energy,-0.3
 climb_down_stam,climb_down,stamina,0.01
 climb_down_energy,climb_down,energy,-0.1
+learn_mana,learn,mana,-1
+learn_wisdom,learn,wisdom,0.01
 
