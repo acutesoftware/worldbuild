@@ -1,0 +1,9 @@
+---,area,category,perc_done,details
+1,"char","animation","60","sneak and sprint need to use speed in the anim montage"
+2,"env","quarry","80","Quarry map needs foliage cleaned up (up in air)"
+3,"env","garrison","40","Garrison map has bad lighting"
+4,"env","mountain","70","Mountain map foliage is too dense and not natural"
+5,"env","grassland","40","Grasslands map needs a purpose or stuff in it"
+6,"env","island","30","Island map needs a jetty and a shop"
+7,"animal","animation","0","animals need to move randomly - currently only have root motion montages"
+9,"char","statistics","40","started gathering stats on players collecting of forage. Still have issues with save game and lvStats in savegame"

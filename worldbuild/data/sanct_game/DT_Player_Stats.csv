@@ -1,0 +1,10 @@
+---,area,stat_id,item_id_if_applicable,description,total,measure_method,player_id
+1,"pickups","pickup_ore_basic","pickup_ore_basic","Totals ores obtained from Mining","0","count of all items","[placeholder]"
+2,"pickups","pickup_herb_basic","pickup_herb_basic","Totals herbs obtained from herbalism","0","count of all items","[placeholder]"
+3,"pickups","pickup_mushroom_basic","pickup_mushroom_basic","Totals Mushrooms found","0","count of all items","[placeholder]"
+4,"pickups","pickup_apple_basic","pickup_apple_basic","Total Apples found","0","count of all items","[placeholder]"
+5,"pickups","pickup_gem_red","pickup_gem_red","Red Gems found","0","count of all items","[placeholder]"
+6,"pickups","pickup_gem_orange","pickup_gem_orange","Orange Gems found","0","count of all items","[placeholder]"
+7,"pickups","pickup_gem_white","pickup_gem_white","White Gems found","0","count of all items","[placeholder]"
+8,"fishing","fish_caught","None","Total Fish Caught","0","count of all items","[placeholder]"
+9,"pickups","total_gems_found","None","Total Gems found","0","count of all items","[placeholder]"

@@ -1,0 +1,9 @@
+---,date,area,category,details
+1002,"2020-12-15","map","animals","animals spawn randomly"
+1005,"2021-01-19","char","movement","sneak and sprint working"
+1006,"2021-07-18","pickup","forage","added shell | snail | scorpion as forage blueprint items"
+1007,"2021-07-18","pickup","forage","all pickups moved to base_pickup class so code is centralised now"
+1009,"2021-07-18","char","statistics","started statistics collecting - implemented savegame"
+1010,"2021-07-24","map","forage","Tree spawner implemented with choppable trees"
+1011,"2021-07-25","house","build","House placed onlvl_test from Blueprint function"
+1013,"2021-07-28","map","items","Dropped items in the world get saved per level per char"
