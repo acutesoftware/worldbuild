@@ -28,7 +28,7 @@ import generate as generate
 ### Public (when rawdata updated via pip install)
 #import rawdata.generate as generate
 
-
+"""
 locations = [  # name,desc,coord_x,coord_y
 ['home','your home',0,0],
 ['road','main street',1,0],
@@ -38,21 +38,26 @@ locations = [  # name,desc,coord_x,coord_y
 ['tavern','Old Tavern',4,0],
 ['old_house','Abandoned House',5,1 ],
 ]
+"""
 
-attitudes = [[-9,'nasty'], [-5,'dismissmive'], [0,'neutral'], [5,'helpful'], [9, 'caring']]
-professions = ['cook', 'farmer', 'builder', 'vet', 'woodworker', 'helper']
+attitudes = [[-2,'negative'], [-1,'dismissmive'], [0,'neutral'], [1,'helpful'], [2, 'caring']]
+professions = ['cook', 'farmer', 'builder', 'vet', 'woodworker', 'angler']
 childhoods = ['poor', 'normal', 'privileged']
 
 def TEST():
+    column_headings, locations_data = read_csv_to_list(get_fullname('locations_world.csv'))
     print('generating NPC list...')
-    npcs = make_npcs(10)
+
+    npcs = make_npcs(10, locations_data)
     save_list_to_csv(npcs, 'random_npc.csv')
 
     relationships = estimate_npc_relationships(npcs)
     save_list_to_csv(relationships, 'npc_relationships.csv')
+
+    
     print("Done")
 
-def make_npcs(num_npcs):
+def make_npcs(num_npcs, locations):
     """
     generates the NPC list
     """
@@ -61,7 +66,7 @@ def make_npcs(num_npcs):
     for i in range(1, num_npcs):
         nme = random.choice(list_names)
         age = get_random_age()
-        location = random.choice(locations[1:])[1]
+        location = random.choice(locations)[0]
         born =  generate.get_fantasy_name() #random.choice(generate.get_list_places())
         attitude = get_random_attitude() # random.choice(attitudes)[1]
         profession = random.choice(professions)
@@ -90,9 +95,7 @@ def get_random_attitude():
         att =random.choice(attitudes)
     if att[0] < 3 :
         att =random.choice(attitudes)
-    if att[0] < 3 :
-        att =random.choice(attitudes)
-    return att[1]    
+    return str(att[0]    )
 
 
 
@@ -123,7 +126,7 @@ def describe_npc(npc_spec):
     age = str(npc_spec[1])
     location = npc_spec[2] 
     born = npc_spec[3] 
-    pers = npc_spec[4] 
+    pers =  get_pers_desc(int(npc_spec[4]))
     prof = npc_spec[5] 
     work = npc_spec[6] 
     childhood = npc_spec[7] 
@@ -134,8 +137,43 @@ def describe_npc(npc_spec):
     res += nme + ' had a ' + childhood + ' childhood and have a ' + pers + ' personality.'
 
     print(res)
+
+def get_pers_desc(pers_index):
+    if pers_index == -2:
+        return 'grumpy'
+    elif pers_index == -1:
+        return 'bored'
+    if pers_index == 0:
+        return 'normal'
+    if pers_index == 1:
+        return 'happy'
+    if pers_index == 2:
+        return 'helpful'
+        
+
+def get_fullname(fname):
+    """
+    gets full filename of crafting data from this folder
+    """
+    return os.path.join(root_folder,'worldbuild', 'data', fname)
+
+def read_csv_to_list(fname):
+    raw_data = []
+    column_headings = []
+    clean_data = []
+    with open(fname, 'r') as fip:
+        for line in fip:
+            raw_data.append(line.strip('\n'))
     
-    
+    for line_num, raw_line in enumerate(raw_data):
+        if raw_line.strip(' ') != '':
+            cols = raw_line.split(',')
+            if line_num == 0:
+                column_headings = cols
+            else:
+                clean_data.append(cols)
+    return column_headings, clean_data
+
 
 def save_list_to_csv(lst, filename):
     """
@@ -193,7 +231,15 @@ def find_relationship_score(npc1, npc2):
     # check professions
     if npc1[5] == npc2[5]:
         score += 20
-        
+
+    # bonus if we come from the same place
+    if npc1[2] == npc2[2]:
+        score += 20
+
+    # modify THIS Npcs score based on their attitude
+    score += int(npc1[4]) * 5
+
+
     return score
 
 
@@ -202,7 +248,17 @@ def get_welcome_message(npc1,npc2, relationship_score):
 
     msg = ''
     if npc1[5] == npc2[5]:
-        msg = 'Cool, another ' + npc1[5] + '! '
+        msg = 'Oh, cool another ' + npc1[5]
+
+        if npc1[2] == npc2[2]:
+            msg += ' from ' + npc1[2] + ' as well! '
+        else:
+            msg +=  '! '
+    else:
+        if npc1[2] == npc2[2]:
+            msg += 'Oh , you are from ' + npc1[2] + ' as well! '
+
+
 
 
     if relationship_score < 40:
@@ -216,7 +272,7 @@ def get_welcome_message(npc1,npc2, relationship_score):
     if relationship_score < 100:
         return  msg + " Hey, great to see you again"
         
-    return  msg + " Hi love"
+    return  msg + " *hugs*"
 
 
 if __name__ == '__main__':
