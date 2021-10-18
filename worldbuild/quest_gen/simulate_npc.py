@@ -3,6 +3,8 @@
 # simulate_npc.py
 
 import os
+import random 
+
 import quest 
 
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." )
@@ -27,16 +29,19 @@ def main():
             command_move()
         if cmd == '2':
             command_help()
-        if cmd == '3':
-            command_fight()
+        if cmd == 'n':
+            command_list_npc()
+        if cmd == 'l':
+            command_list_location()
 
 
 def get_command():
     # press enter manually for now, but game loop
     print('commands are:')
-    print('1 = move')
+    print('1 = move (EventTick - all NPCs do their next move [may not be to timescale])')
     print('2 = help')
-    print('3 = fight')
+    print('n = list NPCs')
+    print('l = list locations')
  
     
     cmd = input("enter command: ")
@@ -46,15 +51,28 @@ def command_move():
     """
     move the NPCs
     """
-    import random 
 
     print('moving NPCs')
 
-    for n in npcs.object_list:
-        new_location = locations.object_list[random.randint(1,3)]
-        print(str(n.name) + ' moving to ' + new_location.name + ' (' + new_location.desc + ')')
-    
+    for npc_num, n in enumerate(npcs.object_list):
+        new_location = get_new_location(n)
+        if new_location is None:
+            print(str(n.name) + ' is idle at ' + str(n.location) )    
+        else:
+            print(str(n.name) + ' moving to ' + new_location.name + ' (' + new_location.desc + ')')
+            n.location = new_location
+            npcs.object_list[npc_num] = n
 
+
+def get_new_location(npc):
+    """
+    uses an NPC current location and goals to find thier new location
+    """
+    if random.randint(1,100) > 50:
+        new_location = locations.object_list[random.randint(0,len(locations.object_list) - 1)]
+        return new_location    
+    else:
+        return None
 
 def command_help():
     """
@@ -66,11 +84,19 @@ def command_help():
     
     
 
-def command_fight():
+def command_list_npc():
     """
-    NPCs attack
+    List NPCs - location and goals
     """
-    print('not yet implemented')
+    for n in npcs.object_list:
+        print(str(n))
+
+
+def command_list_location():
+    for l in locations.object_list:
+        print(str(l))
+
+
 
 
 if __name__ == '__main__':

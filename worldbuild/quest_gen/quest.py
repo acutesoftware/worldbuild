@@ -99,8 +99,9 @@ class DataSet(object):
 
     def fill_from_csv(self, fname):
         with open(fname, 'r') as fip:
-            for line in fip:
-                self.raw_data.append(line)
+            for line_num, line in enumerate(fip):
+                if line_num > 0:
+                    self.raw_data.append(line)
 
 class Locations(DataSet):
     """
