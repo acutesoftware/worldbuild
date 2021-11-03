@@ -16,4 +16,4 @@ fish_perch_all,"fish_perch","All","0.100000","BlueprintGeneratedClass'/Game/_DJM
 fish_red_eye_all,"fish_red_eye","All","0.100000","BlueprintGeneratedClass'/Game/_DJM/InventorySystem/Items/Blueprints/fish_red_eye.fish_red_eye_C'"
 fish_salmon_all,"fish_salmon","All","0.100000","BlueprintGeneratedClass'/Game/_DJM/InventorySystem/Items/Blueprints/fish_salmon.fish_salmon_C'"
 fish_shark_all,"fish_shark","All","0.100000","BlueprintGeneratedClass'/Game/_DJM/InventorySystem/Items/Blueprints/fish_shark.fish_shark_C'"
-shell_scallop_all,"shell_scallop","All","0.100000","BlueprintGeneratedClass'/Game/_DJM/pickups/ShellPickupScallop.ShellPickupScallop_C'"
+shell_scallop_all,"shell_scallop","All","0.100000","BlueprintGeneratedClass'/Game/_DJM/crafting/pickups/ShellPickupScallop.ShellPickupScallop_C'"

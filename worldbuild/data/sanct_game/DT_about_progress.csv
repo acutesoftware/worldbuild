@@ -6,4 +6,6 @@
 5,"env","grassland","40","Grasslands map needs a purpose or stuff in it"
 6,"env","island","30","Island map needs a jetty and a shop"
 7,"animal","animation","0","animals need to move randomly - currently only have root motion montages"
-9,"char","statistics","40","started gathering stats on players collecting of forage. Still have issues with save game and lvStats in savegame"
+8,"char","statistics","40","started gathering stats on players collecting of forage. Still have issues with save game and lvStats in savegame"
+9,"combat","combat","10","added combat for zombies using any tool"
+10,"build","crafting","20","craftable recipes increasing"
