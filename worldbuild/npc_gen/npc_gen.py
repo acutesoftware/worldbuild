@@ -6,16 +6,10 @@ import os
 import sys
 import random 
 
-import os
-import sys 
-import random
-
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + ".." )
-
 pth = root_folder #+ os.sep + 'worldbuild'
 sys.path.append(pth)
 
-import worldbuild.town_gen.town_gen_config as cfg
 
 
 ### LOCAL PC (rawdata)
@@ -62,7 +56,7 @@ def make_npcs(num_npcs, locations):
     generates the NPC list
     """
     list_names = generate.get_list_people()
-    npcs = [['npc_name', 'age', 'location', 'born', 'attitude', 'profession', 'work_location', 'childhood']]
+    npcs = [['npc_name', 'age', 'location', 'born', 'attitude', 'profession',  'childhood']]
     for i in range(1, num_npcs):
         nme = random.choice(list_names)
         age = get_random_age()
@@ -70,9 +64,8 @@ def make_npcs(num_npcs, locations):
         born =  generate.get_fantasy_name() #random.choice(generate.get_list_places())
         attitude = get_random_attitude() # random.choice(attitudes)[1]
         profession = random.choice(professions)
-        work_location = generate.get_fantasy_name() #random.choice(locations[1:])[1]
         childhood = random.choice(childhoods)
-        this_npc = [nme, age, location, born, attitude, profession, work_location, childhood]
+        this_npc = [nme, age, location, born, attitude, profession, childhood]
         describe_npc(this_npc)
         npcs.append(this_npc)
 
@@ -128,13 +121,12 @@ def describe_npc(npc_spec):
     born = npc_spec[3] 
     pers =  get_pers_desc(int(npc_spec[4]))
     prof = npc_spec[5] 
-    work = npc_spec[6] 
-    childhood = npc_spec[7] 
+    childhood = npc_spec[6] 
     res = ''
     res += '------------------------------------------------\n'
-    res += nme + ' was born ' + age + ' years ago in ' + born + '\n'
-    res += 'They work as ' + prof + ' in ' + work + '\n'
-    res += nme + ' had a ' + childhood + ' childhood and have a ' + pers + ' personality.'
+    res += nme + ' is ' + age + ' years old and lives in ' + location + ', '
+    res += 'where they work as a ' + prof + '\n'
+    #res += nme + ' had a ' + childhood + ' childhood and have a ' + pers + ' personality.'
 
     print(res)
 
