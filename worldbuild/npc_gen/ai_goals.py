@@ -19,6 +19,68 @@ plans_love = ['family','friends','charity']
 plans_fun = ['family', 'friends','chat','pub', 'fish', 'games']
 plans_learn = ['work','craft','study', 'train', 'craft']
 
+interests = ['people','outdoors', 'fashion', 'food', 'building', 'books', 'games','sports' ]
+
+tasks = ['fishing','library', 'job', 'run_stall', 'run_shop', 'talk', 'make_clothes', 'dressup', 'cafe', 'restaurant', 'events', 'party', 'pub', 'crafting', 'help_others', 'forage', 'shopping', 'explore', 'cook', 'cards', 'soccer']
+
+tasks_for_plans = [   # plan_id, task_id, weight
+    ['work', 'job', 9 ], 
+    ['work', 'run_stall', 8 ], 
+    ['work', 'forage', 4 ], 
+    ['work', 'forage', 4 ], 
+    ['business', 'run_stall', 9 ], 
+    ['business', 'run_shop', 10 ], 
+    ['forage', 'forage', 9 ],
+    ['forage', 'explore', 8 ],
+    ['forage', 'fishing', 7 ],
+    ['craft', 'make_clothes', 5 ],
+    ['craft', 'crafting', 10 ],
+    ['craft', 'cook', 7 ],
+    ['family', 'cafe', 7 ],
+    ['family', 'restaurant', 7 ],
+    ['family', 'shopping', 7 ],    
+    ['friends', 'cafe', 7 ],
+    ['friends', 'restaurant', 7 ],
+    ['friends', 'shopping', 7 ],    
+    ['charity', 'run_stall', 5 ],
+    ['charity', 'help_others', 10 ],
+    ['chat', 'talk', 10 ],
+    ['pub', 'pub', 10 ],
+    ['fish', 'fishing', 10 ],
+    ['games', 'cards', 5 ],
+    ['games', 'soccer', 5 ],
+    ['study', 'study', 10 ],
+    ['train', 'train', 10 ],
+    ['craft', 'craft', 10 ],
+]
+
+tasks_for_interests = [   # interest_id , task_id, weighting
+    ['people', 'talk_friends', 9],
+    ['people', 'meet_strangers', 4],
+    ['people', 'events', 9],
+    ['people', 'restaurant', 6],
+    ['people', 'cafe', 5],
+    ['people', 'pub', 5],
+    ['outdoors', 'fishing', 7 ],
+    ['outdoors', 'forage', 7 ],
+    ['outdoors', 'explore', 7 ],
+    ['fashion', 'make_clothes', 7 ],
+    ['fashion', 'dressup', 7],
+    ['fashion', 'events', 7],
+    ['fashion', 'restaurant', 6],
+    ['food', 'cook', 9],
+    ['food', 'restaurant', 8],
+    ['food', 'cafe', 7],
+    ['building', 'crafting', 7],
+    ['building', 'forage', 7],
+    ['books', 'reading', 9],
+    ['books', 'library', 8],
+    ['books', 'shopping', 7],
+    ['games', 'cards', 9],
+    ['sports', 'cards', 8],
+    ['sports', 'soccer', 8],    
+]
+
 """
 ['npc_name', 'age', 'location', 'born', 'attitude', 'profession',  'childhood']
 "Jennie","16","doctade","Elkite","-1","cook","privileged",
@@ -47,12 +109,18 @@ def main():
         for line_num, line in enumerate(fip):
             if line_num > 0:
                 npc = extract_npc_raw_data(line)
+                my_interests = get_random_interests(npc)
                 goals, plans = assign_goals(npc)
                 display_npc_goals(npc, goals, plans)
+                my_tasks = get_tasks(npc, goals, plans, my_interests)
+                #for tsk in my_tasks:
+                #    print(tsk)
                 
 
 def display_npc_goals(npc, goals, plans):
+    print('\n----------------------------------------')
     print(npc['nme'] + ' goals = ' + str(goals))
+    print('----------------------------------------')
     for plan in plans:
         print('plan = ' + str(plan))
 
@@ -69,7 +137,15 @@ def extract_npc_raw_data(line):
     op['childhood'] = npc[6]
     return op #, nme, age, location, born, attitude, profession, childhood
    
-
+def get_random_interests(npc):
+    #print('getting interests for ' + str(npc))
+    npc_interests = ['relax']
+    num_interests = random.randint(2,7)
+    for n in range(num_interests):
+        new_interest = random.choice(interests)
+        if new_interest not in npc_interests:
+            npc_interests.append(new_interest)
+    return npc_interests
 
 
 def assign_goals(npc):
@@ -83,7 +159,7 @@ def assign_goals(npc):
     plans_learn = ['work','craft','study', 'train', 'craft']
 
     """
-    print('generating goals for ' + npc['nme'] + ' born in ' + npc['born'])
+    #print('generating goals for ' + npc['nme'] + ' born in ' + npc['born'])
     goal = random.choice(goals)
 
     npc_goals = {}
@@ -117,6 +193,41 @@ def get_top_plan_for_goal(goal, npc_goals):
         weight = npc_goals[goal]
         
     return {"plan_name":plan, "weight":weight}
+
+def get_top_plan(plan_list):
+    #return max(plan_list, key= lambda x: plan_list[x])
+    max_val = 0
+    highest_plan = ''
+    for plan in plan_list:
+        if plan['weight'] > max_val:
+            max_val = plan['weight']
+            highest_plan = plan
+    return highest_plan
+    
+
+def get_tasks(npc, goals, plans, my_interests):
+    my_tasks = []
+    plan  = get_top_plan(plans)
+    print('getting tasks based on top plan : ' + str(plan))
+
+    # add all tasks for my TOP plan
+    
+    for task_plan in tasks_for_plans:
+        if plan["plan_name"] == task_plan[0]:
+            my_tasks.append(task_plan[1])
+            print(task_plan)
+    # add all tasks for TOP interest
+    print('getting random tasks based on some interests : ' + str(my_interests))
+    todays_interest = random.choice(my_interests)
+    for intr in tasks_for_interests:
+        if intr[0] == todays_interest:
+            if random.randint(1,10) > 5:
+                my_tasks.append(intr[1])
+                print(intr)
+
+
+
+    return my_tasks
 
 
 if __name__ == '__main__':
