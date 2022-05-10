@@ -99,6 +99,21 @@ actions = [
 {"name":"tinker", "cost_energy":0.01, "cost_gold":0, "reward_chance":0.5,"reward_item":"recipe", "exp_gain":0.1},
 ]
 
+
+
+----------------------------------------
+Elin goals = {'money': 3, 'love': 2, 'fun': 10, 'learn': 9}
+----------------------------------------
+plan = {'plan_name': 'work', 'weight': 3}
+plan = {'plan_name': 'charity', 'weight': 2}
+plan = {'plan_name': 'games', 'weight': 10}
+plan = {'plan_name': 'craft', 'weight': 9}
+getting tasks based on top plan : {'plan_name': 'games', 'weight': 10}
+['games', 'cards', 5]
+['games', 'soccer', 5]
+getting random tasks based on some interests : ['relax', 'building', 'fashion', 'games', 'sports']
+['building', 'crafting', 7]
+
 """
 
 
@@ -207,6 +222,7 @@ def get_top_plan(plan_list):
 
 def get_tasks(npc, goals, plans, my_interests):
     my_tasks = []
+    num_tasks_added_for_interest = 0
     plan  = get_top_plan(plans)
     print('getting tasks based on top plan : ' + str(plan))
 
@@ -221,13 +237,20 @@ def get_tasks(npc, goals, plans, my_interests):
     todays_interest = random.choice(my_interests)
     for intr in tasks_for_interests:
         if intr[0] == todays_interest:
-            if random.randint(1,10) > 5:
+            if num_tasks_added_for_interest == 0:
                 my_tasks.append(intr[1])
+                num_tasks_added_for_interest += 1
                 print(intr)
+            else:
+                if random.randint(1,10) > 5:
+                    my_tasks.append(intr[1])
+                    num_tasks_added_for_interest += 1
+                    print(intr)
 
 
 
     return my_tasks
+
 
 
 if __name__ == '__main__':
