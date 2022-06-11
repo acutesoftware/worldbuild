@@ -1,0 +1,13 @@
+---,goal_id,npc_name,goal_weight
+simon_people,"people","None","7"
+simon_money,"money","simon","2"
+simon_fun,"learn","simon","6"
+simon_learn,"learn","simon","6"
+jane_fun,"fun","jane","3"
+jane_money,"money","jane","4"
+jane_people,"people","jane","3"
+jane_learn,"learn","jane","5"
+leela_money,"money","leela","4"
+leela_fun,"fun","leela","8"
+leela_people,"people","leela","2"
+leela_learn,"learn","leela","3"

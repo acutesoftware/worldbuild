@@ -1,0 +1,4 @@
+---,task_id,task_desc,time_taken,cost
+chat_with_people,"chat_with_people","Chat with People","1","0"
+play_cards,"play_cards","Play cards","2","0"
+run_stall,"run_stall","Work in a stall selling","5","-5"
