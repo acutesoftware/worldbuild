@@ -26,7 +26,7 @@ body {   margin: 20px;   padding: 0;
 }
 #container { margin: 0 auto; width: 100%;  background-image: url("paper-texture.jpg"); }
 
-#content { z-index: -1; float: left; width: 70%;	padding: 25px 25px 0px 25px; margin: 0px auto;
+#content { z-index: -1; float: left; width: 90%;	padding: 25px 25px 0px 25px; margin: 0px auto;
 
 }
 
@@ -52,15 +52,17 @@ img { border: none; }
   --         Colors              -- 
   ---------------------------------*/
 
-body               { background: #DEB887;   color: #444; 
+body               {  color: #444;  
+	background: #DEB887; 
+}
+#container         { background: #fff; }
+#content 		 {  color: #333333; border-radius: 6px 6px 0px 0px ; border: 1px solid #000; 
 	background-image: url('paper-texture.jpg');
 	background-repeat: no-repeat;   
 	
 	background-attachment: fixed;
 	background-size: 100% 100%;	
 }
-#container         { background: #fff; }
-#content 		 { background: #FFE5B4; color: #333333; border-radius: 6px 6px 0px 0px ; border: 1px solid #000; }
 #header 		 { background: #ccc; }
 #footer 		 { color: #333333;  }
 

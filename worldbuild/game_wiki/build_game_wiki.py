@@ -18,7 +18,16 @@ def main():
     make_page_index()
     make_page_Places()
     make_page_NPCs()
+    make_page_Items()
+    make_page_Item_list_filtered('Food', 'food_')
+    make_page_Item_list_filtered('Plants', 'plant_')
+    make_page_Item_list_filtered('Fish', 'fish_')
+    make_page_Item_list_filtered('Animals', 'animal_')
+    make_page_Item_list_filtered('Clothes', 'cloth_')
+    make_page_Item_list_filtered('Tools', 'tool_')
+    make_page_Item_list_filtered('Materials', 'build_')
 
+    make_page_crafting()
     #op += make_html_level(lvl, lvl_waypoints, lvl_spawners )
        
 
@@ -102,9 +111,12 @@ def make_page_Places():
         if lvl[7] == 'True':  # is level playable
             lvl_waypoints, lvl_spawners = get_data_levels(lvl[0])
             cur_level_file = os.path.join(cfg.op_folder, 'Places_' + lvl[0] + '.html')
-            
+            img_file = os.path.join(cfg.op_folder, 'img', 'places',lvl[0] + '.png')
+            #print('img file = ' + img_file)
             txt += '<H2><a href=' + cur_level_file + '>' + lvl[3] + '<a/></H2>' 
             txt += '<div>[' + lvl[0] + '] ' + lvl[4] + '</div>'
+            txt += '<img align=center  width = 64px src="' + img_file + '"><BR>'
+                
 
 
             # make a page for each level
@@ -114,7 +126,8 @@ def make_page_Places():
                 f_cur.write('<div id = content>\n')
                 f_cur.write('<div>[' + lvl[0] + '] ' + lvl[4] + '</div>')
                 cur_txt = ''
-
+                
+                f_cur.write('<img align=center  width = 800px src="' + img_file + '"><BR>')  #  align=left width = 250px src="' + 'map_' + entry['name'] + '.jpg">'
                 if len(lvl_waypoints) > 0:
                     cur_txt += '<B>Waypoints</B><BR>\n' 
                     for wp in lvl_waypoints:
@@ -156,22 +169,207 @@ def make_page_NPCs():
     list_npc = read_csv_to_list(cfg.f_npcs) # ---,level_filename,full_filename,name,desc,image_med,image_icon,is_playable,is_home,is_locked,biome
     for npc in list_npc:
         txt += '<H2>' + npc[2] + '</H2>'
-        txt += '<div>' + npc[0] + ' lives in <a href="Places_' + npc[5] + '.html">' + npc[5] + '</a> and usually spawns at ' + npc[6] + '</div>\n'
+        txt += '<div>' + npc[0] + ' lives in <a href="Places_' + npc[5] + '.html">' + npc[5] + '</a> and usually spawns at ' + get_short_coord(npc[6]) + '</div>\n'
         if npc[9] == 'True':
             txt += 'They sell the following items:<BR>'
             if npc[10] == '':
-                txt += '[ALL ITEMS]<BR>'
+                if npc[11] == '':
+                    txt += '[ALL ITEMS]<BR>'
+                else:
+                    txt +=  'Evertything except for : ' + npc[11] + '<BR>'
             else:
                 txt +=  npc[10] + '<BR>'
-            if npc[11] == '':
-                txt += '(no exclusions)<BR>'
-            else:
-                txt +=  'Except : ' + npc[11] + '<BR>'
-        
+       
 
     txt += html_utils.get_footer('')
     with open(cfg.op_file_npcs, 'w') as fop:
         fop.write(txt)
+
+
+def make_page_Items():
+    """
+    build the main Object page and sub pages if needed 
+    ---,ID,Name,Description,Quality,Icon,ItemType,Amount,IsStackable,MaxStackSize,IsDroppable,WorldMesh,Health,Duration,WeaponActorClass,EquipmentMesh,EquipmentType,EquipmentSlot,Damage,Armor,Strength,Dexterity,Intelligence
+
+    """
+    txt = html_utils.get_header('Sanct')
+    txt += '<H1>Items</H1><div id = content><BR>Details of in game items<BR>'
+
+    txt += get_world_build_menu('Items', 'Items in the game')
+    list_items = read_csv_to_list(cfg.f_items) # 
+    for itm in list_items:
+        itm_id = itm[1].lower()
+        #txt += '<H2>' + itm[2] + '</H2>'
+
+        # NOTE - we need to exclude items in the other lists below
+        show_this_here = 1
+        if 'food_' in itm_id:
+            show_this_here = 0
+        if 'plant_' in itm_id:
+            show_this_here = 0
+        if 'fish_' in itm_id:
+            show_this_here = 0
+        if 'animal_' in itm_id:
+            show_this_here = 0
+        if 'cloth_' in itm_id:
+            show_this_here = 0
+        if 'tool_' in itm_id:
+            show_this_here = 0
+        if 'build_' in itm_id:
+            show_this_here = 0
+
+        if show_this_here == 1:
+            txt += '<div><a href="Item_' + itm[1] + '.html">' + itm[2] + '</a> = ' + itm[3] + '</div>\n'
+
+
+    txt += html_utils.get_footer('')
+    with open(cfg.op_file_items, 'w') as fop:
+        fop.write(txt)
+
+def make_page_Item_list_filtered(filter_list_desc, filter_string):
+    """
+    build a filtered list of items, but do NOT create pages (aalready done by 'make_page_Items')
+    ---,ID,Name,Description,Quality,Icon,ItemType,Amount,IsStackable,MaxStackSize,IsDroppable,WorldMesh,Health,Duration,WeaponActorClass,EquipmentMesh,EquipmentType,EquipmentSlot,Damage,Armor,Strength,Dexterity,Intelligence
+
+    """
+    opfile = os.path.join(cfg.op_folder, '' + filter_list_desc + '.html' )
+    txt = html_utils.get_header('Sanct')
+    txt += '<H1>Items : ' + filter_list_desc + '</H1><div id = content><BR>'
+
+    txt += get_world_build_menu(filter_list_desc, filter_list_desc + ' in the game')
+    list_items = read_csv_to_list(cfg.f_items) # 
+    txt += '<table border=1><TR><TD>Item</TD><TD>Details</TD></TR>\n'
+
+    for itm in list_items:
+        #txt += '<H2>' + itm[2] + '</H2>'
+        if filter_string.lower() in itm[0].lower():
+            txt += '<TR><TD>'
+            txt += '<img align=left  width = 50px src="' + get_img_for_item(itm[1]) + '">'
+                    
+            txt += '<div><a href="Item_' + itm[1] + '.html">' + itm[2] + '</a>'
+            txt += '</td><TD>'
+            txt +=  itm[3] 
+            txt += '</TD></TR>\n'
+    txt += '</table>\n'
+
+    txt += html_utils.get_footer('')
+    with open(opfile, 'w') as fop:
+        fop.write(txt)
+
+def make_page_crafting(view_type='ICON'):
+    """
+    crafting page with recipes AND built items
+    recipe data = ---,recipe_id,recipe_name,base_time_to_build,base_cost_to_build,num_produced_per_craft,tools_or_workbench_required
+    recipe ingred data = ---,recipe_id,item_id,quantity,crafting_method_id
+    builtitem data = ---,built_item_id,Built Item Name,level_required,icon,floorplan_img,SM_foundation_for_placing,building_size
+
+    """
+    opfile = cfg.op_file_crafting
+    txt = html_utils.get_header('Sanct')
+    txt += '<H1>Recipes and Built Items</H1><div id = content><BR>'
+
+    txt += '<BR><div id = content><BR>'
+
+    txt += get_world_build_menu('Crafting', 'Crafting recipes')
+    list_items = read_csv_to_list(cfg.f_recipes) # 
+    list_item_ingred = read_csv_to_list(cfg.f_recipe_ingred) # 
+    txt += '<table border=1><TR><TD>Recipe</TD><TD>Ingredients</TD><TD>Workstation</TD></TR>\n'
+    for itm in list_items:
+        txt += '<TR><TD valign=top>\n'
+        
+        # get icon for main recipe
+        txt += '<img align=left  width = 50px src="' + get_img_for_item(itm[1]) + '">'
+        txt += '<div><a href="Item_' + itm[1] + '.html">' + itm[2] + '</a>'
+        txt += '</TD><TD valign=top>'
+        for ingr in list_item_ingred:
+            if ingr[1] == itm[1]:
+                if view_type != 'ICON':
+                    # DETAIL VIEW
+                    txt += ingr[3] + 'x ' + ingr[2]
+                    if ingr[4] != 'None':
+                        txt += ' (' + ingr[4] + ')'
+                    txt += '<BR>'
+                else:
+                    # ICON VIEW (which everyone likes)
+                    alt_text = ingr[3] + 'x ' + ingr[2] 
+                    txt += '<img height = 50px title= "' + alt_text + '" alt="' + alt_text + '" src="' + get_img_for_item(ingr[2] ) + '">'
+
+        txt += '</TD><TD>' + get_workstation_nice_name(itm[6]) + '</TD>'
+        txt += '</TR>'
+    txt += '</table>\n'
+
+    txt += '<H2>Built Items</H2>These are things that are built in place (houses, campfires) or spawnable objects that dont go into your inventory (like animals)<BR>'
+    list_items = read_csv_to_list(cfg.f_builtitem) # 
+    txt += '<table><TR><TD>Built Item</TD><TD>Cost</TD></TR>'
+    for itm in list_items:
+        img_file = os.path.join(cfg.op_folder, 'img', 'builtitem',itm[1] + '.png')
+        txt += '<TR><TD><img align=left  width = 50px src="' + img_file + '">'
+        
+        txt += '<div>' + itm[2] +  '</div>\n'
+        txt += '</TD><TD>' + itm[3]
+        
+        txt += '</TD>'
+        txt += '</TR>'
+    txt += '</table>'
+
+    txt += html_utils.get_footer('')
+    with open(opfile, 'w') as fop:
+        fop.write(txt)
+
+def get_workstation_nice_name(raw_name):
+    if raw_name == '':
+        return ''
+    if '_Kitchen' in raw_name:
+        return 'Kitchen'
+    if '_Workbench' in raw_name:
+        return 'Workbench'
+
+    if '_Furnace' in raw_name:
+        return 'Furnace'
+
+    if '_Pottery' in raw_name:
+        return 'Pottery Wheel'
+
+    if 'bucket' in raw_name:
+        return 'Bucket'
+
+
+
+
+    return 'UNKNOWN WORKSTATION'
+
+
+
+
+
+def get_img_for_item(item_id):
+    """
+    gets the icon for an inventory item
+    """
+    list_inv = read_csv_to_list(cfg.f_items) # 
+    
+    for inv in list_inv:
+        if inv[1] == item_id:
+
+            img_file = os.path.join(cfg.op_folder, 'img', 'items',item_id + '.png')
+            #print('img file = ' + img_file)
+            return img_file
+    return ''            
+
+
+
+
+
+    return '1'
+
+
+def get_short_coord(long_coord):
+    """
+    strips off the .0000 stuff from end of coords in UE4
+    """
+
+    return long_coord.strip('.000')
+
 
 def check_data_files():
     """

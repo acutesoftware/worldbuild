@@ -14,6 +14,8 @@ data_folder = os.path.join(cur_folder, '..', 'data', 'sanct_game')
 op_file_main = os.path.join(op_folder, 'index.html')
 op_file_places = os.path.join(op_folder, 'Places.html')
 op_file_npcs = os.path.join(op_folder, 'NPC.html')
+op_file_items = os.path.join(op_folder, 'Items.html')
+op_file_crafting = os.path.join(op_folder, 'Crafting.html')
 
 #####################################################
 # Data Files
@@ -27,6 +29,10 @@ f_items = os.path.join(data_folder, 'ItemList.csv')
 
 f_npcs = os.path.join(data_folder, 'NPC_data','DT_NPCs.csv')
 f_fishing_loot = os.path.join(data_folder, 'DT_Fishing_Loot.csv')
+f_recipes = os.path.join(data_folder, 'Crafting_data', 'DT_craft_recipe.csv')
+f_recipe_ingred = os.path.join(data_folder, 'Crafting_data', 'DT_craft_recipe_ingredients.csv')
+f_builtitem = os.path.join(data_folder, 'Crafting_data', 'DT_BuiltItem.csv')
+
 
 
 
@@ -43,9 +49,15 @@ chapters = [
     ['Places', 'places in Alrona'],
     ['NPC', 'Any non player character that can communicate'],
     #['Creatures', 'animals and other creatures in the world'],
-    ['Objects', 'Objects in the world'],
+    ['Items', 'Items in the world'],
+    ['Food', 'Food in the world'],
     ['Plants', 'Plants in the world'],
+    ['Animals', 'Animals in the world'],
+    ['Fish', 'Fish in the world'],
+    ['Clothes', 'Animals in the world'],
+    ['Tools', 'Tools to gather and craft'],
     #['MOBs', 'dangerous animals and NPCs in the world'],
+    ['Materials', 'stuff for crafting'],
     ['Crafting', 'building and creating things'],
     #['Gathering', 'finding and collecting things']
 ]
