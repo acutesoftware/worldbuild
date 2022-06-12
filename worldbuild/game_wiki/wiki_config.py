@@ -12,6 +12,8 @@ op_folder = os.path.join(cur_folder, "html_op")
 data_folder = os.path.join(cur_folder, '..', 'data', 'sanct_game')
 
 op_file_main = os.path.join(op_folder, 'index.html')
+op_file_places = os.path.join(op_folder, 'Places.html')
+op_file_npcs = os.path.join(op_folder, 'NPC.html')
 
 #####################################################
 # Data Files
