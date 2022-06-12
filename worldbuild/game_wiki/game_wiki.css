@@ -52,15 +52,17 @@ img { border: none; }
   --         Colors              -- 
   ---------------------------------*/
 
-body               { background: #DEB887;   color: #444; 
+body               {  color: #444;  
+	background: #DEB887; 
+}
+#container         { background: #fff; }
+#content 		 {  color: #333333; border-radius: 6px 6px 0px 0px ; border: 1px solid #000; 
 	background-image: url('paper-texture.jpg');
 	background-repeat: no-repeat;   
 	
 	background-attachment: fixed;
 	background-size: 100% 100%;	
 }
-#container         { background: #fff; }
-#content 		 { background: #FFE5B4; color: #333333; border-radius: 6px 6px 0px 0px ; border: 1px solid #000; }
 #header 		 { background: #ccc; }
 #footer 		 { color: #333333;  }
 
