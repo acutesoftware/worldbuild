@@ -6,7 +6,7 @@ Generate an in game Wiki from Data tables
 1. From Unreal Engine, export all data tables to CSV
 2. Run the DEV_TOOL UI below to export all Textures in game to .PNG
 
-![ue4_sanct_export_data_table_images.PNG](https://github.com/acutesoftware/worldbuild/blob/master/game_wiki/ue4_sanct_export_data_table_images.PNG)
+![ue4_sanct_export_data_table_images.PNG](https://github.com/acutesoftware/worldbuild/blob/master/worldbuild/game_wiki/ue4_sanct_export_data_table_images.PNG)
 ue4_sanct_export_data_table_images.PNG
 
 

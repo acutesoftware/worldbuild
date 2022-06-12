@@ -3,7 +3,7 @@
 ###################### TEMPLATES #########################
 
 def get_header(pge=''):
-    txt = '<HTML><HEAD>\n'
+    txt = '<!DOCTYPE html><HTML><HEAD>\n'
     txt += '<title>worldbuild:' + pge + '</title>\n'
     txt += '<!-- Stylesheets for responsive design -->\n'
     txt += '<meta name="viewport" content="width=device-width, initial-scale=1.0" />\n'
