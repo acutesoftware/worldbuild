@@ -121,7 +121,7 @@ def make_page_Places():
 
 
             # make a page for each level
-            with open(cur_level_file, 'w') as f_cur:
+            with open('html_op' + os.sep + cur_level_file, 'w') as f_cur:
                 f_cur.write(html_utils.get_header('Sanct'))
                 f_cur.write(get_world_build_menu('Places', 'Place - ' + lvl[3]))
                 f_cur.write('<div id = content>\n')
