@@ -41,6 +41,10 @@ h1, h2, h3, h4, h5, h6 { margin: 0 0 0em; line-height: 1.0; }
 p { margin: 0 0 1em; }
 img { border: none; }
 
+img {
+	clip: rect(0px, 300px, 200px, 0px);
+  }
+
 /*-------------- mainMenu (currently Top menu)  ----------*/ 
 #mainMenu { position: absolute; left: 19px; top: 60px; height: 30px; width: 100%; }
 #mainMenu ul  {   margin: 0;  padding: 1px 1px; height: 30px; }

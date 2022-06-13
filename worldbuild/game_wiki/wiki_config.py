@@ -16,6 +16,7 @@ op_file_places = os.path.join(op_folder, 'Places.html')
 op_file_npcs = os.path.join(op_folder, 'NPC.html')
 op_file_items = os.path.join(op_folder, 'Items.html')
 op_file_crafting = os.path.join(op_folder, 'Crafting.html')
+op_file_dev = os.path.join(op_folder, 'Dev.html')
 
 #####################################################
 # Data Files
@@ -32,6 +33,8 @@ f_fishing_loot = os.path.join(data_folder, 'DT_Fishing_Loot.csv')
 f_recipes = os.path.join(data_folder, 'Crafting_data', 'DT_craft_recipe.csv')
 f_recipe_ingred = os.path.join(data_folder, 'Crafting_data', 'DT_craft_recipe_ingredients.csv')
 f_builtitem = os.path.join(data_folder, 'Crafting_data', 'DT_BuiltItem.csv')
+
+f_about_progress = os.path.join(data_folder,  'DT_about_dev_log.csv')
 
 
 
@@ -59,5 +62,6 @@ chapters = [
     #['MOBs', 'dangerous animals and NPCs in the world'],
     ['Materials', 'stuff for crafting'],
     ['Crafting', 'building and creating things'],
+    ['Dev', 'DevLog and works in progress'],
     #['Gathering', 'finding and collecting things']
 ]

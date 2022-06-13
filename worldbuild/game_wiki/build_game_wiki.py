@@ -7,7 +7,7 @@ import sys
 import csv
 import shutil
 import wiki_config as cfg
-
+import dev_tools as mod_dev
 sys.path.append(os.path.join(os.getcwd(), '..'))
 
 import html_utils
@@ -30,14 +30,15 @@ def main():
     make_page_crafting()
     #op += make_html_level(lvl, lvl_waypoints, lvl_spawners )
        
+    make_page_DevLog()
 
     #with open(cfg.op_file_main, 'w') as fop:
     #    fop.write(op)
 
 def get_data_levels(lvl_id):
     #check_data_files()
-    waypoint_list = read_csv_to_list(cfg.f_waypoints)  # ---,level_name,location_name,X,Y,Z,biome
-    waypoint_spawner = read_csv_to_list(cfg.f_waypoint_spawn_pickups) # ---,level_name,location_name,spawn_id_class_name,radius,min_quant,max_quant
+    waypoint_list = html_utils.read_csv_to_list(cfg.f_waypoints)  # ---,level_name,location_name,X,Y,Z,biome
+    waypoint_spawner = html_utils.read_csv_to_list(cfg.f_waypoint_spawn_pickups) # ---,level_name,location_name,spawn_id_class_name,radius,min_quant,max_quant
 
     lvl_waypoints = []
     lvl_spawners = []
@@ -69,7 +70,7 @@ def make_page_index():
             # add short blurb or list based on each main heading
             if chapter[0] == 'Places':
                 f.write('Alrona has the following key locations<BR>')
-                lvl_list = read_csv_to_list(cfg.f_levels)
+                lvl_list = html_utils.read_csv_to_list(cfg.f_levels)
                 for lvl in lvl_list:
                     if lvl[7] == 'True':  # is level playable
                         lvl_waypoints, lvl_spawners = get_data_levels(lvl[0])
@@ -106,16 +107,16 @@ def make_page_Places():
     txt = html_utils.get_header('Sanct')
     txt += '<H1>Places</H1><div id = content><BR><BR>'
     txt += get_world_build_menu('Places', 'Sanct Places')
-    lvl_list = read_csv_to_list(cfg.f_levels) # ---,level_filename,full_filename,name,desc,image_med,image_icon,is_playable,is_home,is_locked,biome
+    lvl_list = html_utils.read_csv_to_list(cfg.f_levels) # ---,level_filename,full_filename,name,desc,image_med,image_icon,is_playable,is_home,is_locked,biome
     for lvl in lvl_list:
         if lvl[7] == 'True':  # is level playable
             lvl_waypoints, lvl_spawners = get_data_levels(lvl[0])
-            cur_level_file = os.path.join(cfg.op_folder, 'Places_' + lvl[0] + '.html')
-            img_file = os.path.join(cfg.op_folder, 'img', 'places',lvl[0] + '.png')
-            #print('img file = ' + img_file)
-            txt += '<H2><a href=' + cur_level_file + '>' + lvl[3] + '<a/></H2>' 
-            txt += '<div>[' + lvl[0] + '] ' + lvl[4] + '</div>'
-            txt += '<img align=center  width = 64px src="' + img_file + '"><BR>'
+            #cur_level_file = os.path.join(cfg.op_folder, 'Places_' + lvl[0] + '.html')
+            #img_file = os.path.join(cfg.op_folder, 'img', 'places',lvl[0] + '.png')
+            cur_level_file = 'Places_' + lvl[0] + '.html'
+            img_file = 'img' + os.sep + 'places' + os.sep + lvl[0] + '.png'
+            
+            txt += '<a href=' + cur_level_file + '><img align=center Title="' + lvl[4] + '" alt= ' + lvl[4] + ' height=240px width=320px src="' + img_file + '"><a/>'
                 
 
 
@@ -150,6 +151,12 @@ def make_page_Places():
                 f_cur.write(cur_txt)
                 f_cur.write(html_utils.get_footer(''))
             #txt += cur_txt
+
+
+    txt += '<H2>Biomes</H2>'            
+    txt += 'The following biomes are in the game<BR>\n'
+
+
     txt += html_utils.get_footer('')
     with open(cfg.op_file_places, 'w') as fop:
         fop.write(txt)
@@ -166,7 +173,7 @@ def make_page_NPCs():
     txt += '<H1>NPCs</H1><div id = content><BR>NPCs in game<BR>'
 
     txt += get_world_build_menu('NPC', 'Sanct NPCs')
-    list_npc = read_csv_to_list(cfg.f_npcs) # ---,level_filename,full_filename,name,desc,image_med,image_icon,is_playable,is_home,is_locked,biome
+    list_npc = html_utils.read_csv_to_list(cfg.f_npcs) # ---,level_filename,full_filename,name,desc,image_med,image_icon,is_playable,is_home,is_locked,biome
     for npc in list_npc:
         txt += '<H2>' + npc[2] + '</H2>'
         txt += '<div>' + npc[0] + ' lives in <a href="Places_' + npc[5] + '.html">' + npc[5] + '</a> and usually spawns at ' + get_short_coord(npc[6]) + '</div>\n'
@@ -196,7 +203,7 @@ def make_page_Items():
     txt += '<H1>Items</H1><div id = content><BR>Details of in game items<BR>'
 
     txt += get_world_build_menu('Items', 'Items in the game')
-    list_items = read_csv_to_list(cfg.f_items) # 
+    list_items = html_utils.read_csv_to_list(cfg.f_items) # 
     for itm in list_items:
         itm_id = itm[1].lower()
         #txt += '<H2>' + itm[2] + '</H2>'
@@ -237,7 +244,7 @@ def make_page_Item_list_filtered(filter_list_desc, filter_string):
     txt += '<H1>Items : ' + filter_list_desc + '</H1><div id = content><BR>'
 
     txt += get_world_build_menu(filter_list_desc, filter_list_desc + ' in the game')
-    list_items = read_csv_to_list(cfg.f_items) # 
+    list_items = html_utils.read_csv_to_list(cfg.f_items) # 
     txt += '<table border=1><TR><TD>Item</TD><TD>Details</TD></TR>\n'
 
     for itm in list_items:
@@ -271,8 +278,8 @@ def make_page_crafting(view_type='ICON'):
     txt += '<BR><div id = content><BR>'
 
     txt += get_world_build_menu('Crafting', 'Crafting recipes')
-    list_items = read_csv_to_list(cfg.f_recipes) # 
-    list_item_ingred = read_csv_to_list(cfg.f_recipe_ingred) # 
+    list_items = html_utils.read_csv_to_list(cfg.f_recipes) # 
+    list_item_ingred = html_utils.read_csv_to_list(cfg.f_recipe_ingred) # 
     txt += '<table border=1><TR><TD>Recipe</TD><TD>Ingredients</TD><TD>Workstation</TD></TR>\n'
     for itm in list_items:
         txt += '<TR><TD valign=top>\n'
@@ -299,11 +306,11 @@ def make_page_crafting(view_type='ICON'):
     txt += '</table>\n'
 
     txt += '<H2>Built Items</H2>These are things that are built in place (houses, campfires) or spawnable objects that dont go into your inventory (like animals)<BR>'
-    list_items = read_csv_to_list(cfg.f_builtitem) # 
+    list_items = html_utils.read_csv_to_list(cfg.f_builtitem) # 
     txt += '<table><TR><TD>Built Item</TD><TD>Cost</TD></TR>'
     for itm in list_items:
-        img_file = os.path.join(cfg.op_folder, 'img', 'builtitem',itm[1] + '.png')
-        txt += '<TR><TD><img align=left  width = 50px src="' + img_file + '">'
+        img_file = 'img' + os.sep + 'builtitem' + os.sep + itm[1] + '.png'
+        txt += '<TR><TD><img align=left  width = 50px src="' + img_file  + '">'
         
         txt += '<div>' + itm[2] +  '</div>\n'
         txt += '</TD><TD>' + itm[3]
@@ -315,6 +322,27 @@ def make_page_crafting(view_type='ICON'):
     txt += html_utils.get_footer('')
     with open(opfile, 'w') as fop:
         fop.write(txt)
+
+
+def make_page_DevLog():
+    """
+    build a page showing dev log progress AND list of exceptions (missing items in recipes, etc) 
+    """
+    txt = html_utils.get_header('Sanct')
+    txt += '<H1>Dev Log</H1><div id = content><BR>'
+
+    txt += get_world_build_menu('Dev', 'Dev Log and list of errors')
+    txt += mod_dev.get_stats()
+    txt += mod_dev.get_progress_log()
+    txt += mod_dev.get_missing_images()
+    
+ 
+
+    txt += html_utils.get_footer('')
+    with open(cfg.op_file_dev, 'w') as fop:
+        fop.write(txt)
+
+
 
 def get_workstation_nice_name(raw_name):
     if raw_name == '':
@@ -346,12 +374,13 @@ def get_img_for_item(item_id):
     """
     gets the icon for an inventory item
     """
-    list_inv = read_csv_to_list(cfg.f_items) # 
+    list_inv = html_utils.read_csv_to_list(cfg.f_items) # 
     
     for inv in list_inv:
         if inv[1] == item_id:
 
-            img_file = os.path.join(cfg.op_folder, 'img', 'items',item_id + '.png')
+            #img_file = os.path.join(cfg.op_folder, 'img', 'items',item_id + '.png')
+            img_file = 'img' + os.sep + 'items' + os.sep + item_id + '.png'
             #print('img file = ' + img_file)
             return img_file
     return ''            
@@ -415,20 +444,6 @@ def read_file(fname, show_summary=True):
             rows += 1
     print('File ' + fname + ' has ' + str(rows) + ' records')
 
-def read_csv_to_list(filename):
-    """
-    reads a CSV file to a list
-    """
-    import csv
-
-    rows_to_load = []
-    with open(filename, 'r', encoding='cp1252') as csvfile: # sort of works with , encoding='cp65001'
-        #csvreader = csv.reader(csvfile, delimiter = ',' )
-
-        reader = csv.reader(csvfile)
-
-        rows_to_load = list(reader)
-    return rows_to_load[1:]
 
 if __name__ == '__main__':
     main()
