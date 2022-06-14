@@ -17,7 +17,7 @@ import html_utils
 def main():
     print("generating list of game exceptions...")
     print(get_stats())
-    print(get_progress_log())
+    #print(get_progress_log())
 
 def get_progress_log():
     from operator import itemgetter
@@ -50,19 +50,79 @@ def get_stats():
 
     txt += get_stats_for_csv('Items', cfg.f_items, 1)
     txt += get_stats_for_csv('Item Types', cfg.f_items, 6)
+
+    txt += '<BR>'
     txt += get_stats_for_csv('Levels', cfg.f_levels, 0)
     txt += get_stats_for_csv('Level Biomes', cfg.f_levels, 10)
     
-    txt += get_stats_for_csv('Waypoints', cfg.f_waypoints, 0)
+    #txt += get_stats_for_csv('Waypoints', cfg.f_waypoints, 0)
     txt += get_stats_for_csv('Waypoint - levels', cfg.f_waypoints, 1)
     txt += get_stats_for_csv('Waypoint - Biomes', cfg.f_waypoints, 6)
+
+    txt += '<BR>'
+    txt += get_stats_for_csv('Location Pickup Spawners - Lands', cfg.f_waypoint_spawn_pickups, 1) # ---,level_name,location_name,spawn_id_class_name,radius,min_quant,max_quant
+    txt += get_stats_for_csv('Location Pickup Spawners - Waypoints', cfg.f_waypoint_spawn_pickups, 2) # ---,level_name,location_name,spawn_id_class_name,radius,min_quant,max_quant
+    txt += get_stats_for_csv('Location Pickup Spawners - BP Spawn', cfg.f_waypoint_spawn_pickups, 3) # ---,level_name,location_name,spawn_id_class_name,radius,min_quant,max_quant
 
     txt += get_stats_for_csv('Level Pickups', cfg.f_level_pickups, 0)
     txt += get_stats_for_csv('Level Pickup Levels', cfg.f_level_pickups, 1)
     txt += get_stats_for_csv('Level Pickup Spawners', cfg.f_level_pickups, 2)
-    
 
- 
+    txt += get_stats_for_csv('Tree Spawner Types', cfg.f_tree_spawner_types, 1)
+    txt += get_stats_for_csv('Tree Spawner Types - Biomes', cfg.f_tree_spawner_types, 3)
+    #txt += get_stats_for_csv('Tree Spawner Types - Meshes', cfg.f_tree_spawner_types, 5)
+   
+    txt += '<BR>'
+
+
+    txt += get_stats_for_csv('Events - IDs', cfg.f_events, 1)
+    txt += get_stats_for_csv('Events - ActionID', cfg.f_events, 4)
+
+    txt += get_stats_for_csv('Sounds', cfg.f_sounds, 1)
+    txt += get_stats_for_csv('Sounds - Category', cfg.f_sounds, 3)
+    txt += get_stats_for_csv('Sounds - CueFile', cfg.f_sounds, 5)
+
+    txt += get_stats_for_csv('Sounds by Level - ID', cfg.f_sounds_game_level, 1)
+    txt += get_stats_for_csv('Sounds by Level - Song', cfg.f_sounds_game_level, 2)
+
+
+    txt += '<BR>'
+
+    txt += get_stats_for_csv('Recipes', cfg.f_recipes, 1)
+    txt += get_stats_for_csv('Recipe Ingredients', cfg.f_recipe_ingred, 1)
+    
+    txt += get_stats_for_csv('BuiltItems', cfg.f_builtitem, 1)
+    txt += get_stats_for_csv('BuiltItems Parts', cfg.f_builtitem_parts, 2)
+    txt += get_stats_for_csv('BuiltItems Spawned BP', cfg.f_builtitem_parts, 3)
+    
+    txt += '<BR>'
+
+    txt += get_stats_for_csv('Fishing Loot', cfg.f_fishing_loot, 1)
+    txt += get_stats_for_csv('Crops', cfg.f_crops, 1)
+    txt += get_stats_for_csv('Quests', cfg.f_quests, 1)
+    txt += get_stats_for_csv('Achievements', cfg.f_achievements, 3)
+    txt += get_stats_for_csv('Emotes', cfg.f_emotes, 1)
+
+    txt += '<BR>'
+
+    txt += get_stats_for_csv('Object Types', cfg.f_object_type, 1)
+    txt += get_stats_for_csv('Object Actions - Types', cfg.f_object_actions, 1)
+    txt += get_stats_for_csv('Object Actions - Tools', cfg.f_object_actions, 2)
+
+    txt += '<BR>'
+
+    txt += get_stats_for_csv('NPCs names', cfg.f_npcs, 2)
+    txt += get_stats_for_csv('NPCs lands', cfg.f_npcs, 5)
+    txt += '<BR>'
+
+    txt += get_stats_for_csv('Profession', cfg.f_learn_professions, 1)
+    txt += get_stats_for_csv('Profession - Area', cfg.f_learn_professions, 2)
+    txt += get_stats_for_csv('Skills', cfg.f_learn_skills, 0)
+    txt += get_stats_for_csv('Skill Parents', cfg.f_learn_skills, 1)
+    txt += get_stats_for_csv('Profession Skills - Profs', cfg.f_learn_profession_skills, 1)
+    txt += get_stats_for_csv('Profession Skills - Skills', cfg.f_learn_profession_skills, 2)
+    
+    txt += '<BR>'
 
 
 
@@ -124,6 +184,19 @@ def get_img_for_item(item_id):
             #print('img file = ' + img_file)
             return img_file
     return ''            
+
+def get_recipes_missing_ingredients():
+    """
+    make sure all recipes have ingredients in inventory
+    """
+    pass 
+
+def get_ingredients_not_used_in_recipes():
+    """
+    this returns a list of MATERIALS (eg wood_ or food_ that is not used in 
+    any recipes
+    """
+    pass 
 
 
     

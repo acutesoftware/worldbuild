@@ -26,6 +26,22 @@ f_waypoints = os.path.join(data_folder, 'World_data','DT_GameWaypoints.csv')
 f_level_pickups = os.path.join(data_folder, 'World_data','DT_Pickup_Level_Defaults.csv')
 f_waypoint_spawn_pickups = os.path.join(data_folder, 'World_data','DT_Pickup_Locations_Spawn_Pickup.csv')
 
+f_tree_spawner_types = os.path.join(data_folder, 'World_data','DT_Tree_Spawner_Types.csv')
+
+f_fishing_loot = os.path.join(data_folder, 'DT_Fishing_Loot.csv')
+f_crops = os.path.join(data_folder, 'DT_Crops.csv')
+f_plants_harvestable = os.path.join(data_folder, 'DT_Plants_Harvestable.csv')
+
+f_quests = os.path.join(data_folder, 'DT_Quests.csv')
+f_achievements = os.path.join(data_folder, 'DT_Achievements.csv')
+f_emotes = os.path.join(data_folder, 'DT_djm_emotes.csv')
+
+f_object_type = os.path.join(data_folder, 'DT_Object_Type.csv')
+f_object_actions = os.path.join(data_folder, 'DT_Object_Actions.csv')
+
+f_npcs = os.path.join(data_folder, 'DT_NPCs.csv')
+
+
 f_items = os.path.join(data_folder, 'ItemList.csv')
 
 f_npcs = os.path.join(data_folder, 'NPC_data','DT_NPCs.csv')
@@ -33,6 +49,15 @@ f_fishing_loot = os.path.join(data_folder, 'DT_Fishing_Loot.csv')
 f_recipes = os.path.join(data_folder, 'Crafting_data', 'DT_craft_recipe.csv')
 f_recipe_ingred = os.path.join(data_folder, 'Crafting_data', 'DT_craft_recipe_ingredients.csv')
 f_builtitem = os.path.join(data_folder, 'Crafting_data', 'DT_BuiltItem.csv')
+f_builtitem_parts = os.path.join(data_folder, 'Crafting_data', 'DT_BuiltItem_Parts.csv')
+
+f_learn_skills = os.path.join(data_folder, 'Learning_data', 'DT_Learn_Skills.csv')
+f_learn_professions = os.path.join(data_folder, 'Learning_data', 'DT_Learn_Professions.csv')
+f_learn_profession_skills = os.path.join(data_folder, 'Learning_data', 'DT_Learn_Profession_Skills.csv')
+f_events = os.path.join(data_folder, 'World_data', 'DT_Events.csv')
+
+f_sounds = os.path.join(data_folder, 'World_data', 'DT_Sounds.csv')
+f_sounds_game_level = os.path.join(data_folder, 'World_data', 'DT_Sounds_Game_Level.csv')
 
 f_about_progress = os.path.join(data_folder,  'DT_about_dev_log.csv')
 
