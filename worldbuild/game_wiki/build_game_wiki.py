@@ -15,6 +15,7 @@ import html_utils
 def main():
     print("Generating in game wiki pages in " + cfg.op_folder)
     init_op_folder()
+    make_page_Commands()
     make_page_index()
     make_page_Places()
     make_page_NPCs()
@@ -24,7 +25,7 @@ def main():
     make_page_Item_list_filtered('Fish', 'fish_')
     make_page_Item_list_filtered('Animals', 'animal_')
     make_page_Item_list_filtered('Clothes', 'cloth_')
-    make_page_Item_list_filtered('Tools', 'tool_')
+    make_page_Tools()
     make_page_Item_list_filtered('Materials', 'build_')
 
     make_page_crafting()
@@ -65,18 +66,18 @@ def make_page_index():
         f.write('<div id = content><BR><BR>\n')
         for chap_num, chapter in enumerate(cfg.chapters):
             chap_html = chapter[0] + '.html'
-            f.write('<a href="' + chap_html + '">Chapter ' + str(chap_num+1) + ' : ' + chapter[0] + '</a><BR>')
+            f.write('<a href="' + chap_html + '">' + chapter[0] + '</a> - ' + chapter[1] + '<BR>')
 
             # add short blurb or list based on each main heading
             if chapter[0] == 'Places':
-                f.write('Alrona has the following key locations<BR>')
+                #f.write('Alrona has the following key locations<BR>')
                 lvl_list = html_utils.read_csv_to_list(cfg.f_levels)
                 for lvl in lvl_list:
                     if lvl[7] == 'True':  # is level playable
                         lvl_waypoints, lvl_spawners = get_data_levels(lvl[0])
 
-                        f.write(lvl[3] + ' : ' + lvl[4] + '<BR>')
-
+                        #f.write(lvl[3] + ' : ' + lvl[4] + '<BR>')
+                        pass
   
 
 
@@ -105,7 +106,7 @@ def make_page_Places():
     takes the raw data lists and builds it into HTML 
     """
     txt = html_utils.get_header('Sanct')
-    txt += '<H1>Places</H1><div id = content><BR><BR>'
+    txt += '<H1>Sanct Game</H1><div id = content><BR><BR>'
     txt += get_world_build_menu('Places', 'Sanct Places')
     lvl_list = html_utils.read_csv_to_list(cfg.f_levels) # ---,level_filename,full_filename,name,desc,image_med,image_icon,is_playable,is_home,is_locked,biome
     for lvl in lvl_list:
@@ -170,7 +171,7 @@ def make_page_NPCs():
     ---,NPC_ID,Name,UCS_Preset,Clothes,SpawnLand,SpawnLocation,spawn_direction_Z,is_active,is_shop,shop_filter_include,shop_filter_exclude,sound_welcome,sound_bye,text_welcome,text_bye,animNormal,animSeqBaseWelcome
     """
     txt = html_utils.get_header('Sanct')
-    txt += '<H1>NPCs</H1><div id = content><BR>NPCs in game<BR>'
+    txt += '<H1>Sanct Game</H1><div id = content><BR>NPCs in game<BR>'
 
     txt += get_world_build_menu('NPC', 'Sanct NPCs')
     list_npc = html_utils.read_csv_to_list(cfg.f_npcs) # ---,level_filename,full_filename,name,desc,image_med,image_icon,is_playable,is_home,is_locked,biome
@@ -200,7 +201,7 @@ def make_page_Items():
 
     """
     txt = html_utils.get_header('Sanct')
-    txt += '<H1>Items</H1><div id = content><BR>Details of in game items<BR>'
+    txt += '<H1>Sanct Game</H1><div id = content><BR>Details of in game items<BR>'
 
     txt += get_world_build_menu('Items', 'Items in the game')
     list_items = html_utils.read_csv_to_list(cfg.f_items) # 
@@ -241,10 +242,12 @@ def make_page_Item_list_filtered(filter_list_desc, filter_string):
     """
     opfile = os.path.join(cfg.op_folder, '' + filter_list_desc + '.html' )
     txt = html_utils.get_header('Sanct')
-    txt += '<H1>Items : ' + filter_list_desc + '</H1><div id = content><BR>'
+    txt += '<H1>Sanct Game</H1><div id = content><BR>'
 
     txt += get_world_build_menu(filter_list_desc, filter_list_desc + ' in the game')
     list_items = html_utils.read_csv_to_list(cfg.f_items) # 
+    list_object_actions = html_utils.read_csv_to_list(cfg.f_object_actions) # 
+    list_tool_types = html_utils.read_csv_to_list(cfg.f_tool_type)
     txt += '<table border=1><TR><TD>Item</TD><TD>Details</TD></TR>\n'
 
     for itm in list_items:
@@ -255,13 +258,80 @@ def make_page_Item_list_filtered(filter_list_desc, filter_string):
                     
             txt += '<div><a href="Item_' + itm[1] + '.html">' + itm[2] + '</a>'
             txt += '</td><TD>'
-            txt +=  itm[3] 
+            txt +=  itm[3] + '<BR>'
             txt += '</TD></TR>\n'
     txt += '</table>\n'
 
     txt += html_utils.get_footer('')
     with open(opfile, 'w') as fop:
         fop.write(txt)
+
+
+def make_page_Tools():
+    """
+    build a filtered list of items, but do NOT create pages (aalready done by 'make_page_Items')
+    ---,ID,Name,Description,Quality,Icon,ItemType,Amount,IsStackable,MaxStackSize,IsDroppable,WorldMesh,Health,Duration,WeaponActorClass,EquipmentMesh,EquipmentType,EquipmentSlot,Damage,Armor,Strength,Dexterity,Intelligence
+
+    """
+    opfile = os.path.join(cfg.op_folder, 'Tools.html' )
+    txt = html_utils.get_header('Sanct')
+    txt += '<H1>Sanct Game</H1><div id = content><BR>'
+
+    txt += get_world_build_menu('Tools', 'Tool Actions')
+    list_items = html_utils.read_csv_to_list(cfg.f_items) # 
+    list_object_actions = html_utils.read_csv_to_list(cfg.f_object_actions) # 
+    list_tool_types = html_utils.read_csv_to_list(cfg.f_tool_type)
+    list_object_types = html_utils.read_csv_to_list(cfg.f_object_type)
+    txt += 'when a weilded tool is used on actors below, the functions below are called.<BR>'
+    
+    txt += '<table border=1><TR><TD>Item</TD><TD>Details</TD></TR>\n'
+
+    for itm in list_items:
+        #txt += '<H2>' + itm[2] + '</H2>'
+        if 'Tool_' in itm[0]:
+            txt += '<TR><TD>'
+            txt += '<img align=left  width = 50px src="' + get_img_for_item(itm[1]) + '">'
+                    
+            txt += '<div><a href="Item_' + itm[1] + '.html">' + itm[2] + '</a>'
+            txt += '</td><TD>'
+            txt +=  itm[3] + '<BR>'
+            txt += get_tool_actions(list_tool_types, list_object_actions, itm[1])
+            txt += '</TD></TR>\n'
+    txt += '</table>\n'
+
+
+    txt += 'For generic objects that the tool can collect / harvest - the drop table is used to work out what items are dropped<BR>'
+    txt += '<table border=1><TR><TD>Object Type</TD><TD>Description</TD><TD>If Object Name contains..</TD><TD>might Drop items on Destroy</TD></TR>\n'
+    for itm in list_object_types: # ---,object_type,description,object_name_contains,drops_items_on_destroy
+        #txt += '<H2>' + itm[2] + '</H2>'
+
+            txt += '<TR><TD>' + itm[1] + '</td>'
+            txt += '<TD>' + itm[2] + '</td>'           
+            txt += '<TD>' + itm[3] + '</td>'            
+            txt += '<TD>' + itm[4] + '</td>'            
+            txt += '</TR>\n'
+    txt += '</table>\n'
+
+
+    txt += html_utils.get_footer('')
+    with open(opfile, 'w') as fop:
+        fop.write(txt)
+
+
+def get_tool_actions(lstToolTypes, lstObjActions, item_id):
+    """
+    gets a list of tool actions for the tools page (filtered item list)
+    """
+    txt = ''
+    tool_type = 'None'
+    for tpe in sorted(lstToolTypes):
+        if tpe[4] in item_id:
+            tool_type = tpe[1]
+    for lst in lstObjActions:
+        if lst[2] == tool_type:
+            txt += 'when used on "' + lst[1] + '", it calls ' +lst[3] + '<BR>'
+    
+    return txt
 
 def make_page_crafting(view_type='ICON'):
     """
@@ -273,7 +343,7 @@ def make_page_crafting(view_type='ICON'):
     """
     opfile = cfg.op_file_crafting
     txt = html_utils.get_header('Sanct')
-    txt += '<H1>Recipes and Built Items</H1><div id = content><BR>'
+    txt += '<H1>Sanct Game</H1><div id = content><BR>'
 
     txt += '<BR><div id = content><BR>'
 
@@ -329,7 +399,7 @@ def make_page_DevLog():
     build a page showing dev log progress AND list of exceptions (missing items in recipes, etc) 
     """
     txt = html_utils.get_header('Sanct')
-    txt += '<H1>Dev Log</H1><div id = content><BR>'
+    txt += '<H1>Sanct Game</H1><div id = content><BR>'
 
     txt += get_world_build_menu('Dev', 'Dev Log and list of errors')
     txt += mod_dev.get_stats()
@@ -340,6 +410,30 @@ def make_page_DevLog():
 
     txt += html_utils.get_footer('')
     with open(cfg.op_file_dev, 'w') as fop:
+        fop.write(txt)
+
+
+def make_page_Commands():
+    """
+    generate the help file with list of commands. NOTE you need
+    to run the UE4 GOD mode, then DEV UI, then make help files 
+    which generates a CSV list of all commands with subheadings.
+    """
+    txt = html_utils.get_header('Sanct')
+    txt += '<H1>Sanct Game</H1><div id = content><BR>'
+    txt += get_world_build_menu('Game', 'Game Play')
+    txt += '<div>Explore the lands of Alrona and discover tamable animals in this Open world map (you can go anywhere - like even off the edge of the world if you want)<div>\n'
+    txt += '<div>Train and practice crafting recipes to build quality items for sale<div>\n'
+    txt += '<div>Compete in Leaderboard challenges for best item, most money earned<div>\n'
+    txt += '<div>Decorate your house, make a nice shed and hang out with your pets<div><BR>\n'
+    list_items = html_utils.read_csv_to_list(cfg.f_game_help)
+    txt += '<table border=0>\n'  # <TR><TD>Command</TD><TD>Description</TD></TR>
+    for itm in list_items:
+        txt += '<TR><TD valign=top>\n' + itm[0] + '</td><td valign=top>' + itm[1] + '</td></tr>\n'
+    txt += '</table>\n'
+        
+    txt += html_utils.get_footer('')
+    with open(cfg.op_file_game_help, 'w') as fop:
         fop.write(txt)
 
 

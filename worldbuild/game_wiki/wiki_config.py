@@ -17,6 +17,7 @@ op_file_npcs = os.path.join(op_folder, 'NPC.html')
 op_file_items = os.path.join(op_folder, 'Items.html')
 op_file_crafting = os.path.join(op_folder, 'Crafting.html')
 op_file_dev = os.path.join(op_folder, 'Dev.html')
+op_file_game_help = os.path.join(op_folder, 'Game.html')
 
 #####################################################
 # Data Files
@@ -36,6 +37,7 @@ f_quests = os.path.join(data_folder, 'DT_Quests.csv')
 f_achievements = os.path.join(data_folder, 'DT_Achievements.csv')
 f_emotes = os.path.join(data_folder, 'DT_djm_emotes.csv')
 
+f_tool_type = os.path.join(data_folder, 'DT_Tool_Type.csv')
 f_object_type = os.path.join(data_folder, 'DT_Object_Type.csv')
 f_object_actions = os.path.join(data_folder, 'DT_Object_Actions.csv')
 
@@ -60,7 +62,7 @@ f_sounds = os.path.join(data_folder, 'World_data', 'DT_Sounds.csv')
 f_sounds_game_level = os.path.join(data_folder, 'World_data', 'DT_Sounds_Game_Level.csv')
 
 f_about_progress = os.path.join(data_folder,  'DT_about_dev_log.csv')
-
+f_game_help =  os.path.join(data_folder, 'misc', 'sanct_help.csv')
 
 
 
@@ -74,6 +76,7 @@ f_about_progress = os.path.join(data_folder,  'DT_about_dev_log.csv')
 
 chapters = [
     #['Players','Players in the world that have high scores, notable achievements, rare discoveries'],
+    ['Game', 'Game play and general help'],
     ['Places', 'places in Alrona'],
     ['NPC', 'Any non player character that can communicate'],
     #['Creatures', 'animals and other creatures in the world'],
@@ -82,11 +85,11 @@ chapters = [
     ['Plants', 'Plants in the world'],
     ['Animals', 'Animals in the world'],
     ['Fish', 'Fish in the world'],
-    ['Clothes', 'Animals in the world'],
+    ['Clothes', 'Craftable clothes worn by players and NPCs'],
     ['Tools', 'Tools to gather and craft'],
     #['MOBs', 'dangerous animals and NPCs in the world'],
     ['Materials', 'stuff for crafting'],
-    ['Crafting', 'building and creating things'],
+    ['Crafting', 'building and creating things. Details of Recipes and buildable items'],
     ['Dev', 'DevLog and works in progress'],
     #['Gathering', 'finding and collecting things']
 ]
