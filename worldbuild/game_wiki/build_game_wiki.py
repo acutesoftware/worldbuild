@@ -20,9 +20,9 @@ def main():
     make_page_Places()
     make_page_NPCs()
     make_page_Items()
-    make_page_Item_list_filtered('Food', 'food_')
-    make_page_Item_list_filtered('Plants', 'plant_')
-    make_page_Item_list_filtered('Fish', 'fish_')
+    #make_page_Item_list_filtered('Food', 'food_')
+    #make_page_Item_list_filtered('Plants', 'plant_')
+    make_page_Fish()
     make_page_Item_list_filtered('Animals', 'animal_')
     make_page_Item_list_filtered('Clothes', 'cloth_')
     make_page_Tools()
@@ -265,6 +265,7 @@ def make_page_Item_list_filtered(filter_list_desc, filter_string):
     txt += html_utils.get_footer('')
     with open(opfile, 'w') as fop:
         fop.write(txt)
+        
 
 
 def make_page_Tools():
@@ -317,6 +318,71 @@ def make_page_Tools():
     with open(opfile, 'w') as fop:
         fop.write(txt)
 
+
+def make_page_Fish():
+    """
+    build a filtered list of items, but do NOT create pages (aalready done by 'make_page_Items')
+    ---,ID,Name,Description,Quality,Icon,ItemType,Amount,IsStackable,MaxStackSize,IsDroppable,WorldMesh,Health,Duration,WeaponActorClass,EquipmentMesh,EquipmentType,EquipmentSlot,Damage,Armor,Strength,Dexterity,Intelligence
+
+    """
+    opfile = os.path.join(cfg.op_folder, 'Fish.html' )
+    txt = html_utils.get_header('Sanct')
+    txt += '<H1>Sanct Game</H1><div id = content><BR>'
+
+    txt += get_world_build_menu('Fish', 'Fishing and Water forage')
+    list_items = html_utils.read_csv_to_list(cfg.f_items) # 
+    list_fishing_loot = html_utils.read_csv_to_list(cfg.f_fishing_loot) # 
+    list_recipes = html_utils.read_csv_to_list(cfg.f_recipes)
+    list_recipe_ingred = html_utils.read_csv_to_list(cfg.f_recipe_ingred)
+    txt += 'Make or buy yourself a fishing rod and catch fish for cooking and profit.<BR>'
+    
+    txt += '<table border=1><TR><TD>img</TD><TD>Fish</TD><TD>Desc</TD><TD>Drop chance</TD><TD>Lands Found</TD><TD>Water Type</TD><TD>Used in Recipes</TD></TR>\n'
+
+    for itm in list_items:
+        #txt += '<H2>' + itm[2] + '</H2>'
+        if itm[0].startswith('fish_'):
+            txt += '<TR><TD>'
+            txt += '<img align=left  width = 50px src="' + get_img_for_item(itm[1]) + '">'
+            txt += '</td><TD>'
+            txt += '<a href="Item_' + itm[1] + '.html">' + itm[2] + '</a>'  # name
+            txt += '</td><TD>'
+            txt +=  itm[3]    # desc
+            txt += '</td><TD>'
+            
+            has_loot = 'N'
+            for loot in list_fishing_loot:
+                if loot[1] == itm[1]:      # land locations
+                    txt += loot[2] + '</td><TD>' + loot[3] + '</td><TD>' + loot[4] + '</td><TD>'
+                    has_loot = 'Y'
+            if has_loot == 'N':
+                    txt += '<font color=red>no data</font></td><TD></td><TD></td><TD>'
+
+            txt += get_recipes_for_item(list_recipes, list_recipe_ingred, itm[1])
+            
+            txt += '</TD></TR>\n'
+    txt += '</table>\n'
+
+
+
+    txt += html_utils.get_footer('')
+    with open(opfile, 'w') as fop:
+        fop.write(txt)
+
+
+def get_recipes_for_item(lstRecipes, lstRecipeIngred, item_id):
+    """
+    gets details of all recipes used by item
+    """
+    txt = ''
+    recipe_id = ''
+    for tpe in sorted(lstRecipeIngred):
+        if tpe[2] in item_id:
+            recipe_id = tpe[1]
+    for lst in lstRecipes:
+        if lst[1] == recipe_id:
+            txt += '<img align=left  width = 50px src="' + get_img_for_item(recipe_id) + '">' + lst[1] + '<BR>'
+    
+    return txt
 
 def get_tool_actions(lstToolTypes, lstObjActions, item_id):
     """
