@@ -20,8 +20,8 @@ def main():
     make_page_Places()
     make_page_NPCs()
     make_page_Items()
-    #make_page_Item_list_filtered('Food', 'food_')
-    #make_page_Item_list_filtered('Plants', 'plant_')
+    make_page_Food()
+    make_page_Item_list_filtered('Plants', 'plant_')
     make_page_Fish()
     make_page_Item_list_filtered('Animals', 'animal_')
     make_page_Item_list_filtered('Clothes', 'cloth_')
@@ -29,12 +29,8 @@ def main():
     make_page_Item_list_filtered('Materials', 'build_')
 
     make_page_crafting()
-    #op += make_html_level(lvl, lvl_waypoints, lvl_spawners )
        
     make_page_DevLog()
-
-    #with open(cfg.op_file_main, 'w') as fop:
-    #    fop.write(op)
 
 def get_data_levels(lvl_id):
     #check_data_files()
@@ -109,54 +105,45 @@ def make_page_Places():
     txt += '<H1>Sanct Game</H1><div id = content><BR><BR>'
     txt += get_world_build_menu('Places', 'Sanct Places')
     lvl_list = html_utils.read_csv_to_list(cfg.f_levels) # ---,level_filename,full_filename,name,desc,image_med,image_icon,is_playable,is_home,is_locked,biome
+
+    cur_txt = ''
+    # first make a short list
+    for lvl in lvl_list:
+        if lvl[7] == 'True':  # is level playable
+            txt += '<a href=Places.html#' + lvl[0] + '>' + lvl[4] + '><a/><BR>'
+    txt += '<BR><BR>\n'
+
+    # full details
     for lvl in lvl_list:
         if lvl[7] == 'True':  # is level playable
             lvl_waypoints, lvl_spawners = get_data_levels(lvl[0])
-            #cur_level_file = os.path.join(cfg.op_folder, 'Places_' + lvl[0] + '.html')
-            #img_file = os.path.join(cfg.op_folder, 'img', 'places',lvl[0] + '.png')
-            cur_level_file = 'Places_' + lvl[0] + '.html'
+            cur_level_file = 'Places.html#' + lvl[0]
             img_file = 'img' + os.sep + 'places' + os.sep + lvl[0] + '.png'
-            
-            txt += '<a href=' + cur_level_file + '><img align=center Title="' + lvl[4] + '" alt= ' + lvl[4] + ' height=240px width=320px src="' + img_file + '"><a/>'
-                
+            txt += '<div id=' + lvl[0] + '>\n' 
+            txt += '<H2>' + lvl[3] + '</H3>'
+            txt += '<a href=' + img_file + '><img align=center Title="' + lvl[4] + '" alt= ' + lvl[4] + ' height=240px width=320px src="' + img_file + '"><a/>'
+            # make a section for each level
 
-
-            # make a page for each level
-            with open('html_op' + os.sep + cur_level_file, 'w') as f_cur:
-                f_cur.write(html_utils.get_header('Sanct'))
-                f_cur.write(get_world_build_menu('Places', 'Place - ' + lvl[3]))
-                f_cur.write('<div id = content>\n')
-                f_cur.write('<div>[' + lvl[0] + '] ' + lvl[4] + '</div>')
-                cur_txt = ''
-                
-                f_cur.write('<img align=center  width = 800px src="' + img_file + '"><BR>')  #  align=left width = 250px src="' + 'map_' + entry['name'] + '.jpg">'
-                if len(lvl_waypoints) > 0:
-                    cur_txt += '<B>Waypoints</B><BR>\n' 
-                    for wp in lvl_waypoints:
-                        wp_id = wp[2]
-                        if wp[1] == lvl[0]:
-                            
-                            cur_txt += '<H4>' + wp[2] + '</H4>\n'
-                            cur_txt +='is a <a href=biome.html>' + wp[6] + ' biome</a> at ' + wp[3] + ','+ wp[4] + ','+ wp[5] + '\n'
-                            
-                            cur_txt += '<table border=1><tr><td>'
-                            #op += wp[2] + '[' + wp[6] + '] ' + wp[3] + ','+ wp[4] + ','+ wp[5] + '</td></tr>\n'
-                            #op += '<TR><TD>'
-                            cur_txt += '<table border=1>' #<tr><td>spawned item</td><td>radius</td><td>number spawned</td></tr>\n'
-                            for spwn in lvl_spawners:
-                                if spwn[1] == lvl[0]:
-                                    if spwn[2] == wp_id:
-                                        cur_txt += '<TR><TD>' + spwn[0] + '</td><TD>' + spwn[1] + '</td><TD>' + spwn[2] + '</td><TD>' + spwn[3] + '</td><td>' + spwn[4] + '</td><td>' +  spwn[5] + '-' +  spwn[6]  + '</td></tr>\n'
-                            cur_txt += '</table>'
-                        cur_txt += '</TD></TR></table>'
-                f_cur.write(cur_txt)
-                f_cur.write(html_utils.get_footer(''))
-            #txt += cur_txt
-
-
-    txt += '<H2>Biomes</H2>'            
-    txt += 'The following biomes are in the game<BR>\n'
-
+            if len(lvl_waypoints) > 0:
+                cur_txt += '<B>Waypoints</B><BR>\n' 
+                for wp in lvl_waypoints:
+                    wp_id = wp[2]
+                    if wp[1] == lvl[0]:
+                        
+                        cur_txt += '<H4>' + wp[2] + '</H4>\n'
+                        cur_txt +='is a <a href=biome.html>' + wp[6] + ' biome</a> at ' + wp[3] + ','+ wp[4] + ','+ wp[5] + '\n'
+                        
+                        cur_txt += '<table border=1><tr><td>'
+                        #op += wp[2] + '[' + wp[6] + '] ' + wp[3] + ','+ wp[4] + ','+ wp[5] + '</td></tr>\n'
+                        #op += '<TR><TD>'
+                        cur_txt += '<table border=1>' #<tr><td>spawned item</td><td>radius</td><td>number spawned</td></tr>\n'
+                        for spwn in lvl_spawners:
+                            if spwn[1] == lvl[0]:
+                                if spwn[2] == wp_id:
+                                    cur_txt += '<TR><TD>' + spwn[0] + '</td><TD>' + spwn[1] + '</td><TD>' + spwn[2] + '</td><TD>' + spwn[3] + '</td><td>' + spwn[4] + '</td><td>' +  spwn[5] + '-' +  spwn[6]  + '</td></tr>\n'
+                        cur_txt += '</table>'
+                    cur_txt += '</TD></TR></table>'
+            txt += cur_txt
 
     txt += html_utils.get_footer('')
     with open(cfg.op_file_places, 'w') as fop:
@@ -201,34 +188,25 @@ def make_page_Items():
 
     """
     txt = html_utils.get_header('Sanct')
-    txt += '<H1>Sanct Game</H1><div id = content><BR>Details of in game items<BR>'
+    txt += '<H1>Sanct Game</H1><div id = content><BR>Table of all game items<BR>'
 
     txt += get_world_build_menu('Items', 'Items in the game')
     list_items = html_utils.read_csv_to_list(cfg.f_items) # 
+    txt += '<div><table border=1><TR><TD>Item ID</TD><TD>Name</TD><TD>Description</TD><TD>Quality</TD><TD>Type</TD><TD>Stack size</TD><TD>Drops</TD><TD>Type</TD></TR>\n'
     for itm in list_items:
-        itm_id = itm[1].lower()
-        #txt += '<H2>' + itm[2] + '</H2>'
-
-        # NOTE - we need to exclude items in the other lists below
-        show_this_here = 1
-        if 'food_' in itm_id:
-            show_this_here = 0
-        if 'plant_' in itm_id:
-            show_this_here = 0
-        if 'fish_' in itm_id:
-            show_this_here = 0
-        if 'animal_' in itm_id:
-            show_this_here = 0
-        if 'cloth_' in itm_id:
-            show_this_here = 0
-        if 'tool_' in itm_id:
-            show_this_here = 0
-        if 'build_' in itm_id:
-            show_this_here = 0
-
-        if show_this_here == 1:
-            txt += '<div><a href="Item_' + itm[1] + '.html">' + itm[2] + '</a> = ' + itm[3] + '</div>\n'
-
+        txt += '<TR id=' + itm[1] + '><TD>'
+        txt += '<div><a href=' + get_img_for_item(list_items, itm[1]) + '>'
+        txt += itm[1] + '</a>' 
+        txt += '<TD>' + itm[2] + '</TD>'
+        txt += '<TD>' + itm[3] + '</TD>'
+        txt += '<TD>' + itm[4] + '</TD>'  # quality
+        txt += '<TD>' + itm[6] + '</TD>'  # type
+        txt += '<TD>' + itm[9] + '</TD>'  # stack size
+        txt += '<TD>' + itm[10] + '</TD>' # drops
+        txt += '<TD>' + itm[16] + '</TD>' # equip type
+        txt += '</TR>\n'
+    txt += '</table>\n'
+    txt += '</div>'
 
     txt += html_utils.get_footer('')
     with open(cfg.op_file_items, 'w') as fop:
@@ -248,19 +226,20 @@ def make_page_Item_list_filtered(filter_list_desc, filter_string):
     list_items = html_utils.read_csv_to_list(cfg.f_items) # 
     list_object_actions = html_utils.read_csv_to_list(cfg.f_object_actions) # 
     list_tool_types = html_utils.read_csv_to_list(cfg.f_tool_type)
-    txt += '<table border=1><TR><TD>Item</TD><TD>Details</TD></TR>\n'
+    txt += '<DIV><table border=1><TR><TD>Item</TD><TD>Details</TD></TR>\n'
 
     for itm in list_items:
         #txt += '<H2>' + itm[2] + '</H2>'
         if filter_string.lower() in itm[0].lower():
             txt += '<TR><TD>'
-            txt += '<img align=left  width = 50px src="' + get_img_for_item(itm[1]) + '">'
+            txt += '<img align=left  width = 50px src="' + get_img_for_item(list_items, itm[1]) + '">'
                     
-            txt += '<div><a href="Item_' + itm[1] + '.html">' + itm[2] + '</a>'
+            txt += '<div><a href="Items.html#' + itm[1] + '">' + itm[2] + '</a>'
             txt += '</td><TD>'
             txt +=  itm[3] + '<BR>'
             txt += '</TD></TR>\n'
     txt += '</table>\n'
+    txt += '</div>'
 
     txt += html_utils.get_footer('')
     with open(opfile, 'w') as fop:
@@ -290,10 +269,10 @@ def make_page_Tools():
     for itm in list_items:
         #txt += '<H2>' + itm[2] + '</H2>'
         if 'Tool_' in itm[0]:
-            txt += '<TR><TD>'
-            txt += '<img align=left  width = 50px src="' + get_img_for_item(itm[1]) + '">'
+            txt += '<TR id=' + itm[1]  + '><TD>'
+            txt += '<img align=left  width = 50px src="' + get_img_for_item(list_items, itm[1]) + '">'
                     
-            txt += '<div><a href="Item_' + itm[1] + '.html">' + itm[2] + '</a>'
+            txt += '<div><a href="Items.html#' + itm[1] + '">' + itm[2] + '</a>'
             txt += '</td><TD>'
             txt +=  itm[3] + '<BR>'
             txt += get_tool_actions(list_tool_types, list_object_actions, itm[1])
@@ -341,10 +320,10 @@ def make_page_Fish():
     for itm in list_items:
         #txt += '<H2>' + itm[2] + '</H2>'
         if itm[0].startswith('fish_'):
-            txt += '<TR><TD>'
-            txt += '<img align=left  width = 50px src="' + get_img_for_item(itm[1]) + '">'
+            txt += '<TR id=' + itm[1]  + '><TD>'
+            txt += '<img align=left  width = 50px src="' + get_img_for_item(list_items, itm[1]) + '">'
             txt += '</td><TD>'
-            txt += '<a href="Item_' + itm[1] + '.html">' + itm[2] + '</a>'  # name
+            txt += '<a href="Items.html#' + itm[1] + '">' + itm[2] + '</a>'  # name
             txt += '</td><TD>'
             txt +=  itm[3]    # desc
             txt += '</td><TD>'
@@ -357,7 +336,7 @@ def make_page_Fish():
             if has_loot == 'N':
                     txt += '<font color=red>no data</font></td><TD></td><TD></td><TD>'
 
-            txt += get_recipes_for_item(list_recipes, list_recipe_ingred, itm[1])
+            txt += get_recipes_for_item(list_items, list_recipes, list_recipe_ingred, itm[1])
             
             txt += '</TD></TR>\n'
     txt += '</table>\n'
@@ -369,7 +348,88 @@ def make_page_Fish():
         fop.write(txt)
 
 
-def get_recipes_for_item(lstRecipes, lstRecipeIngred, item_id):
+
+def make_page_Food():
+    """
+    build a filtered list of items, but do NOT create pages (aalready done by 'make_page_Items')
+    ---,ID,Name,Description,Quality,Icon,ItemType,Amount,IsStackable,MaxStackSize,IsDroppable,WorldMesh,Health,Duration,WeaponActorClass,EquipmentMesh,EquipmentType,EquipmentSlot,Damage,Armor,Strength,Dexterity,Intelligence
+
+    """
+    opfile = os.path.join(cfg.op_folder, 'Food.html' )
+    txt = html_utils.get_header('Sanct')
+    txt += '<H1>Sanct Game</H1><div id = content><BR>'
+
+    txt += get_world_build_menu('Food', 'Cooking and Eating')
+    list_items = html_utils.read_csv_to_list(cfg.f_items) # 
+    list_recipes = html_utils.read_csv_to_list(cfg.f_recipes)
+    list_recipe_ingred = html_utils.read_csv_to_list(cfg.f_recipe_ingred)
+    list_npcs = html_utils.read_csv_to_list(cfg.f_npcs)
+    txt += '<table border=1><TR><TD>img</TD><TD>Food</TD><TD>Desc</TD><TD>Crafted via</TD><TD>Sold by Vendors</TD><TD>Health</TD><TD>Used in Recipes</TD></TR>\n'
+
+    for itm in list_items:
+        #txt += '<H2>' + itm[2] + '</H2>'
+        if itm[0].lower().startswith('food_'):
+            txt += '<TR id=' + itm[1]  + '><TD>'
+            txt += '<img align=left  width = 50px src="' + get_img_for_item(list_items, itm[1]) + '">'
+            txt += '</td><TD>'
+            txt += '<a href="Items.html#' + itm[1] + '">' + itm[2] + '</a>'  # name
+            txt += '</td><TD>'
+            txt +=  itm[3]    # desc
+            txt += '</td><TD>'
+            txt += get_item_crafted_via(list_recipes,  itm[1])    # Crafted by
+            txt += '</td><TD>'
+            txt += get_item_sold_by(list_npcs, itm[1])    # Sold by Vendors
+            txt += '</td><TD>'
+            txt +=  itm[12]    # health
+            txt += '</td><TD>'
+            
+            txt += get_recipes_for_item(list_items, list_recipes, list_recipe_ingred, itm[1])
+            
+            txt += '</TD></TR>\n'
+    txt += '</table>\n'
+
+
+
+    txt += html_utils.get_footer('')
+    with open(opfile, 'w') as fop:
+        fop.write(txt)
+
+
+
+
+def get_item_crafted_via(lstRecipes, item_id):
+    """
+    gets the recipe used to craft an inventory item
+    """
+    txt = ''
+    for recipe in lstRecipes:
+        if recipe[1] == item_id:
+            if recipe[2]  == '':
+                workstation = 'Hand'
+            else:
+                workstation = recipe[6]
+            txt += '<a href=Crafting.html#' + recipe[1] + '>' + recipe[2] + 'recipe </a>'
+            txt += ' (makes = ' + recipe[5] + ')<BR>'
+            txt += ' via ' + workstation + '<BR>'
+
+            
+    return txt            
+
+def get_item_sold_by(lstNPCs, item_id):
+    """
+    gets the recipe used to craft an inventory item
+    """
+    txt = ''
+    for npc in lstNPCs:
+        if npc[9] == 'True':
+            if npc[10] in item_id or npc[10] == '':
+                txt += '<a href=NPC.html#' + npc[1] + '>' + npc[2] + '</a>'  + ' in ' + npc[5] + '<BR>'
+            
+    return txt            
+
+
+
+def get_recipes_for_item(list_items, lstRecipes, lstRecipeIngred, item_id):
     """
     gets details of all recipes used by item
     """
@@ -378,9 +438,10 @@ def get_recipes_for_item(lstRecipes, lstRecipeIngred, item_id):
     for tpe in sorted(lstRecipeIngred):
         if tpe[2] in item_id:
             recipe_id = tpe[1]
-    for lst in lstRecipes:
-        if lst[1] == recipe_id:
-            txt += '<img align=left  width = 50px src="' + get_img_for_item(recipe_id) + '">' + lst[1] + '<BR>'
+            for lst in lstRecipes:
+                if lst[1] == recipe_id:
+                    txt += '<img width = 50px src="' + get_img_for_item(list_items, recipe_id) + '">' 
+                    txt += '<a href=Crafting.html#' + recipe_id + '>' + lst[1] + '</a><BR>'
     
     return txt
 
@@ -418,11 +479,11 @@ def make_page_crafting(view_type='ICON'):
     list_item_ingred = html_utils.read_csv_to_list(cfg.f_recipe_ingred) # 
     txt += '<table border=1><TR><TD>Recipe</TD><TD>Ingredients</TD><TD>Workstation</TD></TR>\n'
     for itm in list_items:
-        txt += '<TR><TD valign=top>\n'
+        txt += '<TR id=' + itm[1]  + '><TD valign=top>\n'
         
         # get icon for main recipe
-        txt += '<img align=left  width = 50px src="' + get_img_for_item(itm[1]) + '">'
-        txt += '<div><a href="Item_' + itm[1] + '.html">' + itm[2] + '</a>'
+        txt += '<img align=left  width = 50px src="' + get_img_for_item(list_items, itm[1]) + '">'
+        txt += '<div><a href="Items.html#' + itm[1] + '">' + itm[2] + '</a>'
         txt += '</TD><TD valign=top>'
         for ingr in list_item_ingred:
             if ingr[1] == itm[1]:
@@ -435,7 +496,7 @@ def make_page_crafting(view_type='ICON'):
                 else:
                     # ICON VIEW (which everyone likes)
                     alt_text = ingr[3] + 'x ' + ingr[2] 
-                    txt += '<img height = 50px title= "' + alt_text + '" alt="' + alt_text + '" src="' + get_img_for_item(ingr[2] ) + '">'
+                    txt += '<img height = 50px title= "' + alt_text + '" alt="' + alt_text + '" src="' + get_img_for_item(list_items, ingr[2] ) + '">'
 
         txt += '</TD><TD>' + get_workstation_nice_name(itm[6]) + '</TD>'
         txt += '</TR>'
@@ -530,11 +591,11 @@ def get_workstation_nice_name(raw_name):
 
 
 
-def get_img_for_item(item_id):
+def get_img_for_item(list_inv, item_id):
     """
     gets the icon for an inventory item
     """
-    list_inv = html_utils.read_csv_to_list(cfg.f_items) # 
+    #list_inv = html_utils.read_csv_to_list(cfg.f_items) # 
     
     for inv in list_inv:
         if inv[1] == item_id:
