@@ -106,11 +106,12 @@ def make_page_Places():
     txt += get_world_build_menu('Places', 'Sanct Places')
     lvl_list = html_utils.read_csv_to_list(cfg.f_levels) # ---,level_filename,full_filename,name,desc,image_med,image_icon,is_playable,is_home,is_locked,biome
 
-    cur_txt = ''
+    cur_txt = '<div id=Places.html#top>'
+    back = '<a href=Places.html#top><font size=3>Back to Top</font></a><BR>' 
     # first make a short list
-    for lvl in lvl_list:
-        if lvl[7] == 'True':  # is level playable
-            txt += '<a href=Places.html#' + lvl[0] + '>' + lvl[4] + '><a/><BR>'
+    for lvl_index in lvl_list:
+        if lvl_index[7] == 'True':  # is level playable
+            txt += '<a href=Places.html#' + lvl_index[0] + '>' + lvl_index[3] + '<a/> - ' + lvl_index[4] + '<BR>'
     txt += '<BR><BR>\n'
 
     # full details
@@ -119,31 +120,36 @@ def make_page_Places():
             lvl_waypoints, lvl_spawners = get_data_levels(lvl[0])
             cur_level_file = 'Places.html#' + lvl[0]
             img_file = 'img' + os.sep + 'places' + os.sep + lvl[0] + '.png'
-            txt += '<div id=' + lvl[0] + '>\n' 
-            txt += '<H2>' + lvl[3] + '</H3>'
-            txt += '<a href=' + img_file + '><img align=center Title="' + lvl[4] + '" alt= ' + lvl[4] + ' height=240px width=320px src="' + img_file + '"><a/>'
+            txt += '<BR><HR><BR><div id=' + lvl[0] + '>\n' 
+            txt += '<H2>' + lvl[3] + '</H2>' + back
+            txt += lvl[4] + '<BR>'
+            txt += '<a href=' + img_file + '><img align=center Title="' + lvl[3] + '" alt= ' + lvl[3] + ' height=240px width=320px src="' + img_file + '"><a/><BR>'
             # make a section for each level
 
+            txt += '<h3>' + lvl[3] + ' Waypoints</h3>\n'
+            txt += '<table border=1><tr><TD>Waypoint</TD><TD>Biome</TD><TD>X,Y,Z</TD><TD>Spawners</TD></TR>\n'
+            txt += '<tr>'
             if len(lvl_waypoints) > 0:
-                cur_txt += '<B>Waypoints</B><BR>\n' 
                 for wp in lvl_waypoints:
                     wp_id = wp[2]
                     if wp[1] == lvl[0]:
                         
-                        cur_txt += '<H4>' + wp[2] + '</H4>\n'
-                        cur_txt +='is a <a href=biome.html>' + wp[6] + ' biome</a> at ' + wp[3] + ','+ wp[4] + ','+ wp[5] + '\n'
+                        txt += '<td>' + wp[2] + '</td>\n'
+                        txt +='<td><a href=biome.html>' + wp[6] + '</a></td><td>' + get_short_coord(wp[3] + ','+ wp[4] + ','+ wp[5]) + '</td>\n'
                         
-                        cur_txt += '<table border=1><tr><td>'
+                        
                         #op += wp[2] + '[' + wp[6] + '] ' + wp[3] + ','+ wp[4] + ','+ wp[5] + '</td></tr>\n'
                         #op += '<TR><TD>'
-                        cur_txt += '<table border=1>' #<tr><td>spawned item</td><td>radius</td><td>number spawned</td></tr>\n'
+                        txt += '<TD><table border=0>' #<tr><td>spawned item</td><td>radius</td><td>number spawned</td></tr>\n'
                         for spwn in lvl_spawners:
                             if spwn[1] == lvl[0]:
                                 if spwn[2] == wp_id:
-                                    cur_txt += '<TR><TD>' + spwn[0] + '</td><TD>' + spwn[1] + '</td><TD>' + spwn[2] + '</td><TD>' + spwn[3] + '</td><td>' + spwn[4] + '</td><td>' +  spwn[5] + '-' +  spwn[6]  + '</td></tr>\n'
-                        cur_txt += '</table>'
-                    cur_txt += '</TD></TR></table>'
-            txt += cur_txt
+                                    txt += '<TR><TD>' + spwn[3] + '</td><td>' + spwn[4] + '</td><td>' +  spwn[5] + '-' +  spwn[6]  + '</td></tr>\n'
+                        txt += '</table></TD></TR>'
+                    #txt += '</TD></TR>'
+                #txt += '</TR>'
+            txt += '</table>'
+            txt += '</div>\n\n'
 
     txt += html_utils.get_footer('')
     with open(cfg.op_file_places, 'w') as fop:
@@ -616,9 +622,15 @@ def get_img_for_item(list_inv, item_id):
 def get_short_coord(long_coord):
     """
     strips off the .0000 stuff from end of coords in UE4
+    long_coord = (X=-11980.000000,Y=-2230.000000,Z=-295.000000)
     """
-
-    return long_coord.strip('.000')
+    
+    cols = long_coord.strip('(').strip(')').split(',')
+    x = cols[0].split('.')[0]
+    y = cols[1].split('.')[0]
+    z = cols[2].split('.')[0]
+    #print('long_coord = ' + long_coord + ' split =' + x + ',' + y + ',' + z)
+    return x + ',' + y + ',' + z #+ ' (' + long_coord + ')'
 
 
 def check_data_files():
