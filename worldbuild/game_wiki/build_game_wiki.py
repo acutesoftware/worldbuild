@@ -370,7 +370,7 @@ def make_page_Food():
     list_recipes = html_utils.read_csv_to_list(cfg.f_recipes)
     list_recipe_ingred = html_utils.read_csv_to_list(cfg.f_recipe_ingred)
     list_npcs = html_utils.read_csv_to_list(cfg.f_npcs)
-    txt += '<table border=1><TR><TD>img</TD><TD>Food</TD><TD>Desc</TD><TD>Crafted via</TD><TD>Sold by Vendors</TD><TD>Health</TD><TD>Used in Recipes</TD></TR>\n'
+    txt += '<table border=1><TR><TD>img</TD><TD>Food</TD><TD>Desc</TD><TD>Crafted via</TD><TD>Health</TD><TD>Used in Recipes</TD></TR>\n'
 
     for itm in list_items:
         #txt += '<H2>' + itm[2] + '</H2>'
@@ -384,7 +384,8 @@ def make_page_Food():
             txt += '</td><TD>'
             txt += get_item_crafted_via(list_recipes,  itm[1])    # Crafted by
             txt += '</td><TD>'
-            txt += get_item_sold_by(list_npcs, itm[1])    # Sold by Vendors
+            #txt += get_item_sold_by(list_npcs, itm[1])    # Sold by Vendors  (not needed - same list for everything)
+
             txt += '</td><TD>'
             txt +=  itm[12]    # health
             txt += '</td><TD>'
@@ -414,9 +415,9 @@ def get_item_crafted_via(lstRecipes, item_id):
                 workstation = 'Hand'
             else:
                 workstation = recipe[6]
-            txt += '<a href=Crafting.html#' + recipe[1] + '>' + recipe[2] + 'recipe </a>'
-            txt += ' (makes = ' + recipe[5] + ')<BR>'
-            txt += ' via ' + workstation + '<BR>'
+            txt += 'Recipe: <a href=Crafting.html#' + recipe[1] + '>' + recipe[2] + '</a><BR>'
+            txt += '(makes = ' + recipe[5] + ')<BR>'
+            txt += 'via ' + get_workstation_nice_name(workstation) + '<BR>'
 
             
     return txt            
@@ -442,12 +443,12 @@ def get_recipes_for_item(list_items, lstRecipes, lstRecipeIngred, item_id):
     txt = ''
     recipe_id = ''
     for tpe in sorted(lstRecipeIngred):
-        if tpe[2] in item_id:
+        if tpe[2] == item_id:   # was in 
             recipe_id = tpe[1]
             for lst in lstRecipes:
                 if lst[1] == recipe_id:
                     txt += '<img width = 50px src="' + get_img_for_item(list_items, recipe_id) + '">' 
-                    txt += '<a href=Crafting.html#' + recipe_id + '>' + lst[1] + '</a><BR>'
+                    txt += '<a href=Crafting.html#' + recipe_id + '>' + get_name_for_item(list_items, recipe_id) + '</a><BR>'
     
     return txt
 
@@ -481,10 +482,11 @@ def make_page_crafting(view_type='ICON'):
     txt += '<BR><div id = content><BR>'
 
     txt += get_world_build_menu('Crafting', 'Crafting recipes')
-    list_items = html_utils.read_csv_to_list(cfg.f_recipes) # 
+    list_items = html_utils.read_csv_to_list(cfg.f_items) # 
+    list_recipes = html_utils.read_csv_to_list(cfg.f_recipes) # 
     list_item_ingred = html_utils.read_csv_to_list(cfg.f_recipe_ingred) # 
     txt += '<table border=1><TR><TD>Recipe</TD><TD>Ingredients</TD><TD>Workstation</TD></TR>\n'
-    for itm in list_items:
+    for itm in list_recipes:
         txt += '<TR id=' + itm[1]  + '><TD valign=top>\n'
         
         # get icon for main recipe
@@ -495,13 +497,13 @@ def make_page_crafting(view_type='ICON'):
             if ingr[1] == itm[1]:
                 if view_type != 'ICON':
                     # DETAIL VIEW
-                    txt += ingr[3] + 'x ' + ingr[2]
+                    txt += get_name_for_item(list_items, ingr[2]) + 'x ' + ingr[3]
                     if ingr[4] != 'None':
                         txt += ' (' + ingr[4] + ')'
                     txt += '<BR>'
                 else:
-                    # ICON VIEW (which everyone likes)
-                    alt_text = ingr[3] + 'x ' + ingr[2] 
+                    # ICON VIEW (which everyone likes) - get_name_for_item(list_items, ingr[3])
+                    alt_text = get_name_for_item(list_items, ingr[2]) + ' (x ' + ingr[3] + ')'
                     txt += '<img height = 50px title= "' + alt_text + '" alt="' + alt_text + '" src="' + get_img_for_item(list_items, ingr[2] ) + '">'
 
         txt += '</TD><TD>' + get_workstation_nice_name(itm[6]) + '</TD>'
@@ -601,16 +603,20 @@ def get_img_for_item(list_inv, item_id):
     """
     gets the icon for an inventory item
     """
-    #list_inv = html_utils.read_csv_to_list(cfg.f_items) # 
-    
     for inv in list_inv:
         if inv[1] == item_id:
-
-            #img_file = os.path.join(cfg.op_folder, 'img', 'items',item_id + '.png')
             img_file = 'img' + os.sep + 'items' + os.sep + item_id + '.png'
-            #print('img file = ' + img_file)
             return img_file
-    return ''            
+    return 'CANT FIND Image FOR ' + item_id            
+
+def get_name_for_item(list_inv, item_id):
+    """
+    gets the icon for an inventory item
+    """
+    for inv in list_inv:
+        if inv[1] == item_id:
+            return inv[2] 
+    return 'CANT FIND NAME FOR ' + item_id            
 
 
 
