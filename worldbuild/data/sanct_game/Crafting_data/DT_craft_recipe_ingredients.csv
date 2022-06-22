@@ -110,3 +110,6 @@ food_battered_mackeral2,"food_fish_battered_mackeral","food_cook_batter","1","mi
 food_fish_bleak_poached1,"food_fish_bleak_poached","fish_bleak_small","1","boil"
 food_fish_eel_smoked1,"food_fish_eel_smoked","fish_eel","1","smoke"
 chem_squalene,"chem_squalene","fish_starfish","1","separate"
+food_pasta_spaghetti_simple1,"food_pasta_spaghetti_simple","food_cook_dough_pasta","1","boil"
+food_pasta_spaghetti_simple2,"food_pasta_spaghetti_simple","Food_Fruit_Tomato","2","mix"
+food_pasta_spaghetti_simple3,"food_pasta_spaghetti_simple","food_cheese","1","mix"
