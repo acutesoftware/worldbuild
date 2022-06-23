@@ -75,7 +75,7 @@ def lookup_desc(itm, list_plants):
     """
     looks up item manually from googling
     """
-    txt = ',,,,'
+    txt = ',,,,,,,,,,'
     for plant in list_plants:
         if get_base_name(itm) == plant[0]:
             #print(plant)
