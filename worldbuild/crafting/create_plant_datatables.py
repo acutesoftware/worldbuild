@@ -43,8 +43,8 @@ def main():
 
 def make_plant_summary_record(invent_item, list_plants):
     res = ''
-    res += invent_item[1] + ','
-    res += invent_item[3] + ','
+    res += invent_item[1] + ',"'
+    res += invent_item[3] + '",'
     res += get_base_name(invent_item[1]) + ','
     res += get_plant_type(invent_item[1]) + ','
     res += lookup_desc(invent_item[1], list_plants)
