@@ -32,6 +32,9 @@ f_tree_spawner_types = os.path.join(data_folder, 'World_data','DT_Tree_Spawner_T
 f_fishing_loot = os.path.join(data_folder, 'DT_Fishing_Loot.csv')
 f_crops = os.path.join(data_folder, 'DT_Crops.csv')
 f_plants_harvestable = os.path.join(data_folder, 'DT_Plants_Harvestable.csv')
+f_plants = os.path.join(data_folder, 'World_data', 'DT_plants_combined.csv')
+
+
 
 f_quests = os.path.join(data_folder, 'DT_Quests.csv')
 f_achievements = os.path.join(data_folder, 'DT_Achievements.csv')

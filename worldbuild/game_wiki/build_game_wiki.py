@@ -21,7 +21,8 @@ def main():
     make_page_NPCs()
     make_page_Items()
     make_page_Food()
-    make_page_Item_list_filtered('Plants', 'plant_')
+    make_page_Plants()
+    #make_page_Item_list_filtered('Plants', 'plant_')
     make_page_Fish()
     make_page_Item_list_filtered('Animals', 'animal_')
     make_page_Item_list_filtered('Clothes', 'cloth_')
@@ -391,6 +392,69 @@ def make_page_Food():
             txt += '</td><TD>'
             
             txt += get_recipes_for_item(list_items, list_recipes, list_recipe_ingred, itm[1])
+            
+            txt += '</TD></TR>\n'
+    txt += '</table>\n'
+
+
+
+    txt += html_utils.get_footer('')
+    with open(opfile, 'w') as fop:
+        fop.write(txt)
+
+
+def make_page_Plants():
+    """
+    Make the plants page
+     """
+    opfile = os.path.join(cfg.op_folder, 'Plants.html' )
+    txt = html_utils.get_header('Sanct')
+    txt += '<H1>Sanct Game</H1><div id = content><BR>'
+
+    txt += get_world_build_menu('Plants', 'Foraging, growing and usingPlants')
+    list_items = html_utils.read_csv_to_list(cfg.f_items) # 
+    list_plants = html_utils.read_csv_to_list(cfg.f_plants) # invent_id,invent_name,base_name,plant_type,common_name,higher_classification,family,plant_type,plant_height,leaf_size,uses,location,sunlight,water,notes
+    list_recipes = html_utils.read_csv_to_list(cfg.f_recipes)
+    list_recipe_ingred = html_utils.read_csv_to_list(cfg.f_recipe_ingred)
+    list_npcs = html_utils.read_csv_to_list(cfg.f_npcs)
+    txt += '<table border=1><TR><TD>img</TD><TD>Plant Name</TD><TD>Base name</TD><TD>type</TD><TD>Common Name</TD><TD>Classification</TD><TD>Family</TD><TD>plant type</TD><TD>Hgt</TD><TD>leaf size</TD><TD>uses</TD><TD>Location</TD><TD>Sun</TD><TD>Water</TD><TD>Notes</TD><TD>Used in Recipes</TD></TR>\n'
+
+    # sort list by latin order
+    list_plants.sort(key=lambda x: (x[5], x[6], x[2], x[0]))
+
+    for itm in list_plants:
+            txt += '<TR id=' + itm[1]  + '><TD>'
+            txt += '<img align=left  width = 50px src="' + get_img_for_item(list_items, itm[0]) + '">'
+            txt += '</td><TD>'
+            txt += '<a href="Items.html#' + itm[0] + '">' + itm[1] + '</a>'  # name
+            txt += '</td><TD>'
+            txt +=  itm[2]    # desc
+            txt += '</td><TD>'
+            txt +=  itm[3]    # desc
+            txt += '</td><TD>'
+            txt +=  itm[4]    # desc
+            txt += '</td><TD>'
+            txt +=  itm[5]    # desc
+            txt += '</td><TD>'
+            txt +=  itm[6]    # desc
+            txt += '</td><TD>'
+            txt +=  itm[7]    # desc
+            txt += '</td><TD>'
+            txt +=  itm[8]    # desc
+            txt += '</td><TD>'
+            txt +=  itm[9]    # desc
+            txt += '</td><TD>'
+            txt +=  itm[10]    # desc
+            txt += '</td><TD>'
+            txt +=  itm[11]    # desc
+            txt += '</td><TD>'
+            txt +=  itm[12]    # desc
+            txt += '</td><TD>'
+            txt +=  itm[13]    # desc
+            txt += '</td><TD>'
+            txt +=  itm[14]    # desc
+            txt += '</td><TD>'
+            txt += get_recipes_for_item(list_items, list_recipes, list_recipe_ingred, itm[0])
             
             txt += '</TD></TR>\n'
     txt += '</table>\n'
