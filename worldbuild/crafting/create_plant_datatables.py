@@ -29,17 +29,21 @@ def main():
 
     """
     op_file = 'plants.csv'
+    op_file = os.path.join(os.getcwd(), '..', 'data', 'sanct_game','World_data','DT_plants_combined.csv')
 
     print('generating simplified plant database...')
     list_items = html_utils.read_csv_to_list(cfg.f_items) 
     list_plants = html_utils.read_csv_to_list('plant_data_raw.csv') 
     #print(list_plants)
+    tot = 0
     with open(op_file, 'w') as fop:
         fop.write('invent_id,invent_name,base_name,plant_type,common_name,higher_classification,family,plant_type,plant_height,leaf_size,uses,location,sunlight,water,notes\n')
         for lst in list_items:
             if lst[0].startswith('plant_'):
+                tot += 1
                 fop.write(make_plant_summary_record(lst, list_plants))
 
+    print('saved ' + str(tot) + ' plant records to ' + op_file)
 
 def make_plant_summary_record(invent_item, list_plants):
     res = ''
