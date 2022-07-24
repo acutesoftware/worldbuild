@@ -1,0 +1,5 @@
+---,direction,X_mult,Y_mult
+North,"North","0.000000","-1.000000"
+South,"South","0.000000","1.000000"
+East,"East","-1.000000","0.000000"
+West,"West","1.000000","0.000000"

@@ -81,3 +81,5 @@
 2022-07-04,"2022-07-04","build","new","DEV - structure generator for making fast castles"
 2022-07-09,"2022-07-09","build","new","Edit buildable structure now includes reclaim structure (to remove it)"
 2022-07-10,"2022-07-10","DEV","upgr","implemented DT_Tags data table to speed up performance of game"
+2022-07-15,"2022-07-15","build","upgr","Added all Trees and Plants to build menu for placement in world"
+2022-07-22,"2022-07-22","game","new","Added treasure chests as random pickups"
