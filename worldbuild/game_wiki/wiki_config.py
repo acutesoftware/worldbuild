@@ -8,7 +8,7 @@ import sys
 #####################################################
 
 cur_folder = os.getcwd()
-op_folder = os.path.join(cur_folder, "html_op")
+op_folder = os.path.join(cur_folder, '..', '..', '..', 'divitie', 'website')
 data_folder = os.path.join(cur_folder, '..', 'data', 'sanct_game')
 
 op_file_main = os.path.join(op_folder, 'index.html')
