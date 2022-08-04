@@ -308,3 +308,57 @@ ROOT
     ├── social_marketing
     ├── social_seller
     └── social_talker
+ROOT
+├── crafting
+│   ├── artist
+│   │   ├── artist_designer
+│   │   │   ├── artist_designer_clothes
+│   │   │   ├── artist_designer_house
+│   │   │   ├── artist_designer_interior
+│   │   │   └── artist_designer_tools
+│   │   ├── artist_painting
+│   │   └── artist_pottery
+│   ├── blacksmith
+│   │   ├── armourer
+│   │   ├── toolcrafter
+│   │   └── weaponsmith
+│   ├── brewing
+│   ├── cooking
+│   │   ├── cooking_baking
+│   │   ├── cooking_pan
+│   │   ├── cooking_roast
+│   │   ├── cooking_salad
+│   │   ├── cooking_soup
+│   │   └── cooking_stirfry
+│   ├── engineering
+│   │   ├── engineering_civil
+│   │   └── engineering_mechanical
+│   ├── leatherworking
+│   ├── mechanic
+│   ├── tailoring
+│   ├── winemaking
+│   └── woodworking
+├── farming
+├── gathering
+│   ├── diving
+│   ├── fishing
+│   │   ├── fishing_beach
+│   │   ├── fishing_caves
+│   │   ├── fishing_lake
+│   │   ├── fishing_river
+│   │   └── fishing_sea
+│   ├── foraging
+│   ├── hunting
+│   │   ├── hunting_blind
+│   │   ├── hunting_chase
+│   │   └── hunting_traps
+│   └── mining
+│       ├── mining_dig
+│       ├── mining_mountains
+│       ├── mining_pan
+│       └── mining_sea
+└── social
+    ├── social_animal_trainer
+    ├── social_marketing
+    ├── social_seller
+    └── social_talker
