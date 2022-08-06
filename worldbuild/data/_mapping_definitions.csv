@@ -1,0 +1,128 @@
+wb_map_id,wb_map_area,wb_map_subarea,wb_map_desc
+character,INFO,metadata,Metadata to describe characters or NPC's in the game
+object,INFO,metadata,Metadata to describe items in the world
+quest,INFO,metadata,Metadata to describe Quests or tasks to do in the world
+env,INFO,metadata,"Metadata to describe environmental obects and effects (trees, rocks, light, weather)"
+char_move_walk_forward,character,movement,character walks forward
+char_move_walk_backward,character,movement,character walks backward
+char_move_walk_left,character,movement,character walks left
+char_move_walk_right,character,movement,character walks right
+char_move_run_forward,character,movement,character runs forward
+char_move_run_backward,character,movement,character runs backward
+char_move_run_left,character,movement,character runs left
+char_move_run_right,character,movement,character runs right
+char_move_sneak_forward,character,movement,character sneaks forward
+char_move_sneak_backward,character,movement,character sneaks backward
+char_move_sneak_left,character,movement,character sneaks left
+char_move_sneak_right,character,movement,character sneaks right
+char_id,character,id,ID of the character or NPC
+char_name,character,name,display name of a character
+char_image_icon,character,image,image of character face for avatar
+char_image_full,character,image,full size image of character
+object_item_id,object,id,object ID of in game item
+object_item_name,object,name,object name of in game item
+object_image_icon,object,image,icon size image of item for bag and menu
+object_image_full,object,image,full size image of item
+env_location_vector,env,location,3D vector location in the environment
+env_level_id,env,id,id of the level
+env_level_name,env,name,name of the level (a level is a map 8x8 - 64x64)
+env_level_image,env,image,small screenshot of the level to show on selection screen
+env_level_image_map,env,image,top view showing map of the level
+env_spawn_id,env,spawner,"spawner id (eg tree_fir, plant_daisy03,jungle_rock04)"
+env_spawn_quant_min,env,spawner,minimum number of obects to spawn from this spawner
+env_spawn_quant_max,env,spawner,maximum number of obects to spawn from this spawner
+env_spawn_respawn_after_x_days,env,spawner,number of days before respawn (default 1 = respawn overnight)
+char_anim_dance,character,animation,Emote definition - You break into dance
+char_anim_laugh,character,animation,Emote definition - You burst out laughing
+char_anim_cry,character,animation,Emote definition - you cry
+char_anim_stop,character,animation,Emote definition - Stop all emote animations
+char_anim_pick,character,animation,Emote definition - Pick stuff from ground
+char_anim_stretch,character,animation,Emote definition - Have a good stretch
+char_anim_bow,character,animation,Emote definition - You bow down
+char_anim_cheer,character,animation,Emote definition - You Cheer
+char_anim_shrug,character,animation,Emote definition - You shrug
+char_anim_exercise,character,animation,Emote definition - You do a quick work out
+char_anim_gethere,character,animation,"Emote definition - Oi, get here right now!"
+char_anim_look,character,animation,Emote definition - You look around
+char_anim_No,character,animation,Emote definition - Just ... No
+char_anim_salute,character,animation,Emote definition - You Salute with respect
+char_anim_flex,character,animation,Emote definition - You flex your muscles like a BOSS
+char_anim_sit,character,animation,Emote definition - You sit down
+char_anim_work,character,animation,Emote definition - You do some work at the table
+char_anim_sneeze,character,animation,Emote definition - You Sneeze - Achoo!
+char_anim_drink,character,animation,Emote definition - You drink..... ahhhh
+char_anim_take,character,animation,Emote definition - You take stuff from the table
+char_anim_talk,character,animation,Emote definition - You chat about various things
+char_anim_think,character,animation,Emote definition - You have a serious think
+char_anim_throw,character,animation,Emote definition - you throw something - hope it wasnt important
+char_anim_wash,character,animation,Emote definition - you wash the window
+char_anim_wave,character,animation,Emote definition - You wave
+char_anim_clap,character,animation,Emote definition - You clap!  Well done
+char_anim_booyah,character,animation,Emote definition - Boo Yah!
+char_anim_gimmebreak,character,animation,Emote definition - Oh, give me a break
+char_anim_death,character,animation,Emote definition - You die
+char_anim_crouch,character,animation,Emote definition - You crouch down
+char_anim_sleep,character,animation,Emote definition - You lay down to sleep
+char_anim_fight1,character,animation,Emote definition - You Attack with Meelee weapon
+char_anim_swim1,character,animation,Emote definition - You go for a swim
+char_anim_pat,character,animation,Emote definition - You pat the animal
+char_anim_leap,character,animation,Emote definition - You leap and attack
+char_anim_sweep,character,animation,Emote definition - You sweep
+char_anim_pose1,character,animation,Emote definition - Pose 1
+char_anim_pose2,character,animation,Emote definition - Pose 2
+char_anim_dust,character,animation,Emote definition - You dust yourself off
+char_anim_clap2,character,animation,Emote definition - you clap vaguely
+char_anim_clap3,character,animation,Emote definition - you clap lazily
+char_anim_point1,character,animation,Emote definition - You point at something
+char_anim_thumbsdown1,character,animation,Emote definition - you give the thumbs down
+char_anim_thumbsup1,character,animation,Emote definition - you give the thumbs up
+char_anim_walk1,character,animation,Emote definition - you walk with style
+char_anim_chargeup,character,animation,Emote definition - You feel yourself powering up
+char_anim_cast,character,animation,Emote definition - you cast something
+char_anim_bigwork,character,animation,Emote definition - Standing_Melee_Attack_Downward_mixamo_com
+char_anim_battlecry,character,animation,Emote definition - Standing_Taunt_Battlecry
+char_anim_tablet,character,animation,Emote definition - You read the book
+char_anim_sitcraft1,character,animation,Emote definition - You sit and craft something
+char_anim_sitcraft2,character,animation,Emote definition - You sit and craft something
+char_anim_sitcraft3,character,animation,Emote definition - You sit and craft something
+char_anim_sitcraft4,character,animation,Emote definition - You sit and craft something
+char_anim_sitcraft5,character,animation,Emote definition - You sit and craft something
+char_anim_sitcraft1,character,animation,Emote definition - You sit and craft something
+char_anim_readbook,character,animation,Emote definition - You read the book
+char_anim_phone,character,animation,Emote definition - You use your phone
+char_anim_chop,character,animation,Emote definition - You chop wood
+char_anim_fallsleep,character,animation,Emote definition - You fall down and sleep
+char_anim_ninjadownkick,character,animation,Emote definition - You do a Ninja attack
+char_anim_ninjalefthook,character,animation,Emote definition - You do a Ninja attack
+char_anim_shower,character,animation,Emote definition - You have a shower
+char_anim_sit_fire,character,animation,Emote definition - You sit down by the fire
+char_anim_guitar,character,animation,Emote definition - You play the guitar
+char_anim_eat,character,animation,Emote definition - You eat
+char_anim_benchpress,character,animation,Emote definition - You bench press some weights
+char_anim_bandage,character,animation,Emote definition - you bandage yourself
+char_anim_choptree,character,animation,Emote definition - You chop a tree
+char_anim_fish_idle,character,animation,Emote definition - You are fishing - waiting for a bite
+char_anim_fish_reel,character,animation,Emote definition - You reel in the fish
+char_anim_fish_cast,character,animation,Emote definition - You cast in your fishing line
+char_anim_fish_bite,character,animation,Emote definition - You get a bite on your fishing line
+
+quest_id,quest,id,Mapping quests - quest_id
+quest_ids_required,quest,id,Mapping quests - ids_required
+quest_ids_unlocked,quest,id,Mapping quests - ids_unlocked
+quest_is_active,quest,id,Mapping quests - is_active
+quest_quest_name,quest,name,Mapping quests - quest_name
+quest_desc_short,quest,desc,Mapping quests - desc_short
+quest_actor_to_start,quest,char,Mapping quests - actor_to_start
+quest_actor_to_end,quest,char,Mapping quests - actor_to_end
+quest_items_required,quest,object,Mapping quests - items_required
+quest_locations_required,quest,env,Mapping quests - locations_required
+quest_text_request,quest,desc,Mapping quests - text_request
+quest_text_accept,quest,desc,Mapping quests - text_accept
+quest_text_complete,quest,desc,Mapping quests - text_complete
+quest_days_until_repeatable,quest,quest,Mapping quests - days_until_repeatable
+quest_reward_gold,quest,money,Mapping quests - reward_gold
+quest_reward_items,quest,object,Mapping quests - reward_items
+quest_reward_skill,quest,skill,Mapping quests - reward_skill
+
+
+
