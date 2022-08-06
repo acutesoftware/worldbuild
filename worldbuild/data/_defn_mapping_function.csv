@@ -114,6 +114,32 @@ object_tool_knife,object,tool,defines the tool that maps to the players knife
 object_wood_log,object,wood,defines the item (you create) that maps to a wood log
 object_wood_plank,object,wood,defines the item (you create) that maps to a wood plank
 object_string,object,material,defines the item (you create) that maps to string
+function_chopBPtree,function,action,selected object has function chopBPtree applied using current selected tool
+function_chop,function,action,selected object has function chop applied using current selected tool
+function_mine,function,action,selected object has function mine applied using current selected tool
+function_pickup,function,action,selected object has function pickup applied using current selected tool
+function_get_bark,function,action,selected object has function get_bark applied using current selected tool
+function_destroy_plot,function,action,selected object has function destroy_plot applied using current selected tool
+function_create_farmplot,function,action,selected object has function create_farmplot applied using current selected tool
+function_grab,function,action,selected object has function grab applied using current selected tool
+function_harvest,function,action,selected object has function harvest applied using current selected tool
+function_none,function,action,selected object has function none applied using current selected tool
+function_smash,function,action,selected object has function smash applied using current selected tool
+function_dig,function,action,selected object has function dig applied using current selected tool
+function_fish,function,action,selected object has function fish applied using current selected tool
+function_fnBuiltItemGui,function,action,selected object has function fnBuiltItemGui applied using current selected tool
+function_saw,function,action,selected object has function saw applied using current selected tool
+function_sawBPtree,function,action,selected object has function sawBPtree applied using current selected tool
+function_climbBPtree,function,action,selected object has function climbBPtree applied using current selected tool
+function_fnStationWidget,function,action,selected object has function fnStationWidget applied using current selected tool
+function_fnSleep,function,action,selected object has function fnSleep applied using current selected tool
+function_fnFightHand,function,action,selected object has function fnFightHand applied using current selected tool
+function_fnFightSword,function,action,selected object has function fnFightSword applied using current selected tool
+function_fnPlacedItem,function,action,selected object has function fnPlacedItem applied using current selected tool
+function_fnPiano,function,action,selected object has function fnPiano applied using current selected tool
+function_fnCraftCentreGui,function,action,selected object has function fnCraftCentreGui applied using current selected tool
+function_fnPlacedItemGui,function,action,selected object has function fnPlacedItemGui applied using current selected tool
+function_fnContainerGui,function,action,selected object has function fnContainerGui applied using current selected tool
 
 
 
