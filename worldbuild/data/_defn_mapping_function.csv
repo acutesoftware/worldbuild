@@ -1,0 +1,120 @@
+function_id,function_area,function_subarea,function_desc
+
+char_move_walk_forward,character,movement,character walks forward
+char_move_walk_backward,character,movement,character walks backward
+char_move_walk_left,character,movement,character walks left
+char_move_walk_right,character,movement,character walks right
+char_move_run_forward,character,movement,character runs forward
+char_move_run_backward,character,movement,character runs backward
+char_move_run_left,character,movement,character runs left
+char_move_run_right,character,movement,character runs right
+char_move_sneak_forward,character,movement,character sneaks forward
+char_move_sneak_backward,character,movement,character sneaks backward
+char_move_sneak_left,character,movement,character sneaks left
+char_move_sneak_right,character,movement,character sneaks right
+char_combat_attack_1,character,combat,character default attack
+char_combat_attack_2,character,combat,character attack #2
+char_combat_attack_3,character,combat,character attack #3
+char_combat_attack_4,character,combat,character attack #4
+char_combat_defend_1,character,combat,character default defence
+char_combat_defend_2,character,combat,character defence #2
+char_combat_defend_3,character,combat,character defence #3
+char_combat_defend_4,character,combat,character defence #4
+char_anim_dance,character,animation,Emote definition - You break into dance
+char_anim_laugh,character,animation,Emote definition - You burst out laughing
+char_anim_cry,character,animation,Emote definition - you cry
+char_anim_stop,character,animation,Emote definition - Stop all emote animations
+char_anim_pick,character,animation,Emote definition - Pick stuff from ground
+char_anim_stretch,character,animation,Emote definition - Have a good stretch
+char_anim_bow,character,animation,Emote definition - You bow down
+char_anim_cheer,character,animation,Emote definition - You Cheer
+char_anim_shrug,character,animation,Emote definition - You shrug
+char_anim_exercise,character,animation,Emote definition - You do a quick work out
+char_anim_gethere,character,animation,"Emote definition - Oi, get here right now!"
+char_anim_look,character,animation,Emote definition - You look around
+char_anim_No,character,animation,Emote definition - Just ... No
+char_anim_salute,character,animation,Emote definition - You Salute with respect
+char_anim_flex,character,animation,Emote definition - You flex your muscles like a BOSS
+char_anim_sit,character,animation,Emote definition - You sit down
+char_anim_work,character,animation,Emote definition - You do some work at the table
+char_anim_sneeze,character,animation,Emote definition - You Sneeze - Achoo!
+char_anim_drink,character,animation,Emote definition - You drink..... ahhhh
+char_anim_take,character,animation,Emote definition - You take stuff from the table
+char_anim_talk,character,animation,Emote definition - You chat about various things
+char_anim_think,character,animation,Emote definition - You have a serious think
+char_anim_throw,character,animation,Emote definition - you throw something - hope it wasnt important
+char_anim_wash,character,animation,Emote definition - you wash the window
+char_anim_wave,character,animation,Emote definition - You wave
+char_anim_clap,character,animation,Emote definition - You clap!  Well done
+char_anim_booyah,character,animation,Emote definition - Boo Yah!
+char_anim_gimmebreak,character,animation,"Emote definition - Oh, give me a break"
+char_anim_death,character,animation,Emote definition - You die
+char_anim_crouch,character,animation,Emote definition - You crouch down
+char_anim_sleep,character,animation,Emote definition - You lay down to sleep
+char_anim_fight1,character,animation,Emote definition - You Attack with Meelee weapon
+char_anim_swim1,character,animation,Emote definition - You go for a swim
+char_anim_pat,character,animation,Emote definition - You pat the animal
+char_anim_leap,character,animation,Emote definition - You leap and attack
+char_anim_sweep,character,animation,Emote definition - You sweep
+char_anim_pose1,character,animation,Emote definition - Pose 1
+char_anim_pose2,character,animation,Emote definition - Pose 2
+char_anim_dust,character,animation,Emote definition - You dust yourself off
+char_anim_clap2,character,animation,Emote definition - you clap vaguely
+char_anim_clap3,character,animation,Emote definition - you clap lazily
+char_anim_point1,character,animation,Emote definition - You point at something
+char_anim_thumbsdown1,character,animation,Emote definition - you give the thumbs down
+char_anim_thumbsup1,character,animation,Emote definition - you give the thumbs up
+char_anim_walk1,character,animation,Emote definition - you walk with style
+char_anim_chargeup,character,animation,Emote definition - You feel yourself powering up
+char_anim_cast,character,animation,Emote definition - you cast something
+char_anim_bigwork,character,animation,Emote definition - Standing_Melee_Attack_Downward_mixamo_com
+char_anim_battlecry,character,animation,Emote definition - Standing_Taunt_Battlecry
+char_anim_tablet,character,animation,Emote definition - You read the book
+char_anim_sitcraft1,character,animation,Emote definition - You sit and craft something
+char_anim_sitcraft2,character,animation,Emote definition - You sit and craft something
+char_anim_sitcraft3,character,animation,Emote definition - You sit and craft something
+char_anim_sitcraft4,character,animation,Emote definition - You sit and craft something
+char_anim_sitcraft5,character,animation,Emote definition - You sit and craft something
+char_anim_sitcraft1,character,animation,Emote definition - You sit and craft something
+char_anim_readbook,character,animation,Emote definition - You read the book
+char_anim_phone,character,animation,Emote definition - You use your phone
+char_anim_chop,character,animation,Emote definition - You chop wood
+char_anim_fallsleep,character,animation,Emote definition - You fall down and sleep
+char_anim_ninjadownkick,character,animation,Emote definition - You do a Ninja attack
+char_anim_ninjalefthook,character,animation,Emote definition - You do a Ninja attack
+char_anim_shower,character,animation,Emote definition - You have a shower
+char_anim_sit_fire,character,animation,Emote definition - You sit down by the fire
+char_anim_guitar,character,animation,Emote definition - You play the guitar
+char_anim_eat,character,animation,Emote definition - You eat
+char_anim_benchpress,character,animation,Emote definition - You bench press some weights
+char_anim_bandage,character,animation,Emote definition - you bandage yourself
+char_anim_choptree,character,animation,Emote definition - You chop a tree
+char_anim_fish_idle,character,animation,Emote definition - You are fishing - waiting for a bite
+char_anim_fish_reel,character,animation,Emote definition - You reel in the fish
+char_anim_fish_cast,character,animation,Emote definition - You cast in your fishing line
+char_anim_fish_bite,character,animation,Emote definition - You get a bite on your fishing line
+fx_sound_music_intro,fx,sound,Music played when level starts
+fx_sound_music_arrive_town,fx,sound,Music played when arriving at town
+fx_sound_music_leave_town,fx,sound,Music played when leaving town
+fx_sound_music_complete_level,fx,sound,Music played when level completed
+env_location_player_start,env,location,Default spawn location of player when starting level
+env_location_player_start,env,location,Default spawn location of player when starting level
+env_location_player_start_enter_via_N,env,location,Spawn location of player when entering level from North
+env_location_player_start_enter_via_S,env,location,Spawn location of player when entering level from South
+env_location_player_start_enter_via_E,env,location,Spawn location of player when entering level from East
+env_location_player_start_enter_via_W,env,location,Spawn location of player when entering level from West
+object_tool_axe,object,tool,defines the tool that maps to the players axe
+object_tool_pickaxe,object,tool,defines the tool that maps to the players pickaxe
+object_tool_shovel,object,tool,defines the tool that maps to the players shovel
+object_tool_hoe,object,tool,defines the tool that maps to the players hoe
+object_tool_screwdriver,object,tool,defines the tool that maps to the players screwdriver
+object_tool_hammer,object,tool,defines the tool that maps to the players hammer
+object_tool_saw,object,tool,defines the tool that maps to the players saw
+object_tool_knife,object,tool,defines the tool that maps to the players knife
+object_wood_log,object,wood,defines the item (you create) that maps to a wood log
+object_wood_plank,object,wood,defines the item (you create) that maps to a wood plank
+object_string,object,material,defines the item (you create) that maps to string
+
+
+
+

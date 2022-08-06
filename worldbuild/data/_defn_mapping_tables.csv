@@ -1,0 +1,7 @@
+wb_table_id,wb_table_area,wb_table_subarea,wb_table_desc
+char,root,metadata,Table to describe characters or NPC's in the game
+object,root,metadata,Table to describe items in the world
+quest,root,metadata,Table to describe Quests or tasks to do in the world
+env,root,metadata,"Table to describe levels | maps and environmental objects and effects (trees, rocks, light, weather)"
+skill,root,metadata,"Table to describe character or NPC skills"
+fx,root,metadata,"Table to describe in game effects (Sounds, Particles, etc)"

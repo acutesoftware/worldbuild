@@ -1,0 +1,49 @@
+wb_column_id,wb_column_area,wb_column_subarea,wb_column_desc
+char_id,character,id,ID of the character or NPC
+char_name,character,name,display name of a character
+char_image_icon,character,image,image of character face for avatar
+char_image_full,character,image,full size image of character
+object_item_id,object,id,object ID of in game item
+object_item_name,object,name,object name of in game item
+object_image_icon,object,image,icon size image of item for bag and menu
+object_image_full,object,image,full size image of item
+env_location_vector,env,location,3D vector location in the environment
+env_level_id,env,id,id of the level
+env_level_name,env,name,name of the level (a level is a map 8x8 - 64x64)
+env_level_image,env,image,small screenshot of the level to show on selection screen
+env_level_image_map,env,image,top view showing map of the level
+env_spawn_id,env,spawner,"spawner id (eg tree_fir, plant_daisy03,jungle_rock04)"
+env_spawn_quant_min,env,spawner,minimum number of obects to spawn from this spawner
+env_spawn_quant_max,env,spawner,maximum number of obects to spawn from this spawner
+env_spawn_respawn_after_x_days,env,spawner,number of days before respawn (default 1 = respawn overnight)
+quest_id,quest,id,Mapping quests - quest_id
+quest_ids_required,quest,id,Mapping quests - ids_required
+quest_ids_unlocked,quest,id,Mapping quests - ids_unlocked
+quest_is_active,quest,id,Mapping quests - is_active
+quest_quest_name,quest,name,Mapping quests - quest_name
+quest_desc_short,quest,desc,Mapping quests - desc_short
+quest_actor_to_start,quest,char,Mapping quests - actor_to_start
+quest_actor_to_end,quest,char,Mapping quests - actor_to_end
+quest_items_required,quest,object,Mapping quests - items_required
+quest_locations_required,quest,env,Mapping quests - locations_required
+quest_text_request,quest,desc,Mapping quests - text_request
+quest_text_accept,quest,desc,Mapping quests - text_accept
+quest_text_complete,quest,desc,Mapping quests - text_complete
+quest_days_until_repeatable,quest,quest,Mapping quests - days_until_repeatable
+quest_reward_gold,quest,money,Mapping quests - reward_gold
+quest_reward_items,quest,object,Mapping quests - reward_items
+quest_reward_skill,quest,skill,Mapping quests - reward_skill
+fx_id,fx,id,id of a particle effect
+fx_name,fx,name,name of a particle effect
+fx_desc,fx,desc,description of a particle effect
+fx_emitter_object,fx,emittor,the object name of emitter spawned
+fx_emitter_scale,fx,size,the vector scale of the emitter
+fx_emitter_time,fx,time,how many milliseconds the effect lasts
+skill_id,skill,id,id of the characters skill
+skill_name,skill,name,name of the skill
+skill_image_icon,skill,image,small screenshot of the skill to show on toolbar
+skill_image_full,skill,image,image the skill (probably in action) to show on selection / learning screen
+skill_effect_start,skill,fx,Effect spawned when the skill is started
+skill_effect_finish,skill,fx,Effect spawned when the skill is finished
+
+
