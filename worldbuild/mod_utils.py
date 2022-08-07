@@ -19,6 +19,9 @@ file_defn_func = os.path.join(os.getcwd(), 'data','_defn_mapping_function.csv')
 # Output Files for Mods
 fldr_op_mod_root = os.path.join(os.getcwd(), 'samples','sanct_mods')
 
+# delim and formatting
+delim = ','
+newline = '\n'
 
 def verify():
     """
@@ -28,9 +31,51 @@ def verify():
         print('reading tbls')
 
 
+def create_level_header():
+    """
+    creates a Level header record
+    id,name,template,biome,image,image_map,pos_X_start,X_end,Y_start,Y_end
+    """
+    op  = 'id' + delim
+    op += 'name' + delim
+    op += 'template' + delim
+    op += 'biome' + delim
+    op += 'image' + delim
+    op += 'image_map' + delim
+    op += 'X_start' + delim
+    op += 'X_end' + delim
+    op += 'Y_start' + delim
+    op += 'Y_end' 
+
+    return op + newline
+
+
+def create_level_line(id,name,template,biome,image,image_map,X_start,X_end,Y_start,Y_end):
+    """
+    creates a Level record
+    """
+    op = id + delim
+    op += name + delim
+    op += template + delim
+    op += biome + delim
+    op += image + delim
+    op += image_map + delim
+    op += str(X_start) + delim
+    op += str(X_end) + delim
+    op += str(Y_start) + delim
+    op += str(Y_end) 
+
+    return op + newline
+
+
 def create_npc_line(npc_name):
     """
     creates an NPC record
+    char_id
+char_name
+char_image_icon
+char_image_full
+
     """
 
     return npc_name + ',,,,,\n' 

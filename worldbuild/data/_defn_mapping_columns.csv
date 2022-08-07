@@ -10,8 +10,15 @@ object_image_full,object,image,full size image of item
 env_location_vector,env,location,3D vector location in the environment
 env_level_id,env,id,id of the level
 env_level_name,env,name,name of the level (a level is a map 8x8 - 64x64)
+env_level_template,env,file,file of the template used for the map
+env_level_biome,env,biome,"default biome of the level (decides spawner types ONLY, not paint layers)"
 env_level_image,env,image,small screenshot of the level to show on selection screen
 env_level_image_map,env,image,top view showing map of the level
+env_level_pos_X_start,env,location,starting X pos of level - used to add blocking volume for map edges
+env_level_pos_X_end,env,location,end X pos of level - used to add blocking volume for map edges
+env_level_pos_Y_start,env,location,starting Y pos of level - used to add blocking volume for map edges
+env_level_pos_Y_end,env,location,end Y pos of level - used to add blocking volume for map edges
+
 env_spawn_id,env,spawner,"spawner id (eg tree_fir, plant_daisy03,jungle_rock04)"
 env_spawn_quant_min,env,spawner,minimum number of obects to spawn from this spawner
 env_spawn_quant_max,env,spawner,maximum number of obects to spawn from this spawner
