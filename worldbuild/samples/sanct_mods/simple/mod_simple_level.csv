@@ -1,0 +1,2 @@
+id,name,template,biome,image,image_map,X_start,X_end,Y_start,Y_end
+user_level_sample01,Sample Map,template,forest,img_lvl_sample1.PNG,img_lvl_sample1.PNG,0,20000,0,20000

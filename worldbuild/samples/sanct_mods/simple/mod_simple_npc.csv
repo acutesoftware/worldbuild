@@ -1,5 +1,5 @@
-frank,,,,,
-jane,,,,,
-alex,,,,,
-simon,,,,,
-mary,,,,,
+id,name,template,level_id,pos_X,pos_Y,pos_Z
+npc_01,Sandra,Female_Brunette_A,user_level_sample01,500,500,1000,
+npc_02,George,Male_Glasses,user_level_sample01,500,2500,1000,
+npc_03,Dindra,Female_Blonde_C,user_level_sample01,2500,500,1000,
+npc_04,Zoltan,Male_Viking,user_level_sample01,1500,1500,1000,
