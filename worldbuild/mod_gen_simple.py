@@ -13,10 +13,8 @@ op_file_npc = os.path.join(op_folder,'mod_simple_npc.csv')
 op_file_item = os.path.join(op_folder,'mod_simple_item.csv')
 op_file_level = os.path.join(op_folder,'mod_simple_level.csv')
 
-npcs = [
-    'frank','jane','alex','simon','mary'
-]
 
+lvl_id = 'user_level_sample01'
 items = ['key','plank']
 
 
@@ -39,7 +37,7 @@ def make_sample_level():
     env_level_pos_Y_end,env,location,end Y pos of level - used to add blocking volume for map edges
     """
 
-    dat = md.create_level_line('user_map_01','Sample Map','template','forest','img_lvl_sample1.PNG','img_lvl_sample1.PNG',0,20000,0,20000)
+    dat = md.create_level_line(lvl_id,'Sample Map','template','forest','img_lvl_sample1.PNG','img_lvl_sample1.PNG',0,20000,0,20000)
     
     with open(op_file_level, 'w') as fop:
         fop.write(md.create_level_header())
@@ -50,12 +48,20 @@ def make_sample_level():
 
 
 def make_file_npc():
-    npc_txt = ''
-    for npc in npcs:
-        npc_txt += md.create_npc_line(npc)
 
     with open(op_file_npc, 'w') as fop:
-        fop.write(npc_txt)
+        fop.write(md.create_npc_header())
+        fop.write(md.create_npc_line('npc_01','Sandra','Female_Brunette_A', lvl_id, 500,500,1000))
+        fop.write(md.create_npc_line('npc_02','George','Male_Glasses', lvl_id, 500,2500,1000))
+        fop.write(md.create_npc_line('npc_03','Dindra','Female_Blonde_C', lvl_id, 2500,500,1000))
+        fop.write(md.create_npc_line('npc_04','Zoltan','Male_Viking', lvl_id, 1500,1500,1000))
+        
+
+
+
+
+
+
 
 def make_file_items():
     itm_txt = ''

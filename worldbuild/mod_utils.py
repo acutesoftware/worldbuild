@@ -30,6 +30,11 @@ def verify():
     with open(file_defn_tbls, 'r') as fip:
         print('reading tbls')
 
+##################                            $$$        $$$
+#                         /--\      .        $$$$$  $   $$$$$
+#   L  E  V  E  L       /-    \    / \        $$$  $$$   $$$
+#                    --/       \  /   ---\     |    $     |
+#################  __-          \----__________|____|_____|
 
 def create_level_header():
     """
@@ -68,17 +73,45 @@ def create_level_line(id,name,template,biome,image,image_map,X_start,X_end,Y_sta
     return op + newline
 
 
-def create_npc_line(npc_name):
-    """
-    creates an NPC record
-    char_id
-char_name
-char_image_icon
-char_image_full
+################      _-""-_
+#                    /      \
+#   N  P  C         /  0. .0 \    
+#                   \   _^_  /  
+################     \______/
 
+def create_npc_header():
     """
+    creates a NPC header record
+    
+    """
+    op  = 'id' + delim
+    op += 'name' + delim
+    op += 'template' + delim
+    op += 'level_id' + delim
+    op += 'pos_X' + delim
+    op += 'pos_Y' + delim
+    op += 'pos_Z'
+    return op + newline
 
-    return npc_name + ',,,,,\n' 
+
+
+def create_npc_line(id,name,template, level_id, pos_X, pos_Y, pos_Z):
+    op = id + delim
+    op += name + delim
+    op += template + delim
+    op += level_id + delim
+    op += str(pos_X) + delim
+    op += str(pos_Y) + delim
+    op += str(pos_Z) + delim
+    return op + newline
+
+
+################             _-_
+#                ___________/   \
+#   ITEMS        ===========|   |   
+#                          /     \   
+################          |-_____-|
+
 
 def create_item_line(itm_name):
     """
