@@ -1,2 +1,6 @@
-key,,,,,
-plank,,,,,
+id,name,base_item_id,material_id,scale_X,scale_Y,scale_Z
+wood_frame_stud,Wood Stud for framing,wood_plank_pine,mat_wood_rough,90,35,2400
+wood_frame_plate,Wood Plate for framing,wood_plank_pine,mat_wood_rough,90,35,4800
+wood_frame_noggin,Wood Noggin for framing,wood_plank_pine,mat_wood_rough,90,35,565
+wood_frame_lintel,Wood Lintel for framing,wood_plank_pine,mat_wood_rough,190,35,1800
+golden_key,Golden Key,loot_key_base,mat_gold,1,1,1

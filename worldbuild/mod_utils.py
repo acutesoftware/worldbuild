@@ -102,20 +102,40 @@ def create_npc_line(id,name,template, level_id, pos_X, pos_Y, pos_Z):
     op += level_id + delim
     op += str(pos_X) + delim
     op += str(pos_Y) + delim
-    op += str(pos_Z) + delim
+    op += str(pos_Z)
     return op + newline
 
 
-################             _-_
-#                ___________/   \
-#   ITEMS        ===========|   |   
-#                          /     \   
-################          |-_____-|
+################           \\
+#                __________| |
+#   ITEMS        ==========/  \   
+#                         |   /   
+################          \__|
+
+def create_item_header():
+    """
+    creates a NPC header record
+    
+    """
+    op  = 'id' + delim
+    op += 'name' + delim
+    op += 'base_item_id' + delim
+    op += 'material_id' + delim
+    op += 'scale_X' + delim
+    op += 'scale_Y' + delim
+    op += 'scale_Z'
+    return op + newline
 
 
-def create_item_line(itm_name):
+def create_item_line(id,name,base_item_id, material_id, scale_X, scale_Y, scale_Z):
     """
     creates an Item record
     """
-
-    return itm_name + ',,,,,\n' 
+    op = id + delim
+    op += name + delim
+    op += base_item_id + delim
+    op += material_id + delim
+    op += str(scale_X) + delim
+    op += str(scale_Y) + delim
+    op += str(scale_Z)
+    return op + newline
