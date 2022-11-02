@@ -31,8 +31,8 @@ graph_depth,sort_order,node_id,parent_id,node_name,detail,full_path,prefix_for_c
 4,8,me_mordor,middle_earth,Mordor,Mordor in Middle Earth,root > where > middle_earth > mordor,w_me_mordor_,w_me_mordor,Bottom right of Middle Earth - not very pleasant
 3,8,azeroth,where,Azeroth,Azeroth (location in World of Warcraft game),root > where > azeroth,w_azer_,w_azeroth,
 4,8,country_locations,earth,Country Locations,Datase of Country GPS Coords,root > where > earth > country > country_coords,w_earth_cnt_loc_,w_earth_country_locations,todo - download GPS coords
-5,9,spain,country,Spain,Spain - Country,root > fact > category > country > spain,f_cat_cnt_spn_,f_cat_country_spain,
-5,10,japan,country,Japan,Japan - Country,root > fact > category > country > japan,f_cat_cnt_jp_,f_cat_country_japan,
+5,9,spain,country,countries,Spain - Country,root > fact > category > country > spain,f_cat_cnt_spn_,f_cat_country_spain,
+5,10,japan,country,countries,Japan - Country,root > fact > category > country > japan,f_cat_cnt_jp_,f_cat_country_japan,
 4,20,colours,category,Colours,List of Colours,root > fact > category > colours,f_cat_colour_,f_cat_colours,
 5,21,colour_red,colours,Red,Colour Red,root > fact > category > colour > red,f_cat_colour_red,f_cat_colour_red,
 5,22,colour_green,colours,Green,Colour Green,root > fact > category > colour > green,f_cat_colour_green,f_cat_colour_green,
