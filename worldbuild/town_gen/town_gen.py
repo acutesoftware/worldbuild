@@ -24,8 +24,8 @@ import aikif.toolbox.cls_grid as mod_grid
 
 def TEST():
     print('generating town...')
-    dat_town = make_town('test town', 3, 5, 20, 30, 90)
-    print(dat_town)
+    dat_town = make_town('test town', 3, 5, 10, 15, 90)
+    print(dat_town.str_as_html())
 
 
 def make_town(town_name, start_x, start_y, sze_y, sze_x, sparseness):
@@ -150,6 +150,28 @@ class Town(object):
 
 
         return res
+
+
+    def str_as_html(self):
+        """
+        outputs the town as html snippet
+        """
+        res = 'Town "' + self.town_name + '" located at  x=' + str(self.pos_x) + '/ y=' + str(self.pos_y) +  '<BR>\n' 
+        res += 'SIZE:  x=' + str(self.size_x) + '/ y=' + str(self.size_y) +  '<BR>\n' 
+        res += '<TABLE>\n'
+        for y in range(self.size_y ):
+            res += '<TR>'
+            for x in range(self.size_x):
+                res += '<TD>'
+                if self.town_grid[y][x]:
+                    res += self.town_grid[y][x].building_type
+                else:
+                    res += '.'   
+                res += '</TD>'                
+            res += '<TR>\n'
+        res += '</TABLE><BR>\n'
+        return res
+
 
     def add_building(self, y,x, building):
         """
