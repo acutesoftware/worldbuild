@@ -158,11 +158,11 @@ class Town(object):
         """
         res = 'Town "' + self.town_name + '" located at  x=' + str(self.pos_x) + '/ y=' + str(self.pos_y) +  '<BR>\n' 
         res += 'SIZE:  x=' + str(self.size_x) + '/ y=' + str(self.size_y) +  '<BR>\n' 
-        res += '<TABLE>\n'
+        res += '<TABLE class="wb_tbl_town">\n'
         for y in range(self.size_y ):
             res += '<TR>'
             for x in range(self.size_x):
-                res += '<TD>'
+                res += '<TD class="wb_td_town">'
                 if self.town_grid[y][x]:
                     res += self.town_grid[y][x].building_type
                 else:
@@ -300,7 +300,7 @@ class Town(object):
         #print('house list = ', self.house_list)
 
 
-    def output_detail(self, op_file_name, show_grid='N'):
+    def output_detail(self, op_file_name, show_grid='N', launch_image='Y'):
         """
         outputs detailled view of town using grid as well as 
         the building sizes
@@ -348,10 +348,8 @@ class Town(object):
                 length = building.y * self.y_space_building/10 #+  y_space_building/10
                 self._draw_building_2d( draw, start_y, start_x, length, width, building)
         
-        im.show()
-
-
-
+        if launch_image == 'Y':
+            im.show()
 
         im.save(op_file_name)
 
