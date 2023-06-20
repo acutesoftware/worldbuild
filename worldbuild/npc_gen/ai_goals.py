@@ -127,9 +127,9 @@ getting random tasks based on some interests : ['relax', 'building', 'fashion', 
 
 def main():
     print('Generating Goals, Plans and Actions for NPCs from ' + npc_file)
-    npc_gen.save_list_to_csv(["NPC","Goal","Weight"], goal_filename)
-    npc_gen.save_list_to_csv(["NPC","Goal","Plan", "Plan_weight"], plan_filename)
-    npc_gen.save_list_to_csv(["NPC","Goal","Plan", "Plan_weight", "Task"], task_filename)
+    npc_gen.save_list_to_csv([["npc_id","goal","goal_weight"]], goal_filename)
+    npc_gen.save_list_to_csv([["npc_id","goal","goal_weight","plan_id", "plan_weight"]], plan_filename)
+    npc_gen.save_list_to_csv([["npc_id","goal","goal_weight","plan_id", "plan_weight", "task_id"]], task_filename)
 
     with open(npc_file, 'r') as fip:
         for line_num, line in enumerate(fip):
