@@ -6,11 +6,18 @@ import os
 import sys
 import random 
 
+import npc_gen
+
 root_folder = os.path.abspath(os.path.dirname(os.path.abspath(__file__)) + os.sep + ".." + os.sep + ".." )
 pth = root_folder #+ os.sep + 'worldbuild'
 sys.path.append(pth)
 
 npc_file = 'random_npc.csv'
+
+goal_filename = 'op_npc_goals.csv'
+plan_filename = 'op_npc_plans.csv'
+task_filename = 'op_npc_tasks.csv'
+
 goals = ['money', 'family','fun', 'learn']
 
 
@@ -120,17 +127,42 @@ getting random tasks based on some interests : ['relax', 'building', 'fashion', 
 
 def main():
     print('Generating Goals, Plans and Actions for NPCs from ' + npc_file)
+    npc_gen.save_list_to_csv(["NPC","Goal","Weight"], goal_filename)
+    npc_gen.save_list_to_csv(["NPC","Goal","Plan", "Plan_weight"], plan_filename)
+    npc_gen.save_list_to_csv(["NPC","Goal","Plan", "Plan_weight", "Task"], task_filename)
+
     with open(npc_file, 'r') as fip:
         for line_num, line in enumerate(fip):
             if line_num > 0:
                 npc = extract_npc_raw_data(line)
                 my_interests = get_random_interests(npc)
                 goals, plans = assign_goals(npc)
-                display_npc_goals(npc, goals, plans)
                 my_tasks = get_tasks(npc, goals, plans, my_interests)
-                #for tsk in my_tasks:
-                #    print(tsk)
-                
+                display_npc_goals(npc, goals, plans)
+                save_all(npc, goals, plans, my_tasks)
+
+            
+
+def save_all(npc, goals, plans, my_tasks):
+    """
+    saves 3 files at different grains showing goals, 
+    plans and tasks and how they are linked.
+    """
+    all_goals = []
+    all_plans = []
+    all_tasks = []    
+
+    for goal in goals:
+        all_goals.append([npc['nme'], goal[0], goal[1]])
+        for plan in plans:
+            all_plans.append([npc['nme'], goal[0], goal[1], plan[0], plan[1]])
+            for task in my_tasks:
+                all_tasks.append([npc['nme'], goal[0], goal[1], plan[0], plan[1], task])
+
+    npc_gen.append_list_to_csv(all_goals, goal_filename)
+    npc_gen.append_list_to_csv(all_plans, plan_filename)
+    npc_gen.append_list_to_csv(all_tasks, task_filename)
+    
 
 def display_npc_goals(npc, goals, plans):
     print('\n----------------------------------------')
@@ -175,14 +207,21 @@ def assign_goals(npc):
 
     """
     #print('generating goals for ' + npc['nme'] + ' born in ' + npc['born'])
-    goal = random.choice(goals)
+    #goal = random.choice(goals)
 
-    npc_goals = {}
-    npc_goals['money'] = random.randint(1,10)
-    npc_goals['love'] = random.randint(1,10)
-    npc_goals['fun'] = random.randint(1,10)
-    npc_goals['learn'] = random.randint(1,10)
+    #npc_goals = {}
+    #npc_goals['money'] = random.randint(1,10)
+    #npc_goals['love'] = random.randint(1,10)
+    #npc_goals['fun'] = random.randint(1,10)
+    #npc_goals['learn'] = random.randint(1,10)
     
+    npc_goals = []
+    npc_goals.append(['money', random.randint(1,10)])
+    npc_goals.append(['love', random.randint(1,10)])
+    npc_goals.append(['fun', random.randint(1,10)])
+    npc_goals.append(['learn', random.randint(1,10)])
+
+
     plans = []
     plans.append(get_top_plan_for_goal('money', npc_goals))
     plans.append(get_top_plan_for_goal('love', npc_goals))
@@ -194,28 +233,32 @@ def assign_goals(npc):
     return npc_goals, plans
 
 def get_top_plan_for_goal(goal, npc_goals):
+    weight = 0
+    plan = ''
+    print('getting plan for goal : ' + str(goal))
     if goal == 'money':
         plan = random.choice(plans_money)
-        weight = npc_goals[goal]
+        weight = random.randint(1,10)
     elif goal == 'love':
         plan = random.choice(plans_love)
-        weight = npc_goals[goal]
+        weight = random.randint(1,10)
     elif goal == 'fun':
         plan = random.choice(plans_fun)
-        weight = npc_goals[goal]
+        weight =random.randint(1,10)
     elif goal == 'learn':
         plan = random.choice(plans_learn)
-        weight = npc_goals[goal]
+        weight = random.randint(1,10) # npc_goals[goal[1]]
         
-    return {"plan_name":plan, "weight":weight}
+    print('plan = ' + str(plan) + " weight = " + str(weight))
+    return [plan, weight]
 
 def get_top_plan(plan_list):
     #return max(plan_list, key= lambda x: plan_list[x])
     max_val = 0
     highest_plan = ''
     for plan in plan_list:
-        if plan['weight'] > max_val:
-            max_val = plan['weight']
+        if plan[1] > max_val:
+            max_val = plan[1]
             highest_plan = plan
     return highest_plan
     
@@ -224,14 +267,19 @@ def get_tasks(npc, goals, plans, my_interests):
     my_tasks = []
     num_tasks_added_for_interest = 0
     plan  = get_top_plan(plans)
+
+    
     print('getting tasks based on top plan : ' + str(plan))
 
     # add all tasks for my TOP plan
     
     for task_plan in tasks_for_plans:
-        if plan["plan_name"] == task_plan[0]:
+        if plan[0] == task_plan[0]:
             my_tasks.append(task_plan[1])
             print(task_plan)
+    
+    """
+
     # add all tasks for TOP interest
     print('getting random tasks based on some interests : ' + str(my_interests))
     todays_interest = random.choice(my_interests)
@@ -247,7 +295,7 @@ def get_tasks(npc, goals, plans, my_interests):
                     num_tasks_added_for_interest += 1
                     print(intr)
 
-
+    """
 
     return my_tasks
 

@@ -181,6 +181,20 @@ def save_list_to_csv(lst, filename):
                     f.write('"",')
             f.write('\n')
 
+def append_list_to_csv(lst, filename):
+    """
+    takes a list and saves to CSV
+    """
+
+    with open(filename, 'a', encoding='UTF-8') as f:
+        for row in lst:
+            for col in row:
+                if col:
+                    f.write( '"' + str(col) + '",')
+                else:
+                    f.write('"",')
+            f.write('\n')
+
 
 def estimate_npc_relationships(npcs):
     """
