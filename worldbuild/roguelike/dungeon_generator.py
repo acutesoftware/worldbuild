@@ -36,7 +36,7 @@ START_Y = -1
 
 TILESET = ' 1234.6789+-#' # note leading space, so 'box' is drawn as per numeric keypad
 TILESET = ' ####.####+-#'
-TILESET = ' \_/|.|/-\+-#'
+TILESET = r" \_/|.|/-\+-#"
 TILESET = ' ╚═╝║.║╔═╗+-#'
 
 """
@@ -74,7 +74,7 @@ def main():
     # convert_grid_to_TileEditor_map('dungeon.tmx', 'samples/ascii_runeset.tsx')
 
 
-def create_dungeon(grid_y=30, grid_x=80, NUM_ROOMS=16, ROOM_SIZE = 3, NUM_HORIZ = 10, lv_SEED = -1):
+def create_dungeon(grid_y=30, grid_x=80, NUM_ROOMS=6, ROOM_SIZE = 3, NUM_HORIZ = 10, lv_SEED = -1):
     grd = []
     if grid_x < 30:
         grid_x = 30
@@ -169,6 +169,7 @@ def path_find(grid):
     path = pathfind.path_find(grid_to_int(grid), st, ex)
     if len(path) < 2:
         return 'no path found'
+    #print('path = ' + str(path))
     return display_solved_grid(grid, path)
 
 
@@ -446,13 +447,30 @@ def display_solved_grid(grd, path):
     for row_num, row in enumerate(grd):
         r_str = '|'
         for col_num, col in enumerate(row):
-            if (col_num, row_num) in path:
+            #if (col_num, row_num) in path:
+            if is_cell_in_path(col_num,row_num, path):
                 r_str += 'x'
             else:
                 r_str += grd[row_num][col_num]
         r_str += '|'
         res += r_str + '\n'
     res += bot_wall
+    return res
+
+def is_cell_in_path(x,y, path):
+    """
+    takes an x,y coord and checks if it is in the path result
+    (this is a function as new version of pathfind has other stuff)
+    """
+    res = False
+    max_steps = len(path)
+    for step_num, step in enumerate(path):
+        #print('path step : ' + str(step.x))
+        if step.x == x and step.y == y:
+            if step_num == 0 or step_num > max_steps - 2:
+                return False # dont hide start and end points of path
+            else:
+                return True
     return res
 
 def create_grid(x,y):
@@ -481,6 +499,31 @@ def grid_as_html(grd, seed):
             else:
                 res += '.'   
             res += '</TD>'                
+        res += '<TR>\n'
+    res += '</TABLE><BR>\n'
+    return res
+
+
+def solved_grid_as_html(grd, seed):
+    """
+    outputs the dungeon as html snippet
+    """
+    print('solved grid = ' + str(grd))
+    rows = grd.split('\n')
+    ## res = 'Dungeon  w=' + str(len(rows[0])) + '/ h=' + str(len(rows)) +  '(seed=' + str(seed) + ')<BR>\n' 
+    res = '<TABLE class="wb_tbl_dungeon">\n'
+    
+    for y in rows:
+        res += '<TR>'
+        for x in y:
+            if x:
+                if x == 'x':  # solved path
+                    res += '<TD class="wb_td_dungeon_path"><B>.</B></TD>'
+                else:
+                    res += '<TD class="wb_td_dungeon">' + x + '</TD>'
+            else:
+                res += '<TD class="wb_td_dungeon">.</TD>'  
+                  
         res += '<TR>\n'
     res += '</TABLE><BR>\n'
     return res
