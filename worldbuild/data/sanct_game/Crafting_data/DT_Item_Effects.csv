@@ -1,6 +1,0 @@
----,item_effect,Description,sound_default,particle_default,effect_time
-cut,"cut","Cut","SoundCue'/Game/_DJM/sounds/crafting/craft_Sawing_Wood_5_Cue.craft_Sawing_Wood_5_Cue'","ParticleSystem'/Game/MaterialLibrary/Particles/P_Ambient_Dust.P_Ambient_Dust'","2.000000"
-burn,"burn","Burn","SoundCue'/Game/_DJM/z_ext_marketplace/Magic_MeleeSounds/Fire/Burn/Mono/C_Fire_Burn_Magic_1_M_Cue.C_Fire_Burn_Magic_1_M_Cue'","ParticleSystem'/Game/DungeonLamps/Particles/P_Fire_for_Tortches.P_Fire_for_Tortches'","5.000000"
-shatter,"shatter","Shatter","SoundCue'/Game/_DJM/sounds/crafting/Glass_breaking_1_Cue.Glass_breaking_1_Cue'","ParticleSystem'/Game/_DJM/Environment/sea_floor_props/PS_Debris.PS_Debris'","0.000000"
-mix,"mix","Mix","SoundCue'/Game/PlayableMusicalInstruments/PlayableGuitarUkulele/Sound/CUEs/Minor/CUE_Bm.CUE_Bm'","None","2.000000"
-join,"join","Join","SoundCue'/Game/_DJM/sounds/crafting/craft_Metallic_item_1_Cue.craft_Metallic_item_1_Cue'","None","1.000000"

@@ -1,4 +1,0 @@
----,skill_id,username,skill_level,xp,xp_to_next_skill_up
-NewRow,"foraging","duncan","1","5","10"
-NewRow_0,"mining","duncan","2","14","20"
-NewRow_1,"gathering_snail","duncan","0","1","10"
