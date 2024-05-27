@@ -486,6 +486,31 @@ def grid_as_html(grd, seed):
     return res
 
 
+def solved_grid_as_html(grd, seed):
+    """
+    outputs the dungeon as html snippet
+    """
+    #print('solved grid = ' + str(grd))
+    rows = grd.split('\n')
+    ## res = 'Dungeon  w=' + str(len(rows[0])) + '/ h=' + str(len(rows)) +  '(seed=' + str(seed) + ')<BR>\n' 
+    res = '<TABLE class="wb_tbl_dungeon">\n'
+    
+    for y in rows:
+        res += '<TR>'
+        for x in y:
+            if x:
+                if x == 'x':  # solved path
+                    res += '<TD class="wb_td_dungeon_path"><B>.</B></TD>'
+                else:
+                    res += '<TD class="wb_td_dungeon">' + x + '</TD>'
+            else:
+                res += '<TD class="wb_td_dungeon">.</TD>'  
+                  
+        res += '<TR>\n'
+    res += '</TABLE><BR>\n'
+    return res
+
+
 
 
 if __name__ == '__main__':
