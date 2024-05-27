@@ -12,9 +12,20 @@ fldr_data = os.path.join(fldr_root, 'data', 'wb_appdata')
 
 db_file = os.path.join(fldr_data, 'worldbuild.db')
 
+# ------- Tables -----------------------------------------------------
 
+db_tables = [
+'DT_craft_methods',
+'DT_craft_recipe',
+'DT_craft_recipe_ingredients',
+'DT_craft_recipe_steps', 
+'DT_Events',
+'DT_NPCs',
+'DT_Quests',
+'ItemList'   
+]
 
-# ------- Menu Items -------------------------------------------------------
+# ------- Menu Items -------------------------------------------------
 
 
 if __name__ == '__main__':
