@@ -12,6 +12,13 @@ fldr_data = os.path.join(fldr_root, 'data', 'wb_appdata')
 
 db_file = os.path.join(fldr_data, 'worldbuild.db')
 
+sys.path.append(fldr_root)
+
+#sys.path.append(os.path.join(fldr_root, 'src', 'roguelike'))
+
+#import roguelike.dungeon_generator as dg
+
+
 # ------- Tables -----------------------------------------------------
 
 db_tables = [

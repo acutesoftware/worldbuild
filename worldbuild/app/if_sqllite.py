@@ -48,8 +48,7 @@ import sys
 import sqlite3
 import pandas as pd
 
-sys.path.append(r"C:\C_DATA\dev\src\procgen\src")
-from genCode import table_definitions as tbl_def
+import table_definitions as tbl_def
 
 
 LOG_ERROR = 3

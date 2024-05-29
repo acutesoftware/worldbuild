@@ -5,6 +5,8 @@
 import if_sqllite
 import config_app as mod_cfg
 
+
+
 def show_stats(conn):
     res = if_sqllite.get_data(conn, 'SELECT src_tbl FROM sys_job_steps WHERE src_tbl IS NOT NULL and job_num = "LOAD_CSV"', [])
 
