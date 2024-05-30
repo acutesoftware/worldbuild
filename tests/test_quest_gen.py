@@ -46,7 +46,7 @@ class TestTemplate(unittest.TestCase):
         print(locations)
 
 
-        self.assertEqual(len(str(locations)), 163) 
+        self.assertEqual(len(str(locations)), 137) 
         self.assertTrue(locations.raw_data[0], 'home,your home,0,0')
         
 

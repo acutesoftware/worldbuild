@@ -5,4 +5,5 @@
 ########################################################
 
 cd /home/duncan/dev/src/python/worldbuild/worldbuild/app
-venv_app/bin/python main_cli.py
+source venv_app/bin/activate
+python main_cli.py

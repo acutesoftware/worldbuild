@@ -45,7 +45,7 @@ def read_yaml(fname):
     import yaml
 
     with open(fname, 'r') as stream:
-        print(yaml.load(stream))
+        print(yaml.load(stream, Loader=yaml.SafeLoader))
  
     
 def convert_json_to_yaml(fname):    
@@ -67,18 +67,18 @@ def convert_yaml_to_json(fname):
     else:
         ystr = '--- NO_DATA:bar'
     print(' ----------- YAML to JSON ----------- ')
-    ydata = yaml.load(ystr)
+    ydata = yaml.load(ystr, Loader=yaml.SafeLoader)
     jstr = json.dumps(ydata)
     return jstr
  
 def _print_yaml(fname):
     print('\n' + fname)
     with open(fname, 'r') as stream:
-        print(yaml.load(stream))
+        print(yaml.load(stream, Loader=yaml.SafeLoader))
      
 def _read_yaml(fname):
     with open(fname, 'r') as stream:
-        return yaml.load(stream)
+        return yaml.load(stream, Loader=yaml.SafeLoader)
 
 
 if __name__ == '__main__': 
