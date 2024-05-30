@@ -2,6 +2,7 @@
 worldbuild/data/temp/
 venv/
 venv2/
+venv_app/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
