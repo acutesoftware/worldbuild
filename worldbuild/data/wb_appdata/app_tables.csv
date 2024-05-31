@@ -1,3 +1,0 @@
-table_name,title,desc,grain_cols,col_list
-DT_craft_methods,Crafting Methods,How items are modified for crafting,craft_method_id,"craft_method_id,craft_action,base_time,base_cost,tools_required,consumables_required,skill_areas"
-DT_craft_recipe_ingredients,Recipe Ingredients,Ingredient List for recipes,"recipe_id,item_id","recipe_id,item_id,quantity,crafting_method_id"

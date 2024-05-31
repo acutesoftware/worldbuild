@@ -1,0 +1,5 @@
+season_id,season_name,num_days,sequence
+spring,Spring,28,1
+summer,Summer,28,2
+autumn,Autumn,28,3
+winter,Winter,28,4
