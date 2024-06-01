@@ -1,0 +1,6 @@
+inv_id,object_type_id,function_id,desc
+tool_axe,wood,f_chop,chop wood with axe
+tool_hand,wood,f_split,split wood with hand
+tool_hammer,wood,f_break,wood breaks when hit with hammer
+
+

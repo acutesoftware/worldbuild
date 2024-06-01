@@ -42,6 +42,9 @@ def main():
     # define CSV files to be loaded for world build
     res = get_list_of_csv_files(csv_folder)
 
+    for r in res:
+        print(str(r))
+    
     print(str(len(res)) + ' csv files to be loaded')        
     def_lp_job_steps = [] # job_id, job_num, step_num, job_type, details, sql_to_run
     for fnum, fname in enumerate(res):

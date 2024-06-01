@@ -372,7 +372,7 @@ def run_job_step_SQL(conn, job_step):
 
 
 def get_short_table_name(txt):
-    nme = txt.split('\\')
+    nme = txt.split(os.sep)
     #print('get_short_table_name' + str(nme))
     fname = ''.join(nme[len(nme) - 1:])[:-4]
     #print('fname' + str(fname))

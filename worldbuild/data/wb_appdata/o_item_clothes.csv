@@ -1,0 +1,4 @@
+cloth_id,item_id,wear_on,sizable_yn,clothe_img,
+shirt_torn_red,cloth_torn red shirt,chest,Y,shirt_torn_red.jpg
+pants_formal_black,cloth_pants_formal_black,legs,Y,pants_formal_black.jpg
+

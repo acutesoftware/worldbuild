@@ -1,0 +1,2 @@
+rule_id,rule_name,desc,
+map_limit,map_limit,Dont move off edge of map
