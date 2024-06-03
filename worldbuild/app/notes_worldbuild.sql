@@ -13,5 +13,11 @@ select ItemType, count(*) as num_recs from ItemList group by ItemType;
 -- item_quality
 select Quality, count(*) as num_recs from ItemList group by Quality;
 
+-- healing things
+select ID, quality, health from ItemList where health > 0 order by health desc, ID;
+
+
+
+
 
 
