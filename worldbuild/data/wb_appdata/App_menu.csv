@@ -1,19 +1,16 @@
 menu_item,sub_menu,table
-world,features,
+world,places,w_lands
+world,waypoints,w_waypoints
 world,weather,e_env_weather
 world,plants,
 world,animals,
 world,fish,f_env_fish
-world,rocks,
-world,herbs,
 world,forage,
 world,trees,
-lore,notes,
-lore,events,
-lore,people,
-lore,culture,
-lore,legends,
-people,races,
+lore,notes,f_lore_story_ft
+lore,events,f_lore_events
+lore,people,f_lore_actors
+people,races,a_races
 people,npcs,a_npcs
 people,mobs,
 people,bosses,
@@ -26,8 +23,8 @@ work,quests,p_quests
 objects,buildings,
 objects,tools,o_item_tools
 objects,clothes,o_item_clothes
-objects,armour,
-objects,weapons,
+objects,armour,o_item_clothes
+objects,weapons,o_item_tools
 
 
 

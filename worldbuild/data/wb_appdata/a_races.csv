@@ -1,0 +1,4 @@
+race,str,int,con
+human,5,5,5
+zombie,2,1,7
+kandagor,9,9,9
