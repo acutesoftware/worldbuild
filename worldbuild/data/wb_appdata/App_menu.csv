@@ -2,11 +2,13 @@ menu_item,sub_menu,table
 world,places,w_lands
 world,waypoints,w_waypoints
 world,weather,e_env_weather
-world,plants,
+world,plants,o_env_plant
+world,crops,o_env_plant_crop
+world,plants,o_env_plant_mesh
 world,animals,
 world,fish,f_env_fish
 world,forage,
-world,trees,
+world,trees,o_env_tree
 lore,notes,f_lore_story_ft
 lore,events,f_lore_events
 lore,people,f_lore_actors

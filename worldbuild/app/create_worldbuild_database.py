@@ -20,7 +20,9 @@ db_file = mod_cfg.db_file
 csv_folder = mod_cfg.fldr_data
 
 def_lp_tables = [ # [table_name, description, grain_cols, col_list, cols_INT, cols_REAL, cols_BLOB]
-   ['A_TODO', 'Checklist of things to do', 'area,todo', 'area,todo', [],  [], []],
+   ['o_env_plant_mesh', 'Plant stages of growth ', 'item_id', 'plant_type, plant_name, item_id, description, health, icon, worldMesh', [],  [], []],
+   ['o_env_plant', 'Plant List', 'plant_name', 'plant_type, plant_name, plant_desc, num_meshes, grown_mesh, icon', [],  [], []],
+   ['o_env_tree', 'Tree List', 'tree_name', 'tree_name, tree_desc, num_meshes, grown_mesh, icon', [],  [], []],
 
 ]
 
@@ -88,11 +90,47 @@ def get_list_of_csv_files(fldr):
 def populate_sample_prod_data(conn):
     sql = []
 
-    sql.append("INSERT INTO A_TODO (area, todo) VALUES ('Gen','Check this list')")
- 
+
+    sql.append("""INSERT INTO o_env_plant_mesh (plant_type, plant_name, item_id, description, health, icon, worldMesh)
+select plant_type, plant_name, item_id, description, health, icon, worldMesh FROM ( 
+select replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
+replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(ID, 'plant_', '') ,'_01', '')
+ ,'_02', '') ,'_03', '') ,'_04', '') ,'_05', '') ,'_06', '') ,'_07', '') ,'_08', '') ,'_09', ''),'_10', '')
+ ,'_11', ''),'_12', ''),'_13', ''),'_14', ''),'_15', ''),'_16', ''),'_17', ''),'_18', ''),'_19', ''),'_20', '')
+as plant_name, ID as item_id, description, health, icon, 
+case 
+  when ID like 'plant_berry_%' then 'berry'
+  when ID like 'plant_flower_%' then 'flower'
+  when ID like 'plant_mushroom_%' then 'mushroom'
+  when ID like 'plant_tree_%' then 'tree'
+  when ID like 'plant_herb_%' then 'herb'
+  when ID like 'plant_farm_%' then 'crop'
+  when ID like 'plant_jungle_%' then 'jungle'
+  else 'plant' end as plant_type,
+  WorldMesh from ItemList where ID like 'plant%'
+ ) order by 1,2,3;
+""")
+
+    sql.append("""INSERT INTO o_env_plant (plant_type, plant_name, plant_desc, num_meshes, grown_mesh, icon)    
+select plant_type, plant_name, max(description) as plant_desc, 
+count(*) as num_meshes, max(item_id) as grown_mesh, max(icon) as icon 
+from o_env_plant_mesh
+group by plant_type, plant_name
+order by plant_type, plant_name
+""")
 
 
-
+    sql.append("""INSERT INTO o_env_tree (tree_name, tree_desc, num_meshes, grown_mesh, icon)
+SELECT tree_name, tree_desc, num_meshes, grown_mesh, icon FROM (
+SELECT tree_name, max(plant_desc) as tree_desc, sum(num_meshes) as num_meshes, max(grown_mesh) as grown_mesh, max(icon) as icon FROM (
+select 
+case when length(plant_name) > 10 then substr(plant_name, 6, instr(substr(plant_name, 7, 99), '_'))
+else replace(plant_name, 'tree_', '') end as tree_name,
+pl.* from o_env_plant pl where plant_type = 'tree'
+) group by tree_name
+) order by tree_name
+""")
+    
     # Build Views
     #sql.append("DROP VIEW U_ITEM_RECIPE")
 
