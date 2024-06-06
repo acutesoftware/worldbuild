@@ -7,30 +7,67 @@ import config_app as mod_cfg
 
 
 
-def show_stats(conn):
+def show_logs(conn):
     res = if_sqllite.get_data(conn, 'SELECT src_tbl FROM sys_job_steps WHERE src_tbl IS NOT NULL and job_num = "LOAD_CSV"', [])
 
     for row in res:
         op = row[0].replace('D:\\dev\\src\\worldbuild\\worldbuild\\data\\wb_appdata\\', '')
         print('CSV File loaded : ' + str(op))
 
+# ----- Find Str ----------------
+
+def find_str(conn):
+    f = input('Enter string to find :')
+    num_found = 0
+    print('Searching for ' + f + ' ...')
+    tbl_list = if_sqllite.get_data(conn, 'SELECT * FROM App_menu WHERE "table" is not NULL', [])
+    op = []
+    for tbl in tbl_list:
+        tbl_data = if_sqllite.get_data(conn, 'SELECT * FROM ' + tbl[3] , [])
+        if tbl_data:
+            for row in tbl_data:
+                if f.upper() in str(row).upper():
+                    num_found += 1
+                    op.append(tbl[3] + ':' + str(row))
+                    print(tbl[3] + ':' + str(row))
+
+                    
+    print(str(len(op)) + ' results')
+    return
+        
 
 # ----- Verify Data ----------------
 
 def verify_data(conn):
-    print('Verifying database.....')
+    print('TODO = verify data')
+    return
+
+# ----- Show Stats  ----------------
+
+def show_stats(conn):
+    print('Database Stats...')
+
+    tbl_list = if_sqllite.get_data(conn, "SELECT * FROM App_menu", [])
     op = []
-    for tbl in mod_cfg.db_tables:
-        sql = "SELECT count(*) as numrecs FROM " + tbl
-        res = if_sqllite.get_data(conn, sql, [])[0][0]
-        op.append([tbl, res])
+    for tbl in tbl_list:
+        if tbl[3] is not None:
+            v_tbl = tbl[3]
+            sql = "SELECT count(*) as numrecs FROM " + v_tbl
+            print('sql = ' + sql)
+            res = if_sqllite.get_data(conn, sql, [])
+            #print('res = ' + str(res))
+            if res is None:
+                op.append([tbl[0], tbl[1], tbl[2],  v_tbl, res])
+            else:
+                op.append([tbl[0], tbl[1], tbl[2],  v_tbl, res[0][0]])
+        else:
+            res = [['-1']]
+            v_tbl = 'no table specified'
+            op.append([tbl[0], tbl[1], tbl[2],  'no table specified', '0'])
 
     for line in op:
-        print(line[0], line[1])
-    
-
-
-
+        print(str(line))
+ 
     return
 
 
