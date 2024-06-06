@@ -22,7 +22,6 @@ csv_folder = mod_cfg.fldr_data
 def_lp_tables = [ # [table_name, description, grain_cols, col_list, cols_INT, cols_REAL, cols_BLOB]
    ['o_env_plant_mesh', 'Plant stages of growth ', 'item_id', 'plant_type, plant_name, item_id, description, health, icon, worldMesh', [],  [], []],
    ['o_env_plant', 'Plant List', 'plant_name', 'plant_type, plant_name, plant_desc, num_meshes, grown_mesh, icon', [],  [], []],
-   ['o_env_tree', 'Tree List', 'tree_name', 'tree_name, tree_desc, num_meshes, grown_mesh, icon', [],  [], []],
 
 ]
 

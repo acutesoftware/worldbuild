@@ -7,7 +7,7 @@ world,crops,o_env_plant_crop
 world,plants,o_env_plant_mesh
 world,animals,
 world,fish,f_env_fish
-world,forage,
+world,forage,o_env_forage
 world,trees,o_env_tree
 lore,notes,f_lore_story_ft
 lore,events,f_lore_events
