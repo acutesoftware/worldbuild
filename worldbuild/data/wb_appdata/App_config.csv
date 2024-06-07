@@ -1,0 +1,7 @@
+config_type,config_name,config_value
+folder,root_files,/home/duncan/dev/src/python/worldbuild/worldbuild/samples/alrona/
+folder,sound_files,/home/duncan/Music/music_nas/GAME_SOUNDS/
+folder,music_files,/home/duncan/Documents/nas/user/DATA/3D_gdrive_backedup/PURCHASED/sound/humble_bundle_2021/
+folder,image_files,/home/duncan/dev/src/python/worldbuild/worldbuild/samples/alrona/
+folder,3D_files,/home/duncan/Documents/docs_nas/docs/designs/blender/blender_djm/lifesim/
+map,main_map,/home/duncan/dev/src/python/worldbuild/worldbuild/samples/alrona/alrona-pen-coloured.jpg

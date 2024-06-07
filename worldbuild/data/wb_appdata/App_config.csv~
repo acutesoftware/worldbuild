@@ -1,0 +1,4 @@
+config_type,config_name,config_value
+folder,root_files,/home/duncan/worldbuild
+folder,sound_files,/home/duncan/worldbuild/sound
+folder,image_files,/home/duncan/worldbuild/image
