@@ -9,8 +9,6 @@
 		
 		<a href="#" hx-get="/table/{{ submenu['table_name'] }}?submenu={{ submenu['submenu'] }}" hx-target="#content" class="submenu {{ 'current' if submenu['submenu'] == submenu else '' }}">{{ submenu['submenu'] }}</a>
 	      </li>
-	      {% else %}
-	      <li>{{ submenu['submenu'] }} (No data)</a></li>
 	      {% endif %}
                 {% endfor %}
             </ul>

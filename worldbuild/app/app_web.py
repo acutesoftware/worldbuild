@@ -104,6 +104,7 @@ def show_table(v_table_name):
 
 @app.route('/row/<table_name>/<row_id>')
 def show_row_details(table_name, row_id):
+    current_menu = request.args.get('current_menu', 'home')
     conn = get_db_connection()
     cursor = conn.execute(f"SELECT * FROM {table_name} WHERE id = '{row_id}';")
     row = cursor.fetchone()
@@ -112,7 +113,8 @@ def show_row_details(table_name, row_id):
     return render_template('row_details.html',
                            table_name=table_name,
                            columns=columns,
-                           row=row)
+                           row=row,
+                           current_menu=current_menu)
 
 
 if __name__ == '__main__':

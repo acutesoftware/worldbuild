@@ -12,7 +12,8 @@
             <tr>
                 {% for column in columns[0:] %}
                 <td>
-		  <a href="#" hx-get="/row/{{ table_name }}/{{ row['id'] }}?current_menu={{ current_menu }}" hx-target="#content">{{ row[column] }}</a>
+		  <a href="#" hx-get="/row/{{ v_table_name }}/{{ row['id'] }}?current_menu={{ current_menu }}" hx-target="#content">{{ row[column] }}</a>
+		  
 		</td>
                 {% endfor %}
             </tr>

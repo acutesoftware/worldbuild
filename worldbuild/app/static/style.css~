@@ -9,7 +9,7 @@
 
 /* Global styles */
 body {
-    font-family: 'Cinzel', serif; /* Medieval-like font */
+    font-family: 'EB Garamond', serif; /* Medieval-like font */
     background-color: var(--body-bg-color);
     margin: 0;
     display: flex;
