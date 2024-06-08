@@ -1,4 +1,4 @@
----,recipe_id,item_id,quantity,crafting_method_id
+id,recipe_id,item_id,quantity,crafting_method_id
 torch1,"torch","plant_sticks","4","attach_misc"
 torch2,"torch","tree_sap","1","attach_misc"
 wood_plan_pine1,"wood_plank_pine","wood_log_pine","1","cut_saw"

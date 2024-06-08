@@ -1,4 +1,4 @@
-inv_id,action_id,desc,function_id,amount_of_action,accuracy_of_action
-tool_hammer,tap,tap with hammer,f_hit,1,10
-tool_hammer,hit,hit with hammer,f_hit,5,8
-tool_hammer,whack,whack with hammer,f_hit,8,6
+id,inv_id,action_id,desc,function_id,amount_of_action,accuracy_of_action
+1,tool_hammer,tap,tap with hammer,f_hit,1,10
+2,tool_hammer,hit,hit with hammer,f_hit,5,8
+3,tool_hammer,whack,whack with hammer,f_hit,8,6

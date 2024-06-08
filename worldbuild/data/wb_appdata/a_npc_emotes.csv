@@ -1,4 +1,4 @@
----,name,description,anim_montage
+id,name,description,anim_montage
 dance,"dance","You break into dance","AnimSequence'/Game/_DJM/character/Animations/emotes/djmDance.djmDance'"
 laugh,"laugh","You burst out laughing","AnimSequence'/Game/_DJM/character/Animations/emotes/djmAnim_Laugh.djmAnim_Laugh'"
 cry,"cry","you cry","AnimSequence'/Game/_DJM/character/Animations/emotes/Anim_Don_t_Know.Anim_Don_t_Know'"

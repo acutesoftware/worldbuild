@@ -1,4 +1,4 @@
-link_name,table_A,col_B,link_type_id,table_B,col_B
+id,table_A,col_B,link_type_id,table_B,col_B
 craft_recipe_ingredients,p_craft_recipe,recipe_id,HAS_A,p_craft_recipe_ingredients,recipe_id
 clothes_inventory,o_clothes,item_id,IS_A,ItemList,item_id
 

@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WorldBuild</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://unpkg.com/htmx.org@1.4.0"></script>
+    <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header hx-get="/top_menu?current_menu={{ current_menu }}" hx-trigger="load" hx-target="this">
+        Loading...
+    </header>
+    <main>
+        <nav hx-get="/tables" hx-trigger="load" hx-target="this">
+            Loading...
+        </nav>
+        <section id="content">
+            {% block content %}{% endblock %}
+        </section>
+    </main>
+</body>
+</html>

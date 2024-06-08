@@ -1,32 +1,37 @@
-menu_item,sub_menu,table
-world,places,w_lands
-world,waypoints,w_waypoints
-world,weather,e_env_weather
-world,plants,o_env_plant
-world,crops,o_env_plant_crop
-world,plants,o_env_plant_mesh
-world,animals,
-world,fish,f_env_fish
-world,forage,o_env_forage
-world,trees,o_env_tree
-lore,notes,f_lore_story_ft
-lore,events,f_lore_events
-lore,people,f_lore_actors
-people,races,a_races
-people,npcs,a_npcs
-people,mobs,
-people,bosses,
-people,shopkeepers,
-people,trainers,
-people,teachers,
-work,professions,
-work,areas,
-work,quests,p_quests
-objects,buildings,
-objects,tools,o_item_tools
-objects,clothes,o_item_clothes
-objects,armour,o_item_clothes
-objects,weapons,o_item_tools
+menu,submenu,table_name,col_list_view
+world,places,w_lands,"id,level_name,level_desc"
+world,waypoints,w_waypoints,"id,level_name,location_name"
+world,weather,e_env_weather,"id,event_name,event_description"
+world,plants,o_env_plant,"id,plant_type,plant_name,plant_desc"
+world,crops,o_env_plant_crop,"id,plant_type,description,days_grow_stage,days_bet_harvest,seasons,biomes"
+world,plant mesh,o_env_plant_mesh,"id,plant_type,plant_name,item_id,description"
+world,animals,,*
+world,fish,o_env_fish,"id,drop_chance,locations_avail,water_types_avail"
+world,forage,o_env_forage,"id,pickup_type"
+world,forage_land,w_forage_land,"id,level_name,spawn_id_class_name,num_items_to_spawn"
+world,forage_waypoints,w_forage_waypoint,"id,level_name,location_name,spawn_id_class_name,radius,min_quant,max_quant"
+world,trees,o_env_tree,"id,tree_type,tree_name,spawn_in_biomes"
+lore,story,f_lore_story,"lore_id,id, date,location,character_id_told_by,story_title"
+lore,story_links,f_lore_story_ft,"id,story_id,character_id,location_id"
+people,races,a_races,"id,race_desc,str,int,con"
+people,npcs,a_npcs,"id,SpawnLand,npc_id,Name,UCS_Preset"
+people,npc_body,l_npc_UCS_preset,"id,ucs_char"
+people,mobs,a_mobs,"id,mob_name,HP,STR,AGI,CON,mob_desc"
+people,shopkeepers,,*
+people,teachers,,*
+work,professions,,*
+work,areas,,*
+work,quests,p_quests,"id,quest_id,quest_name,desc_short,actor_to_start"
+objects,buildings,,*
+objects,tools,o_item_tools,"id,tool_type,tool_name,tool_desc,object_name_contains"
+objects,clothes,,*
+objects,armour,,*
+objects,weapons,,*
+objects,all items,ItemList,"id,item_name,item_desc,Quality"
+objects,item sizes,f_item_size,"id,size_X,size_Y,size_Z,radius"
+files,images,o_file_image,"id,filename,path,image_type,width,height,title,img_desc"
+files,sound,o_file_sound,"id,sound_name,sound_desc,category,isLoop"
+
 
 
 

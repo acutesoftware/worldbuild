@@ -1,4 +1,4 @@
----,Name,Description,category,isLoop,Cue,fadeInRate,fadeOutRate
+id,sound_name,sound_desc,category,isLoop,Cue,fadeInRate,fadeOutRate
 birds01,"birds01","Bird sound v1","animal","True","SoundCue'/Game/_DJM/z_ext_marketplace/Ducks/Demo_Content/Audio/Starter_Birds01_Cue.Starter_Birds01_Cue'","0.000000","0.000000"
 music_elven_harmony,"music_elven_harmony","Elven Harmony","music","False","SoundCue'/Game/_DJM/sounds/FantasyOrchestral/ElvenHarmonies.ElvenHarmonies'","0.000000","0.000000"
 earth_explosion2,"earth_explosion2","C_Earth_Explosion_2_S_Cue","fight","False","SoundCue'/Game/_DJM/sounds/C_Earth_Explosion_2_S_Cue.C_Earth_Explosion_2_S_Cue'","0.000000","0.000000"

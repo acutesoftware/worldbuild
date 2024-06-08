@@ -43,8 +43,8 @@ def main():
     # define CSV files to be loaded for world build
     res = get_list_of_csv_files(csv_folder)
 
-    for r in res:
-        print(str(r))
+    #for r in res:
+    #    print(str(r))
     
     print(str(len(res)) + ' csv files to be loaded')        
     def_lp_job_steps = [] # job_id, job_num, step_num, job_type, details, sql_to_run
@@ -62,11 +62,7 @@ def main():
     conn = sqlite3.connect(db_file)
     if_sqllite.init_metadata_tables(conn)
 
-
-
-
     # create tables
-
     for tbl in def_lp_tables:
         if_sqllite.create_table_from_definition(conn, tbl)
 
@@ -75,13 +71,14 @@ def main():
         if_sqllite.job_create(conn, job[0], job[1], job[2], job[3])
 
     for step in def_lp_job_steps:  # job_id, step_num, job_type, src_tbl, dest_tbl, details, sql_to_run
-        print('adding step = ' + str(step))
+        print('running step ' + str(step[2]) + ':' + str(step[4].replace(csv_folder, '')))
         if_sqllite.job_add_step(conn, step[0],step[1],step[2],step[3],step[4], step[5], step[6], step[7], step[8])
         if_sqllite.run_job_step(conn, step)
 
-
     populate_sample_prod_data(conn)
 
+    verify_tables()
+    
 def get_list_of_csv_files(fldr):
     return glob.glob(fldr + os.sep + '**' + os.sep + '*.csv', recursive=True)
 
@@ -91,12 +88,12 @@ def populate_sample_prod_data(conn):
 
 
     sql.append("""INSERT INTO o_env_plant_mesh (plant_type, plant_name, item_id, description, health, icon, worldMesh)
-select plant_type, plant_name, item_id, description, health, icon, worldMesh FROM ( 
+select plant_type, plant_name, item_id, item_desc, health, icon, worldMesh FROM ( 
 select replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(
 replace(replace(replace(replace(replace(replace(replace(replace(replace(replace(ID, 'plant_', '') ,'_01', '')
  ,'_02', '') ,'_03', '') ,'_04', '') ,'_05', '') ,'_06', '') ,'_07', '') ,'_08', '') ,'_09', ''),'_10', '')
  ,'_11', ''),'_12', ''),'_13', ''),'_14', ''),'_15', ''),'_16', ''),'_17', ''),'_18', ''),'_19', ''),'_20', '')
-as plant_name, ID as item_id, description, health, icon, 
+as plant_name, ID as item_id, item_desc, health, icon, 
 case 
   when ID like 'plant_berry_%' then 'berry'
   when ID like 'plant_flower_%' then 'flower'
@@ -134,7 +131,7 @@ pl.* from o_env_plant pl where plant_type = 'tree'
     #sql.append("DROP VIEW U_ITEM_RECIPE")
 
     sql.append("""CREATE VIEW U_ITEM_RECIPE AS
-select itm.ID, itm.Name, itm.Description, rec.recipe_name, rec.num_produced_per_craft , GROUP_CONCAT(ing.item_id) as rec_ingred --CASE WHEN ing.item_id = itm.ID then 'Y' else 'N' end as used_as_ingred
+select itm.ID, itm.item_name, itm.item_description, rec.recipe_name, rec.num_produced_per_craft , GROUP_CONCAT(ing.item_id) as rec_ingred --CASE WHEN ing.item_id = itm.ID then 'Y' else 'N' end as used_as_ingred
 from ItemList itm left join DT_craft_recipe rec on itm.ID = rec.recipe_id
 left join DT_craft_recipe_ingredients ing on ing.recipe_id = itm.ID
 group by itm.ID
@@ -143,7 +140,7 @@ group by itm.ID
     # not needed as we build from scratch sql.append("DROP VIEW U_ITEM_RECIPE_INGRED")
 
     sql.append("""CREATE VIEW U_ITEM_RECIPE_INGRED AS
-select itm.ID, itm.Name, ing.recipe_id, item_id as ingred_name, count(*) as num_recipes,
+select itm.ID, itm.item_name, ing.recipe_id, item_id as ingred_name, count(*) as num_recipes,
 GROUP_CONCAT(ing.recipe_id) as recipes_used --CASE WHEN ing.item_id = itm.ID then 'Y' else 'N' end as used_as_ingred
 from ItemList itm left join DT_craft_recipe_ingredients ing on ing.item_id = itm.ID
 group by itm.ID
@@ -200,7 +197,13 @@ select 'ingred.seasoning' as tag, 'Seasoning ingredients for cooking' as descrip
         if_sqllite.run_job_step(conn, step)
 
 
-
+def verify_tables():
+    print('Verfying...')
+    import time
+    import wb_app_utils
+    time.sleep(1)
+    conn = sqlite3.connect(db_file)
+    wb_app_utils.verify_data(conn)
 
 if __name__ == '__main__':
     main()

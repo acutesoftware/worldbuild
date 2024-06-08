@@ -1,4 +1,4 @@
-item_id,drop_chance,locations_avail,water_types_avail,actor_class_for_spawning,avg_size,avg_speed,bait
+id,drop_chance,locations_avail,water_types_avail,actor_class_for_spawning,avg_size,avg_speed,bait
 fish_pike,0.1,"(woods,mountain)","(river,ocean)",BlueprintGeneratedClass'/Game/_DJM/crafting/fishing/Blueprints/BP_fish_pike.BP_fish_pike_C',6,6,"(insect,worm,fish,plant)"
 fish_salmon,0.2,"(mountain,HUMAN_BUILT)","(river,beach)",BlueprintGeneratedClass'/Game/_DJM/crafting/fishing/Blueprints/BP_fish_salmon.BP_fish_salmon_C',5,6,"(insect,worm,fish)"
 fish_frog_brown,0.1,"(scrub,grassland,swamp)","(river,lake)",BlueprintGeneratedClass'/Game/_DJM/crafting/fishing/Blueprints/BP_fish_frog_brown.BP_fish_frog_brown_C',1,2,(insect)

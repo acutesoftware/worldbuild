@@ -1,2 +1,2 @@
-person_id,person_name,person_type,email,avatar_img,
+id,person_name,person_type,email,avatar_img,
 duncan,duncan,player,djmurray@gmail.com,random.jpg

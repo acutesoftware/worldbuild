@@ -1,4 +1,4 @@
----,level_name,location_name,spawn_id_class_name,radius,min_quant,max_quant
+id,level_name,location_name,spawn_id_class_name,radius,min_quant,max_quant
 [BP_pickup_spawner_22],"lvl_quarry","","HerbPickup_C","6000.000000","15","20"
 [BP_spawner_apple_castle],"lvl_quarry","Castle","ApplePickup_C","1000.000000","4","6"
 [BP_spawner_Apples_Shed,"lvl_quarry","Shed","ApplePickup_C","1000.000000","3","5"

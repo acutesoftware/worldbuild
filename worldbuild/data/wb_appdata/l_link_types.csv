@@ -1,4 +1,4 @@
-link_type_id,link_type_desc
+id,link_type_desc
 USES,A Uses B (eg code package uses source data table)
 UPDATES,A updates B (eg S_MDM_* updates C_MDM_*)
 CONTROL,A Controls B (eg refreshes

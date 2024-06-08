@@ -1,4 +1,4 @@
----,event_id,event_name,event_description,action_id,action_param,action_desc
+id,event_id,event_name,event_description,action_id,action_param,action_desc
 autumn_storm,"autumn_storm","Autumn Storm","autumn shower","niagra_rain","3","start autumn shower"
 env_fog,"env_fog","Fog","a fog rolls in","niagra_fog","4","a fog rolls in"
 env_light_god_rays,"env_light_god_rays","God Rays","beautiful shafts of sunlight beam across the land","god_ray","2","call god ray light function"

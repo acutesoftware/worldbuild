@@ -1,4 +1,4 @@
----,tool_type,name,Description,object_name_contains
+id,tool_type,tool_name,tool_desc,object_name_contains
 NewRow,"None","None","No tool in hand","N/A"
 NewRow_0,"hand","Bare Hands","bare hands","N/A"
 NewRow_1,"axe","Axe","Cut down trees and chopping wood","Tool_Axe_"

@@ -1,0 +1,13 @@
+<h2>Details for <a href="#" hx-get="/table/{{ table_name }}" hx-target="#content">{{ table_name }}</a> - ID: {{ row['id'] }}</h2>
+
+
+<table border="1">
+    <tbody>
+        {% for column in columns %}
+            <tr>
+                <th>{{ column }}</th>
+                <td>{{ row[column] }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

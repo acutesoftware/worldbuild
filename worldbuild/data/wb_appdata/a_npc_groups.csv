@@ -1,4 +1,4 @@
-npc_group_id,npc_group_desc
+id,npc_group_desc
 quarry_residents,People who live in the Quarry
 shopkeepers,People who sell and buy
 trainers,NPC's who can train

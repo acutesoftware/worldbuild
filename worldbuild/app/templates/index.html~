@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Welcome to Flask HTMX SQLite Example</h1>
+<p>Select a table from the side menu to view its contents.</p>
+{% endblock %}

@@ -1,4 +1,4 @@
----,level_name,spawn_id_class_name,num_items_to_spawn
+id,level_name,spawn_id_class_name,num_items_to_spawn
 grassland_herb,"lvl_grassland","HerbPickup_C","200"
 grassland_ore,"lvl_grassland","BP_Pickup_Ore_C","10"
 grassland_mushroom,"lvl_grassland","mushroomPickup_C","200"

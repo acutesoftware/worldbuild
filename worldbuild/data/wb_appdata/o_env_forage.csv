@@ -1,4 +1,4 @@
----,pickup_type,class_to_spawn
+id,pickup_type,class_to_spawn
 NewRow,"Ore","BlueprintGeneratedClass'/Game/_DJM/crafting/pickups/BP_Pickup_Ore.BP_Pickup_Ore_C'"
 NewRow_0,"Herb","BlueprintGeneratedClass'/Game/_DJM/crafting/pickups/HerbPickup.HerbPickup_C'"
 NewRow_1,"Egg","BlueprintGeneratedClass'/Game/_DJM/crafting/pickups/BP_Pickup_Egg.BP_Pickup_Egg_C'"

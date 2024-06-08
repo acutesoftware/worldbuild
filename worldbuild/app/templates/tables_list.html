@@ -1,0 +1,30 @@
+<ul>
+    {% for menu, submenus in menus.items() %}
+        <li>
+            {{ menu }}
+            <ul>
+              {% for submenu in submenus %}
+	       {% if submenu['table_name']  %}
+              <li>
+		
+		<a href="#" hx-get="/table/{{ submenu['table_name'] }}?submenu={{ submenu['submenu'] }}" hx-target="#content" class="submenu {{ 'current' if submenu['submenu'] == submenu else '' }}">{{ submenu['submenu'] }}</a>
+	      </li>
+	      {% else %}
+	      <li>{{ submenu['submenu'] }} (No data)</a></li>
+	      {% endif %}
+                {% endfor %}
+            </ul>
+        </li>
+    {% endfor %}
+</ul>
+
+<script>
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('submenu')) {
+            document.querySelectorAll('.submenu').forEach(function(item) {
+                item.classList.remove('current');
+            });
+            e.target.classList.add('current');
+        }
+    });
+</script>

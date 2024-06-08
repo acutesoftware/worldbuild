@@ -1,4 +1,4 @@
----,recipe_id,recipe_name,mana_cost_to_learn,energy_cost_to_build,num_produced_per_craft,tools_or_workbench_required,min_level,shop_gold_buy_price,learnable_on_itemId_pickup,deconstruct_base_chance,deconstruct_items
+id,recipe_id,recipe_name,mana_cost_to_learn,energy_cost_to_build,num_produced_per_craft,tools_or_workbench_required,min_level,shop_gold_buy_price,learnable_on_itemId_pickup,deconstruct_base_chance,deconstruct_items
 torch,"torch","Torch","5","5","10","","2","100","","0.600000",""
 charcoal,"charcoal","Charcoal","3","5","1","(""BP_Station_Cooking_Fire"")","2","100","","0.600000",""
 food_butter,"food_butter","Butter","5","5","1","(""BP_Station_Kitchen"")","2","100","","0.600000",""

@@ -1,0 +1,22 @@
+<h2>{{ v_menu }}/{{ v_submenu }} </h2>
+<table border="1">
+    <thead>
+        <tr>
+            {% for column in columns[0:] %}
+                <th>{{ column }}</th>
+            {% endfor %}
+        </tr>
+    </thead>
+    <tbody>
+        {% for row in rows %}
+            <tr>
+                {% for column in columns[0:] %}
+                <td>
+		  <a href="#" hx-get="/row/{{ v_table_name }}/{{ row['id'] }}" hx-target="#content">{{ row[column] }}</a>
+		</td>
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div>Table: {{ v_table_name }}</div>

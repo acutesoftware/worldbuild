@@ -1,4 +1,4 @@
----,level_name,location_name,X,Y,Z,biome
+id,level_name,location_name,X,Y,Z,biome
 lvl_desert_DesertCentre,"lvl_desert","Desert Centre","1000.000000","-2000.000000","133.000000","forest"
 lvl_desert_DesertHouse,"lvl_desert","Desert House","6550.000000","-1990.000000","-290.393738","forest"
 lvl_desert_DesertMid,"lvl_desert","Desert Mid","-10410.000000","5690.000000","578.000000","forest"

@@ -1,4 +1,4 @@
----,mat_type,name,material
+id,mat_type,name,material
 clay,"clay","clay","MaterialInstanceConstant'/Game/ext_landscapes/MedievalDungeon/Materials/M_Pots_Inst.M_Pots_Inst'"
 sandstone,"rock_sandstone","sandstone","MaterialInstanceConstant'/Game/MaterialLibrary/Materials/MI_Rock_Sandstone_Inst.MI_Rock_Sandstone_Inst'"
 rust,"metal_rust","rust","MaterialInstanceConstant'/Game/MaterialLibrary/Materials/MI_Metal_Rust_Inst.MI_Metal_Rust_Inst'"

@@ -1,4 +1,4 @@
----,object_type,tool_type,function
+id,object_type,tool_type,function
 BPtree_axe,"BP_tree","axe","chopBPtree"
 tree_axe,"tree","axe","chop"
 stone_pick,"stone","pickaxe","mine"

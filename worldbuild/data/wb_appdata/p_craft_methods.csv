@@ -1,4 +1,4 @@
----,craft_method_id,craft_action,base_time,base_cost,tools_required,consumables_required,skill_areas
+id,craft_method_id,craft_action,base_time,base_cost,tools_required,consumables_required,skill_areas
 mix,"mix","Mix in a bowl","5","0","bowl|stick","","cooking"
 hammer,"hammer","Hit with Hammer","1","1","hammer","","building"
 melt_pot,"melt_pot","Melt in a pot","5","2","melting_pot","","crafting"

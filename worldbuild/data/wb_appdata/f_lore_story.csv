@@ -1,3 +1,3 @@
-story_id, date,location,story_content
-battle01,12/12/2011,Quarry,There was a fierce battle battle between the farmers of the Quarry and the Orcs - the farms were destroyed and farmers fled in fear. The Orcs took over the farmlands
-
+lore_id,id, date,location,character_id_told_by,story_title,story_content
+battle01,battle01_fred,2/12/2011,Quarry,fred,Farmer defends Quarry,There was a fierce battle battle between the farmers of the Quarry and the Orcs - the farms were destroyed and farmers fled in fear. The Orcs took over the farmlands
+battle01,battle01_orc,2/12/2011,Quarry,orc,Orcs Reclaim Lands,The farmer fred stole our ancient land and we took it back with force

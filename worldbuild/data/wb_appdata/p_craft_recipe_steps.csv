@@ -1,4 +1,4 @@
----,recipe_id,item_id,step_num,process,tools_needed,time,desc
+id,recipe_id,item_id,step_num,process,tools_needed,time,desc
 woodplanks1,"wood planks","wood logs","1","chop","axe","2","you chop down a tree"
 roundstick1,"round stick","wood branch","1","whittling","knife","3","you carve the stick "
 bread1,"bread","flour","1","sift","bowl|sifter","1","sift flour"

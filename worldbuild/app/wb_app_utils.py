@@ -39,7 +39,21 @@ def find_str(conn):
 # ----- Verify Data ----------------
 
 def verify_data(conn):
-    print('TODO = verify data')
+    tbl_list = if_sqllite.get_data(conn, "SELECT menu,submenu,table_name,col_list_view FROM App_menu", [])
+    op = []
+    tot_cols = 0
+    tot_rows = 0
+    for tbl in tbl_list:
+        v_tbl = tbl[2]
+        v_cols = tbl[3]
+        if v_tbl is not None:
+            sql = "SELECT " + v_cols + " FROM " + v_tbl
+            print('Checking : ' + sql)
+            res = if_sqllite.get_data(conn, sql, [])
+            tot_rows += len(res)
+    print ('All good - read ' + str(tot_rows) + ' rows from ' + str(len(tbl_list)) + ' tables')
+
+    
     return
 
 # ----- Show Stats  ----------------
@@ -53,7 +67,7 @@ def show_stats(conn):
         if tbl[3] is not None:
             v_tbl = tbl[3]
             sql = "SELECT count(*) as numrecs FROM " + v_tbl
-            print('sql = ' + sql)
+            #print('sql = ' + sql)
             res = if_sqllite.get_data(conn, sql, [])
             #print('res = ' + str(res))
             if res is None:
