@@ -52,10 +52,11 @@ ul {
 
 ul ul {
     margin-left: 20px;
+    padding-left: 10px;
 }
 
 li {
-    margin-bottom: 5px;
+    margin-bottom: 1px;
 }
 
 a {
@@ -98,7 +99,7 @@ a:hover {
 /* Side menu tabbed interface */
 nav a {
     display: block;
-    padding: 0.5em 1em;
+    padding: 2px 1em 2px 1em;
     border-radius: 5px 0 0 5px;
     margin-bottom: 1px;
     font-size: 0.9em; /* Smaller height */
