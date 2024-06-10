@@ -48,6 +48,7 @@ section {
 ul {
     list-style-type: none;
     padding: 0;
+    margin-left: 20px;
 }
 
 ul ul {
