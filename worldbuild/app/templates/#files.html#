@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Welcome to WorldBuild</h1>
-<p>Click on an area of the map to add waypoints, or jump to Data tab.</p>
+<h1>WorldBuild : Files</h1>
+<p>Select a file list from the side menu to view lists of files.</p>
 <img src="/static/img/map_alrona.jpg" alt="">
+
 {% endblock %}
+g
