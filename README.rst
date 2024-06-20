@@ -6,10 +6,16 @@
 World Build
 =========================================
 
+Desktop app for computational world building (work in progress)
 
-Tools for computational world building (work in progress)
+.. image:: ./doc/worldbuild_app_data.jpg
 
-Overview
+	   
+.. image:: ./doc/worldbuild_app_files.jpg   
+
+
+
+Wiki Page Generation
 --------------------------------
 Worldbuild contains tools to build worlds and store the metadata around that, including objects, history, animals, vegetation.
 

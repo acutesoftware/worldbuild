@@ -3,8 +3,11 @@
 {% block content %}
 <h1>WorldBuild : Files</h1>
 <p>Select a file list from the side menu to view lists of files.</p>
-<!-- <img src="/static/img/map_alrona.jpg" alt=""> -->
+<!-- <img src="/static/img/map_alrona.jpg" width="400px" alt=""> -->
 
+{% for f in fl %}
+<img src="{{ f }}" width="300" alt="">
+{% endfor %}
 
 {% endblock %}
 

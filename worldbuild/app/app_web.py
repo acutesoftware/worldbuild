@@ -26,8 +26,13 @@ def index():
 
 @app.route('/files')
 def files():
-    print('returning files.html')
-    return render_template('files.html', current_menu='files')
+    import glob
+    fl = glob.glob("static/img/*.*")
+    print('fl = ' + str(fl))
+
+    
+    
+    return render_template('files.html', current_menu='files', fl=fl)
 
 @app.route('/data')
 def data():
