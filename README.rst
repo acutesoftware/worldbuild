@@ -8,10 +8,10 @@ World Build
 
 Desktop app for computational world building (work in progress)
 
-.. image:: ./doc/worldbuild_app_data.jpg
+.. image:: ./doc/worldbuild_app_data.png
 
 	   
-.. image:: ./doc/worldbuild_app_files.jpg   
+.. image:: ./doc/worldbuild_app_files.png
 
 
 

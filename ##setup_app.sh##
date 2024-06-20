@@ -1,4 +1,4 @@
-#!/bin/bash
+!/bin/bash
 ########################################################
 # setup_app.sh
 # script to setup app - includes dependancies and config 
