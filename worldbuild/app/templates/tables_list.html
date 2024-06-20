@@ -6,8 +6,11 @@
               {% for submenu in submenus %}
 	       {% if submenu['table_name']  %}
               <li>
-		
-		<a href="#" hx-get="/table/{{ submenu['table_name'] }}?submenu={{ submenu['submenu'] }}" hx-target="#content" class="submenu {{ 'current' if submenu['submenu'] == submenu else '' }}">{{ submenu['submenu'] }}</a>
+
+	
+<a href="/table/{{ submenu['table_name'] }}" hx-push-url="true" hx-trigger="click" hx-target="section" class="{{ 'current' if request.path == '/table/' ~ v_table_name else '' }}">
+
+		  {{ submenu['submenu'] }}</a>
 	      </li>
 	      {% endif %}
                 {% endfor %}
@@ -17,6 +20,13 @@
 </ul>
 
 <script>
+
+     document.body.addEventListener('htmx:afterSwap', (event) => {
+            if (event.detail.target === document.querySelector('section')) {
+                history.pushState(null, '', event.detail.path);
+            }
+         });
+  
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('submenu')) {
             document.querySelectorAll('.submenu').forEach(function(item) {

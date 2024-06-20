@@ -1,6 +1,9 @@
-<h2>Details for <a href="#" hx-get="/table/{{ table_name }}" hx-target="#content">{{ table_name }}</a> - ID: {{ row['id'] }}</h2>
+{% extends "base.html" %}
 
+{% block content %}
 
+<h2>{{ row['id'] }}</h2>
+ <a href="/table/{{ table_name }}"><div id="link_content">< Back</div></a>
 <table border="1">
     <tbody>
         {% for column in columns %}
@@ -11,3 +14,7 @@
         {% endfor %}
     </tbody>
 </table>
+<BR>
+<!-- from table: <a href="/table/{{ table_name }}"><div id="link_content">{{ table_name }}</div></a><BR>-->
+
+{% endblock %}

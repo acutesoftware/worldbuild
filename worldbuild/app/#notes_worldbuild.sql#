@@ -81,6 +81,6 @@ pl.* from o_env_plant pl where plant_type = 'tree'
 ) group by tree_name
 order by tree_name;
 
-
+select * from sys_log;
 
 

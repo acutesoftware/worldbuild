@@ -1,3 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+
 <h2>{{ v_menu }}/{{ v_submenu }} </h2>
 <table border="1">
     <thead>
@@ -12,7 +16,11 @@
             <tr>
                 {% for column in columns[0:] %}
                 <td>
-		  <a href="#" hx-get="/row/{{ v_table_name }}/{{ row['id'] }}?current_menu={{ current_menu }}" hx-target="#content">{{ row[column] }}</a>
+
+<a href="/row/{{ v_table_name }}/{{ row['id'] }}">
+
+		    
+		    {{ row[column] }}</a>
 		  
 		</td>
                 {% endfor %}
@@ -21,3 +29,5 @@
     </tbody>
 </table>
 <div>Table: {{ v_table_name }}</div>
+
+{% endblock %}

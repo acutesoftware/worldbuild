@@ -26,6 +26,7 @@ def index():
 
 @app.route('/files')
 def files():
+    print('returning files.html')
     return render_template('files.html', current_menu='files')
 
 @app.route('/data')
@@ -64,7 +65,7 @@ def tables():
         menu_dict[menu_name] = submenus
     
     conn.close()
-    return render_template('tables_list.html', menus=menu_dict)
+    return render_template('tables_list.html', menus=menu_dict, current_menu='data')
 
 @app.route('/table/<v_table_name>')
 def show_table(v_table_name):
@@ -104,7 +105,7 @@ def show_table(v_table_name):
 
 @app.route('/row/<table_name>/<row_id>')
 def show_row_details(table_name, row_id):
-    current_menu = request.args.get('current_menu', 'home')
+    current_menu = 'data' # request.args.get('current_menu', 'home')
     conn = get_db_connection()
     cursor = conn.execute(f"SELECT * FROM {table_name} WHERE id = '{row_id}';")
     row = cursor.fetchone()

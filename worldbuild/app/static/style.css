@@ -69,6 +69,11 @@ a:hover {
     color: var(--highlight-color);
 }
 
+#link_content {
+    text-decoration:none;
+    color: var(--darker-color);
+}
+
 /* Top menu tabbed interface */
 .top-menu {
     display: flex;
