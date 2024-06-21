@@ -2,5 +2,15 @@
 
 {% block content %}
 <h1>WorldBuild Tools</h1>
-<p>Select a function from the side menu.</p>
+
+<div id="tool_list">
+{% for tool in tool_list %}
+<div id="tool">
+  <a href="/tool/{{ tool[0] }}"><div id="link_content">{{ tool[1] }}</div></a> - {{ tool[3] }}
+</div><BR>
+</div>
+
+
+{% endfor %}
+
 {% endblock %}

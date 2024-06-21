@@ -64,3 +64,13 @@ docs/_build/
 
 # PyBuilder
 target/
+
+# emacs backup files
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*

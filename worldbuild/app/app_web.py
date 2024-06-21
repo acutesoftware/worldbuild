@@ -5,10 +5,11 @@ import os
 import sys
 import wb_app_utils as mod_wb
 import if_sqllite as mod_sql
+import config_app as mod_cfg
 
-data_folder = '/home/duncan/dev/src/python/worldbuild/worldbuild/data/wb_appdata'
+data_folder = mod_cfg.fldr_data # '/home/duncan/dev/src/python/worldbuild/worldbuild/data/wb_appdata'
 
-db_file = os.path.join(data_folder, 'worldbuild.db')
+db_file =  mod_cfg.db_file # os.path.join(data_folder, 'worldbuild.db')
 
 
 
@@ -40,7 +41,27 @@ def data():
 
 @app.route('/tools')
 def tools():
-    return render_template('tools.html', current_menu='tools')
+    return render_template('tools.html',
+                           current_menu='tools',
+                           current_tool = '',
+                           tool_list = mod_cfg.tool_list
+                           )
+
+
+@app.route('/tool/<tool_id>')
+def tool_current(tool_id):
+   
+    for t in mod_cfg.tool_list:
+        if t[0] == tool_id:
+            current_tool = t[1]
+            print('running tool - ' + str(t))
+            
+            
+    return render_template('tool.html',
+                           current_menu='tools',
+                           current_tool = current_tool,
+                           tool_list = mod_cfg.tool_list
+                           )
 
 
 @app.route('/about')
