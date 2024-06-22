@@ -169,6 +169,7 @@ def path_find(grid):
     path = pathfind.path_find(grid_to_int(grid), st, ex)
     if len(path) < 2:
         return 'no path found'
+    #print(' solved path = ' + str(path))
     return display_solved_grid(grid, path)
 
 
@@ -446,7 +447,7 @@ def display_solved_grid(grd, path):
     for row_num, row in enumerate(grd):
         r_str = '|'
         for col_num, col in enumerate(row):
-            if (col_num, row_num) in path:
+            if is_cell_in_path(col_num, row_num, path):
                 r_str += 'x'
             else:
                 r_str += grd[row_num][col_num]
@@ -454,6 +455,14 @@ def display_solved_grid(grd, path):
         res += r_str + '\n'
     res += bot_wall
     return res
+
+def is_cell_in_path(x,y,path):
+    for point in path:
+        #print(dir(point))
+        #print('point = ' + str(point.x) + str(point.y))
+        if x == point.x and y == point.y:
+            return True
+    return False
 
 def create_grid(x,y):
     grd = []
@@ -494,6 +503,7 @@ def solved_grid_as_html(grd, seed):
     rows = grd.split('\n')
     ## res = 'Dungeon  w=' + str(len(rows[0])) + '/ h=' + str(len(rows)) +  '(seed=' + str(seed) + ')<BR>\n' 
     res = '<TABLE class="wb_tbl_dungeon">\n'
+    print('Showing solved grid')
     
     for y in rows:
         res += '<TR>'
@@ -501,6 +511,7 @@ def solved_grid_as_html(grd, seed):
             if x:
                 if x == 'x':  # solved path
                     res += '<TD class="wb_td_dungeon_path"><B>.</B></TD>'
+                    print('solved__PATH = ' + str(x) + str(y))
                 else:
                     res += '<TD class="wb_td_dungeon">' + x + '</TD>'
             else:

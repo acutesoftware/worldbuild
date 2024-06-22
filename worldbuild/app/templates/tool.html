@@ -1,8 +1,64 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>WorldBuild Tool : {{ current_tool }}</h1>
 
-result of running tool<BR><BR>
+<style>
+
+  
+pre {
+font-size: 85%;
+}
+
+
+.wb_tbl_dungeon {
+    background: rgb(17, 17, 17);
+    border-color: rgb(17, 17, 17);
+    color: rgb(8, 149, 29);
+    font-family: 'Fira Mono', monospace;
+    font-size: x-small;
+    margin: 0px;
+    padding:0px;
+    height: 100%;
+    width:auto;
+  }
+  
+
+
+.wb_td_dungeon {
+    height:80%;
+    overflow: none;
+    border-color: rgb(17, 17, 17);
+    overflow-x: hidden;
+    margin:0px;
+    padding:0px;
+    
+  }
+
+  .wb_td_dungeon_path {
+    color: rgb(241, 237, 7);
+ 
+    height:80%;
+    border-color: rgb(17, 17, 17);
+    overflow: none;
+    overflow-x: hidden;
+    margin:0px;
+    padding:0px;
+    
+  }
+      
+  </style>
+
+<h1><a href="{{ url_for('tools', tool_id = tool_id) }}">WorldBuild Tools</a> : {{ current_tool }}</h1>
+<form class="form-group" method="POST">
+  <input type="hidden" name="tool_id" value="{{ tool_id }}">
+  <input type="hidden" name="tool_name" value="{{ current_tool }}">
+      {% for p in form_param_list %}
+         {{ p[0] }}:<input name="{{ p[0] }}" size="8" value="{{ p[1] }}"> 
+      {% endfor %}
+      
+      <input type="submit" class="form-group btn btn-secondary" name="btn_refresh" value="Refresh" onClick="this.form.submit(); this.disabled=true; this.value='Working…'; ">
+    </form>
+ 
+<div>{{ content_html|safe }}</div>
 
 {% endblock %}

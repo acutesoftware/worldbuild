@@ -10,7 +10,7 @@ import sys
 fldr_root = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..'))
 fldr_data = os.path.join(fldr_root, 'data', 'wb_appdata')
 fldr_tools = os.path.join(fldr_root, 'app', 'tools')
-
+fldr_img =  os.path.join(fldr_root, 'app', 'static', 'img')
 db_file = os.path.join(fldr_data, 'worldbuild.db')
 
 sys.path.append(fldr_root)
@@ -38,9 +38,14 @@ db_tables = [
 
 # ------- Tools -------------------------------------------------
 
-tool_list = [
-    ['dungeon', 'Dungeon Generator', 'dungeon.py', 'Generates a random dungeon'],
-    ['town_gen', 'Town Generator', 'town_gen.py', 'Generates a random Town layout'],
+tool_list = [ # tool_id,tool_name,py_import,desc,params_with_defaults
+    ['example', 'Example Tool', 't_EXAMPLE', 'Example tool for user modification',
+     'param1=50, param2=40, param3=-5'],
+    ['dungeon', 'Dungeon Generator', 't_gen_dungeon', 'Generates a random dungeon',
+     'grid_y=30, grid_x=80, NUM_ROOMS=10, ROOM_SIZE=4, NUM_HORIZ=6, lv_SEED=-1'
+     ],
+    ['town_gen', 'Town Generator', 't_gen_town', 'Generates a random Town layout',
+     'X_pos=1, Y_pos=1, width=22, length=10, sparsness=95'],
     
     ]
 

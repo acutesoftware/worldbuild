@@ -3,7 +3,9 @@
 # wb_app_utils.py
 
 import if_sqllite
+import wb_app_utils as mod_wb
 import config_app as mod_cfg
+from flask import request
 
 
 
@@ -55,6 +57,65 @@ def verify_data(conn):
 
     
     return
+
+
+
+def dte():
+    from datetime import datetime
+    now = datetime.today().isoformat().replace(':','_').replace('.', '_')
+    print(now)  # '2018-12-05T11:15:55.126382'    
+    return now
+
+def get_tool_cfg(tool_id):
+  
+    for t in mod_cfg.tool_list:
+        if t[0] == tool_id:
+            # tool_id,tool_name,py_import,desc,params_with_defaults
+            return t
+    return []
+
+    
+def create_html_tool_form(params_with_defaults):
+    """
+    gets the params and default params for a tool and returns as list
+    ready for use in template page
+    """
+
+    html_form = ''
+    cur_pair = []
+    form_param_list = []
+    param_values = []
+
+    param_pairs = params_with_defaults.split(',')
+    for pair in param_pairs:
+        cur_pair = pair.split('=')
+        form_param_list.append([cur_pair[0].strip(' '), cur_pair[1].strip(' ')])
+        param_values.append(int(cur_pair[1]))
+    
+    print('form_param_list = ' + str(form_param_list))
+    print('param_values    = ' + str(param_values))
+    
+    return html_form, form_param_list, param_values
+
+
+def get_tool_form_results(tool_id):
+    new_form_param_list = []
+    new_param_values = []
+    t = get_tool_cfg(tool_id)
+    html_form, form_param_list, param_values = create_html_tool_form(t[4])
+    
+    try:
+        for p_num, p in enumerate(form_param_list):
+            val = request.form[p[0]]
+            new_form_param_list.append([p[0], val])
+            new_param_values.append(int(val))
+
+    except Exception as ex:
+        print('error getting dungeon params : ' + str(ex))
+        raise
+    
+    return new_form_param_list, new_param_values
+
 
 # ----- Show Stats  ----------------
 

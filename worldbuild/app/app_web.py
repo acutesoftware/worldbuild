@@ -3,6 +3,7 @@ import sqlite3
 
 import os
 import sys
+import importlib
 import wb_app_utils as mod_wb
 import if_sqllite as mod_sql
 import config_app as mod_cfg
@@ -48,21 +49,54 @@ def tools():
                            )
 
 
-@app.route('/tool/<tool_id>')
+@app.route('/tool/<tool_id>', methods=['GET'])
 def tool_current(tool_id):
    
-    for t in mod_cfg.tool_list:
-        if t[0] == tool_id:
-            current_tool = t[1]
-            print('running tool - ' + str(t))
-            
+    t = mod_wb.get_tool_cfg(tool_id)
+    # tool_id,tool_name,py_import,desc,param_names,param_defaults
+    tool_id = t[0]
+    tool_name=t[1]
+    py_import=t[2]
+    desc = t[3]
+    params_with_defaults=t[4]
+    print('running tool - ' + str(t))
+
+    mod_tool = importlib.import_module(py_import)
+
+    html_form, form_param_list, param_values = mod_wb.create_html_tool_form(params_with_defaults)
+
+    print('TOOL REFRESH : form_param_list = ' + str(form_param_list))
+    
+    res = mod_tool.run_tool(param_values)
             
     return render_template('tool.html',
                            current_menu='tools',
-                           current_tool = current_tool,
+                           current_tool = tool_name,
+                           tool_id=tool_id,
+                           content_html = res,
+                           form_param_list = form_param_list,
+                           param_values = param_values,
                            tool_list = mod_cfg.tool_list
                            )
 
+@app.route('/tool/<tool_id>', methods=['POST'])
+def tool_clicked(tool_id):
+   new_form_param_list, new_param_values = mod_wb.get_tool_form_results(tool_id)
+   t = mod_wb.get_tool_cfg(tool_id)
+   mod_tool = importlib.import_module(t[2])
+   res = mod_tool.run_tool(new_param_values)
+            
+   return render_template('tool.html',
+                           current_menu='tools',
+                           current_tool = t[1],
+                           tool_id=tool_id,
+                           content_html = res,
+                           form_param_list = new_form_param_list,
+                           param_values = new_param_values,
+                           tool_list = mod_cfg.tool_list
+                           )
+    
+    
 
 @app.route('/about')
 def about():

@@ -141,3 +141,7 @@ th {
 td a {
     color: var(--dark-color);
 }
+
+h1 a {
+    color: var(--darker-color);
+}
