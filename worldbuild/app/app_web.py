@@ -15,9 +15,9 @@ data_folder = mod_cfg.fldr_data # '/home/duncan/dev/src/python/worldbuild/worldb
 
 db_file =  mod_cfg.db_file # os.path.join(data_folder, 'worldbuild.db')
 
-IMAGE_FOLDER = r'/home/duncan/dev/src/python/worldbuild/worldbuild/samples/alrona/'
-THUMBNAIL_FOLDER = r'/home/duncan/dev/src/python/worldbuild/worldbuild/samples/alrona/thumbnails'
-THUMBNAIL_SIZE = (128, 128)
+IMAGE_FOLDER = mod_cfg.IMAGE_FOLDER
+THUMBNAIL_FOLDER = mod_cfg.THUMBNAIL_FOLDER
+THUMBNAIL_SIZE = mod_cfg.THUMBNAIL_SIZE
 
 
 app = Flask(__name__)
@@ -76,12 +76,90 @@ def serve_image(filename):
     return send_file(safe_join(IMAGE_FOLDER, filename))
     
 
-# ---------------------------- DATA -----------------------------
+# ---------------------------- DATA ---------------------------------
 
 
 @app.route('/data')
 def data():
     return render_template('data.html', current_menu='data')
+
+
+# ----- DATA TABLES -----------------------------
+
+
+@app.route('/tables')
+def tables():
+    conn = get_db_connection()
+    cursor = conn.execute("SELECT DISTINCT menu FROM App_menu;")
+    menus = cursor.fetchall()
+    
+    menu_dict = {}
+    for menu in menus:
+        menu_name = menu['menu']
+        cursor = conn.execute("SELECT submenu, table_name FROM App_menu WHERE menu = ?", (menu_name,))
+        submenus = cursor.fetchall()
+        menu_dict[menu_name] = submenus
+    
+    conn.close()
+    return render_template('tables_list.html', menus=menu_dict, current_menu='data')
+
+@app.route('/table/<v_table_name>')
+def show_table(v_table_name):
+    submenu = request.args.get('submenu', '')
+    conn = get_db_connection()
+    # get the list of columns we want to show in table list mode
+    #print('v_table_name = ' + v_table_name)
+    sql_meta = "SELECT menu,submenu,table_name,col_list_view FROM App_menu WHERE table_name = '" + v_table_name + "'"
+    res = mod_sql.get_data(conn, sql_meta, [])[0]   # only fetching 1 row
+
+    #print('res=' + str(res) + ' res[0]=' + str(res[0]))
+    row_view_cols = res[3]
+    #print('row_view_cols = ' + str(row_view_cols)) 
+    cols_to_show = row_view_cols.split(",")
+    
+    #print('cols_to_show = ' + str(cols_to_show))    
+    # now get the contents of the table
+    cursor = conn.execute(f"SELECT {row_view_cols} FROM {v_table_name};")
+    rows = cursor.fetchall()
+    columns = [description[0] for description in cursor.description]
+    #print('columns = ' + str(columns))
+
+    if row_view_cols == '*':
+        cols_to_render = columns
+    else:
+        cols_to_render = cols_to_show
+    
+    conn.close()
+    return render_template('table_contents.html',
+                           v_table_name=v_table_name,
+                           v_menu=res[0],
+                           v_submenu=res[1],
+                           columns=cols_to_render,
+                           rows=rows,
+                           submenu=submenu)
+
+
+
+# ----- TABLE CONTENTS -----------------------------
+
+@app.route('/row/<table_name>/<row_id>')
+def show_row_details(table_name, row_id):
+    current_menu = 'data' # request.args.get('current_menu', 'home')
+    conn = get_db_connection()
+    cursor = conn.execute(f"SELECT * FROM {table_name} WHERE id = '{row_id}';")
+    row = cursor.fetchone()
+    columns = [description[0] for description in cursor.description]
+    conn.close()
+    return render_template('row_details.html',
+                           table_name=table_name,
+                           columns=columns,
+                           row=row,
+                           current_menu=current_menu)
+
+
+
+# ---------------------------- TOOLS -----------------------------
+
 
 @app.route('/tools')
 def tools():
@@ -153,72 +231,6 @@ def contact():
 def top_menu():
     current_menu = request.args.get('current_menu', 'home')
     return render_template('top_menu.html', current_menu=current_menu)
-
-@app.route('/tables')
-def tables():
-    conn = get_db_connection()
-    cursor = conn.execute("SELECT DISTINCT menu FROM App_menu;")
-    menus = cursor.fetchall()
-    
-    menu_dict = {}
-    for menu in menus:
-        menu_name = menu['menu']
-        cursor = conn.execute("SELECT submenu, table_name FROM App_menu WHERE menu = ?", (menu_name,))
-        submenus = cursor.fetchall()
-        menu_dict[menu_name] = submenus
-    
-    conn.close()
-    return render_template('tables_list.html', menus=menu_dict, current_menu='data')
-
-@app.route('/table/<v_table_name>')
-def show_table(v_table_name):
-    submenu = request.args.get('submenu', '')
-    conn = get_db_connection()
-    # get the list of columns we want to show in table list mode
-    #print('v_table_name = ' + v_table_name)
-    sql_meta = "SELECT menu,submenu,table_name,col_list_view FROM App_menu WHERE table_name = '" + v_table_name + "'"
-    res = mod_sql.get_data(conn, sql_meta, [])[0]   # only fetching 1 row
-
-    #print('res=' + str(res) + ' res[0]=' + str(res[0]))
-    row_view_cols = res[3]
-    #print('row_view_cols = ' + str(row_view_cols)) 
-    cols_to_show = row_view_cols.split(",")
-    
-    #print('cols_to_show = ' + str(cols_to_show))    
-    # now get the contents of the table
-    cursor = conn.execute(f"SELECT {row_view_cols} FROM {v_table_name};")
-    rows = cursor.fetchall()
-    columns = [description[0] for description in cursor.description]
-    #print('columns = ' + str(columns))
-
-    if row_view_cols == '*':
-        cols_to_render = columns
-    else:
-        cols_to_render = cols_to_show
-    
-    conn.close()
-    return render_template('table_contents.html',
-                           v_table_name=v_table_name,
-                           v_menu=res[0],
-                           v_submenu=res[1],
-                           columns=cols_to_render,
-                           rows=rows,
-                           submenu=submenu)
-
-
-@app.route('/row/<table_name>/<row_id>')
-def show_row_details(table_name, row_id):
-    current_menu = 'data' # request.args.get('current_menu', 'home')
-    conn = get_db_connection()
-    cursor = conn.execute(f"SELECT * FROM {table_name} WHERE id = '{row_id}';")
-    row = cursor.fetchone()
-    columns = [description[0] for description in cursor.description]
-    conn.close()
-    return render_template('row_details.html',
-                           table_name=table_name,
-                           columns=columns,
-                           row=row,
-                           current_menu=current_menu)
 
 
 if __name__ == '__main__':

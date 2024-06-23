@@ -13,6 +13,10 @@ fldr_tools = os.path.join(fldr_root, 'app', 'tools')
 fldr_img =  os.path.join(fldr_root, 'app', 'static', 'img')
 db_file = os.path.join(fldr_data, 'worldbuild.db')
 
+IMAGE_FOLDER = r'/home/duncan/dev/src/python/worldbuild/worldbuild/samples/alrona/'
+THUMBNAIL_FOLDER = r'/home/duncan/dev/src/python/worldbuild/worldbuild/samples/alrona/thumbnails'
+THUMBNAIL_SIZE = (192, 192)
+
 sys.path.append(fldr_root)
 
 #sys.path.append(os.path.join(fldr_root, 'src', 'roguelike'))
