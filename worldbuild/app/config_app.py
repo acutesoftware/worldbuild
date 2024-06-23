@@ -42,10 +42,10 @@ tool_list = [ # tool_id,tool_name,py_import,desc,params_with_defaults
     ['example', 'Example Tool', 't_EXAMPLE', 'Example tool for user modification',
      'param1=50, param2=40, param3=-5'],
     ['dungeon', 'Dungeon Generator', 't_gen_dungeon', 'Generates a random dungeon',
-     'grid_y=30, grid_x=80, NUM_ROOMS=10, ROOM_SIZE=4, NUM_HORIZ=6, lv_SEED=-1'
+     'grid_y=35, grid_x=130, NUM_ROOMS=20, ROOM_SIZE=3, NUM_HORIZ=4, lv_SEED=-1'
      ],
     ['town_gen', 'Town Generator', 't_gen_town', 'Generates a random Town layout',
-     'X_pos=1, Y_pos=1, width=22, length=10, sparsness=95'],
+     'X_pos=1, Y_pos=1, width=10, length=15, sparsness=97'],
     
     ]
 
@@ -53,9 +53,11 @@ tool_list = [ # tool_id,tool_name,py_import,desc,params_with_defaults
 # --------------------------------------------------------------------
 
 if __name__ == '__main__':
-    print('fldr_root = ' + fldr_root)
-    print('fldr_data = ' + fldr_data)
-    print('DB File = ' + db_file)
-    
+    print('config_app.py : fldr_root  = ' + fldr_root)
+    print('config_app.py : fldr_data  = ' + fldr_data)
+    print('config_app.py : fldr_tools = ' + fldr_tools)
+    print('config_app.py : fldr_img   = ' + fldr_img)
+    print('config_app.py : DB File    = ' + db_file)
+
 
 

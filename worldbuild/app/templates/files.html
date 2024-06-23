@@ -5,10 +5,16 @@
 <p>Select a file list from the side menu to view lists of files.</p>
 <!-- <img src="/static/img/map_alrona.jpg" width="400px" alt=""> -->
 
-{% for f in fl %}
-<img src="{{ f }}" width="300" alt="">
-{% endfor %}
-
+    <div>
+        {% for thumbnail in thumbnails %}
+            <div style="display: inline-block; margin: 10px;">
+                <a href="{{ url_for('serve_image', filename=thumbnail) }}">
+                    <img src="{{ url_for('serve_thumbnail', filename=thumbnail) }}" alt="{{ thumbnail }}">
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+    
 {% endblock %}
 
 

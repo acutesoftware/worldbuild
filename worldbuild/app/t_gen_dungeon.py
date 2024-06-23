@@ -31,15 +31,9 @@ def run_tool(params):
     lv_SEED = params[5]
 
     grid, seed = dg.create_dungeon(grid_y, grid_x, NUM_ROOMS, ROOM_SIZE, NUM_HORIZ, lv_SEED)
-    #print(dg.grid_as_str(grid))
-
-    # optional - make a path through the grid
     solved = dg.path_find(grid)
-    #print(solved)
-
-    # optional - export as TMX file
-    # dg.convert_grid_to_TileEditor_map('dungeon.tmx', 'samples/ascii_runeset.tsx')
+   
     if solved == 'no path found':
-        return '<h3>No path found</h3>' + dg.grid_as_html(grid, seed), seed
+        return dg.grid_as_html(grid, seed)   +  '<BR>No path found<BR>' 
     else:
-        return dg.solved_grid_as_html(solved, seed), seed
+        return dg.solved_grid_as_html(solved, seed) #, seed

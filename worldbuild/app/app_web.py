@@ -1,9 +1,12 @@
 from flask import Flask, render_template, jsonify, request
+from flask import send_file, url_for
+from werkzeug.utils import safe_join
 import sqlite3
 
 import os
 import sys
 import importlib
+from PIL import Image
 import wb_app_utils as mod_wb
 import if_sqllite as mod_sql
 import config_app as mod_cfg
@@ -12,6 +15,9 @@ data_folder = mod_cfg.fldr_data # '/home/duncan/dev/src/python/worldbuild/worldb
 
 db_file =  mod_cfg.db_file # os.path.join(data_folder, 'worldbuild.db')
 
+IMAGE_FOLDER = r'/home/duncan/dev/src/python/worldbuild/worldbuild/samples/alrona/'
+THUMBNAIL_FOLDER = r'/home/duncan/dev/src/python/worldbuild/worldbuild/samples/alrona/thumbnails'
+THUMBNAIL_SIZE = (128, 128)
 
 
 app = Flask(__name__)
@@ -25,16 +31,53 @@ def get_db_connection():
 def index():
     return render_template('index.html', current_menu='home')
 
+# ------------------------------ FILES ----------------------------
 
 @app.route('/files')
 def files():
-    import glob
-    fl = glob.glob("static/img/*.*")
-    print('fl = ' + str(fl))
+    fl = get_list_thumbnails()
+    print('fl - ' + str(fl))
+    return render_template('files.html', current_menu='files',  thumbnails=fl)
 
+def get_list_thumbnails():
+    # List all files in the external image directory
+    image_files = [f for f in os.listdir(IMAGE_FOLDER) if os.path.isfile(os.path.join(IMAGE_FOLDER, f))]
+    thumbnails = []
     
+    # Generate thumbnails if they don't exist
+    for image_file in image_files:
+        name, ext = os.path.splitext(image_file)
+        #print('name = ' +  name  )
+        #print('ext = ' + ext )
+        if ext in ['.jpg','.png']:
+            thumbnail_path = os.path.join(THUMBNAIL_FOLDER, image_file)
+            #print('thumbnail_path ' + thumbnail_path)
+            if not os.path.exists(thumbnail_path):
+                create_thumbnail(os.path.join(IMAGE_FOLDER, image_file), thumbnail_path)
+            thumbnails.append(image_file)
+    #print('thumbnails = ' + str(thumbnails))            
+    return thumbnails
+    #return render_template('files.html', thumbnails=thumbnails)
+
+def create_thumbnail(image_path, thumbnail_path):
+    img = Image.open(image_path)
+    img.thumbnail(THUMBNAIL_SIZE)
+    thumbnail_dir = os.path.dirname(thumbnail_path)
+    if not os.path.exists(thumbnail_dir):
+        os.makedirs(thumbnail_dir)
+    img.save(thumbnail_path)
+
+@app.route('/thumbnails/<filename>')
+def serve_thumbnail(filename):
+    return send_file(safe_join(THUMBNAIL_FOLDER, filename))
+
+@app.route('/images/<filename>')
+def serve_image(filename):
+    return send_file(safe_join(IMAGE_FOLDER, filename))
     
-    return render_template('files.html', current_menu='files', fl=fl)
+
+# ---------------------------- DATA -----------------------------
+
 
 @app.route('/data')
 def data():
@@ -136,9 +179,9 @@ def show_table(v_table_name):
     sql_meta = "SELECT menu,submenu,table_name,col_list_view FROM App_menu WHERE table_name = '" + v_table_name + "'"
     res = mod_sql.get_data(conn, sql_meta, [])[0]   # only fetching 1 row
 
-    print('res=' + str(res) + ' res[0]=' + str(res[0]))
+    #print('res=' + str(res) + ' res[0]=' + str(res[0]))
     row_view_cols = res[3]
-    print('row_view_cols = ' + str(row_view_cols)) 
+    #print('row_view_cols = ' + str(row_view_cols)) 
     cols_to_show = row_view_cols.split(",")
     
     #print('cols_to_show = ' + str(cols_to_show))    
@@ -146,7 +189,7 @@ def show_table(v_table_name):
     cursor = conn.execute(f"SELECT {row_view_cols} FROM {v_table_name};")
     rows = cursor.fetchall()
     columns = [description[0] for description in cursor.description]
-    print('columns = ' + str(columns))
+    #print('columns = ' + str(columns))
 
     if row_view_cols == '*':
         cols_to_render = columns
