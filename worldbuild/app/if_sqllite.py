@@ -378,6 +378,28 @@ def get_short_table_name(txt):
     #print('fname' + str(fname))
     return fname
 
+# ---- Database Functions
+def get_table_summary(conn, db_file):
+    """
+    return a list of information on the database
+    TODO - move this to ETL load so it gets calculated once on load
+    """
+    res = []
+    res.append(['info', 'Database Filename', db_file])
+    #res.append(['info', 'Database size (bytes)', 'todo'])
+
+    #sql = '''SELECT cid+1 as col_num, name as col_name, type as col_type FROM PRAGMA_TABLE_INFO(?)'''
+
+    short_list = []
+    sql_tbl_list = "SELECT name FROM sqlite_master WHERE type in ('table') and name not like 'sys_%' and name not like 'App_%' order by 1";
+    tbl_list =  get_data(conn, sql_tbl_list, [])
+    for tbl in tbl_list:
+        row_count = get_data(conn, "SELECT count(*) from " + tbl[0], [])
+        #print(
+        res.append(['tbl', tbl[0], row_count[0][0]])
+        
+    return res
+
 
 if __name__ == '__main__':
     SELF_TEST()

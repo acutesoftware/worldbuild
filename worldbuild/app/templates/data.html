@@ -3,4 +3,34 @@
 {% block content %}
 <h1>WorldBuild:Data</h1>
 <p>Select a table from the side menu to view its contents.</p>
+
+{% if res %}
+
+
+{% for nfo in res %}
+  {% if nfo[0] == 'info' %}
+    {{ nfo[1] }}:    {{ nfo[2] }}<BR>
+  {% endif %}
+
+{% endfor %}
+<BR>
+
+
+
+<table width="80%"><TR><TH>Table Name</TH><TH>Num Recs</TH></TR>
+{% for row in res %}
+  {% if row[0] != 'info' %}
+  <TR>
+    <TD>{{ row[1] }}</TD>
+    <TD>{{ row[2] }}</TD>
+    
+    </TR>
+  {% endif %}
+{% endfor %}
+</table><BR>
+
+
+
+{% endif %}
+
 {% endblock %}

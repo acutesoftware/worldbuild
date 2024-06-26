@@ -81,7 +81,11 @@ def serve_image(filename):
 
 @app.route('/data')
 def data():
-    return render_template('data.html', current_menu='data')
+    conn = get_db_connection()
+    res = mod_sql.get_table_summary(conn, db_file)
+    return render_template('data.html',
+                           res = res,
+                           current_menu='data')
 
 
 # ----- DATA TABLES -----------------------------
