@@ -2,7 +2,6 @@
 
 {% block content %}
 <h1>WorldBuild:Data</h1>
-<p>Select a table from the side menu to view its contents.</p>
 
 {% if res %}
 
@@ -17,12 +16,15 @@
 
 
 
-<table width="80%"><TR><TH>Table Name</TH><TH>Num Recs</TH></TR>
+<table align="left"><TR><TH>Menu</TH><TH>Sub Menu</TH><TH>Table Name</TH><TH>Num Recs</TH><TH>Key Columns</TH></TR>
 {% for row in res %}
   {% if row[0] != 'info' %}
   <TR>
     <TD>{{ row[1] }}</TD>
     <TD>{{ row[2] }}</TD>
+    <TD>{{ row[3] }}</TD>
+    <TD>{{ row[4] }}</TD>
+    <TD>{{ row[5] }}</TD>
     
     </TR>
   {% endif %}

@@ -385,18 +385,26 @@ def get_table_summary(conn, db_file):
     TODO - move this to ETL load so it gets calculated once on load
     """
     res = []
-    res.append(['info', 'Database Filename', db_file])
-    #res.append(['info', 'Database size (bytes)', 'todo'])
+    res.append(['info', 'Database Filename', db_file, '', ''])
 
-    #sql = '''SELECT cid+1 as col_num, name as col_name, type as col_type FROM PRAGMA_TABLE_INFO(?)'''
-
-    short_list = []
     sql_tbl_list = "SELECT name FROM sqlite_master WHERE type in ('table') and name not like 'sys_%' and name not like 'App_%' order by 1";
+
+    sql_tbl_list = "SELECT menu,submenu,table_name, col_list_view FROM App_menu order by 3";
+
+    row_count_val = 0
     tbl_list =  get_data(conn, sql_tbl_list, [])
     for tbl in tbl_list:
-        row_count = get_data(conn, "SELECT count(*) from " + tbl[0], [])
-        #print(
-        res.append(['tbl', tbl[0], row_count[0][0]])
+        if tbl[2]:
+            print('tbl = ' + tbl[2])
+            row_count = get_data(conn, "SELECT count(*) from " + tbl[2], [])
+            row_count_val = 'n/a'
+            try:
+                row_count_val = str(row_count[0][0])
+            except:
+                pass
+
+            print('row_count_val = ' + row_count_val)
+            res.append(['tbl', tbl[0], tbl[1], tbl[2], row_count_val, tbl[3]])
         
     return res
 

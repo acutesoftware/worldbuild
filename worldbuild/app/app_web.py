@@ -139,6 +139,7 @@ def show_table(v_table_name):
                            v_menu=res[0],
                            v_submenu=res[1],
                            columns=cols_to_render,
+                           current_menu='data',
                            rows=rows,
                            submenu=submenu)
 
