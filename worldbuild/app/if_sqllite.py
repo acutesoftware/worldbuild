@@ -381,7 +381,7 @@ def get_short_table_name(txt):
 # ---- Database Functions
 def get_table_summary(conn, db_file):
     """
-    return a list of information on the database
+    Return a list of information on the database
     TODO - move this to ETL load so it gets calculated once on load
     """
     res = []
@@ -392,6 +392,7 @@ def get_table_summary(conn, db_file):
     sql_tbl_list = "SELECT menu,submenu,table_name, col_list_view FROM App_menu order by 3";
 
     row_count_val = 0
+
     tbl_list =  get_data(conn, sql_tbl_list, [])
     for tbl in tbl_list:
         if tbl[2]:
@@ -406,7 +407,7 @@ def get_table_summary(conn, db_file):
             print('row_count_val = ' + row_count_val)
             res.append(['tbl', tbl[0], tbl[1], tbl[2], row_count_val, tbl[3]])
         
-    return res
+    return sorted(res)
 
 
 if __name__ == '__main__':

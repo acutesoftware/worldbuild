@@ -20,12 +20,9 @@
 {% for row in res %}
   {% if row[0] != 'info' %}
   <TR>
-    <TD>{{ row[1] }}</TD>
-    <TD>{{ row[2] }}</TD>
-    <TD>{{ row[3] }}</TD>
-    <TD>{{ row[4] }}</TD>
-    <TD>{{ row[5] }}</TD>
-    
+    {% for col in row[1:] %}
+    <TD><a href="/table/{{ row[3] }}">{{ col }}</a></TD>
+    {% endfor %}
     </TR>
   {% endif %}
 {% endfor %}
