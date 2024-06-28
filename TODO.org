@@ -1,0 +1,34 @@
+#+title: WorldBuild Progress
+#+author: Duncan Murray
+
+* Goals
+Notes on overall goals and current progress.
+
+At the moment this repo is a collection of random scripts around Worldbuilding, many with simplistic algorithms.
+Currently working on a combined interface (web_app running locally) to allow users to access the scripts and play around with the generators.
+
+Also working on moving all the config and CSV files to a SQLite database.
+
+** Basic framework for worldbuild scripts
+
+** Crafting
+
+*** TODO Crafting works, but needs to go to database
+
+** DONE Game Wiki
+Basic wiki generated, though this needs to be improved
+
+** DONE NPC Generator
+** TODO Web app
+Make sure to explain that this is NOT a nice safe web application suitable for
+running publically - code is executed on local files so make damn sure they understand this.
+
+Web app will have a nice interface to let users run all the scripts, save outputs, etc
+
+*** DONE Basic Web app framework
+
+Running the web app works well
+
+*** TODO new Tools to be added via Sep folders
+instead of specifying tools via data table or config, they should be autoloaded when present in a /tools subfolder
+
