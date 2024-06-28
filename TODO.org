@@ -1,7 +1,11 @@
 #+title: WorldBuild Progress
 #+author: Duncan Murray
 
-* Goals
+* Overview
+Worldbuild repo is a collection of tools to manage worldbuild data and generate bulk lists from parameters.
+
+
+** Goals
 Notes on overall goals and current progress.
 
 At the moment this repo is a collection of random scripts around Worldbuilding, many with simplistic algorithms.
@@ -9,26 +13,67 @@ Currently working on a combined interface (web_app running locally) to allow use
 
 Also working on moving all the config and CSV files to a SQLite database.
 
-** Basic framework for worldbuild scripts
+*** Basic framework for worldbuild scripts
 
-** Crafting
+*** DONE Crafting
+Supply a list of items, and recipes it can autocraft to determine quantities available.
 
-*** TODO Crafting works, but needs to go to database
+**** TODO Crafting works, but needs to go to database
 
-** DONE Game Wiki
+*** DONE Game Wiki
 Basic wiki generated, though this needs to be improved
 
-** DONE NPC Generator
-** TODO Web app
+*** DONE NPC Generator
+Generates random NPC stats
+
+*** DONE Town Generator
+Generates ultra simple town layout
+
+
+*** DONE Dungeon Generator
+Generates random text based Dungeon with path finding
+
+
+*** TODO Event Generator
+Generates random events- this works, but it is a bit simplistic
+
+
+*** DONE Quest Generator
+Generates random Quests 
+
+**** TODO  basic framework only - needs work
+
+
+*** DONE Quest World Generator
+Generates random terrain
+
+**** TODO Update terrain algorithm - too simple
+Needs to be nested to make larger interesting maps
+
+
+*** TODO Web app
 Make sure to explain that this is NOT a nice safe web application suitable for
 running publically - code is executed on local files so make damn sure they understand this.
 
 Web app will have a nice interface to let users run all the scripts, save outputs, etc
 
-*** DONE Basic Web app framework
-
+**** DONE Basic Web app framework
 Running the web app works well
+Main areas are
+- Home = start page (needs something here)
+- Files = List of user created files
+- Data = data tables loaded
 
-*** TODO new Tools to be added via Sep folders
+**** TODO Web app should be able to publish to HTML and Mod flies
+
+Will need to convert the old wiki page so it uses database tables instead
+
+Also need to generate mod files (for import to UE4) or simple Javascript engine / Godot
+
+
+**** DONE AutoLoad CSV files to Database
+
+
+**** TODO new Tools to be added via Sep folders
 instead of specifying tools via data table or config, they should be autoloaded when present in a /tools subfolder
 
