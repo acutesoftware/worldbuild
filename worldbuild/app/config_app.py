@@ -49,9 +49,12 @@ tool_list = [ # tool_id,tool_name,py_import,desc,params_with_defaults
      'grid_y=35, grid_x=130, NUM_ROOMS=20, ROOM_SIZE=3, NUM_HORIZ=4, lv_SEED=-1'
      ],
     ['town_gen', 'Town Generator', 't_gen_town', 'Generates a random Town layout',
-     'X_pos=1, Y_pos=1, width=10, length=15, sparsness=97'],
-    
-    ]
+     'X_pos=1, Y_pos=1, width=10, length=15, sparsness=97'
+     ],
+    ['world_gen', 'World Generator', 't_gen_world', 'Generates random World',
+     'width=80, height=40, num_seeds=5, perc_land=47, perc_sea=50, perc_blocked=0, iterations=3, num_agents=1'
+     ],
+]
 
 
 # --------------------------------------------------------------------
