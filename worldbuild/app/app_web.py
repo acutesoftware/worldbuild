@@ -29,7 +29,10 @@ def get_db_connection():
 
 @app.route('/')
 def index():
-    return render_template('index.html', current_menu='home')
+    
+    return render_template('index.html',
+                           top_menus = mod_wb.get_top_menu(get_db_connection(), 'Home'),
+                           current_menu='Home')
 
 # ------------------------------ FILES ----------------------------
 
@@ -37,7 +40,10 @@ def index():
 def files():
     fl = get_list_thumbnails()
     print('fl - ' + str(fl))
-    return render_template('files.html', current_menu='files',  thumbnails=fl)
+    return render_template('files.html',
+                           top_menus = mod_wb.get_top_menu(get_db_connection(), 'Files'),
+                           current_menu='Files',
+                           thumbnails=fl)
 
 def get_list_thumbnails():
     # List all files in the external image directory
@@ -69,10 +75,13 @@ def create_thumbnail(image_path, thumbnail_path):
 
 @app.route('/thumbnails/<filename>')
 def serve_thumbnail(filename):
+    mnu = mod_wb.get_top_menu(get_db_connection(), 'Home')
+    
     return send_file(safe_join(THUMBNAIL_FOLDER, filename))
 
 @app.route('/images/<filename>')
 def serve_image(filename):
+    mnu = mod_wb.get_top_menu(get_db_connection(), 'Home')
     return send_file(safe_join(IMAGE_FOLDER, filename))
     
 
@@ -83,9 +92,11 @@ def serve_image(filename):
 def data():
     conn = get_db_connection()
     res = mod_sql.get_table_summary(conn, db_file)
+    mnu = mod_wb.get_top_menu(get_db_connection(), 'Home')
     return render_template('data.html',
                            res = res,
-                           current_menu='data')
+                           top_menus = mod_wb.get_top_menu(get_db_connection(), 'Data'),
+                           current_menu='Data')
 
 
 # ----- DATA TABLES -----------------------------
@@ -94,6 +105,7 @@ def data():
 @app.route('/tables')
 def tables():
     conn = get_db_connection()
+    
     cursor = conn.execute("SELECT DISTINCT menu FROM App_menu;")
     menus = cursor.fetchall()
     
@@ -105,7 +117,10 @@ def tables():
         menu_dict[menu_name] = submenus
     
     conn.close()
-    return render_template('tables_list.html', menus=menu_dict, current_menu='data')
+    return render_template('tables_list.html',
+                           menus=menu_dict,
+                           top_menus = mod_wb.get_top_menu(get_db_connection(), 'Data'),
+                           current_menu='Data')
 
 @app.route('/table/<v_table_name>')
 def show_table(v_table_name):
@@ -139,7 +154,8 @@ def show_table(v_table_name):
                            v_menu=res[0],
                            v_submenu=res[1],
                            columns=cols_to_render,
-                           current_menu='data',
+                           current_menu='Data',
+                           top_menus = mod_wb.get_top_menu(get_db_connection(), 'Data'),
                            rows=rows,
                            submenu=submenu)
 
@@ -149,7 +165,6 @@ def show_table(v_table_name):
 
 @app.route('/row/<table_name>/<row_id>')
 def show_row_details(table_name, row_id):
-    current_menu = 'data' # request.args.get('current_menu', 'home')
     conn = get_db_connection()
     cursor = conn.execute(f"SELECT * FROM {table_name} WHERE id = '{row_id}';")
     row = cursor.fetchone()
@@ -159,7 +174,8 @@ def show_row_details(table_name, row_id):
                            table_name=table_name,
                            columns=columns,
                            row=row,
-                           current_menu=current_menu)
+                           top_menus = mod_wb.get_top_menu(get_db_connection(), 'Data'),
+                           current_menu='Data')
 
 
 
@@ -168,24 +184,28 @@ def show_row_details(table_name, row_id):
 
 @app.route('/tools')
 def tools():
+    mnu = mod_wb.get_top_menu(get_db_connection(), 'Tools')
+
+    #mod_wb.save_list(mod_cfg.tool_list, 'tools.csv')
+    
     return render_template('tools.html',
-                           current_menu='tools',
+                           current_menu='Tools',
+                           top_menus = mod_wb.get_top_menu(get_db_connection(), 'Tools'),
                            current_tool = '',
-                           tool_list = mod_cfg.tool_list
+                           tool_list = mod_wb.get_tool_list(get_db_connection())
                            )
 
 
 @app.route('/tool/<tool_id>', methods=['GET'])
 def tool_current(tool_id):
-   
-    t = mod_wb.get_tool_cfg(tool_id)
+    t = mod_wb.get_tool_details(get_db_connection(), tool_id)
     # tool_id,tool_name,py_import,desc,param_names,param_defaults
+    print('t=' + str(t))
     tool_id = t[0]
     tool_name=t[1]
     py_import=t[2]
     desc = t[3]
     params_with_defaults=t[4]
-    print('running tool - ' + str(t))
 
     mod_tool = importlib.import_module(py_import)
 
@@ -196,46 +216,53 @@ def tool_current(tool_id):
     res = mod_tool.run_tool(param_values)
             
     return render_template('tool.html',
-                           current_menu='tools',
+                           current_menu='Tools',
+                           top_menus = mod_wb.get_top_menu(get_db_connection(), 'Tools'),
                            current_tool = tool_name,
                            tool_id=tool_id,
                            content_html = res,
                            form_param_list = form_param_list,
                            param_values = param_values,
-                           tool_list = mod_cfg.tool_list
+                           tool_list = mod_wb.get_tool_list(get_db_connection())
                            )
 
 @app.route('/tool/<tool_id>', methods=['POST'])
 def tool_clicked(tool_id):
-   new_form_param_list, new_param_values = mod_wb.get_tool_form_results(tool_id)
-   t = mod_wb.get_tool_cfg(tool_id)
+   new_form_param_list, new_param_values = mod_wb.get_tool_form_results(get_db_connection(), tool_id)
+   t = mod_wb.get_tool_details(get_db_connection(), tool_id)
    mod_tool = importlib.import_module(t[2])
    res = mod_tool.run_tool(new_param_values)
             
    return render_template('tool.html',
-                           current_menu='tools',
+                           top_menus = mod_wb.get_top_menu(get_db_connection(), 'Tools'),
+                           current_menu = 'Tools',
                            current_tool = t[1],
                            tool_id=tool_id,
                            content_html = res,
                            form_param_list = new_form_param_list,
                            param_values = new_param_values,
-                           tool_list = mod_cfg.tool_list
+                           tool_list = mod_wb.get_tool_list(get_db_connection())
                            )
     
     
 
-@app.route('/about')
-def about():
-    return render_template('index.html', current_menu='about')
+@app.route('/option')
+def page_options():
+    print('options')
+    return render_template('about.html',
+                           top_menus = mod_wb.get_top_menu(get_db_connection(), 'Options'),
+                           current_menu='Options')
 
-@app.route('/contact')
-def contact():
-    return render_template('index.html', current_menu='contact')
+@app.route('/publish')
+def page_publish():
+    return render_template('index.html',
+                           top_menus = mod_wb.get_top_menu(get_db_connection(), 'Publish'),
+                           current_menu='Publish')
 
-@app.route('/top_menu')
-def top_menu():
-    current_menu = request.args.get('current_menu', 'home')
-    return render_template('top_menu.html', current_menu=current_menu)
+#@app.route('/top_menu')
+#def top_menu():
+#    current_menu = request.args.get('current_menu', 'home')
+#    return render_template('top_menu.html', current_menu=current_menu)
 
 
 if __name__ == '__main__':

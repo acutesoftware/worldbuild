@@ -2,13 +2,14 @@ top_menu,visible,routes,desc
 Home,Y,/,Home page
 Ideas,N,/ideas,Free form canvas for ideas
 Files,Y,/files,Links to all your files
-Art,Y,/art,"Links to Images, sketches and other Art"
-Notes,Y,/notes,"Links to Notes, books and Lore"
+Art,N,/art,"Links to Images, sketches and other Art"
+Notes,N,/notes,"Links to Notes, books and Lore"
+Tools,Y,/tools,"Tools to generate sample data"
 Data,Y,/data,Data tables
 Options,Y,/option,Settings and Parameters
 Sim,N,/sim,simulate your world
 Publish,Y,/publish,Publish world to Wiki or UE4
-Help,Y,/help,How to use this software
+Help,N,/help,How to use this software
 
 
 

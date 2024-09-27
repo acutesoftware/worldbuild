@@ -13,6 +13,8 @@ Desktop app for computational world building (work in progress)
 	   
 .. image:: ./doc/worldbuild_app_files.png
 
+.. image:: ./doc/worldbuild_app_tools.png
+
 
 
 Wiki Page Generation

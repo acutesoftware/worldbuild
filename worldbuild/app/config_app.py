@@ -41,7 +41,7 @@ db_tables = [
 
 
 # ------- Tools -------------------------------------------------
-
+"""
 tool_list = [ # tool_id,tool_name,py_import,desc,params_with_defaults
     ['example', 'Example Tool', 't_EXAMPLE', 'Example tool for user modification',
      'param1=50, param2=40, param3=-5'],
@@ -54,8 +54,27 @@ tool_list = [ # tool_id,tool_name,py_import,desc,params_with_defaults
     ['world_gen', 'World Generator', 't_gen_world', 'Generates random World',
      'width=80, height=40, num_seeds=5, perc_land=47, perc_sea=50, perc_blocked=0, iterations=3, num_agents=1'
      ],
+    ['world_gen2', 'World Generator2', 't_gen_world', 'World generator with larger params',
+     'width=150, height=70, num_seeds=7, perc_land=60, perc_sea=40, perc_blocked=0, iterations=6, num_agents=1'
+     ],
+
+    ['world_gen_np', 'World Generator - Numpy', 't_gen_world_np', 'World generator - numpy',
+     'width=150, height=70, scale=100, octaves=6, persistence=1, lacunarity=2'
+     ],
+    ['world_gen_erosion', 'World Generator - Erosion', 't_gen_world_erosion', 'World generator - Erosion',
+     'width=150, height=70, num_seeds=7, perc_land=60, perc_sea=40, perc_blocked=0, iterations=6, num_agents=1'
+     ],       
 ]
 
+CREATE TABLE "App_tools" (
+"index" INTEGER,
+  "tool_id" TEXT,
+  "tool_name" TEXT,
+  "py_import" TEXT,
+  "desc" TEXT,
+  "params_with_defaults" TEXT
+)
+"""
 
 # --------------------------------------------------------------------
 

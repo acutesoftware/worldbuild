@@ -8,6 +8,44 @@ import config_app as mod_cfg
 from flask import request
 
 
+################################################
+# Menu Functions
+################################################
+
+def get_top_menu(conn, selected_item):
+    """
+    generate the list of items for top menu
+    """
+    op = []
+    res = if_sqllite.get_data(conn, "SELECT top_menu, routes, desc FROM App_menu__TOP WHERE visible = 'Y'", [])
+    for row in res:
+        op.append([row[0], row[1]])
+    return op
+
+
+def get_side_menu(conn, selected_top_menu, selected_side_item):
+    return 'TODO'
+
+def get_tool_list(conn):
+    sql = "SELECT tool_id,tool_name,py_import,desc,params_with_defaults FROM App_tools order by srt"
+    res = if_sqllite.get_data(conn, sql, [])
+    op = []
+    for tool in res:
+        op.append(tool)
+    return op
+
+def get_tool_details(conn, tool_id):
+    sql = "SELECT tool_id,tool_name,py_import,desc,params_with_defaults FROM App_tools WHERE tool_id = '" + tool_id + "' order by srt"
+    res = if_sqllite.get_data(conn, sql, [])
+    
+    op = []
+    for tool in res:
+        op.append([tool[0],tool[1], tool[2], tool[3], tool[4]])
+    return op[0]
+
+################################################
+# Utility Functions
+################################################
 
 def show_logs(conn):
     res = if_sqllite.get_data(conn, 'SELECT src_tbl FROM sys_job_steps WHERE src_tbl IS NOT NULL and job_num = "LOAD_CSV"', [])
@@ -36,7 +74,18 @@ def find_str(conn):
                     
     print(str(len(op)) + ' results')
     return
-        
+
+def save_list(lst, fname):
+    """
+    saves a list to file
+    """
+    import csv
+
+    with open(fname, "w", newline="\n") as f:
+        writer = csv.writer(f)
+        writer.writerows(lst)
+
+
 
 # ----- Verify Data ----------------
 
@@ -66,14 +115,6 @@ def dte():
     print(now)  # '2018-12-05T11:15:55.126382'    
     return now
 
-def get_tool_cfg(tool_id):
-  
-    for t in mod_cfg.tool_list:
-        if t[0] == tool_id:
-            # tool_id,tool_name,py_import,desc,params_with_defaults
-            return t
-    return []
-
     
 def create_html_tool_form(params_with_defaults):
     """
@@ -98,10 +139,10 @@ def create_html_tool_form(params_with_defaults):
     return html_form, form_param_list, param_values
 
 
-def get_tool_form_results(tool_id):
+def get_tool_form_results(conn, tool_id):
     new_form_param_list = []
     new_param_values = []
-    t = get_tool_cfg(tool_id)
+    t = get_tool_details(conn, tool_id)
     html_form, form_param_list, param_values = create_html_tool_form(t[4])
     
     try:
@@ -145,8 +186,9 @@ def show_stats(conn):
  
     return
 
-
-
+################################################
+# Application Functions
+################################################
 
 def generate_town(conn):
     print('Generating Town..')

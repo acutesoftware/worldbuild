@@ -10,8 +10,12 @@
     <link href="https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header hx-get="/top_menu?current_menu={{ current_menu }}" hx-trigger="load" hx-target="this">
-        Loading...
+  <header>
+    <div class="top-menu">
+      {% for nme, route in top_menus %}
+      <a href="{{ route }}" class="{{ 'current' if current_menu == nme else '' }}">{{ nme }}</a>
+      {% endfor %}
+      </div>
     </header>
     <main>
         <nav hx-get="/tables" hx-trigger="load" hx-target="this">
